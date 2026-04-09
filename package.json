@@ -4,25 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "node --watch src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
-    "@hookform/resolvers": "^5.2.2",
+    "@prisma/adapter-mariadb": "^7.7.0",
+    "@prisma/client": "^7.7.0",
     "axios": "^1.15.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
+    "dayjs": "^1.11.20",
     "dotenv": "^17.4.1",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "react-hook-form": "^7.72.1",
     "react-router": "^7.14.0",
-    "react-toastify": "^11.0.5",
-    "zod": "^4.3.6",
-    "zustand": "^5.0.12"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "prisma": "^7.7.0"

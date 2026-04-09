@@ -1,0 +1,18 @@
+@base_url = http://localhost:5000
+
+@token =
+
+
+// POST REGISTER 
+POST {{base_url}}/api/auth/register
+Content-Type: application/json
+
+{
+    "identity":"bentesssssadt123@gmail.com",
+    "username":"Kodlsdxsasadd444",
+    "password":"testpass1234",
+    "confirmPassword":"testpass1234",
+    "firstName":"nasdasd",
+    "lastName":"asdasdasd",
+    "dateOfBirth":"23/01/2545"
+}
