@@ -1,0 +1,10 @@
+# ไม่เอาไฟล์ไลบรารี
+node_modules/
+
+# ไม่เอาไฟล์ Environment Variables (เก็บรหัสผ่าน/Token)
+.env
+
+# ไม่เอาไฟล์ที่ Build แล้ว
+dist/
+build/
+.DS_Store
