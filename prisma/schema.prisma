@@ -4,10 +4,253 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "mysql"
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum EventStatus {
+  UPCOMING
+  ONGOING
+  CANCELLED
+  FINISHED
+}
+
+model User {
+  id           Int     @id @default(autoincrement())
+  username     String  @unique
+  email        String  @unique
+  telephone    String? @unique
+  firstName    String
+  lastName     String
+  password     String
+  profileImage String?
+  nationalId   String? // ควรเข้ารหัส (Encrypt) ก่อนบันทึกลง DB เสมอ
+
+  role   Role   @default(USER)
+  gender Gender @default(OTHER)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  favArtists FavArtist[]
+  posts      Post[]
+  likes      Like[]
+  comments   Comment[]
+  messages   Message[] // สำหรับระบบ Chat
+  chatRooms  ChatRoomUser[] // แชทรูมที่ User คนนี้อยู่
+}
+
+model Artist {
+  id           Int     @id @default(autoincrement())
+  artistName   String
+  profileImage String?
+  biography    String? @db.LongText
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  agencyId    Int?
+  agency      Agency?      @relation(fields: [agencyId], references: [id])
+  genres      ArtistGenre[]
+  events      ArtistEvent[]
+  favByUsers  FavArtist[]
+  posts       Post[]       // โพสต์ใน Community ของศิลปินคนนี้
+  songs       Song[]       // ศิลปินคนนี้มีเพลงอะไรบ้าง
+}
+
+// เปลี่ยนจาก Entertainment เป็น Agency (ค่ายเพลง/ต้นสังกัด)
+model Agency {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String? @db.LongText
+  socialMedia String? // อาจจะเก็บเป็น JSON format หากมีหลายช่องทาง
+
+  artists     Artist[]
+}
+
+model Genre {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  artists ArtistGenre[]
+}
+
+// ตารางเชื่อม Many-to-Many ระหว่าง Artist กับ Genre
+model ArtistGenre {
+  artistId Int
+  genreId  Int
+  artist   Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  genre    Genre  @relation(fields: [genreId], references: [id], onDelete: Cascade)
+
+  @@id([artistId, genreId])
+}
+
+// Favorite Artists (Follow ระบบ)
+model FavArtist {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  artistId  Int
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  artist Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, artistId]) // ป้องกันการกด Fav ซ้ำ
+}
+
+// Community Posts
+model Post {
+  id        Int      @id @default(autoincrement())
+  content   String   @db.LongText
+  
+  userId    Int
+  artistId  Int // โพสต์ในคอมมูนิตี้ของศิลปินคนไหน
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  artist    Artist   @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  likes     Like[]
+  comments  Comment[]
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  postId    Int
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, postId]) // 1 คนกด Like ได้แค่ 1 ครั้งต่อโพสต์
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String   @db.Text
+  userId    Int
+  postId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+
+// Event & Concerts
+model Event {
+  id          Int         @id @default(autoincrement())
+  eventName   String
+  description String?     @db.LongText
+  posterImage String
+  status      EventStatus @default(UPCOMING)
+  ticketLink  String?     // ลิงก์จองตั๋วตาม Requirement
+  
+  // Date/Time รวมเข้ามาใน Event เลยเพื่อให้ Query ง่ายขึ้น
+  startTime   DateTime
+  endTime     DateTime?
+
+  venueId     Int
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  venue       Venue         @relation(fields: [venueId], references: [id])
+  artists     ArtistEvent[] // ศิลปินที่มาร่วมงาน
+}
+
+// ตารางเชื่อม Many-to-Many ระหว่าง Artist กับ Event
+model ArtistEvent {
+  artistId Int
+  eventId  Int
+  artist   Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  event    Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@id([artistId, eventId])
+}
+
+// สถานที่จัดงานแยกออกมาเป็น Master Data
+model Venue {
+  id        Int     @id @default(autoincrement())
+  name      String
+  address   String? @db.Text
+  lat       Float   // ใช้ Float สำหรับคำนวณระยะทาง
+  lng       Float   // ใช้ Float สำหรับคำนวณระยะทาง
+
+  events    Event[]
+}
+
+// ==========================================
+// ส่วนเพิ่มเติมสำหรับระบบ Chat (One-on-One)
+// ==========================================
+model ChatRoom {
+  id        Int      @id @default(autoincrement())
+  isGroup   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users    ChatRoomUser[]
+  messages Message[]
+}
+
+// ตารางเชื่อมว่ามีใครอยู่ในห้องแชทไหนบ้าง
+model ChatRoomUser {
+  userId     Int
+  chatRoomId Int
+  joinedAt   DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chatRoom ChatRoom @relation(fields: [chatRoomId], references: [id], onDelete: Cascade)
+
+  @@id([userId, chatRoomId])
+}
+
+model Message {
+  id         Int      @id @default(autoincrement())
+  content    String   @db.Text
+  senderId   Int
+  chatRoomId Int
+  isRead     Boolean  @default(false) // สถานะการอ่าน (Read Receipts)
+  createdAt  DateTime @default(now())
+
+  sender   User     @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  chatRoom ChatRoom @relation(fields: [chatRoomId], references: [id], onDelete: Cascade)
+}
+
+model Song {
+  id          Int       @id @default(autoincrement())
+  title       String    // ชื่อเพลง
+  coverImage  String?   // รูปปกซิงเกิล/อัลบั้ม (ถ้าไม่มีค่อย Fallback ไปใช้รูปศิลปินที่หน้าเว็บ)
+  duration    Int?      // ความยาวเพลง (เก็บเป็น "วินาที" เสมอ เพื่อให้ Frontend นำไปจัด Format ง่าย)
+  streamUrl   String?   // ลิงก์ไปช่องทางฟังเพลง (เช่น Spotify, YouTube, Apple Music)
+  
+  // ฟิลด์สำหรับจัดการ Top Charts
+  popularity  Int       @default(0) // ยอดวิว/คะแนนความนิยม ใช้สำหรับเรียงลำดับ Top Charts
+  
+  releaseDate DateTime? // วันที่ปล่อยเพลง (ใช้จัดเรียงเพลงใหม่ล่าสุดได้)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relation: 1 เพลงเป็นของ 1 ศิลปินหลัก
+  artistId    Int
+  artist      Artist    @relation(fields: [artistId], references: [id], onDelete: Cascade)
 }
