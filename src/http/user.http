@@ -1,0 +1,14 @@
+@BASE_URL = http://localhost:5000
+
+### getMe
+GET {{BASE_URL}}/users/me 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1NzUzODgxLCJleHAiOjE3NzYzNTg2ODF9.5knAQmwjfFciijm799LahMhqrXw5qKFUF4xlxkYNkFI
+
+### editMe
+PATCH {{BASE_URL}}/users/me 
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1NzUzODgxLCJleHAiOjE3NzYzNTg2ODF9.5knAQmwjfFciijm799LahMhqrXw5qKFUF4xlxkYNkFI
+
+{
+   "firstName" : "Somchai123"
+}

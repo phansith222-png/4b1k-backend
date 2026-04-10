@@ -11944,7 +11944,7 @@ export namespace Prisma {
     id: number
     eventName: string
     description: string | null
-    posterImage: string
+    posterImage: string | null
     status: $Enums.EventStatus
     ticketLink: string | null
     startTime: Date
@@ -12023,7 +12023,7 @@ export namespace Prisma {
       id: number
       eventName: string
       description: string | null
-      posterImage: string
+      posterImage: string | null
       status: $Enums.EventStatus
       ticketLink: string | null
       startTime: Date
@@ -19700,7 +19700,7 @@ export namespace Prisma {
     id?: IntFilter<"Event"> | number
     eventName?: StringFilter<"Event"> | string
     description?: StringNullableFilter<"Event"> | string | null
-    posterImage?: StringFilter<"Event"> | string
+    posterImage?: StringNullableFilter<"Event"> | string | null
     status?: EnumEventStatusFilter<"Event"> | $Enums.EventStatus
     ticketLink?: StringNullableFilter<"Event"> | string | null
     startTime?: DateTimeFilter<"Event"> | Date | string
@@ -19716,7 +19716,7 @@ export namespace Prisma {
     id?: SortOrder
     eventName?: SortOrder
     description?: SortOrderInput | SortOrder
-    posterImage?: SortOrder
+    posterImage?: SortOrderInput | SortOrder
     status?: SortOrder
     ticketLink?: SortOrderInput | SortOrder
     startTime?: SortOrder
@@ -19736,7 +19736,7 @@ export namespace Prisma {
     NOT?: EventWhereInput | EventWhereInput[]
     eventName?: StringFilter<"Event"> | string
     description?: StringNullableFilter<"Event"> | string | null
-    posterImage?: StringFilter<"Event"> | string
+    posterImage?: StringNullableFilter<"Event"> | string | null
     status?: EnumEventStatusFilter<"Event"> | $Enums.EventStatus
     ticketLink?: StringNullableFilter<"Event"> | string | null
     startTime?: DateTimeFilter<"Event"> | Date | string
@@ -19752,7 +19752,7 @@ export namespace Prisma {
     id?: SortOrder
     eventName?: SortOrder
     description?: SortOrderInput | SortOrder
-    posterImage?: SortOrder
+    posterImage?: SortOrderInput | SortOrder
     status?: SortOrder
     ticketLink?: SortOrderInput | SortOrder
     startTime?: SortOrder
@@ -19774,7 +19774,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Event"> | number
     eventName?: StringWithAggregatesFilter<"Event"> | string
     description?: StringNullableWithAggregatesFilter<"Event"> | string | null
-    posterImage?: StringWithAggregatesFilter<"Event"> | string
+    posterImage?: StringNullableWithAggregatesFilter<"Event"> | string | null
     status?: EnumEventStatusWithAggregatesFilter<"Event"> | $Enums.EventStatus
     ticketLink?: StringNullableWithAggregatesFilter<"Event"> | string | null
     startTime?: DateTimeWithAggregatesFilter<"Event"> | Date | string
@@ -20697,7 +20697,7 @@ export namespace Prisma {
   export type EventCreateInput = {
     eventName: string
     description?: string | null
-    posterImage: string
+    posterImage?: string | null
     status?: $Enums.EventStatus
     ticketLink?: string | null
     startTime: Date | string
@@ -20712,7 +20712,7 @@ export namespace Prisma {
     id?: number
     eventName: string
     description?: string | null
-    posterImage: string
+    posterImage?: string | null
     status?: $Enums.EventStatus
     ticketLink?: string | null
     startTime: Date | string
@@ -20726,7 +20726,7 @@ export namespace Prisma {
   export type EventUpdateInput = {
     eventName?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImage?: StringFieldUpdateOperationsInput | string
+    posterImage?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
     ticketLink?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20741,7 +20741,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     eventName?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImage?: StringFieldUpdateOperationsInput | string
+    posterImage?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
     ticketLink?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20756,7 +20756,7 @@ export namespace Prisma {
     id?: number
     eventName: string
     description?: string | null
-    posterImage: string
+    posterImage?: string | null
     status?: $Enums.EventStatus
     ticketLink?: string | null
     startTime: Date | string
@@ -20769,7 +20769,7 @@ export namespace Prisma {
   export type EventUpdateManyMutationInput = {
     eventName?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImage?: StringFieldUpdateOperationsInput | string
+    posterImage?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
     ticketLink?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20782,7 +20782,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     eventName?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImage?: StringFieldUpdateOperationsInput | string
+    posterImage?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
     ticketLink?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25208,7 +25208,7 @@ export namespace Prisma {
   export type EventCreateWithoutArtistsInput = {
     eventName: string
     description?: string | null
-    posterImage: string
+    posterImage?: string | null
     status?: $Enums.EventStatus
     ticketLink?: string | null
     startTime: Date | string
@@ -25222,7 +25222,7 @@ export namespace Prisma {
     id?: number
     eventName: string
     description?: string | null
-    posterImage: string
+    posterImage?: string | null
     status?: $Enums.EventStatus
     ticketLink?: string | null
     startTime: Date | string
@@ -25289,7 +25289,7 @@ export namespace Prisma {
   export type EventUpdateWithoutArtistsInput = {
     eventName?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImage?: StringFieldUpdateOperationsInput | string
+    posterImage?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
     ticketLink?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25303,7 +25303,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     eventName?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImage?: StringFieldUpdateOperationsInput | string
+    posterImage?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
     ticketLink?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25316,7 +25316,7 @@ export namespace Prisma {
   export type EventCreateWithoutVenueInput = {
     eventName: string
     description?: string | null
-    posterImage: string
+    posterImage?: string | null
     status?: $Enums.EventStatus
     ticketLink?: string | null
     startTime: Date | string
@@ -25330,7 +25330,7 @@ export namespace Prisma {
     id?: number
     eventName: string
     description?: string | null
-    posterImage: string
+    posterImage?: string | null
     status?: $Enums.EventStatus
     ticketLink?: string | null
     startTime: Date | string
@@ -25373,7 +25373,7 @@ export namespace Prisma {
     id?: IntFilter<"Event"> | number
     eventName?: StringFilter<"Event"> | string
     description?: StringNullableFilter<"Event"> | string | null
-    posterImage?: StringFilter<"Event"> | string
+    posterImage?: StringNullableFilter<"Event"> | string | null
     status?: EnumEventStatusFilter<"Event"> | $Enums.EventStatus
     ticketLink?: StringNullableFilter<"Event"> | string | null
     startTime?: DateTimeFilter<"Event"> | Date | string
@@ -26253,7 +26253,7 @@ export namespace Prisma {
     id?: number
     eventName: string
     description?: string | null
-    posterImage: string
+    posterImage?: string | null
     status?: $Enums.EventStatus
     ticketLink?: string | null
     startTime: Date | string
@@ -26265,7 +26265,7 @@ export namespace Prisma {
   export type EventUpdateWithoutVenueInput = {
     eventName?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImage?: StringFieldUpdateOperationsInput | string
+    posterImage?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
     ticketLink?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26279,7 +26279,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     eventName?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImage?: StringFieldUpdateOperationsInput | string
+    posterImage?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
     ticketLink?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26293,7 +26293,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     eventName?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    posterImage?: StringFieldUpdateOperationsInput | string
+    posterImage?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
     ticketLink?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
