@@ -89,7 +89,7 @@ const songsData = [
 ];
 
 // 7. Venues (อย่างน้อย 5 สถานที่)
-const locationData = [
+const venuesData = [
   { name: "Impact Arena", address: "Muang Thong Thani", lat: 13.9133, lng: 100.5480 },
   { name: "Rajamangala Stadium", address: "Hua Mak", lat: 13.7552, lng: 100.6225 },
   { name: "Thunder Dome", address: "Muang Thong Thani", lat: 13.9211, lng: 100.5466 },
@@ -111,7 +111,7 @@ const artistEventsData = [
   { artistId: 6, eventId: 1 }, // Bodyslam แสดง Bodyslam Fest
   { artistId: 16, eventId: 2 }, // The Weeknd แสดงคอนเสิร์ตเดี่ยว
   { artistId: 2, eventId: 3 }, { artistId: 20, eventId: 3 }, // INK & BOWKYLION แสดง Indie Pop
-  { artistId: 11, eventId: 4 }, { artistId: 12, eventId: 4 }, // URBOYTJ & MILLI แสดง Hip Hop Fest
+  { artistId: 11, eventId: 4 },{ artistId: 12, eventId: 4 }, // URBOYTJ & MILLI แสดง Hip Hop Fest
   { artistId: 21, eventId: 5 }, // Martin Garrix แสดง EDM
 ];
 
@@ -193,7 +193,7 @@ async function resetData() {
         prisma.$executeRawUnsafe('TRUNCATE TABLE `Comment`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `Event`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `ArtistEvent`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `Location`;'),
+        prisma.$executeRawUnsafe('TRUNCATE TABLE `Venue`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `ChatRoom`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `Message`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `Song`;'),
@@ -231,8 +231,8 @@ async function resetData() {
         skipDuplicates: true,
     })
 
-        await prisma.location.createMany({
-        data: locationData ,
+        await prisma.venue.createMany({
+        data: venuesData ,
         skipDuplicates: true,
     })    
 
@@ -266,12 +266,12 @@ async function resetData() {
         skipDuplicates: true,
     })
 
-        await prisma.chatroom.createMany({
+        await prisma.chatRoom.createMany({
         data: chatRoomsData  ,
         skipDuplicates: true,
     })
 
-        await prisma.chatroomuser.createMany({
+        await prisma.chatRoomUser.createMany({
         data: chatRoomUsersData,
         skipDuplicates: true,
     })
@@ -280,7 +280,6 @@ async function resetData() {
         data: messagesData,
         skipDuplicates: true,
     })
-
 
 }
 
