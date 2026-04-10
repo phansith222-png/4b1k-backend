@@ -2,12 +2,12 @@
 
 ### getMe
 GET {{BASE_URL}}/users/me 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1NzUzODgxLCJleHAiOjE3NzYzNTg2ODF9.5knAQmwjfFciijm799LahMhqrXw5qKFUF4xlxkYNkFI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1ODEwOTg0LCJleHAiOjE3NzY0MTU3ODR9.yeVuLZXpYrb8zzNZiloi-O1FjOO9Tb69O76WAvLURS8
 
 ### editMe
 PATCH {{BASE_URL}}/users/me 
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1NzUzODgxLCJleHAiOjE3NzYzNTg2ODF9.5knAQmwjfFciijm799LahMhqrXw5qKFUF4xlxkYNkFI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1ODEwOTg0LCJleHAiOjE3NzY0MTU3ODR9.yeVuLZXpYrb8zzNZiloi-O1FjOO9Tb69O76WAvLURS8
 
 {
    "firstName" : "Somchai123"

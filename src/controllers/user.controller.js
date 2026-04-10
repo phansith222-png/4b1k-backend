@@ -12,7 +12,7 @@ export async function editMeController (req,res,next) {
     //ระบุตัวตนว่าใครเป็นแก้
     const {id} = req.user
     // req.user from middleware
-    console.log('req.user', req.user)
+    // console.log('req.user', req.user)
     //ดึงข้อมูลใหม่จาก req.body
 
     const {

@@ -172,11 +172,19 @@ exports.Prisma.FavArtistScalarFieldEnum = {
 
 exports.Prisma.PostScalarFieldEnum = {
   id: 'id',
+  title: 'title',
   content: 'content',
   userId: 'userId',
-  artistId: 'artistId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  artistId: 'artistId'
+};
+
+exports.Prisma.PostImageScalarFieldEnum = {
+  id: 'id',
+  url: 'url',
+  postId: 'postId',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.LikeScalarFieldEnum = {
@@ -189,6 +197,7 @@ exports.Prisma.LikeScalarFieldEnum = {
 exports.Prisma.CommentScalarFieldEnum = {
   id: 'id',
   content: 'content',
+  image: 'image',
   userId: 'userId',
   postId: 'postId',
   createdAt: 'createdAt',
@@ -295,11 +304,17 @@ exports.Prisma.GenreOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.PostOrderByRelevanceFieldEnum = {
+  title: 'title',
   content: 'content'
 };
 
+exports.Prisma.PostImageOrderByRelevanceFieldEnum = {
+  url: 'url'
+};
+
 exports.Prisma.CommentOrderByRelevanceFieldEnum = {
-  content: 'content'
+  content: 'content',
+  image: 'image'
 };
 
 exports.Prisma.EventOrderByRelevanceFieldEnum = {
@@ -349,6 +364,7 @@ exports.Prisma.ModelName = {
   ArtistGenre: 'ArtistGenre',
   FavArtist: 'FavArtist',
   Post: 'Post',
+  PostImage: 'PostImage',
   Like: 'Like',
   Comment: 'Comment',
   Event: 'Event',
