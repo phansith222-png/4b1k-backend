@@ -1,0 +1,38 @@
+@BASE_URL = http://localhost:5000
+
+### get all post
+GET {{BASE_URL}}/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1ODEwOTg0LCJleHAiOjE3NzY0MTU3ODR9.yeVuLZXpYrb8zzNZiloi-O1FjOO9Tb69O76WAvLURS8
+
+
+### get a post
+GET {{BASE_URL}}/posts/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1ODEwOTg0LCJleHAiOjE3NzY0MTU3ODR9.yeVuLZXpYrb8zzNZiloi-O1FjOO9Tb69O76WAvLURS8
+
+### get a post
+POST {{BASE_URL}}/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1ODEwOTg0LCJleHAiOjE3NzY0MTU3ODR9.yeVuLZXpYrb8zzNZiloi-O1FjOO9Tb69O76WAvLURS8
+
+{
+    "title" : "Concert สนุกมากกกกก",
+    "content" : "อยากให้จัดอีก"
+}
+
+
+### delete a post
+DELETE {{BASE_URL}}/posts/10
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1ODEwOTg0LCJleHAiOjE3NzY0MTU3ODR9.yeVuLZXpYrb8zzNZiloi-O1FjOO9Tb69O76WAvLURS8
+
+### edit a post
+PATCH  {{BASE_URL}}/posts/9
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1ODEwOTg0LCJleHAiOjE3NzY0MTU3ODR9.yeVuLZXpYrb8zzNZiloi-O1FjOO9Tb69O76WAvLURS8
+
+{
+    "title" : "Concert สนุกมากกกกก",
+    "content" : "อยากให้จัดอีก ได้ไหมมมมมมม"
+}

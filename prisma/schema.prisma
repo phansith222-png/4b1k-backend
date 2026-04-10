@@ -66,13 +66,13 @@ model Artist {
   updatedAt DateTime @updatedAt
 
   // Relations
-  agencyId    Int?
-  agency      Agency?      @relation(fields: [agencyId], references: [id])
-  genres      ArtistGenre[]
-  events      ArtistEvent[]
-  favByUsers  FavArtist[]
-  posts       Post[]       // โพสต์ใน Community ของศิลปินคนนี้
-  songs       Song[]       // ศิลปินคนนี้มีเพลงอะไรบ้าง
+  agencyId   Int?
+  agency     Agency?       @relation(fields: [agencyId], references: [id])
+  genres     ArtistGenre[]
+  events     ArtistEvent[]
+  favByUsers FavArtist[]
+  songs      Song[] // ศิลปินคนนี้มีเพลงอะไรบ้าง
+  posts      Post[]
 }
 
 // เปลี่ยนจาก Entertainment เป็น Agency (ค่ายเพลง/ต้นสังกัด)
@@ -82,7 +82,7 @@ model Agency {
   description String? @db.LongText
   socialMedia String? // อาจจะเก็บเป็น JSON format หากมีหลายช่องทาง
 
-  artists     Artist[]
+  artists Artist[]
 }
 
 model Genre {
@@ -117,19 +117,31 @@ model FavArtist {
 
 // Community Posts
 model Post {
-  id        Int      @id @default(autoincrement())
-  content   String   @db.LongText
-  
-  userId    Int
-  artistId  Int // โพสต์ในคอมมูนิตี้ของศิลปินคนไหน
+  id      Int    @id @default(autoincrement())
+  title   String
+  content String @db.LongText
+
+  userId Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  artist    Artist   @relation(fields: [artistId], references: [id], onDelete: Cascade)
-  likes     Like[]
-  comments  Comment[]
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  likes      Like[]
+  comments   Comment[]
+  postImages PostImage[]
+  artist     Artist?     @relation(fields: [artistId], references: [id])
+  artistId   Int?
+}
+
+model PostImage {
+  id        Int      @id @default(autoincrement())
+  url       String?   @db.Text // เก็บ URL ของรูปภาพ
+  postId    Int
+  createdAt DateTime @default(now())
+
+  // สร้าง Relation กลับไปที่ Post (ถ้า Post ถูกลบ รูปก็จะถูกลบด้วยผ่าน onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
 
 model Like {
@@ -147,6 +159,7 @@ model Like {
 model Comment {
   id        Int      @id @default(autoincrement())
   content   String   @db.Text
+  image     String?
   userId    Int
   postId    Int
   createdAt DateTime @default(now())
@@ -163,18 +176,18 @@ model Event {
   description String?     @db.LongText
   posterImage String?
   status      EventStatus @default(UPCOMING)
-  ticketLink  String?     // ลิงก์จองตั๋วตาม Requirement
-  
+  ticketLink  String? // ลิงก์จองตั๋วตาม Requirement
+
   // Date/Time รวมเข้ามาใน Event เลยเพื่อให้ Query ง่ายขึ้น
-  startTime   DateTime
-  endTime     DateTime?
+  startTime DateTime
+  endTime   DateTime?
 
-  venueId     Int
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  venueId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  venue       Venue        @relation(fields: [venueId], references: [id])
-  artists     ArtistEvent[] // ศิลปินที่มาร่วมงาน
+  venue   Venue         @relation(fields: [venueId], references: [id])
+  artists ArtistEvent[] // ศิลปินที่มาร่วมงาน
 }
 
 // ตารางเชื่อม Many-to-Many ระหว่าง Artist กับ Event
@@ -189,13 +202,13 @@ model ArtistEvent {
 
 // สถานที่จัดงานแยกออกมาเป็น Master Data
 model Venue {
-  id        Int     @id @default(autoincrement())
-  name      String
-  address   String? @db.Text
-  lat       Float   // ใช้ Float สำหรับคำนวณระยะทาง
-  lng       Float   // ใช้ Float สำหรับคำนวณระยะทาง
+  id      Int     @id @default(autoincrement())
+  name    String
+  address String? @db.Text
+  lat     Float // ใช้ Float สำหรับคำนวณระยะทาง
+  lng     Float // ใช้ Float สำหรับคำนวณระยะทาง
 
-  events    Event[]
+  events Event[]
 }
 
 // ==========================================
@@ -236,21 +249,21 @@ model Message {
 }
 
 model Song {
-  id          Int       @id @default(autoincrement())
-  title       String    // ชื่อเพลง
-  coverImage  String?   // รูปปกซิงเกิล/อัลบั้ม (ถ้าไม่มีค่อย Fallback ไปใช้รูปศิลปินที่หน้าเว็บ)
-  duration    Int?      // ความยาวเพลง (เก็บเป็น "วินาที" เสมอ เพื่อให้ Frontend นำไปจัด Format ง่าย)
-  streamUrl   String?   // ลิงก์ไปช่องทางฟังเพลง (เช่น Spotify, YouTube, Apple Music)
-  
+  id         Int     @id @default(autoincrement())
+  title      String // ชื่อเพลง
+  coverImage String? // รูปปกซิงเกิล/อัลบั้ม (ถ้าไม่มีค่อย Fallback ไปใช้รูปศิลปินที่หน้าเว็บ)
+  duration   Int? // ความยาวเพลง (เก็บเป็น "วินาที" เสมอ เพื่อให้ Frontend นำไปจัด Format ง่าย)
+  streamUrl  String? // ลิงก์ไปช่องทางฟังเพลง (เช่น Spotify, YouTube, Apple Music)
+
   // ฟิลด์สำหรับจัดการ Top Charts
-  popularity  Int       @default(0) // ยอดวิว/คะแนนความนิยม ใช้สำหรับเรียงลำดับ Top Charts
-  
+  popularity Int @default(0) // ยอดวิว/คะแนนความนิยม ใช้สำหรับเรียงลำดับ Top Charts
+
   releaseDate DateTime? // วันที่ปล่อยเพลง (ใช้จัดเรียงเพลงใหม่ล่าสุดได้)
 
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relation: 1 เพลงเป็นของ 1 ศิลปินหลัก
-  artistId    Int
-  artist      Artist    @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  artistId Int
+  artist   Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
 }
