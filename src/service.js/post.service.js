@@ -198,3 +198,27 @@ export const editComment = async (userId,postId,commentId,newContent) => {
 
     return result
 }
+
+export const deleteComment = async (userId,postId,commentId) => {
+    const haveComment = await prisma.comment.findUnique({
+        where : {id : commentId}
+    })
+
+    if (!haveComment) {
+        return createHttpError([404],'Comment not found')
+    }
+
+    if (haveComment.postId !== postId) {
+        return createHttpError([400],'This comment does not belong to the specified post')
+    }
+
+    if (haveComment.userId !== userId) {
+        return createHttpError([403],'You are not authorized to delete this comment')
+    }
+
+    const result = await prisma.comment.deleteMany({
+        where : { id : commentId}
+    })
+
+    return result
+}
