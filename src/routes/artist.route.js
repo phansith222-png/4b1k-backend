@@ -1,10 +1,9 @@
 import express from 'express'
+import { getAllArtistsController } from '../controllers/artist.controller.js'
 
 const artistsRouter = express.Router()
 
-artistsRouter.get('/',(req,res) => {
-    res.json('get all artist pages')
-})
+artistsRouter.get('/',getAllArtistsController)
 
 artistsRouter.get('/;id',(req,res) => {
     res.json('get an artist pages')
@@ -23,6 +22,10 @@ artistsRouter.delete('/:id',(req,res) => {
 })
 
 artistsRouter.post('/:id/like',(req,res) => {
+    res.json('like artist')
+})
+
+artistsRouter.delete('/:id/like',(req,res) => {
     res.json('like artist')
 })
 

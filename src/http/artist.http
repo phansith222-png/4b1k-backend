@@ -1,0 +1,4 @@
+@BASE_URL = http://localhost:5000
+
+### get all artistss
+GET {{BASE_URL}}/artists
