@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors'
-import { createPost, deletePost, editPost, getAllPosts, getAPost } from '../service.js/post.service.js'
+import { commentPost, createPost, deletePost, editComment, editPost, getAllPosts, getAPost, likePost, unlikePost } from '../service.js/post.service.js'
 
 export async function getAllPostController (req,res,next) {
     
@@ -72,6 +72,112 @@ export async function editPostController (req,res,next) {
         res.status(200).json({
             message : 'Post updated',
             post : updatePost
+        })
+
+    }catch(error) {
+        next(error)
+    }
+}
+
+export async function commentPostController (req,res,next) {
+    try {
+        const {postId} = req.params
+        const {content} = req.body
+        const userId = req.user.id
+
+        if (!content || content.trim() === '') {
+            return res.status(400).json({ error: 'Comment content cannot be empty' })
+        }
+
+        if (!postId) {
+            return res.status(400).json({ error: 'Invalid post ID' })
+        }
+
+        const newComment = await commentPost(
+            content.trim(),
+            userId,
+            Number(postId)
+        )
+
+        res.status(201).json({
+            message : 'comment successfully',
+            data : newComment
+        })
+    }catch (error) {
+        next(error)
+    }
+}
+
+export async function likePostController (req,res,next) {
+    try {
+        const {postId} = req.params
+        const userId = req.user.id
+
+        if(!postId) {
+            return res.status(400).json({ error: 'Invalid post ID' })
+        }
+        
+        const newLike = await likePost(userId,Number(postId))
+
+        res.status(201).json({
+            message : 'Like Post successfully',
+            data : newLike
+        })
+
+    }catch (error) {
+        next(error)
+    }
+}
+
+export async function deleteLikePostController (req,res,next) {
+    try {
+        const {postId} = req.params
+        const userId = req.user.id
+
+        if(!postId) {
+            return res.status(400).json({ error: 'Invalid post ID' })
+        }
+
+        const removeLike = await unlikePost(userId,Number(postId))
+
+        res.status(200).json({
+            message : 'unlike Post successfully',
+            data : removeLike
+        })
+
+    }catch(error) {
+        if (error.message === 'NOT_LIKED_YET') {
+            return res.status(404).json({ error: 'Like not found for this post' }); // 404 Not Found
+        }
+
+        console.error('Error in deleteLikeController:', error);
+        next(error);
+    }
+}
+
+export async function editCommentController (req,res,next) {
+    try {
+        const {postId,commentId} = req.params
+        const userId = req.user.id
+        const {content} = req.body
+
+        if(!content || content.trim() === '') {
+            return createHttpError(400, 'Comment content cannot be empty')
+        }
+
+        if(!postId || !commentId) {
+            return createHttpError(400, 'Invalid post ID or comment ID')
+        }
+
+        const updateComment = await editComment(
+            userId,
+            Number(postId),
+            Number(commentId),
+            content.trim())
+
+        res.status(201).json({
+            message : 'edit comment successfully',
+            data : updateComment
         })
 
     }catch(error) {

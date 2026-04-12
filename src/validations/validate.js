@@ -27,7 +27,7 @@ export const registerSchema = z.object({
     telephone: z.string().optional()
 }).refine(input=>input.password === input.confirmPassword,{
     message: 'Passwords must match',
-    path : ['confirmpassword']
+    path : ['confirmPassword']
 }).transform(async data => ({
     username : data.username,
     firstName : data.firstName,

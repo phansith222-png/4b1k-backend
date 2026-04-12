@@ -36,3 +36,33 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxN
     "title" : "Concert สนุกมากกกกก",
     "content" : "อยากให้จัดอีก ได้ไหมมมมมมม"
 }
+
+### comment at post
+POST {{BASE_URL}}/posts/9/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1ODEwOTg0LCJleHAiOjE3NzY0MTU3ODR9.yeVuLZXpYrb8zzNZiloi-O1FjOO9Tb69O76WAvLURS8
+
+{
+    "content" : "ฉันเห็นด้วยยยยยยยย อยากให้จัดอีกมากๆๆๆ",
+    "userId" : "3"
+}
+
+### Like Post
+POST {{BASE_URL}}/posts/9/like
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1ODEwOTg0LCJleHAiOjE3NzY0MTU3ODR9.yeVuLZXpYrb8zzNZiloi-O1FjOO9Tb69O76WAvLURS8
+
+### unLike Post
+DELETE  {{BASE_URL}}/posts/9/like
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1ODEwOTg0LCJleHAiOjE3NzY0MTU3ODR9.yeVuLZXpYrb8zzNZiloi-O1FjOO9Tb69O76WAvLURS8
+
+### edit comment
+PATCH  {{BASE_URL}}/posts/9/comments/6
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1ODEwOTg0LCJleHAiOjE3NzY0MTU3ODR9.yeVuLZXpYrb8zzNZiloi-O1FjOO9Tb69O76WAvLURS8
+
+{
+    "content" : "ฉันเห็นด้วยยยยยยยย อยากให้จัด อยากหาคนไปด้วยจัง",
+    "userId" : "3"
+}
