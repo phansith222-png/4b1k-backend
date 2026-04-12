@@ -1,5 +1,5 @@
 import express from 'express'
-import { createPostController, deletePostController, editPostController, getAllPostController, getPostController } from '../controllers/post.controller.js'
+import { commentPostController, createPostController, deleteLikePostController, deletePostController, editCommentController, editPostController, getAllPostController, getPostController, likePostController } from '../controllers/post.controller.js'
 
 const postsRouter = express.Router()
 
@@ -13,12 +13,12 @@ postsRouter.delete('/:id',deletePostController)
 
 postsRouter.patch('/:id',editPostController)
 
-postsRouter.post('/:id/comment',(req,res)=>{
-    res.json('write comment at a posts')
-})
+postsRouter.post('/:postId/comments',commentPostController)
 
-postsRouter.post('/:id/like',(req,res)=> {
-    res.json('like at post')
-})
+postsRouter.post('/:postId/like',likePostController)
+
+postsRouter.delete('/:postId/like',deleteLikePostController)
+
+postsRouter.patch('/:postId/comments/:commentId',editCommentController)
 
 export default postsRouter
