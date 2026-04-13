@@ -1,5 +1,5 @@
 import express from 'express'
-import { createArtistPageController, deleteArtistPageController, getAllArtistsController, getArtistController, updateArtistPageController } from '../controllers/artist.controller.js'
+import { createArtistPageController, deleteArtistPageController, getAllArtistsController, getArtistController, likeArtistController, unlikeArtistController, updateArtistPageController } from '../controllers/artist.controller.js'
 import authenicateMiddleware from '../middlewares/authenticate.middleware.js'
 
 const artistsRouter = express.Router()
@@ -14,12 +14,8 @@ artistsRouter.patch('/:artistId',authenicateMiddleware,updateArtistPageControlle
 
 artistsRouter.delete('/:artistId',authenicateMiddleware,deleteArtistPageController)
 
-artistsRouter.post('/:artistId/like',(req,res) => {
-    res.json('like artist')
-})
+artistsRouter.post('/:artistId/like',authenicateMiddleware,likeArtistController)
 
-artistsRouter.delete('/:artistId/like',(req,res) => {
-    res.json('like artist')
-})
+artistsRouter.delete('/:artistId/like',authenicateMiddleware,unlikeArtistController)
 
 export default artistsRouter

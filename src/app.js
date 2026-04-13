@@ -6,6 +6,7 @@ import notFoundMiddleware from './middlewares/notFound.middleware.js';
 import errorMidddleware from './middlewares/error.middleware.js';
 import postsRouter from './routes/posts.route.js';
 import artistsRouter from './routes/artist.route.js';
+import eventsRouter from './routes/events.route.js';
 
 const app = express()
 
@@ -18,6 +19,8 @@ app.use('/users',authenicateMiddleware,usersRouter)
 app.use('/posts',authenicateMiddleware,postsRouter)
 
 app.use('/artists',artistsRouter)
+
+app.use('/events',eventsRouter)
 
 //not found
 app.use(notFoundMiddleware)

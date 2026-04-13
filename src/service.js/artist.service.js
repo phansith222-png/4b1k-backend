@@ -171,3 +171,59 @@ export const deleteArtistPage = async(artistId) => {
 
     return result
 }
+
+export const likeArtist = async(data) => {
+
+    const {userId,artistId} = data
+
+    // console.log('artistId at likeArtist',artistId)
+
+    const foundArtist = await prisma.artist.findUnique({
+        where : {id : artistId}
+    })
+
+    if(!foundArtist) {
+        return (createHttpError(404),'Artist Not Found')
+    }
+
+    const haveLike = await prisma.favArtist.findUnique({
+        where: {
+            userId_artistId: {
+                userId: userId,
+                artistId: artistId
+            }
+        }
+    })
+
+    if(haveLike) {
+        return (createHttpError[400],('already like this artist'))
+    }
+
+    const result = await prisma.favArtist.create({
+        data : {userId : userId, artistId : artistId}
+    })
+
+    return result
+}
+
+export const unlikeArtist = async(data) => {
+    const {userId,artistId} = data
+
+    const likeData = await prisma.favArtist.findUnique({
+        where : {
+            userId_artistId : {userId,artistId}
+        }
+    })
+
+    if(!likeData) {
+        return (createHttpError[401]('Cannot unlike this artist'))
+    }
+
+    const result = await prisma.favArtist.delete({
+        where : {
+            userId_artistId : {userId,artistId}
+        }
+    })
+
+    return result
+}

@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors'
-import { createArtistPage, deleteArtistPage, getAllArtists, getArtist, updateArtistPage } from '../service.js/artist.service.js'
+import { createArtistPage, deleteArtistPage, getAllArtists, getArtist, likeArtist, unlikeArtist, updateArtistPage } from '../service.js/artist.service.js'
 
 export async function getAllArtistsController (req,res,next) {
     try {
@@ -126,6 +126,50 @@ export async function deleteArtistPageController (req,res,next) {
                 adminName: adminName
             },
             deletedData : remeoveArtist
+        })
+
+    }catch(error) {
+        next(error)
+    }
+}
+export async function likeArtistController (req,res,next) {
+    
+    try {
+        const {artistId} = req.params
+        const userId = req.user.id
+
+        // console.log('artistId',artistId)
+        // console.log('userId',userId)
+
+        const addLike = await likeArtist({
+            userId,
+            artistId: Number(artistId)
+        })
+
+        res.status(200).json({
+            message : 'Like artist successfully',
+            artist : addLike
+        })
+
+    }catch(error){
+        next(error)
+    }
+}
+
+export async function unlikeArtistController (req,res,next) {
+
+    try {
+        const {artistId} = req.params
+        const userId = req.user.id
+
+        const unlike = await unlikeArtist({
+            userId,
+            artistId: Number(artistId)
+        })
+
+         res.status(200).json({
+            message : 'unLike artist successfully',
+            artist : unlike
         })
 
     }catch(error) {
