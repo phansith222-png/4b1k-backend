@@ -1,0 +1,6 @@
+@BASE_URL = http://localhost:5000
+
+### Get all events
+GET {{BASE_URL}}/events
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1ODEwOTg0LCJleHAiOjE3NzY0MTU3ODR9.yeVuLZXpYrb8zzNZiloi-O1FjOO9Tb69O76WAvLURS8

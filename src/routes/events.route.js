@@ -1,10 +1,10 @@
 import express from 'express'
+import { getAllEventsController } from '../controllers/event.controller.js'
+import authenicateMiddleware from '../middlewares/authenticate.middleware.js'
 
 const eventsRouter = express.Router()
 
-eventsRouter.get('/',(req,res)=> {
-    res.json('get all event')
-})
+eventsRouter.get('/',authenicateMiddleware,getAllEventsController)
 
 eventsRouter.get('/:eventId',(req,res)=> {
     res.json('get an event')
