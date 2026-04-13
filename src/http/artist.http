@@ -62,3 +62,27 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxN
         }
     ]
 }
+
+
+### update artist page1
+PATCH {{BASE_URL}}/artists/29
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzc2MDU1MjM3LCJleHAiOjE3NzY2NjAwMzd9.xBVpMORHbaeX-ViIXEOIICGmn8o4jbtKQOiOmxSZhrM
+
+{
+    "artistName": "Tilly Birds (Official)",
+    "agencyId": 2,
+    "genreId": 3
+}
+
+
+### update artist page2
+PATCH {{BASE_URL}}/artists/28
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzc2MDU1MjM3LCJleHAiOjE3NzY2NjAwMzd9.xBVpMORHbaeX-ViIXEOIICGmn8o4jbtKQOiOmxSZhrM
+
+{
+    "artistName": "Benjy lovely",
+    "biography" : "No.1 thailand",
+    "genreId": 3
+}

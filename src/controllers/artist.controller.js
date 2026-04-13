@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors'
-import { createArtistPage, getAllArtists, getArtist } from '../service.js/artist.service.js'
+import { createArtistPage, getAllArtists, getArtist, updateArtistPage } from '../service.js/artist.service.js'
 
 export async function getAllArtistsController (req,res,next) {
     try {
@@ -34,6 +34,8 @@ export async function createArtistPageController (req,res,next) {
         if (req.user.role !== 'ADMIN') {
             return (createHttpError[403],'Access denied, Admin only')
         }
+
+        const userId = req.user.id
         const { artistName, profileImage, biography, agencyId, genreId, songs } = req.body
 
         if (!artistName || artistName.trim() === '') {
@@ -46,7 +48,8 @@ export async function createArtistPageController (req,res,next) {
             biography,
             agencyId: agencyId ? Number(agencyId) : undefined,
             genreId: genreId ? Number(genreId) : undefined,
-            songs: songs
+            songs: songs,
+            userId
         })
 
         res.status(201).json({
@@ -59,3 +62,40 @@ export async function createArtistPageController (req,res,next) {
     }
 }
 
+export async function updateArtistPageController (req,res,next) {
+
+    try {
+        if (req.user.role !== 'ADMIN') {
+            return (createHttpError[403],'Access denied, Admin only')
+        }
+
+        const userId = req.user.id
+
+        const {artistId} = req.params
+
+        const { artistName, profileImage, biography, agencyId, genreId, songs } = req.body
+
+         if (!artistName || artistName.trim() === '') {
+            return  (createHttpError[400],'Artist name is required')
+        }
+
+        const updateArtist = await updateArtistPage({
+            artistName: artistName.trim(),
+            artistId: Number(artistId),
+            profileImage,
+            biography,
+            agencyId: agencyId ? Number(agencyId) : undefined,
+            genreId: genreId ? Number(genreId) : undefined,
+            songs: songs,
+            userId
+        })
+
+        res.status(200).json({
+            message : 'updated Artist successfully',
+            artist : updateArtist
+        })
+
+    }catch (error) {
+        next(error)
+    }
+}

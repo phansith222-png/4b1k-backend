@@ -30,12 +30,15 @@ export const getArtist = async(artistId) => {
 }
 
 export const createArtistPage = async(data) => {
-    const { artistName, profileImage, biography, agencyId, genreId, songs } = data
+    const { artistName, profileImage, biography, agencyId, genreId, songs,userId } = data
 
     const prismaData = {
         artistName: artistName,
         profileImage: profileImage || null,
         biography: biography || null,
+        createdByUser: {
+            connect : {id : userId}
+        }
     }
 
     if (agencyId) {
@@ -74,11 +77,80 @@ export const createArtistPage = async(data) => {
             genres: { 
                 include: { genre: true } 
             },
-            songs: true
+            songs: true,
+            createdByUser: {
+                select: { id: true, username: true } // ดึงมาแค่ ID กับชื่อก็พอ
+            }
         }
     })
 
     return result
 }
 
+export const updateArtistPage = async(data) => {
 
+    const { artistName,artistId, profileImage, biography, agencyId, genreId, songs,userId } = data
+    const foundArtist = await prisma.artist.findUnique({
+        where : {id : artistId}
+    })
+
+    if(!foundArtist) {
+        return (createHttpError[404]('Not found Artist'))
+    }
+
+    // เตรียมข้อมูลที่จะอัปเดต
+    const prismaData = {
+        artistName: artistName,
+        profileImage: profileImage !== undefined ? profileImage : undefined,
+        biography: biography !== undefined ? biography : undefined,
+        createdByUser: {
+            connect : {id : userId}
+        }
+    }
+
+    console.log(prismaData)
+    //ถ้ามีการเปลี่ยนค่ายเพลง (agencyId)
+    if (agencyId) {
+        prismaData.agency = { 
+            connect: { id: agencyId } 
+        }
+    }
+
+    if (genreId) {
+        prismaData.genres = {
+            deleteMany: {}, // ลบแนวเพลงเดิมของศิลปินคนนี้ออกทั้งหมด เพิ่มได้ทีละหลายแนว ไม่ค้อเียนโค้ดดักว่า แนวเพลงนี้มีซ้ำหรือยัง
+            create: [
+                { genre: { connect: { id: genreId } } } // ผูกกับแนวเพลงใหม่
+            ]
+        };
+    }
+
+    // ถ้าส่งเพลงใหม่มาด้วย (สมมติว่าเป็นการ "เพิ่มเพลงใหม่" เข้าไป ไม่ใช่ลบเพลงเก่า)
+    if (songs && Array.isArray(songs) && songs.length > 0) {
+        prismaData.songs = {
+            create: songs.map((song) => ({
+                title: song.title,
+                coverImage: song.coverImage || null,
+                duration: song.duration ? Number(song.duration) : null,
+                streamUrl: song.streamUrl || null,
+                releaseDate: song.releaseDate ? new Date(song.releaseDate) : null
+            }))
+        };
+    }
+
+    //อัปเดตลง Database
+    const result = await prisma.artist.update({
+        where: { id: artistId },
+        data: prismaData,
+        include: {
+            agency: true,
+            genres: { include: { genre: true } },
+            songs: true,
+            createdByUser: {
+                select: { id: true, username: true } // ดึงมาแค่ ID กับชื่อก็พอ
+            }
+        }
+    });
+
+    return result
+}
