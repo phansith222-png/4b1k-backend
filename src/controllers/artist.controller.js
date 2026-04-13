@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors'
-import { createArtistPage, getAllArtists, getArtist, updateArtistPage } from '../service.js/artist.service.js'
+import { createArtistPage, deleteArtistPage, getAllArtists, getArtist, updateArtistPage } from '../service.js/artist.service.js'
 
 export async function getAllArtistsController (req,res,next) {
     try {
@@ -96,6 +96,39 @@ export async function updateArtistPageController (req,res,next) {
         })
 
     }catch (error) {
+        next(error)
+    }
+}
+
+export async function deleteArtistPageController (req,res,next) {
+
+    try {
+         if (req.user.role !== 'ADMIN') {
+            return (createHttpError[403],'Access denied, Admin only')
+        }
+
+        const {artistId} = req.params
+
+        const adminId = req.user.id;
+
+        const adminName = req.user.username || "Admin";
+
+       if (!artistId) {
+            return (createHttpError[400], 'Invalid artist ID');
+        } 
+
+        const remeoveArtist = await deleteArtistPage(Number(artistId))
+
+        res.status(200).json({
+            message : "deleted Artist Page successfully",
+            actionBy: {
+                adminId: adminId,
+                adminName: adminName
+            },
+            deletedData : remeoveArtist
+        })
+
+    }catch(error) {
         next(error)
     }
 }

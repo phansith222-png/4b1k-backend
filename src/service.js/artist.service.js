@@ -108,7 +108,7 @@ export const updateArtistPage = async(data) => {
         }
     }
 
-    console.log(prismaData)
+    // console.log(prismaData)
     //ถ้ามีการเปลี่ยนค่ายเพลง (agencyId)
     if (agencyId) {
         prismaData.agency = { 
@@ -151,6 +151,23 @@ export const updateArtistPage = async(data) => {
             }
         }
     });
+
+    return result
+}
+
+export const deleteArtistPage = async(artistId) => {
+
+    const foundArtist = await prisma.artist.findUnique({
+          where : { id : artistId}
+    })
+
+    if(!foundArtist) {
+        return (createHttpError[404]('Artist not found'))
+    }
+
+    const result = await prisma.artist.delete({
+        where : { id : artistId}
+    })
 
     return result
 }
