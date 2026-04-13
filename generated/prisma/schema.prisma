@@ -48,12 +48,13 @@ model User {
   updatedAt DateTime @updatedAt
 
   // Relations
-  favArtists FavArtist[]
-  posts      Post[]
-  likes      Like[]
-  comments   Comment[]
-  messages   Message[] // สำหรับระบบ Chat
-  chatRooms  ChatRoomUser[] // แชทรูมที่ User คนนี้อยู่
+  favArtists     FavArtist[]
+  posts          Post[]
+  likes          Like[]
+  comments       Comment[]
+  messages       Message[] // สำหรับระบบ Chat
+  chatRooms      ChatRoomUser[] // แชทรูมที่ User คนนี้อยู่
+  createdArtists Artist[]       @relation("ArtistCreator")
 }
 
 model Artist {
@@ -66,13 +67,15 @@ model Artist {
   updatedAt DateTime @updatedAt
 
   // Relations
-  agencyId   Int?
-  agency     Agency?       @relation(fields: [agencyId], references: [id])
-  genres     ArtistGenre[]
-  events     ArtistEvent[]
-  favByUsers FavArtist[]
-  songs      Song[] // ศิลปินคนนี้มีเพลงอะไรบ้าง
-  posts      Post[]
+  agencyId        Int?
+  agency          Agency?       @relation(fields: [agencyId], references: [id])
+  genres          ArtistGenre[]
+  events          ArtistEvent[]
+  favByUsers      FavArtist[]
+  songs           Song[] // ศิลปินคนนี้มีเพลงอะไรบ้าง
+  posts           Post[]
+  createdByUserId Int?
+  createdByUser   User?         @relation("ArtistCreator", fields: [createdByUserId], references: [id])
 }
 
 // เปลี่ยนจาก Entertainment เป็น Agency (ค่ายเพลง/ต้นสังกัด)

@@ -54,6 +54,7 @@ model User {
   comments   Comment[]
   messages   Message[] // สำหรับระบบ Chat
   chatRooms  ChatRoomUser[] // แชทรูมที่ User คนนี้อยู่
+  createdArtists Artist[] @relation("ArtistCreator")
 }
 
 model Artist {
@@ -73,6 +74,9 @@ model Artist {
   favByUsers FavArtist[]
   songs      Song[] // ศิลปินคนนี้มีเพลงอะไรบ้าง
   posts      Post[]
+  createdByUserId Int?   
+  createdByUser   User?  @relation("ArtistCreator", fields: [createdByUserId], references: [id])
+
 }
 
 // เปลี่ยนจาก Entertainment เป็น Agency (ค่ายเพลง/ต้นสังกัด)

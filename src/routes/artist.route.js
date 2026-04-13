@@ -1,17 +1,14 @@
 import express from 'express'
-import { getAllArtistsController } from '../controllers/artist.controller.js'
+import { createArtistPageController, getAllArtistsController, getArtistController } from '../controllers/artist.controller.js'
+import authenicateMiddleware from '../middlewares/authenticate.middleware.js'
 
 const artistsRouter = express.Router()
 
 artistsRouter.get('/',getAllArtistsController)
 
-artistsRouter.get('/;id',(req,res) => {
-    res.json('get an artist pages')
-})
+artistsRouter.get('/:artistId',getArtistController)
 
-artistsRouter.post('/',(req,res) => {
-    res.json('create artist page')
-})
+artistsRouter.post('/',authenicateMiddleware,createArtistPageController)
 
 artistsRouter.patch('/:id',(req,res) => {
     res.json('update artist page')

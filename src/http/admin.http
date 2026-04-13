@@ -1,0 +1,10 @@
+@BASE_URL = http://localhost:5000
+
+### admin login
+POST  {{BASE_URL}}/auth/login
+Content-Type: application/json
+
+{
+    "username" : "admin_ben",
+    "password" : "@Concert123456"
+}

@@ -143,7 +143,8 @@ exports.Prisma.ArtistScalarFieldEnum = {
   biography: 'biography',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  agencyId: 'agencyId'
+  agencyId: 'agencyId',
+  createdByUserId: 'createdByUserId'
 };
 
 exports.Prisma.AgencyScalarFieldEnum = {

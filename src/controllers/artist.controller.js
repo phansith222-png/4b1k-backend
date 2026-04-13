@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors'
-import { getAllArtists } from '../service.js/artist.service.js'
+import { createArtistPage, getAllArtists, getArtist } from '../service.js/artist.service.js'
 
 export async function getAllArtistsController (req,res,next) {
     try {
@@ -13,4 +13,49 @@ export async function getAllArtistsController (req,res,next) {
         next(error)
     }
 }
- 
+
+export async function getArtistController (req,res,next) {
+    try {
+        const {artistId} = req.params
+
+        const getAnArtist = await getArtist(Number(artistId))
+
+        res.status(200).json({
+            message : 'get an artist',
+            artist : getAnArtist
+        })
+    }catch(error){
+        next(error)
+    }
+}
+
+export async function createArtistPageController (req,res,next) {
+    try {
+        if (req.user.role !== 'ADMIN') {
+            return (createHttpError[403],'Access denied, Admin only')
+        }
+        const { artistName, profileImage, biography, agencyId, genreId, songs } = req.body
+
+        if (!artistName || artistName.trim() === '') {
+            return  (createHttpError[400],'Artist name is required')
+        }
+
+        const newArtist = await createArtistPage({
+            artistName: artistName.trim(),
+            profileImage,
+            biography,
+            agencyId: agencyId ? Number(agencyId) : undefined,
+            genreId: genreId ? Number(genreId) : undefined,
+            songs: songs
+        })
+
+        res.status(201).json({
+            message : 'created Artist Page successfully',
+            artist : newArtist
+        })
+
+    }catch(error) {
+        next(error)
+    }
+}
+
