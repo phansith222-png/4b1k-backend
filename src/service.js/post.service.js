@@ -222,3 +222,4 @@ export const deleteComment = async (userId,postId,commentId) => {
 
     return result
 }
+

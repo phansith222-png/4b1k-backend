@@ -28,6 +28,7 @@ model User {
   likes          Like[]
   messages       Message[]
   posts          Post[]
+  createdEvents  Event[]        @relation("EventCreator")
 }
 
 model Artist {
@@ -143,21 +144,24 @@ model Comment {
 }
 
 model Event {
-  id          Int           @id @default(autoincrement())
-  eventName   String
-  description String?       @db.LongText
-  posterImage String?
-  status      EventStatus   @default(UPCOMING)
-  ticketLink  String?
-  startTime   DateTime
-  endTime     DateTime?
-  venueId     Int
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  artists     ArtistEvent[]
-  venue       Venue         @relation(fields: [venueId], references: [id])
+  id            Int           @id @default(autoincrement())
+  eventName     String
+  description   String?       @db.LongText
+  posterImage   String?
+  status        EventStatus   @default(UPCOMING)
+  ticketLink    String?
+  startTime     DateTime
+  endTime       DateTime?
+  venueId       Int
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  artists       ArtistEvent[]
+  createdByUserId Int?
+  createdByUser User?         @relation("EventCreator", fields: [createdByUserId], references: [id])
+  venue         Venue         @relation(fields: [venueId], references: [id])
 
   @@index([venueId], map: "Event_venueId_fkey")
+  @@index([createdByUserId], map: "Event_createdByUserId_fkey")
 }
 
 model ArtistEvent {
@@ -243,6 +247,6 @@ enum Gender {
 enum EventStatus {
   UPCOMING
   ONGOING
-  CANCELLED
+  CANCELED
   FINISHED
 }

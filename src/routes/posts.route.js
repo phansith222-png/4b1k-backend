@@ -23,4 +23,10 @@ postsRouter.patch('/:postId/comments/:commentId',editCommentController)
 
 postsRouter.delete('/:postId/comments/:commentId',deleteCommentController)
 
+// postsRouter.delete('/:postId',adminDeletePostController)
+
+// postsRouter.delete('/:postId/comments/:commentId',(req,res) => {
+//     res.json('admin delete user comment')
+// })
+
 export default postsRouter

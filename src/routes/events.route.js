@@ -1,25 +1,17 @@
 import express from 'express'
-import { getAllEventsController } from '../controllers/event.controller.js'
+import { createEventController, deleteEventController, getAllEventsController, getEventController, updateEventController } from '../controllers/event.controller.js'
 import authenicateMiddleware from '../middlewares/authenticate.middleware.js'
 
 const eventsRouter = express.Router()
 
 eventsRouter.get('/',authenicateMiddleware,getAllEventsController)
 
-eventsRouter.get('/:eventId',(req,res)=> {
-    res.json('get an event')
-})
+eventsRouter.get('/:eventId',authenicateMiddleware,getEventController)
 
-eventsRouter.post('/',(req,res)=> {
-    res.json('create all event')
-})
+eventsRouter.post('/',authenicateMiddleware,createEventController)
 
-eventsRouter.patch('/:eventId',(req,res)=> {
-    res.json('edit/update event')
-})
+eventsRouter.patch('/:eventId',authenicateMiddleware,updateEventController)
 
-eventsRouter.delete('/:eventId',(req,res)=> {
-    res.json('deleted an event')
-})
+eventsRouter.delete('/:eventId',authenicateMiddleware,deleteEventController)
 
 export default eventsRouter

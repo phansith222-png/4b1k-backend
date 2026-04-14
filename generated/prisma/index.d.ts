@@ -123,7 +123,7 @@ export type Gender = (typeof Gender)[keyof typeof Gender]
 export const EventStatus: {
   UPCOMING: 'UPCOMING',
   ONGOING: 'ONGOING',
-  CANCELLED: 'CANCELLED',
+  CANCELED: 'CANCELED',
   FINISHED: 'FINISHED'
 };
 
@@ -2237,6 +2237,7 @@ export namespace Prisma {
     likes: number
     messages: number
     posts: number
+    createdEvents: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2247,6 +2248,7 @@ export namespace Prisma {
     likes?: boolean | UserCountOutputTypeCountLikesArgs
     messages?: boolean | UserCountOutputTypeCountMessagesArgs
     posts?: boolean | UserCountOutputTypeCountPostsArgs
+    createdEvents?: boolean | UserCountOutputTypeCountCreatedEventsArgs
   }
 
   // Custom InputTypes
@@ -2307,6 +2309,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PostWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventWhereInput
   }
 
 
@@ -2863,6 +2872,7 @@ export namespace Prisma {
     likes?: boolean | User$likesArgs<ExtArgs>
     messages?: boolean | User$messagesArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
+    createdEvents?: boolean | User$createdEventsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2893,6 +2903,7 @@ export namespace Prisma {
     likes?: boolean | User$likesArgs<ExtArgs>
     messages?: boolean | User$messagesArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
+    createdEvents?: boolean | User$createdEventsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2906,6 +2917,7 @@ export namespace Prisma {
       likes: Prisma.$LikePayload<ExtArgs>[]
       messages: Prisma.$MessagePayload<ExtArgs>[]
       posts: Prisma.$PostPayload<ExtArgs>[]
+      createdEvents: Prisma.$EventPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3268,6 +3280,7 @@ export namespace Prisma {
     likes<T extends User$likesArgs<ExtArgs> = {}>(args?: Subset<T, User$likesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     messages<T extends User$messagesArgs<ExtArgs> = {}>(args?: Subset<T, User$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdEvents<T extends User$createdEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3823,6 +3836,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdEvents
+   */
+  export type User$createdEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    where?: EventWhereInput
+    orderBy?: EventOrderByWithRelationInput | EventOrderByWithRelationInput[]
+    cursor?: EventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventScalarFieldEnum | EventScalarFieldEnum[]
   }
 
   /**
@@ -12947,11 +12984,13 @@ export namespace Prisma {
   export type EventAvgAggregateOutputType = {
     id: number | null
     venueId: number | null
+    createdByUserId: number | null
   }
 
   export type EventSumAggregateOutputType = {
     id: number | null
     venueId: number | null
+    createdByUserId: number | null
   }
 
   export type EventMinAggregateOutputType = {
@@ -12966,6 +13005,7 @@ export namespace Prisma {
     venueId: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    createdByUserId: number | null
   }
 
   export type EventMaxAggregateOutputType = {
@@ -12980,6 +13020,7 @@ export namespace Prisma {
     venueId: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    createdByUserId: number | null
   }
 
   export type EventCountAggregateOutputType = {
@@ -12994,6 +13035,7 @@ export namespace Prisma {
     venueId: number
     createdAt: number
     updatedAt: number
+    createdByUserId: number
     _all: number
   }
 
@@ -13001,11 +13043,13 @@ export namespace Prisma {
   export type EventAvgAggregateInputType = {
     id?: true
     venueId?: true
+    createdByUserId?: true
   }
 
   export type EventSumAggregateInputType = {
     id?: true
     venueId?: true
+    createdByUserId?: true
   }
 
   export type EventMinAggregateInputType = {
@@ -13020,6 +13064,7 @@ export namespace Prisma {
     venueId?: true
     createdAt?: true
     updatedAt?: true
+    createdByUserId?: true
   }
 
   export type EventMaxAggregateInputType = {
@@ -13034,6 +13079,7 @@ export namespace Prisma {
     venueId?: true
     createdAt?: true
     updatedAt?: true
+    createdByUserId?: true
   }
 
   export type EventCountAggregateInputType = {
@@ -13048,6 +13094,7 @@ export namespace Prisma {
     venueId?: true
     createdAt?: true
     updatedAt?: true
+    createdByUserId?: true
     _all?: true
   }
 
@@ -13149,6 +13196,7 @@ export namespace Prisma {
     venueId: number
     createdAt: Date
     updatedAt: Date
+    createdByUserId: number | null
     _count: EventCountAggregateOutputType | null
     _avg: EventAvgAggregateOutputType | null
     _sum: EventSumAggregateOutputType | null
@@ -13182,7 +13230,9 @@ export namespace Prisma {
     venueId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdByUserId?: boolean
     artists?: boolean | Event$artistsArgs<ExtArgs>
+    createdByUser?: boolean | Event$createdByUserArgs<ExtArgs>
     venue?: boolean | VenueDefaultArgs<ExtArgs>
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
@@ -13201,11 +13251,13 @@ export namespace Prisma {
     venueId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdByUserId?: boolean
   }
 
-  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "eventName" | "description" | "posterImage" | "status" | "ticketLink" | "startTime" | "endTime" | "venueId" | "createdAt" | "updatedAt", ExtArgs["result"]["event"]>
+  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "eventName" | "description" | "posterImage" | "status" | "ticketLink" | "startTime" | "endTime" | "venueId" | "createdAt" | "updatedAt" | "createdByUserId", ExtArgs["result"]["event"]>
   export type EventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     artists?: boolean | Event$artistsArgs<ExtArgs>
+    createdByUser?: boolean | Event$createdByUserArgs<ExtArgs>
     venue?: boolean | VenueDefaultArgs<ExtArgs>
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -13214,6 +13266,7 @@ export namespace Prisma {
     name: "Event"
     objects: {
       artists: Prisma.$ArtistEventPayload<ExtArgs>[]
+      createdByUser: Prisma.$UserPayload<ExtArgs> | null
       venue: Prisma.$VenuePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -13228,6 +13281,7 @@ export namespace Prisma {
       venueId: number
       createdAt: Date
       updatedAt: Date
+      createdByUserId: number | null
     }, ExtArgs["result"]["event"]>
     composites: {}
   }
@@ -13569,6 +13623,7 @@ export namespace Prisma {
   export interface Prisma__EventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     artists<T extends Event$artistsArgs<ExtArgs> = {}>(args?: Subset<T, Event$artistsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArtistEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdByUser<T extends Event$createdByUserArgs<ExtArgs> = {}>(args?: Subset<T, Event$createdByUserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     venue<T extends VenueDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VenueDefaultArgs<ExtArgs>>): Prisma__VenueClient<$Result.GetResult<Prisma.$VenuePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -13610,6 +13665,7 @@ export namespace Prisma {
     readonly venueId: FieldRef<"Event", 'Int'>
     readonly createdAt: FieldRef<"Event", 'DateTime'>
     readonly updatedAt: FieldRef<"Event", 'DateTime'>
+    readonly createdByUserId: FieldRef<"Event", 'Int'>
   }
     
 
@@ -13979,6 +14035,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ArtistEventScalarFieldEnum | ArtistEventScalarFieldEnum[]
+  }
+
+  /**
+   * Event.createdByUser
+   */
+  export type Event$createdByUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -20076,7 +20151,8 @@ export namespace Prisma {
     endTime: 'endTime',
     venueId: 'venueId',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    createdByUserId: 'createdByUserId'
   };
 
   export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
@@ -20348,6 +20424,7 @@ export namespace Prisma {
     likes?: LikeListRelationFilter
     messages?: MessageListRelationFilter
     posts?: PostListRelationFilter
+    createdEvents?: EventListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -20371,6 +20448,7 @@ export namespace Prisma {
     likes?: LikeOrderByRelationAggregateInput
     messages?: MessageOrderByRelationAggregateInput
     posts?: PostOrderByRelationAggregateInput
+    createdEvents?: EventOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
   }
 
@@ -20398,6 +20476,7 @@ export namespace Prisma {
     likes?: LikeListRelationFilter
     messages?: MessageListRelationFilter
     posts?: PostListRelationFilter
+    createdEvents?: EventListRelationFilter
   }, "id" | "username" | "email" | "telephone">
 
   export type UserOrderByWithAggregationInput = {
@@ -21004,7 +21083,9 @@ export namespace Prisma {
     venueId?: IntFilter<"Event"> | number
     createdAt?: DateTimeFilter<"Event"> | Date | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
+    createdByUserId?: IntNullableFilter<"Event"> | number | null
     artists?: ArtistEventListRelationFilter
+    createdByUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     venue?: XOR<VenueScalarRelationFilter, VenueWhereInput>
   }
 
@@ -21020,7 +21101,9 @@ export namespace Prisma {
     venueId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdByUserId?: SortOrderInput | SortOrder
     artists?: ArtistEventOrderByRelationAggregateInput
+    createdByUser?: UserOrderByWithRelationInput
     venue?: VenueOrderByWithRelationInput
     _relevance?: EventOrderByRelevanceInput
   }
@@ -21040,7 +21123,9 @@ export namespace Prisma {
     venueId?: IntFilter<"Event"> | number
     createdAt?: DateTimeFilter<"Event"> | Date | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
+    createdByUserId?: IntNullableFilter<"Event"> | number | null
     artists?: ArtistEventListRelationFilter
+    createdByUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     venue?: XOR<VenueScalarRelationFilter, VenueWhereInput>
   }, "id">
 
@@ -21056,6 +21141,7 @@ export namespace Prisma {
     venueId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdByUserId?: SortOrderInput | SortOrder
     _count?: EventCountOrderByAggregateInput
     _avg?: EventAvgOrderByAggregateInput
     _max?: EventMaxOrderByAggregateInput
@@ -21078,6 +21164,7 @@ export namespace Prisma {
     venueId?: IntWithAggregatesFilter<"Event"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
+    createdByUserId?: IntNullableWithAggregatesFilter<"Event"> | number | null
   }
 
   export type ArtistEventWhereInput = {
@@ -21459,6 +21546,7 @@ export namespace Prisma {
     likes?: LikeCreateNestedManyWithoutUserInput
     messages?: MessageCreateNestedManyWithoutSenderInput
     posts?: PostCreateNestedManyWithoutUserInput
+    createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -21482,6 +21570,7 @@ export namespace Prisma {
     likes?: LikeUncheckedCreateNestedManyWithoutUserInput
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserUpdateInput = {
@@ -21504,6 +21593,7 @@ export namespace Prisma {
     likes?: LikeUpdateManyWithoutUserNestedInput
     messages?: MessageUpdateManyWithoutSenderNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -21527,6 +21617,7 @@ export namespace Prisma {
     likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -22074,6 +22165,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     artists?: ArtistEventCreateNestedManyWithoutEventInput
+    createdByUser?: UserCreateNestedOneWithoutCreatedEventsInput
     venue: VenueCreateNestedOneWithoutEventsInput
   }
 
@@ -22089,6 +22181,7 @@ export namespace Prisma {
     venueId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdByUserId?: number | null
     artists?: ArtistEventUncheckedCreateNestedManyWithoutEventInput
   }
 
@@ -22103,6 +22196,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     artists?: ArtistEventUpdateManyWithoutEventNestedInput
+    createdByUser?: UserUpdateOneWithoutCreatedEventsNestedInput
     venue?: VenueUpdateOneRequiredWithoutEventsNestedInput
   }
 
@@ -22118,6 +22212,7 @@ export namespace Prisma {
     venueId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
     artists?: ArtistEventUncheckedUpdateManyWithoutEventNestedInput
   }
 
@@ -22133,6 +22228,7 @@ export namespace Prisma {
     venueId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdByUserId?: number | null
   }
 
   export type EventUpdateManyMutationInput = {
@@ -22159,6 +22255,7 @@ export namespace Prisma {
     venueId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ArtistEventCreateInput = {
@@ -22599,6 +22696,12 @@ export namespace Prisma {
     none?: PostWhereInput
   }
 
+  export type EventListRelationFilter = {
+    every?: EventWhereInput
+    some?: EventWhereInput
+    none?: EventWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -22629,6 +22732,10 @@ export namespace Prisma {
   }
 
   export type PostOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EventOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -23277,11 +23384,13 @@ export namespace Prisma {
     venueId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdByUserId?: SortOrder
   }
 
   export type EventAvgOrderByAggregateInput = {
     id?: SortOrder
     venueId?: SortOrder
+    createdByUserId?: SortOrder
   }
 
   export type EventMaxOrderByAggregateInput = {
@@ -23296,6 +23405,7 @@ export namespace Prisma {
     venueId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdByUserId?: SortOrder
   }
 
   export type EventMinOrderByAggregateInput = {
@@ -23310,11 +23420,13 @@ export namespace Prisma {
     venueId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdByUserId?: SortOrder
   }
 
   export type EventSumOrderByAggregateInput = {
     id?: SortOrder
     venueId?: SortOrder
+    createdByUserId?: SortOrder
   }
 
   export type EnumEventStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -23385,16 +23497,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type EventListRelationFilter = {
-    every?: EventWhereInput
-    some?: EventWhereInput
-    none?: EventWhereInput
-  }
-
-  export type EventOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type VenueOrderByRelevanceInput = {
@@ -23688,6 +23790,13 @@ export namespace Prisma {
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
+  export type EventCreateNestedManyWithoutCreatedByUserInput = {
+    create?: XOR<EventCreateWithoutCreatedByUserInput, EventUncheckedCreateWithoutCreatedByUserInput> | EventCreateWithoutCreatedByUserInput[] | EventUncheckedCreateWithoutCreatedByUserInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutCreatedByUserInput | EventCreateOrConnectWithoutCreatedByUserInput[]
+    createMany?: EventCreateManyCreatedByUserInputEnvelope
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
   export type ArtistUncheckedCreateNestedManyWithoutCreatedByUserInput = {
     create?: XOR<ArtistCreateWithoutCreatedByUserInput, ArtistUncheckedCreateWithoutCreatedByUserInput> | ArtistCreateWithoutCreatedByUserInput[] | ArtistUncheckedCreateWithoutCreatedByUserInput[]
     connectOrCreate?: ArtistCreateOrConnectWithoutCreatedByUserInput | ArtistCreateOrConnectWithoutCreatedByUserInput[]
@@ -23735,6 +23844,13 @@ export namespace Prisma {
     connectOrCreate?: PostCreateOrConnectWithoutUserInput | PostCreateOrConnectWithoutUserInput[]
     createMany?: PostCreateManyUserInputEnvelope
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type EventUncheckedCreateNestedManyWithoutCreatedByUserInput = {
+    create?: XOR<EventCreateWithoutCreatedByUserInput, EventUncheckedCreateWithoutCreatedByUserInput> | EventCreateWithoutCreatedByUserInput[] | EventUncheckedCreateWithoutCreatedByUserInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutCreatedByUserInput | EventCreateOrConnectWithoutCreatedByUserInput[]
+    createMany?: EventCreateManyCreatedByUserInputEnvelope
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -23855,6 +23971,20 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
+  export type EventUpdateManyWithoutCreatedByUserNestedInput = {
+    create?: XOR<EventCreateWithoutCreatedByUserInput, EventUncheckedCreateWithoutCreatedByUserInput> | EventCreateWithoutCreatedByUserInput[] | EventUncheckedCreateWithoutCreatedByUserInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutCreatedByUserInput | EventCreateOrConnectWithoutCreatedByUserInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutCreatedByUserInput | EventUpsertWithWhereUniqueWithoutCreatedByUserInput[]
+    createMany?: EventCreateManyCreatedByUserInputEnvelope
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutCreatedByUserInput | EventUpdateWithWhereUniqueWithoutCreatedByUserInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutCreatedByUserInput | EventUpdateManyWithWhereWithoutCreatedByUserInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -23959,6 +24089,20 @@ export namespace Prisma {
     update?: PostUpdateWithWhereUniqueWithoutUserInput | PostUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: PostUpdateManyWithWhereWithoutUserInput | PostUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
+  export type EventUncheckedUpdateManyWithoutCreatedByUserNestedInput = {
+    create?: XOR<EventCreateWithoutCreatedByUserInput, EventUncheckedCreateWithoutCreatedByUserInput> | EventCreateWithoutCreatedByUserInput[] | EventUncheckedCreateWithoutCreatedByUserInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutCreatedByUserInput | EventCreateOrConnectWithoutCreatedByUserInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutCreatedByUserInput | EventUpsertWithWhereUniqueWithoutCreatedByUserInput[]
+    createMany?: EventCreateManyCreatedByUserInputEnvelope
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutCreatedByUserInput | EventUpdateWithWhereUniqueWithoutCreatedByUserInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutCreatedByUserInput | EventUpdateManyWithWhereWithoutCreatedByUserInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
   }
 
   export type AgencyCreateNestedOneWithoutArtistsInput = {
@@ -24584,6 +24728,12 @@ export namespace Prisma {
     connect?: ArtistEventWhereUniqueInput | ArtistEventWhereUniqueInput[]
   }
 
+  export type UserCreateNestedOneWithoutCreatedEventsInput = {
+    create?: XOR<UserCreateWithoutCreatedEventsInput, UserUncheckedCreateWithoutCreatedEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedEventsInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type VenueCreateNestedOneWithoutEventsInput = {
     create?: XOR<VenueCreateWithoutEventsInput, VenueUncheckedCreateWithoutEventsInput>
     connectOrCreate?: VenueCreateOrConnectWithoutEventsInput
@@ -24617,6 +24767,16 @@ export namespace Prisma {
     update?: ArtistEventUpdateWithWhereUniqueWithoutEventInput | ArtistEventUpdateWithWhereUniqueWithoutEventInput[]
     updateMany?: ArtistEventUpdateManyWithWhereWithoutEventInput | ArtistEventUpdateManyWithWhereWithoutEventInput[]
     deleteMany?: ArtistEventScalarWhereInput | ArtistEventScalarWhereInput[]
+  }
+
+  export type UserUpdateOneWithoutCreatedEventsNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedEventsInput, UserUncheckedCreateWithoutCreatedEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedEventsInput
+    upsert?: UserUpsertWithoutCreatedEventsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedEventsInput, UserUpdateWithoutCreatedEventsInput>, UserUncheckedUpdateWithoutCreatedEventsInput>
   }
 
   export type VenueUpdateOneRequiredWithoutEventsNestedInput = {
@@ -25335,6 +25495,45 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type EventCreateWithoutCreatedByUserInput = {
+    eventName: string
+    description?: string | null
+    posterImage?: string | null
+    status?: $Enums.EventStatus
+    ticketLink?: string | null
+    startTime: Date | string
+    endTime?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    artists?: ArtistEventCreateNestedManyWithoutEventInput
+    venue: VenueCreateNestedOneWithoutEventsInput
+  }
+
+  export type EventUncheckedCreateWithoutCreatedByUserInput = {
+    id?: number
+    eventName: string
+    description?: string | null
+    posterImage?: string | null
+    status?: $Enums.EventStatus
+    ticketLink?: string | null
+    startTime: Date | string
+    endTime?: Date | string | null
+    venueId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    artists?: ArtistEventUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventCreateOrConnectWithoutCreatedByUserInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutCreatedByUserInput, EventUncheckedCreateWithoutCreatedByUserInput>
+  }
+
+  export type EventCreateManyCreatedByUserInputEnvelope = {
+    data: EventCreateManyCreatedByUserInput | EventCreateManyCreatedByUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ArtistUpsertWithWhereUniqueWithoutCreatedByUserInput = {
     where: ArtistWhereUniqueInput
     update: XOR<ArtistUpdateWithoutCreatedByUserInput, ArtistUncheckedUpdateWithoutCreatedByUserInput>
@@ -25528,6 +25727,40 @@ export namespace Prisma {
     artistId?: IntNullableFilter<"Post"> | number | null
   }
 
+  export type EventUpsertWithWhereUniqueWithoutCreatedByUserInput = {
+    where: EventWhereUniqueInput
+    update: XOR<EventUpdateWithoutCreatedByUserInput, EventUncheckedUpdateWithoutCreatedByUserInput>
+    create: XOR<EventCreateWithoutCreatedByUserInput, EventUncheckedCreateWithoutCreatedByUserInput>
+  }
+
+  export type EventUpdateWithWhereUniqueWithoutCreatedByUserInput = {
+    where: EventWhereUniqueInput
+    data: XOR<EventUpdateWithoutCreatedByUserInput, EventUncheckedUpdateWithoutCreatedByUserInput>
+  }
+
+  export type EventUpdateManyWithWhereWithoutCreatedByUserInput = {
+    where: EventScalarWhereInput
+    data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyWithoutCreatedByUserInput>
+  }
+
+  export type EventScalarWhereInput = {
+    AND?: EventScalarWhereInput | EventScalarWhereInput[]
+    OR?: EventScalarWhereInput[]
+    NOT?: EventScalarWhereInput | EventScalarWhereInput[]
+    id?: IntFilter<"Event"> | number
+    eventName?: StringFilter<"Event"> | string
+    description?: StringNullableFilter<"Event"> | string | null
+    posterImage?: StringNullableFilter<"Event"> | string | null
+    status?: EnumEventStatusFilter<"Event"> | $Enums.EventStatus
+    ticketLink?: StringNullableFilter<"Event"> | string | null
+    startTime?: DateTimeFilter<"Event"> | Date | string
+    endTime?: DateTimeNullableFilter<"Event"> | Date | string | null
+    venueId?: IntFilter<"Event"> | number
+    createdAt?: DateTimeFilter<"Event"> | Date | string
+    updatedAt?: DateTimeFilter<"Event"> | Date | string
+    createdByUserId?: IntNullableFilter<"Event"> | number | null
+  }
+
   export type AgencyCreateWithoutArtistsInput = {
     name: string
     description?: string | null
@@ -25565,6 +25798,7 @@ export namespace Prisma {
     likes?: LikeCreateNestedManyWithoutUserInput
     messages?: MessageCreateNestedManyWithoutSenderInput
     posts?: PostCreateNestedManyWithoutUserInput
+    createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserUncheckedCreateWithoutCreatedArtistsInput = {
@@ -25587,6 +25821,7 @@ export namespace Prisma {
     likes?: LikeUncheckedCreateNestedManyWithoutUserInput
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserCreateOrConnectWithoutCreatedArtistsInput = {
@@ -25771,6 +26006,7 @@ export namespace Prisma {
     likes?: LikeUpdateManyWithoutUserNestedInput
     messages?: MessageUpdateManyWithoutSenderNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedArtistsInput = {
@@ -25793,6 +26029,7 @@ export namespace Prisma {
     likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type ArtistEventUpsertWithWhereUniqueWithoutArtistInput = {
@@ -26157,6 +26394,7 @@ export namespace Prisma {
     likes?: LikeCreateNestedManyWithoutUserInput
     messages?: MessageCreateNestedManyWithoutSenderInput
     posts?: PostCreateNestedManyWithoutUserInput
+    createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserUncheckedCreateWithoutFavArtistsInput = {
@@ -26179,6 +26417,7 @@ export namespace Prisma {
     likes?: LikeUncheckedCreateNestedManyWithoutUserInput
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserCreateOrConnectWithoutFavArtistsInput = {
@@ -26256,6 +26495,7 @@ export namespace Prisma {
     likes?: LikeUpdateManyWithoutUserNestedInput
     messages?: MessageUpdateManyWithoutSenderNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFavArtistsInput = {
@@ -26278,6 +26518,7 @@ export namespace Prisma {
     likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type CommentCreateWithoutPostInput = {
@@ -26381,6 +26622,7 @@ export namespace Prisma {
     favArtists?: FavArtistCreateNestedManyWithoutUserInput
     likes?: LikeCreateNestedManyWithoutUserInput
     messages?: MessageCreateNestedManyWithoutSenderInput
+    createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -26403,6 +26645,7 @@ export namespace Prisma {
     favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
     likes?: LikeUncheckedCreateNestedManyWithoutUserInput
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -26533,6 +26776,7 @@ export namespace Prisma {
     favArtists?: FavArtistUpdateManyWithoutUserNestedInput
     likes?: LikeUpdateManyWithoutUserNestedInput
     messages?: MessageUpdateManyWithoutSenderNestedInput
+    createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -26555,6 +26799,7 @@ export namespace Prisma {
     favArtists?: FavArtistUncheckedUpdateManyWithoutUserNestedInput
     likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type PostImageUpsertWithWhereUniqueWithoutPostInput = {
@@ -26692,6 +26937,7 @@ export namespace Prisma {
     favArtists?: FavArtistCreateNestedManyWithoutUserInput
     messages?: MessageCreateNestedManyWithoutSenderInput
     posts?: PostCreateNestedManyWithoutUserInput
+    createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserUncheckedCreateWithoutLikesInput = {
@@ -26714,6 +26960,7 @@ export namespace Prisma {
     favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserCreateOrConnectWithoutLikesInput = {
@@ -26785,6 +27032,7 @@ export namespace Prisma {
     favArtists?: FavArtistUpdateManyWithoutUserNestedInput
     messages?: MessageUpdateManyWithoutSenderNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLikesInput = {
@@ -26807,6 +27055,7 @@ export namespace Prisma {
     favArtists?: FavArtistUncheckedUpdateManyWithoutUserNestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type PostCreateWithoutCommentsInput = {
@@ -26856,6 +27105,7 @@ export namespace Prisma {
     likes?: LikeCreateNestedManyWithoutUserInput
     messages?: MessageCreateNestedManyWithoutSenderInput
     posts?: PostCreateNestedManyWithoutUserInput
+    createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserUncheckedCreateWithoutCommentsInput = {
@@ -26878,6 +27128,7 @@ export namespace Prisma {
     likes?: LikeUncheckedCreateNestedManyWithoutUserInput
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserCreateOrConnectWithoutCommentsInput = {
@@ -26949,6 +27200,7 @@ export namespace Prisma {
     likes?: LikeUpdateManyWithoutUserNestedInput
     messages?: MessageUpdateManyWithoutSenderNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -26971,6 +27223,7 @@ export namespace Prisma {
     likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type ArtistEventCreateWithoutEventInput = {
@@ -26989,6 +27242,56 @@ export namespace Prisma {
   export type ArtistEventCreateManyEventInputEnvelope = {
     data: ArtistEventCreateManyEventInput | ArtistEventCreateManyEventInput[]
     skipDuplicates?: boolean
+  }
+
+  export type UserCreateWithoutCreatedEventsInput = {
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdArtists?: ArtistCreateNestedManyWithoutCreatedByUserInput
+    chatRooms?: ChatRoomUserCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedEventsInput = {
+    id?: number
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdArtists?: ArtistUncheckedCreateNestedManyWithoutCreatedByUserInput
+    chatRooms?: ChatRoomUserUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedEventsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedEventsInput, UserUncheckedCreateWithoutCreatedEventsInput>
   }
 
   export type VenueCreateWithoutEventsInput = {
@@ -27025,6 +27328,62 @@ export namespace Prisma {
   export type ArtistEventUpdateManyWithWhereWithoutEventInput = {
     where: ArtistEventScalarWhereInput
     data: XOR<ArtistEventUpdateManyMutationInput, ArtistEventUncheckedUpdateManyWithoutEventInput>
+  }
+
+  export type UserUpsertWithoutCreatedEventsInput = {
+    update: XOR<UserUpdateWithoutCreatedEventsInput, UserUncheckedUpdateWithoutCreatedEventsInput>
+    create: XOR<UserCreateWithoutCreatedEventsInput, UserUncheckedCreateWithoutCreatedEventsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedEventsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedEventsInput, UserUncheckedUpdateWithoutCreatedEventsInput>
+  }
+
+  export type UserUpdateWithoutCreatedEventsInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdArtists?: ArtistUpdateManyWithoutCreatedByUserNestedInput
+    chatRooms?: ChatRoomUserUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    favArtists?: FavArtistUpdateManyWithoutUserNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedEventsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdArtists?: ArtistUncheckedUpdateManyWithoutCreatedByUserNestedInput
+    chatRooms?: ChatRoomUserUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    favArtists?: FavArtistUncheckedUpdateManyWithoutUserNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type VenueUpsertWithoutEventsInput = {
@@ -27097,6 +27456,7 @@ export namespace Prisma {
     endTime?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdByUser?: UserCreateNestedOneWithoutCreatedEventsInput
     venue: VenueCreateNestedOneWithoutEventsInput
   }
 
@@ -27112,6 +27472,7 @@ export namespace Prisma {
     venueId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdByUserId?: number | null
   }
 
   export type EventCreateOrConnectWithoutArtistsInput = {
@@ -27180,6 +27541,7 @@ export namespace Prisma {
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdByUser?: UserUpdateOneWithoutCreatedEventsNestedInput
     venue?: VenueUpdateOneRequiredWithoutEventsNestedInput
   }
 
@@ -27195,6 +27557,7 @@ export namespace Prisma {
     venueId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type EventCreateWithoutVenueInput = {
@@ -27208,6 +27571,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     artists?: ArtistEventCreateNestedManyWithoutEventInput
+    createdByUser?: UserCreateNestedOneWithoutCreatedEventsInput
   }
 
   export type EventUncheckedCreateWithoutVenueInput = {
@@ -27221,6 +27585,7 @@ export namespace Prisma {
     endTime?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdByUserId?: number | null
     artists?: ArtistEventUncheckedCreateNestedManyWithoutEventInput
   }
 
@@ -27248,23 +27613,6 @@ export namespace Prisma {
   export type EventUpdateManyWithWhereWithoutVenueInput = {
     where: EventScalarWhereInput
     data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyWithoutVenueInput>
-  }
-
-  export type EventScalarWhereInput = {
-    AND?: EventScalarWhereInput | EventScalarWhereInput[]
-    OR?: EventScalarWhereInput[]
-    NOT?: EventScalarWhereInput | EventScalarWhereInput[]
-    id?: IntFilter<"Event"> | number
-    eventName?: StringFilter<"Event"> | string
-    description?: StringNullableFilter<"Event"> | string | null
-    posterImage?: StringNullableFilter<"Event"> | string | null
-    status?: EnumEventStatusFilter<"Event"> | $Enums.EventStatus
-    ticketLink?: StringNullableFilter<"Event"> | string | null
-    startTime?: DateTimeFilter<"Event"> | Date | string
-    endTime?: DateTimeNullableFilter<"Event"> | Date | string | null
-    venueId?: IntFilter<"Event"> | number
-    createdAt?: DateTimeFilter<"Event"> | Date | string
-    updatedAt?: DateTimeFilter<"Event"> | Date | string
   }
 
   export type ChatRoomUserCreateWithoutChatRoomInput = {
@@ -27383,6 +27731,7 @@ export namespace Prisma {
     likes?: LikeCreateNestedManyWithoutUserInput
     messages?: MessageCreateNestedManyWithoutSenderInput
     posts?: PostCreateNestedManyWithoutUserInput
+    createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserUncheckedCreateWithoutChatRoomsInput = {
@@ -27405,6 +27754,7 @@ export namespace Prisma {
     likes?: LikeUncheckedCreateNestedManyWithoutUserInput
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserCreateOrConnectWithoutChatRoomsInput = {
@@ -27468,6 +27818,7 @@ export namespace Prisma {
     likes?: LikeUpdateManyWithoutUserNestedInput
     messages?: MessageUpdateManyWithoutSenderNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChatRoomsInput = {
@@ -27490,6 +27841,7 @@ export namespace Prisma {
     likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type ChatRoomCreateWithoutMessagesInput = {
@@ -27531,6 +27883,7 @@ export namespace Prisma {
     favArtists?: FavArtistCreateNestedManyWithoutUserInput
     likes?: LikeCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutUserInput
+    createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserUncheckedCreateWithoutMessagesInput = {
@@ -27553,6 +27906,7 @@ export namespace Prisma {
     favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
     likes?: LikeUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserCreateOrConnectWithoutMessagesInput = {
@@ -27616,6 +27970,7 @@ export namespace Prisma {
     favArtists?: FavArtistUpdateManyWithoutUserNestedInput
     likes?: LikeUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessagesInput = {
@@ -27638,6 +27993,7 @@ export namespace Prisma {
     favArtists?: FavArtistUncheckedUpdateManyWithoutUserNestedInput
     likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type ArtistCreateWithoutSongsInput = {
@@ -27765,6 +28121,20 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     artistId?: number | null
+  }
+
+  export type EventCreateManyCreatedByUserInput = {
+    id?: number
+    eventName: string
+    description?: string | null
+    posterImage?: string | null
+    status?: $Enums.EventStatus
+    ticketLink?: string | null
+    startTime: Date | string
+    endTime?: Date | string | null
+    venueId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ArtistUpdateWithoutCreatedByUserInput = {
@@ -27934,6 +28304,49 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     artistId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type EventUpdateWithoutCreatedByUserInput = {
+    eventName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    posterImage?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    ticketLink?: NullableStringFieldUpdateOperationsInput | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    artists?: ArtistEventUpdateManyWithoutEventNestedInput
+    venue?: VenueUpdateOneRequiredWithoutEventsNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutCreatedByUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    eventName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    posterImage?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    ticketLink?: NullableStringFieldUpdateOperationsInput | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    venueId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    artists?: ArtistEventUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateManyWithoutCreatedByUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    eventName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    posterImage?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    ticketLink?: NullableStringFieldUpdateOperationsInput | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    venueId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ArtistEventCreateManyArtistInput = {
@@ -28252,6 +28665,7 @@ export namespace Prisma {
     endTime?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdByUserId?: number | null
   }
 
   export type EventUpdateWithoutVenueInput = {
@@ -28265,6 +28679,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     artists?: ArtistEventUpdateManyWithoutEventNestedInput
+    createdByUser?: UserUpdateOneWithoutCreatedEventsNestedInput
   }
 
   export type EventUncheckedUpdateWithoutVenueInput = {
@@ -28278,6 +28693,7 @@ export namespace Prisma {
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
     artists?: ArtistEventUncheckedUpdateManyWithoutEventNestedInput
   }
 
@@ -28292,6 +28708,7 @@ export namespace Prisma {
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ChatRoomUserCreateManyChatRoomInput = {

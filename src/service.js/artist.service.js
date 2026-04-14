@@ -162,7 +162,7 @@ export const deleteArtistPage = async(artistId) => {
     })
 
     if(!foundArtist) {
-        return (createHttpError[404]('Artist not found'))
+        return (createHttpError[404],('Artist not found'))
     }
 
     const result = await prisma.artist.delete({

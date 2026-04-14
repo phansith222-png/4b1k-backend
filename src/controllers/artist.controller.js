@@ -168,7 +168,7 @@ export async function unlikeArtistController (req,res,next) {
         })
 
          res.status(200).json({
-            message : 'unLike artist successfully',
+            message : 'Like artist successfully',
             artist : unlike
         })
 
