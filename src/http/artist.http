@@ -1,0 +1,103 @@
+@BASE_URL = http://localhost:5000
+
+### get all artistss
+GET {{BASE_URL}}/artists
+
+### get an artist
+GET {{BASE_URL}}/artists/1
+
+### create artist page by admin
+POST {{BASE_URL}}/artists
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzc2MDU1MjM3LCJleHAiOjE3NzY2NjAwMzd9.xBVpMORHbaeX-ViIXEOIICGmn8o4jbtKQOiOmxSZhrM
+
+{
+    "artistName": "Three Man Down",
+    "biography": "Pop-Rock band",
+    "agencyId": 1,
+    "genreIds": [1, 2],
+    "songs": [
+        {
+            "title": "ฝนตกไหม",
+            "duration": 240
+        },
+        {
+            "title": "ฝันถึงแฟนเก่า"
+        }
+    ]
+}
+
+### create artist page by admin
+POST {{BASE_URL}}/artists
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzc2MDU1MjM3LCJleHAiOjE3NzY2NjAwMzd9.xBVpMORHbaeX-ViIXEOIICGmn8o4jbtKQOiOmxSZhrM
+
+{
+    "artistName": "Tilly Birds",
+    "biography": "Thai alternative rock band",
+    "agencyId": 1,
+    "genreIds": [1, 3]
+}
+
+### create artist page by admin
+POST {{BASE_URL}}/artists
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzc2MDU1MjM3LCJleHAiOjE3NzY2NjAwMzd9.xBVpMORHbaeX-ViIXEOIICGmn8o4jbtKQOiOmxSZhrM
+
+{
+    "artistName": "Benchan",
+    "biography": "A talented indie artist focusing on acoustic pop.",
+    "profileImage": "https://example.com/images/benchan.jpg",
+    "agencyId": 1,
+    "genreIds": [2, 5],
+    "songs": [
+        {
+            "title": "First Love",
+            "duration": 210,
+            "releaseDate": "2026-04-12T00:00:00.000Z"
+        },
+        {
+            "title": "Acoustic Rain",
+            "streamUrl": "https://spotify.com/track/12345"
+        }
+    ]
+}
+
+
+### update artist page1 by admin
+PATCH {{BASE_URL}}/artists/29
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzc2MDU1MjM3LCJleHAiOjE3NzY2NjAwMzd9.xBVpMORHbaeX-ViIXEOIICGmn8o4jbtKQOiOmxSZhrM
+
+{
+    "artistName": "Tilly Birds (Official)",
+    "agencyId": 2,
+    "genreId": 3
+}
+
+
+### update artist page2 by admin
+PATCH {{BASE_URL}}/artists/28
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzc2MDU1MjM3LCJleHAiOjE3NzY2NjAwMzd9.xBVpMORHbaeX-ViIXEOIICGmn8o4jbtKQOiOmxSZhrM
+
+{
+    "artistName": "Benjy lovely",
+    "biography" : "No.1 thailand",
+    "genreId": 3
+}
+
+### create artist page by admin
+DELETE  {{BASE_URL}}/artists/31
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzc2MDU1MjM3LCJleHAiOjE3NzY2NjAwMzd9.xBVpMORHbaeX-ViIXEOIICGmn8o4jbtKQOiOmxSZhrM
+
+### Like artist by user
+POST {{BASE_URL}}/artists/11/like
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1ODEwOTg0LCJleHAiOjE3NzY0MTU3ODR9.yeVuLZXpYrb8zzNZiloi-O1FjOO9Tb69O76WAvLURS8 
+
+### unLike artist by user
+DELETE {{BASE_URL}}/artists/11/like
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1ODEwOTg0LCJleHAiOjE3NzY0MTU3ODR9.yeVuLZXpYrb8zzNZiloi-O1FjOO9Tb69O76WAvLURS8

@@ -1,0 +1,73 @@
+@BASE_URL = http://localhost:5000
+
+### Get all events
+GET {{BASE_URL}}/events
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1ODEwOTg0LCJleHAiOjE3NzY0MTU3ODR9.yeVuLZXpYrb8zzNZiloi-O1FjOO9Tb69O76WAvLURS8
+
+### Get an event
+GET {{BASE_URL}}/events/3
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1ODEwOTg0LCJleHAiOjE3NzY0MTU3ODR9.yeVuLZXpYrb8zzNZiloi-O1FjOO9Tb69O76WAvLURS8
+
+### create Event by admin
+POST {{BASE_URL}}/events
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzc2MDU1MjM3LCJleHAiOjE3NzY2NjAwMzd9.xBVpMORHbaeX-ViIXEOIICGmn8o4jbtKQOiOmxSZhrM
+
+{
+    "eventName": "Cat Expo 10",
+    "description": "เทศกาลดนตรีของคนเล็กๆ กับตลาดเพลงไทยใหญ่โตที่สุดในโลก",
+    "ticketLink": "https://www.theconcert.com/catexpo",
+    "startTime": "2026-11-20T10:00:00.000Z",
+    "endTime": "2026-11-21T23:59:00.000Z",
+    "venueId": 2,
+    "artistIds": [5, 8, 12]
+}
+
+### update Event full Data by admin
+PATCH {{BASE_URL}}/events/7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzc2MDU1MjM3LCJleHAiOjE3NzY2NjAwMzd9.xBVpMORHbaeX-ViIXEOIICGmn8o4jbtKQOiOmxSZhrM
+
+{
+  "eventName": "Rock Mountain Festival 2026",
+  "description": "เทศกาลดนตรีร็อคที่ยิ่งใหญ่ที่สุดแห่งปี จัดเต็ม 10 วงร็อคแถวหน้า",
+  "posterImage": "https://example.com/images/rock-mountain-2026.jpg",
+  "status": "UPCOMING",
+  "ticketLink": "https://www.ticketbox.com/rock-mountain-2026",
+  "startTime": "2026-11-20T17:00:00.000Z",
+  "endTime": "2026-11-20T23:59:59.000Z",
+  "venueId": 5,
+  "artistIds": [1, 14, 25]
+}
+
+### update Event some Data by admin
+PATCH {{BASE_URL}}/events/7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzc2MDU1MjM3LCJleHAiOjE3NzY2NjAwMzd9.xBVpMORHbaeX-ViIXEOIICGmn8o4jbtKQOiOmxSZhrM
+
+{
+  "eventName": "Acoustic Night (Secret Show)",
+  "startTime": "2026-12-01T19:00:00.000Z",
+  "venueId": 2
+}
+
+### update Event some Data by admin
+PATCH {{BASE_URL}}/events/7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzc2MDU1MjM3LCJleHAiOjE3NzY2NjAwMzd9.xBVpMORHbaeX-ViIXEOIICGmn8o4jbtKQOiOmxSZhrM
+
+{
+  "eventName": "Indie Pop Live 2026 (CANCELED)",
+  "description": "งานถูกยกเลิกเนื่องจากเหตุสุดวิสัย ขออภัยในความไม่สะดวก",
+  "status": "CANCELED",
+  "startTime": "2026-05-15T18:00:00.000Z",
+  "venueId": 2,
+  "artistIds": [] 
+}
+
+### deleted Event by admin
+DELETE {{BASE_URL}}/events/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzc2MDU1MjM3LCJleHAiOjE3NzY2NjAwMzd9.xBVpMORHbaeX-ViIXEOIICGmn8o4jbtKQOiOmxSZhrM

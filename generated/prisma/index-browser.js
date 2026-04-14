@@ -143,7 +143,8 @@ exports.Prisma.ArtistScalarFieldEnum = {
   biography: 'biography',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  agencyId: 'agencyId'
+  agencyId: 'agencyId',
+  createdByUserId: 'createdByUserId'
 };
 
 exports.Prisma.AgencyScalarFieldEnum = {
@@ -215,7 +216,8 @@ exports.Prisma.EventScalarFieldEnum = {
   endTime: 'endTime',
   venueId: 'venueId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  createdByUserId: 'createdByUserId'
 };
 
 exports.Prisma.ArtistEventScalarFieldEnum = {
@@ -352,7 +354,7 @@ exports.Gender = exports.$Enums.Gender = {
 exports.EventStatus = exports.$Enums.EventStatus = {
   UPCOMING: 'UPCOMING',
   ONGOING: 'ONGOING',
-  CANCELLED: 'CANCELLED',
+  CANCELED: 'CANCELED',
   FINISHED: 'FINISHED'
 };
 

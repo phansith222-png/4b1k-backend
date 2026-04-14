@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors'
-import { commentPost, createPost, deletePost, editComment, editPost, getAllPosts, getAPost, likePost, unlikePost } from '../service.js/post.service.js'
+import { commentPost, createPost, deleteComment, deletePost, editComment, editPost, getAllPosts, getAPost, likePost, unlikePost } from '../service.js/post.service.js'
 
 export async function getAllPostController (req,res,next) {
     
@@ -184,3 +184,24 @@ export async function editCommentController (req,res,next) {
         next(error)
     }
 }
+
+export async function deleteCommentController (req,res,next) {
+    try {
+        const {postId,commentId} = req.params
+        const userId = req.user.id
+
+        if(!postId || !commentId) {
+            return createHttpError(400, 'Invalid post ID or comment ID')
+        }
+    
+        const removeComment = await deleteComment(userId,Number(userId),Number(commentId))
+
+        res.status(200).json({
+            message : 'Deleted comment successfully'
+        })
+
+    }catch(error) {
+        next(error)
+    }
+}
+

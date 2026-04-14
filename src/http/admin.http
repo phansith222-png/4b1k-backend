@@ -1,0 +1,15 @@
+@BASE_URL = http://localhost:5000
+
+### admin login
+POST  {{BASE_URL}}/auth/login
+Content-Type: application/json
+
+{
+    "username" : "admin_ben",
+    "password" : "@Concert123456"
+}
+
+### admin delete user post
+DELETE {{BASE_URL}}/admin/posts/11
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzc2MDU1MjM3LCJleHAiOjE3NzY2NjAwMzd9.xBVpMORHbaeX-ViIXEOIICGmn8o4jbtKQOiOmxSZhrM

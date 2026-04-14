@@ -123,7 +123,7 @@ export type Gender = (typeof Gender)[keyof typeof Gender]
 export const EventStatus: {
   UPCOMING: 'UPCOMING',
   ONGOING: 'ONGOING',
-  CANCELLED: 'CANCELLED',
+  CANCELED: 'CANCELED',
   FINISHED: 'FINISHED'
 };
 
@@ -2230,21 +2230,25 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    favArtists: number
-    posts: number
-    likes: number
-    comments: number
-    messages: number
+    createdArtists: number
     chatRooms: number
+    comments: number
+    favArtists: number
+    likes: number
+    messages: number
+    posts: number
+    createdEvents: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    favArtists?: boolean | UserCountOutputTypeCountFavArtistsArgs
-    posts?: boolean | UserCountOutputTypeCountPostsArgs
-    likes?: boolean | UserCountOutputTypeCountLikesArgs
-    comments?: boolean | UserCountOutputTypeCountCommentsArgs
-    messages?: boolean | UserCountOutputTypeCountMessagesArgs
+    createdArtists?: boolean | UserCountOutputTypeCountCreatedArtistsArgs
     chatRooms?: boolean | UserCountOutputTypeCountChatRoomsArgs
+    comments?: boolean | UserCountOutputTypeCountCommentsArgs
+    favArtists?: boolean | UserCountOutputTypeCountFavArtistsArgs
+    likes?: boolean | UserCountOutputTypeCountLikesArgs
+    messages?: boolean | UserCountOutputTypeCountMessagesArgs
+    posts?: boolean | UserCountOutputTypeCountPostsArgs
+    createdEvents?: boolean | UserCountOutputTypeCountCreatedEventsArgs
   }
 
   // Custom InputTypes
@@ -2261,22 +2265,15 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountFavArtistsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: FavArtistWhereInput
+  export type UserCountOutputTypeCountCreatedArtistsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ArtistWhereInput
   }
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PostWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountLikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: LikeWhereInput
+  export type UserCountOutputTypeCountChatRoomsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChatRoomUserWhereInput
   }
 
   /**
@@ -2289,6 +2286,20 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountFavArtistsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FavArtistWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountLikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LikeWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MessageWhereInput
   }
@@ -2296,8 +2307,15 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountChatRoomsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ChatRoomUserWhereInput
+  export type UserCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PostWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventWhereInput
   }
 
 
@@ -2306,19 +2324,19 @@ export namespace Prisma {
    */
 
   export type ArtistCountOutputType = {
-    genres: number
     events: number
+    genres: number
     favByUsers: number
-    songs: number
     posts: number
+    songs: number
   }
 
   export type ArtistCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    genres?: boolean | ArtistCountOutputTypeCountGenresArgs
     events?: boolean | ArtistCountOutputTypeCountEventsArgs
+    genres?: boolean | ArtistCountOutputTypeCountGenresArgs
     favByUsers?: boolean | ArtistCountOutputTypeCountFavByUsersArgs
-    songs?: boolean | ArtistCountOutputTypeCountSongsArgs
     posts?: boolean | ArtistCountOutputTypeCountPostsArgs
+    songs?: boolean | ArtistCountOutputTypeCountSongsArgs
   }
 
   // Custom InputTypes
@@ -2335,15 +2353,15 @@ export namespace Prisma {
   /**
    * ArtistCountOutputType without action
    */
-  export type ArtistCountOutputTypeCountGenresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ArtistGenreWhereInput
+  export type ArtistCountOutputTypeCountEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ArtistEventWhereInput
   }
 
   /**
    * ArtistCountOutputType without action
    */
-  export type ArtistCountOutputTypeCountEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ArtistEventWhereInput
+  export type ArtistCountOutputTypeCountGenresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ArtistGenreWhereInput
   }
 
   /**
@@ -2356,15 +2374,15 @@ export namespace Prisma {
   /**
    * ArtistCountOutputType without action
    */
-  export type ArtistCountOutputTypeCountSongsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SongWhereInput
+  export type ArtistCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PostWhereInput
   }
 
   /**
    * ArtistCountOutputType without action
    */
-  export type ArtistCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PostWhereInput
+  export type ArtistCountOutputTypeCountSongsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SongWhereInput
   }
 
 
@@ -2435,14 +2453,14 @@ export namespace Prisma {
    */
 
   export type PostCountOutputType = {
-    likes: number
     comments: number
+    likes: number
     postImages: number
   }
 
   export type PostCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    likes?: boolean | PostCountOutputTypeCountLikesArgs
     comments?: boolean | PostCountOutputTypeCountCommentsArgs
+    likes?: boolean | PostCountOutputTypeCountLikesArgs
     postImages?: boolean | PostCountOutputTypeCountPostImagesArgs
   }
 
@@ -2460,15 +2478,15 @@ export namespace Prisma {
   /**
    * PostCountOutputType without action
    */
-  export type PostCountOutputTypeCountLikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: LikeWhereInput
+  export type PostCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommentWhereInput
   }
 
   /**
    * PostCountOutputType without action
    */
-  export type PostCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CommentWhereInput
+  export type PostCountOutputTypeCountLikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LikeWhereInput
   }
 
   /**
@@ -2847,12 +2865,14 @@ export namespace Prisma {
     gender?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    favArtists?: boolean | User$favArtistsArgs<ExtArgs>
-    posts?: boolean | User$postsArgs<ExtArgs>
-    likes?: boolean | User$likesArgs<ExtArgs>
-    comments?: boolean | User$commentsArgs<ExtArgs>
-    messages?: boolean | User$messagesArgs<ExtArgs>
+    createdArtists?: boolean | User$createdArtistsArgs<ExtArgs>
     chatRooms?: boolean | User$chatRoomsArgs<ExtArgs>
+    comments?: boolean | User$commentsArgs<ExtArgs>
+    favArtists?: boolean | User$favArtistsArgs<ExtArgs>
+    likes?: boolean | User$likesArgs<ExtArgs>
+    messages?: boolean | User$messagesArgs<ExtArgs>
+    posts?: boolean | User$postsArgs<ExtArgs>
+    createdEvents?: boolean | User$createdEventsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2876,24 +2896,28 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "email" | "telephone" | "firstName" | "lastName" | "password" | "profileImage" | "nationalId" | "role" | "gender" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    favArtists?: boolean | User$favArtistsArgs<ExtArgs>
-    posts?: boolean | User$postsArgs<ExtArgs>
-    likes?: boolean | User$likesArgs<ExtArgs>
-    comments?: boolean | User$commentsArgs<ExtArgs>
-    messages?: boolean | User$messagesArgs<ExtArgs>
+    createdArtists?: boolean | User$createdArtistsArgs<ExtArgs>
     chatRooms?: boolean | User$chatRoomsArgs<ExtArgs>
+    comments?: boolean | User$commentsArgs<ExtArgs>
+    favArtists?: boolean | User$favArtistsArgs<ExtArgs>
+    likes?: boolean | User$likesArgs<ExtArgs>
+    messages?: boolean | User$messagesArgs<ExtArgs>
+    posts?: boolean | User$postsArgs<ExtArgs>
+    createdEvents?: boolean | User$createdEventsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      favArtists: Prisma.$FavArtistPayload<ExtArgs>[]
-      posts: Prisma.$PostPayload<ExtArgs>[]
-      likes: Prisma.$LikePayload<ExtArgs>[]
-      comments: Prisma.$CommentPayload<ExtArgs>[]
-      messages: Prisma.$MessagePayload<ExtArgs>[]
+      createdArtists: Prisma.$ArtistPayload<ExtArgs>[]
       chatRooms: Prisma.$ChatRoomUserPayload<ExtArgs>[]
+      comments: Prisma.$CommentPayload<ExtArgs>[]
+      favArtists: Prisma.$FavArtistPayload<ExtArgs>[]
+      likes: Prisma.$LikePayload<ExtArgs>[]
+      messages: Prisma.$MessagePayload<ExtArgs>[]
+      posts: Prisma.$PostPayload<ExtArgs>[]
+      createdEvents: Prisma.$EventPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3249,12 +3273,14 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    favArtists<T extends User$favArtistsArgs<ExtArgs> = {}>(args?: Subset<T, User$favArtistsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavArtistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    likes<T extends User$likesArgs<ExtArgs> = {}>(args?: Subset<T, User$likesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    comments<T extends User$commentsArgs<ExtArgs> = {}>(args?: Subset<T, User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    messages<T extends User$messagesArgs<ExtArgs> = {}>(args?: Subset<T, User$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdArtists<T extends User$createdArtistsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdArtistsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArtistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     chatRooms<T extends User$chatRoomsArgs<ExtArgs> = {}>(args?: Subset<T, User$chatRoomsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatRoomUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    comments<T extends User$commentsArgs<ExtArgs> = {}>(args?: Subset<T, User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    favArtists<T extends User$favArtistsArgs<ExtArgs> = {}>(args?: Subset<T, User$favArtistsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavArtistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    likes<T extends User$likesArgs<ExtArgs> = {}>(args?: Subset<T, User$likesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    messages<T extends User$messagesArgs<ExtArgs> = {}>(args?: Subset<T, User$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdEvents<T extends User$createdEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3645,75 +3671,51 @@ export namespace Prisma {
   }
 
   /**
-   * User.favArtists
+   * User.createdArtists
    */
-  export type User$favArtistsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$createdArtistsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the FavArtist
+     * Select specific fields to fetch from the Artist
      */
-    select?: FavArtistSelect<ExtArgs> | null
+    select?: ArtistSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the FavArtist
+     * Omit specific fields from the Artist
      */
-    omit?: FavArtistOmit<ExtArgs> | null
+    omit?: ArtistOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: FavArtistInclude<ExtArgs> | null
-    where?: FavArtistWhereInput
-    orderBy?: FavArtistOrderByWithRelationInput | FavArtistOrderByWithRelationInput[]
-    cursor?: FavArtistWhereUniqueInput
+    include?: ArtistInclude<ExtArgs> | null
+    where?: ArtistWhereInput
+    orderBy?: ArtistOrderByWithRelationInput | ArtistOrderByWithRelationInput[]
+    cursor?: ArtistWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: FavArtistScalarFieldEnum | FavArtistScalarFieldEnum[]
+    distinct?: ArtistScalarFieldEnum | ArtistScalarFieldEnum[]
   }
 
   /**
-   * User.posts
+   * User.chatRooms
    */
-  export type User$postsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$chatRoomsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Post
+     * Select specific fields to fetch from the ChatRoomUser
      */
-    select?: PostSelect<ExtArgs> | null
+    select?: ChatRoomUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Post
+     * Omit specific fields from the ChatRoomUser
      */
-    omit?: PostOmit<ExtArgs> | null
+    omit?: ChatRoomUserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PostInclude<ExtArgs> | null
-    where?: PostWhereInput
-    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
-    cursor?: PostWhereUniqueInput
+    include?: ChatRoomUserInclude<ExtArgs> | null
+    where?: ChatRoomUserWhereInput
+    orderBy?: ChatRoomUserOrderByWithRelationInput | ChatRoomUserOrderByWithRelationInput[]
+    cursor?: ChatRoomUserWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
-  }
-
-  /**
-   * User.likes
-   */
-  export type User$likesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Like
-     */
-    select?: LikeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Like
-     */
-    omit?: LikeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LikeInclude<ExtArgs> | null
-    where?: LikeWhereInput
-    orderBy?: LikeOrderByWithRelationInput | LikeOrderByWithRelationInput[]
-    cursor?: LikeWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: LikeScalarFieldEnum | LikeScalarFieldEnum[]
+    distinct?: ChatRoomUserScalarFieldEnum | ChatRoomUserScalarFieldEnum[]
   }
 
   /**
@@ -3741,6 +3743,54 @@ export namespace Prisma {
   }
 
   /**
+   * User.favArtists
+   */
+  export type User$favArtistsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FavArtist
+     */
+    select?: FavArtistSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FavArtist
+     */
+    omit?: FavArtistOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavArtistInclude<ExtArgs> | null
+    where?: FavArtistWhereInput
+    orderBy?: FavArtistOrderByWithRelationInput | FavArtistOrderByWithRelationInput[]
+    cursor?: FavArtistWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FavArtistScalarFieldEnum | FavArtistScalarFieldEnum[]
+  }
+
+  /**
+   * User.likes
+   */
+  export type User$likesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Like
+     */
+    select?: LikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Like
+     */
+    omit?: LikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LikeInclude<ExtArgs> | null
+    where?: LikeWhereInput
+    orderBy?: LikeOrderByWithRelationInput | LikeOrderByWithRelationInput[]
+    cursor?: LikeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LikeScalarFieldEnum | LikeScalarFieldEnum[]
+  }
+
+  /**
    * User.messages
    */
   export type User$messagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3765,27 +3815,51 @@ export namespace Prisma {
   }
 
   /**
-   * User.chatRooms
+   * User.posts
    */
-  export type User$chatRoomsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$postsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ChatRoomUser
+     * Select specific fields to fetch from the Post
      */
-    select?: ChatRoomUserSelect<ExtArgs> | null
+    select?: PostSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ChatRoomUser
+     * Omit specific fields from the Post
      */
-    omit?: ChatRoomUserOmit<ExtArgs> | null
+    omit?: PostOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ChatRoomUserInclude<ExtArgs> | null
-    where?: ChatRoomUserWhereInput
-    orderBy?: ChatRoomUserOrderByWithRelationInput | ChatRoomUserOrderByWithRelationInput[]
-    cursor?: ChatRoomUserWhereUniqueInput
+    include?: PostInclude<ExtArgs> | null
+    where?: PostWhereInput
+    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
+    cursor?: PostWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ChatRoomUserScalarFieldEnum | ChatRoomUserScalarFieldEnum[]
+    distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdEvents
+   */
+  export type User$createdEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    where?: EventWhereInput
+    orderBy?: EventOrderByWithRelationInput | EventOrderByWithRelationInput[]
+    cursor?: EventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventScalarFieldEnum | EventScalarFieldEnum[]
   }
 
   /**
@@ -3822,11 +3896,13 @@ export namespace Prisma {
   export type ArtistAvgAggregateOutputType = {
     id: number | null
     agencyId: number | null
+    createdByUserId: number | null
   }
 
   export type ArtistSumAggregateOutputType = {
     id: number | null
     agencyId: number | null
+    createdByUserId: number | null
   }
 
   export type ArtistMinAggregateOutputType = {
@@ -3837,6 +3913,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     agencyId: number | null
+    createdByUserId: number | null
   }
 
   export type ArtistMaxAggregateOutputType = {
@@ -3847,6 +3924,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     agencyId: number | null
+    createdByUserId: number | null
   }
 
   export type ArtistCountAggregateOutputType = {
@@ -3857,6 +3935,7 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     agencyId: number
+    createdByUserId: number
     _all: number
   }
 
@@ -3864,11 +3943,13 @@ export namespace Prisma {
   export type ArtistAvgAggregateInputType = {
     id?: true
     agencyId?: true
+    createdByUserId?: true
   }
 
   export type ArtistSumAggregateInputType = {
     id?: true
     agencyId?: true
+    createdByUserId?: true
   }
 
   export type ArtistMinAggregateInputType = {
@@ -3879,6 +3960,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     agencyId?: true
+    createdByUserId?: true
   }
 
   export type ArtistMaxAggregateInputType = {
@@ -3889,6 +3971,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     agencyId?: true
+    createdByUserId?: true
   }
 
   export type ArtistCountAggregateInputType = {
@@ -3899,6 +3982,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     agencyId?: true
+    createdByUserId?: true
     _all?: true
   }
 
@@ -3996,6 +4080,7 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     agencyId: number | null
+    createdByUserId: number | null
     _count: ArtistCountAggregateOutputType | null
     _avg: ArtistAvgAggregateOutputType | null
     _sum: ArtistSumAggregateOutputType | null
@@ -4025,12 +4110,14 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     agencyId?: boolean
+    createdByUserId?: boolean
     agency?: boolean | Artist$agencyArgs<ExtArgs>
-    genres?: boolean | Artist$genresArgs<ExtArgs>
+    createdByUser?: boolean | Artist$createdByUserArgs<ExtArgs>
     events?: boolean | Artist$eventsArgs<ExtArgs>
+    genres?: boolean | Artist$genresArgs<ExtArgs>
     favByUsers?: boolean | Artist$favByUsersArgs<ExtArgs>
-    songs?: boolean | Artist$songsArgs<ExtArgs>
     posts?: boolean | Artist$postsArgs<ExtArgs>
+    songs?: boolean | Artist$songsArgs<ExtArgs>
     _count?: boolean | ArtistCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["artist"]>
 
@@ -4044,16 +4131,18 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     agencyId?: boolean
+    createdByUserId?: boolean
   }
 
-  export type ArtistOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "artistName" | "profileImage" | "biography" | "createdAt" | "updatedAt" | "agencyId", ExtArgs["result"]["artist"]>
+  export type ArtistOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "artistName" | "profileImage" | "biography" | "createdAt" | "updatedAt" | "agencyId" | "createdByUserId", ExtArgs["result"]["artist"]>
   export type ArtistInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     agency?: boolean | Artist$agencyArgs<ExtArgs>
-    genres?: boolean | Artist$genresArgs<ExtArgs>
+    createdByUser?: boolean | Artist$createdByUserArgs<ExtArgs>
     events?: boolean | Artist$eventsArgs<ExtArgs>
+    genres?: boolean | Artist$genresArgs<ExtArgs>
     favByUsers?: boolean | Artist$favByUsersArgs<ExtArgs>
-    songs?: boolean | Artist$songsArgs<ExtArgs>
     posts?: boolean | Artist$postsArgs<ExtArgs>
+    songs?: boolean | Artist$songsArgs<ExtArgs>
     _count?: boolean | ArtistCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -4061,11 +4150,12 @@ export namespace Prisma {
     name: "Artist"
     objects: {
       agency: Prisma.$AgencyPayload<ExtArgs> | null
-      genres: Prisma.$ArtistGenrePayload<ExtArgs>[]
+      createdByUser: Prisma.$UserPayload<ExtArgs> | null
       events: Prisma.$ArtistEventPayload<ExtArgs>[]
+      genres: Prisma.$ArtistGenrePayload<ExtArgs>[]
       favByUsers: Prisma.$FavArtistPayload<ExtArgs>[]
-      songs: Prisma.$SongPayload<ExtArgs>[]
       posts: Prisma.$PostPayload<ExtArgs>[]
+      songs: Prisma.$SongPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -4075,6 +4165,7 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       agencyId: number | null
+      createdByUserId: number | null
     }, ExtArgs["result"]["artist"]>
     composites: {}
   }
@@ -4416,11 +4507,12 @@ export namespace Prisma {
   export interface Prisma__ArtistClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     agency<T extends Artist$agencyArgs<ExtArgs> = {}>(args?: Subset<T, Artist$agencyArgs<ExtArgs>>): Prisma__AgencyClient<$Result.GetResult<Prisma.$AgencyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    genres<T extends Artist$genresArgs<ExtArgs> = {}>(args?: Subset<T, Artist$genresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArtistGenrePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdByUser<T extends Artist$createdByUserArgs<ExtArgs> = {}>(args?: Subset<T, Artist$createdByUserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     events<T extends Artist$eventsArgs<ExtArgs> = {}>(args?: Subset<T, Artist$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArtistEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    genres<T extends Artist$genresArgs<ExtArgs> = {}>(args?: Subset<T, Artist$genresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArtistGenrePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     favByUsers<T extends Artist$favByUsersArgs<ExtArgs> = {}>(args?: Subset<T, Artist$favByUsersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavArtistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    songs<T extends Artist$songsArgs<ExtArgs> = {}>(args?: Subset<T, Artist$songsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SongPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     posts<T extends Artist$postsArgs<ExtArgs> = {}>(args?: Subset<T, Artist$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    songs<T extends Artist$songsArgs<ExtArgs> = {}>(args?: Subset<T, Artist$songsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SongPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4457,6 +4549,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Artist", 'DateTime'>
     readonly updatedAt: FieldRef<"Artist", 'DateTime'>
     readonly agencyId: FieldRef<"Artist", 'Int'>
+    readonly createdByUserId: FieldRef<"Artist", 'Int'>
   }
     
 
@@ -4824,27 +4917,22 @@ export namespace Prisma {
   }
 
   /**
-   * Artist.genres
+   * Artist.createdByUser
    */
-  export type Artist$genresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Artist$createdByUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ArtistGenre
+     * Select specific fields to fetch from the User
      */
-    select?: ArtistGenreSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ArtistGenre
+     * Omit specific fields from the User
      */
-    omit?: ArtistGenreOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ArtistGenreInclude<ExtArgs> | null
-    where?: ArtistGenreWhereInput
-    orderBy?: ArtistGenreOrderByWithRelationInput | ArtistGenreOrderByWithRelationInput[]
-    cursor?: ArtistGenreWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ArtistGenreScalarFieldEnum | ArtistGenreScalarFieldEnum[]
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -4872,6 +4960,30 @@ export namespace Prisma {
   }
 
   /**
+   * Artist.genres
+   */
+  export type Artist$genresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ArtistGenre
+     */
+    select?: ArtistGenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ArtistGenre
+     */
+    omit?: ArtistGenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArtistGenreInclude<ExtArgs> | null
+    where?: ArtistGenreWhereInput
+    orderBy?: ArtistGenreOrderByWithRelationInput | ArtistGenreOrderByWithRelationInput[]
+    cursor?: ArtistGenreWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ArtistGenreScalarFieldEnum | ArtistGenreScalarFieldEnum[]
+  }
+
+  /**
    * Artist.favByUsers
    */
   export type Artist$favByUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4896,30 +5008,6 @@ export namespace Prisma {
   }
 
   /**
-   * Artist.songs
-   */
-  export type Artist$songsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Song
-     */
-    select?: SongSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Song
-     */
-    omit?: SongOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SongInclude<ExtArgs> | null
-    where?: SongWhereInput
-    orderBy?: SongOrderByWithRelationInput | SongOrderByWithRelationInput[]
-    cursor?: SongWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: SongScalarFieldEnum | SongScalarFieldEnum[]
-  }
-
-  /**
    * Artist.posts
    */
   export type Artist$postsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4941,6 +5029,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
+  }
+
+  /**
+   * Artist.songs
+   */
+  export type Artist$songsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Song
+     */
+    select?: SongSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Song
+     */
+    omit?: SongOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SongInclude<ExtArgs> | null
+    where?: SongWhereInput
+    orderBy?: SongOrderByWithRelationInput | SongOrderByWithRelationInput[]
+    cursor?: SongWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SongScalarFieldEnum | SongScalarFieldEnum[]
   }
 
   /**
@@ -8047,8 +8159,8 @@ export namespace Prisma {
     userId?: boolean
     artistId?: boolean
     createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     artist?: boolean | ArtistDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["favArtist"]>
 
 
@@ -8062,15 +8174,15 @@ export namespace Prisma {
 
   export type FavArtistOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "artistId" | "createdAt", ExtArgs["result"]["favArtist"]>
   export type FavArtistInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     artist?: boolean | ArtistDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $FavArtistPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "FavArtist"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       artist: Prisma.$ArtistPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -8417,8 +8529,8 @@ export namespace Prisma {
    */
   export interface Prisma__FavArtistClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     artist<T extends ArtistDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ArtistDefaultArgs<ExtArgs>>): Prisma__ArtistClient<$Result.GetResult<Prisma.$ArtistPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9040,11 +9152,11 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     artistId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    likes?: boolean | Post$likesArgs<ExtArgs>
     comments?: boolean | Post$commentsArgs<ExtArgs>
-    postImages?: boolean | Post$postImagesArgs<ExtArgs>
+    likes?: boolean | Post$likesArgs<ExtArgs>
     artist?: boolean | Post$artistArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    postImages?: boolean | Post$postImagesArgs<ExtArgs>
     _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
@@ -9062,22 +9174,22 @@ export namespace Prisma {
 
   export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "userId" | "createdAt" | "updatedAt" | "artistId", ExtArgs["result"]["post"]>
   export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    likes?: boolean | Post$likesArgs<ExtArgs>
     comments?: boolean | Post$commentsArgs<ExtArgs>
-    postImages?: boolean | Post$postImagesArgs<ExtArgs>
+    likes?: boolean | Post$likesArgs<ExtArgs>
     artist?: boolean | Post$artistArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    postImages?: boolean | Post$postImagesArgs<ExtArgs>
     _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $PostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Post"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-      likes: Prisma.$LikePayload<ExtArgs>[]
       comments: Prisma.$CommentPayload<ExtArgs>[]
-      postImages: Prisma.$PostImagePayload<ExtArgs>[]
+      likes: Prisma.$LikePayload<ExtArgs>[]
       artist: Prisma.$ArtistPayload<ExtArgs> | null
+      user: Prisma.$UserPayload<ExtArgs>
+      postImages: Prisma.$PostImagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -9427,11 +9539,11 @@ export namespace Prisma {
    */
   export interface Prisma__PostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    likes<T extends Post$likesArgs<ExtArgs> = {}>(args?: Subset<T, Post$likesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     comments<T extends Post$commentsArgs<ExtArgs> = {}>(args?: Subset<T, Post$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    postImages<T extends Post$postImagesArgs<ExtArgs> = {}>(args?: Subset<T, Post$postImagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    likes<T extends Post$likesArgs<ExtArgs> = {}>(args?: Subset<T, Post$likesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     artist<T extends Post$artistArgs<ExtArgs> = {}>(args?: Subset<T, Post$artistArgs<ExtArgs>>): Prisma__ArtistClient<$Result.GetResult<Prisma.$ArtistPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    postImages<T extends Post$postImagesArgs<ExtArgs> = {}>(args?: Subset<T, Post$postImagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9816,30 +9928,6 @@ export namespace Prisma {
   }
 
   /**
-   * Post.likes
-   */
-  export type Post$likesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Like
-     */
-    select?: LikeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Like
-     */
-    omit?: LikeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LikeInclude<ExtArgs> | null
-    where?: LikeWhereInput
-    orderBy?: LikeOrderByWithRelationInput | LikeOrderByWithRelationInput[]
-    cursor?: LikeWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: LikeScalarFieldEnum | LikeScalarFieldEnum[]
-  }
-
-  /**
    * Post.comments
    */
   export type Post$commentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9864,6 +9952,49 @@ export namespace Prisma {
   }
 
   /**
+   * Post.likes
+   */
+  export type Post$likesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Like
+     */
+    select?: LikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Like
+     */
+    omit?: LikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LikeInclude<ExtArgs> | null
+    where?: LikeWhereInput
+    orderBy?: LikeOrderByWithRelationInput | LikeOrderByWithRelationInput[]
+    cursor?: LikeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LikeScalarFieldEnum | LikeScalarFieldEnum[]
+  }
+
+  /**
+   * Post.artist
+   */
+  export type Post$artistArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Artist
+     */
+    select?: ArtistSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Artist
+     */
+    omit?: ArtistOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ArtistInclude<ExtArgs> | null
+    where?: ArtistWhereInput
+  }
+
+  /**
    * Post.postImages
    */
   export type Post$postImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9885,25 +10016,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PostImageScalarFieldEnum | PostImageScalarFieldEnum[]
-  }
-
-  /**
-   * Post.artist
-   */
-  export type Post$artistArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Artist
-     */
-    select?: ArtistSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Artist
-     */
-    omit?: ArtistOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ArtistInclude<ExtArgs> | null
-    where?: ArtistWhereInput
   }
 
   /**
@@ -11084,8 +11196,8 @@ export namespace Prisma {
     userId?: boolean
     postId?: boolean
     createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     post?: boolean | PostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["like"]>
 
 
@@ -11099,15 +11211,15 @@ export namespace Prisma {
 
   export type LikeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "postId" | "createdAt", ExtArgs["result"]["like"]>
   export type LikeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     post?: boolean | PostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $LikePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Like"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       post: Prisma.$PostPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -11454,8 +11566,8 @@ export namespace Prisma {
    */
   export interface Prisma__LikeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     post<T extends PostDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PostDefaultArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12077,8 +12189,8 @@ export namespace Prisma {
     postId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     post?: boolean | PostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
 
@@ -12095,15 +12207,15 @@ export namespace Prisma {
 
   export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "image" | "userId" | "postId" | "createdAt" | "updatedAt", ExtArgs["result"]["comment"]>
   export type CommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     post?: boolean | PostDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $CommentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Comment"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       post: Prisma.$PostPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -12453,8 +12565,8 @@ export namespace Prisma {
    */
   export interface Prisma__CommentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     post<T extends PostDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PostDefaultArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12872,11 +12984,13 @@ export namespace Prisma {
   export type EventAvgAggregateOutputType = {
     id: number | null
     venueId: number | null
+    createdByUserId: number | null
   }
 
   export type EventSumAggregateOutputType = {
     id: number | null
     venueId: number | null
+    createdByUserId: number | null
   }
 
   export type EventMinAggregateOutputType = {
@@ -12891,6 +13005,7 @@ export namespace Prisma {
     venueId: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    createdByUserId: number | null
   }
 
   export type EventMaxAggregateOutputType = {
@@ -12905,6 +13020,7 @@ export namespace Prisma {
     venueId: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    createdByUserId: number | null
   }
 
   export type EventCountAggregateOutputType = {
@@ -12919,6 +13035,7 @@ export namespace Prisma {
     venueId: number
     createdAt: number
     updatedAt: number
+    createdByUserId: number
     _all: number
   }
 
@@ -12926,11 +13043,13 @@ export namespace Prisma {
   export type EventAvgAggregateInputType = {
     id?: true
     venueId?: true
+    createdByUserId?: true
   }
 
   export type EventSumAggregateInputType = {
     id?: true
     venueId?: true
+    createdByUserId?: true
   }
 
   export type EventMinAggregateInputType = {
@@ -12945,6 +13064,7 @@ export namespace Prisma {
     venueId?: true
     createdAt?: true
     updatedAt?: true
+    createdByUserId?: true
   }
 
   export type EventMaxAggregateInputType = {
@@ -12959,6 +13079,7 @@ export namespace Prisma {
     venueId?: true
     createdAt?: true
     updatedAt?: true
+    createdByUserId?: true
   }
 
   export type EventCountAggregateInputType = {
@@ -12973,6 +13094,7 @@ export namespace Prisma {
     venueId?: true
     createdAt?: true
     updatedAt?: true
+    createdByUserId?: true
     _all?: true
   }
 
@@ -13074,6 +13196,7 @@ export namespace Prisma {
     venueId: number
     createdAt: Date
     updatedAt: Date
+    createdByUserId: number | null
     _count: EventCountAggregateOutputType | null
     _avg: EventAvgAggregateOutputType | null
     _sum: EventSumAggregateOutputType | null
@@ -13107,8 +13230,10 @@ export namespace Prisma {
     venueId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    venue?: boolean | VenueDefaultArgs<ExtArgs>
+    createdByUserId?: boolean
     artists?: boolean | Event$artistsArgs<ExtArgs>
+    createdByUser?: boolean | Event$createdByUserArgs<ExtArgs>
+    venue?: boolean | VenueDefaultArgs<ExtArgs>
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
 
@@ -13126,20 +13251,23 @@ export namespace Prisma {
     venueId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdByUserId?: boolean
   }
 
-  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "eventName" | "description" | "posterImage" | "status" | "ticketLink" | "startTime" | "endTime" | "venueId" | "createdAt" | "updatedAt", ExtArgs["result"]["event"]>
+  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "eventName" | "description" | "posterImage" | "status" | "ticketLink" | "startTime" | "endTime" | "venueId" | "createdAt" | "updatedAt" | "createdByUserId", ExtArgs["result"]["event"]>
   export type EventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    venue?: boolean | VenueDefaultArgs<ExtArgs>
     artists?: boolean | Event$artistsArgs<ExtArgs>
+    createdByUser?: boolean | Event$createdByUserArgs<ExtArgs>
+    venue?: boolean | VenueDefaultArgs<ExtArgs>
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $EventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Event"
     objects: {
-      venue: Prisma.$VenuePayload<ExtArgs>
       artists: Prisma.$ArtistEventPayload<ExtArgs>[]
+      createdByUser: Prisma.$UserPayload<ExtArgs> | null
+      venue: Prisma.$VenuePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -13153,6 +13281,7 @@ export namespace Prisma {
       venueId: number
       createdAt: Date
       updatedAt: Date
+      createdByUserId: number | null
     }, ExtArgs["result"]["event"]>
     composites: {}
   }
@@ -13493,8 +13622,9 @@ export namespace Prisma {
    */
   export interface Prisma__EventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    venue<T extends VenueDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VenueDefaultArgs<ExtArgs>>): Prisma__VenueClient<$Result.GetResult<Prisma.$VenuePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     artists<T extends Event$artistsArgs<ExtArgs> = {}>(args?: Subset<T, Event$artistsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArtistEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdByUser<T extends Event$createdByUserArgs<ExtArgs> = {}>(args?: Subset<T, Event$createdByUserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    venue<T extends VenueDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VenueDefaultArgs<ExtArgs>>): Prisma__VenueClient<$Result.GetResult<Prisma.$VenuePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13535,6 +13665,7 @@ export namespace Prisma {
     readonly venueId: FieldRef<"Event", 'Int'>
     readonly createdAt: FieldRef<"Event", 'DateTime'>
     readonly updatedAt: FieldRef<"Event", 'DateTime'>
+    readonly createdByUserId: FieldRef<"Event", 'Int'>
   }
     
 
@@ -13904,6 +14035,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ArtistEventScalarFieldEnum | ArtistEventScalarFieldEnum[]
+  }
+
+  /**
+   * Event.createdByUser
+   */
+  export type Event$createdByUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -17067,8 +17217,8 @@ export namespace Prisma {
     userId?: boolean
     chatRoomId?: boolean
     joinedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     chatRoom?: boolean | ChatRoomDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["chatRoomUser"]>
 
 
@@ -17081,15 +17231,15 @@ export namespace Prisma {
 
   export type ChatRoomUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "chatRoomId" | "joinedAt", ExtArgs["result"]["chatRoomUser"]>
   export type ChatRoomUserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     chatRoom?: boolean | ChatRoomDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $ChatRoomUserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ChatRoomUser"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       chatRoom: Prisma.$ChatRoomPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       userId: number
@@ -17435,8 +17585,8 @@ export namespace Prisma {
    */
   export interface Prisma__ChatRoomUserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     chatRoom<T extends ChatRoomDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChatRoomDefaultArgs<ExtArgs>>): Prisma__ChatRoomClient<$Result.GetResult<Prisma.$ChatRoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -18049,8 +18199,8 @@ export namespace Prisma {
     chatRoomId?: boolean
     isRead?: boolean
     createdAt?: boolean
-    sender?: boolean | UserDefaultArgs<ExtArgs>
     chatRoom?: boolean | ChatRoomDefaultArgs<ExtArgs>
+    sender?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["message"]>
 
 
@@ -18066,15 +18216,15 @@ export namespace Prisma {
 
   export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "senderId" | "chatRoomId" | "isRead" | "createdAt", ExtArgs["result"]["message"]>
   export type MessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    sender?: boolean | UserDefaultArgs<ExtArgs>
     chatRoom?: boolean | ChatRoomDefaultArgs<ExtArgs>
+    sender?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $MessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Message"
     objects: {
-      sender: Prisma.$UserPayload<ExtArgs>
       chatRoom: Prisma.$ChatRoomPayload<ExtArgs>
+      sender: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -18423,8 +18573,8 @@ export namespace Prisma {
    */
   export interface Prisma__MessageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    sender<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     chatRoom<T extends ChatRoomDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChatRoomDefaultArgs<ExtArgs>>): Prisma__ChatRoomClient<$Result.GetResult<Prisma.$ChatRoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    sender<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19901,7 +20051,8 @@ export namespace Prisma {
     biography: 'biography',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    agencyId: 'agencyId'
+    agencyId: 'agencyId',
+    createdByUserId: 'createdByUserId'
   };
 
   export type ArtistScalarFieldEnum = (typeof ArtistScalarFieldEnum)[keyof typeof ArtistScalarFieldEnum]
@@ -20000,7 +20151,8 @@ export namespace Prisma {
     endTime: 'endTime',
     venueId: 'venueId',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    createdByUserId: 'createdByUserId'
   };
 
   export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
@@ -20265,12 +20417,14 @@ export namespace Prisma {
     gender?: EnumGenderFilter<"User"> | $Enums.Gender
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    favArtists?: FavArtistListRelationFilter
-    posts?: PostListRelationFilter
-    likes?: LikeListRelationFilter
-    comments?: CommentListRelationFilter
-    messages?: MessageListRelationFilter
+    createdArtists?: ArtistListRelationFilter
     chatRooms?: ChatRoomUserListRelationFilter
+    comments?: CommentListRelationFilter
+    favArtists?: FavArtistListRelationFilter
+    likes?: LikeListRelationFilter
+    messages?: MessageListRelationFilter
+    posts?: PostListRelationFilter
+    createdEvents?: EventListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -20287,12 +20441,14 @@ export namespace Prisma {
     gender?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    favArtists?: FavArtistOrderByRelationAggregateInput
-    posts?: PostOrderByRelationAggregateInput
-    likes?: LikeOrderByRelationAggregateInput
-    comments?: CommentOrderByRelationAggregateInput
-    messages?: MessageOrderByRelationAggregateInput
+    createdArtists?: ArtistOrderByRelationAggregateInput
     chatRooms?: ChatRoomUserOrderByRelationAggregateInput
+    comments?: CommentOrderByRelationAggregateInput
+    favArtists?: FavArtistOrderByRelationAggregateInput
+    likes?: LikeOrderByRelationAggregateInput
+    messages?: MessageOrderByRelationAggregateInput
+    posts?: PostOrderByRelationAggregateInput
+    createdEvents?: EventOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
   }
 
@@ -20313,12 +20469,14 @@ export namespace Prisma {
     gender?: EnumGenderFilter<"User"> | $Enums.Gender
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    favArtists?: FavArtistListRelationFilter
-    posts?: PostListRelationFilter
-    likes?: LikeListRelationFilter
-    comments?: CommentListRelationFilter
-    messages?: MessageListRelationFilter
+    createdArtists?: ArtistListRelationFilter
     chatRooms?: ChatRoomUserListRelationFilter
+    comments?: CommentListRelationFilter
+    favArtists?: FavArtistListRelationFilter
+    likes?: LikeListRelationFilter
+    messages?: MessageListRelationFilter
+    posts?: PostListRelationFilter
+    createdEvents?: EventListRelationFilter
   }, "id" | "username" | "email" | "telephone">
 
   export type UserOrderByWithAggregationInput = {
@@ -20372,12 +20530,14 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Artist"> | Date | string
     updatedAt?: DateTimeFilter<"Artist"> | Date | string
     agencyId?: IntNullableFilter<"Artist"> | number | null
+    createdByUserId?: IntNullableFilter<"Artist"> | number | null
     agency?: XOR<AgencyNullableScalarRelationFilter, AgencyWhereInput> | null
-    genres?: ArtistGenreListRelationFilter
+    createdByUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     events?: ArtistEventListRelationFilter
+    genres?: ArtistGenreListRelationFilter
     favByUsers?: FavArtistListRelationFilter
-    songs?: SongListRelationFilter
     posts?: PostListRelationFilter
+    songs?: SongListRelationFilter
   }
 
   export type ArtistOrderByWithRelationInput = {
@@ -20388,12 +20548,14 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     agencyId?: SortOrderInput | SortOrder
+    createdByUserId?: SortOrderInput | SortOrder
     agency?: AgencyOrderByWithRelationInput
-    genres?: ArtistGenreOrderByRelationAggregateInput
+    createdByUser?: UserOrderByWithRelationInput
     events?: ArtistEventOrderByRelationAggregateInput
+    genres?: ArtistGenreOrderByRelationAggregateInput
     favByUsers?: FavArtistOrderByRelationAggregateInput
-    songs?: SongOrderByRelationAggregateInput
     posts?: PostOrderByRelationAggregateInput
+    songs?: SongOrderByRelationAggregateInput
     _relevance?: ArtistOrderByRelevanceInput
   }
 
@@ -20408,12 +20570,14 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Artist"> | Date | string
     updatedAt?: DateTimeFilter<"Artist"> | Date | string
     agencyId?: IntNullableFilter<"Artist"> | number | null
+    createdByUserId?: IntNullableFilter<"Artist"> | number | null
     agency?: XOR<AgencyNullableScalarRelationFilter, AgencyWhereInput> | null
-    genres?: ArtistGenreListRelationFilter
+    createdByUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     events?: ArtistEventListRelationFilter
+    genres?: ArtistGenreListRelationFilter
     favByUsers?: FavArtistListRelationFilter
-    songs?: SongListRelationFilter
     posts?: PostListRelationFilter
+    songs?: SongListRelationFilter
   }, "id">
 
   export type ArtistOrderByWithAggregationInput = {
@@ -20424,6 +20588,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     agencyId?: SortOrderInput | SortOrder
+    createdByUserId?: SortOrderInput | SortOrder
     _count?: ArtistCountOrderByAggregateInput
     _avg?: ArtistAvgOrderByAggregateInput
     _max?: ArtistMaxOrderByAggregateInput
@@ -20442,6 +20607,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Artist"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Artist"> | Date | string
     agencyId?: IntNullableWithAggregatesFilter<"Artist"> | number | null
+    createdByUserId?: IntNullableWithAggregatesFilter<"Artist"> | number | null
   }
 
   export type AgencyWhereInput = {
@@ -20594,8 +20760,8 @@ export namespace Prisma {
     userId?: IntFilter<"FavArtist"> | number
     artistId?: IntFilter<"FavArtist"> | number
     createdAt?: DateTimeFilter<"FavArtist"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     artist?: XOR<ArtistScalarRelationFilter, ArtistWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type FavArtistOrderByWithRelationInput = {
@@ -20603,8 +20769,8 @@ export namespace Prisma {
     userId?: SortOrder
     artistId?: SortOrder
     createdAt?: SortOrder
-    user?: UserOrderByWithRelationInput
     artist?: ArtistOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type FavArtistWhereUniqueInput = Prisma.AtLeast<{
@@ -20616,8 +20782,8 @@ export namespace Prisma {
     userId?: IntFilter<"FavArtist"> | number
     artistId?: IntFilter<"FavArtist"> | number
     createdAt?: DateTimeFilter<"FavArtist"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     artist?: XOR<ArtistScalarRelationFilter, ArtistWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "userId_artistId">
 
   export type FavArtistOrderByWithAggregationInput = {
@@ -20653,11 +20819,11 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
     artistId?: IntNullableFilter<"Post"> | number | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    likes?: LikeListRelationFilter
     comments?: CommentListRelationFilter
-    postImages?: PostImageListRelationFilter
+    likes?: LikeListRelationFilter
     artist?: XOR<ArtistNullableScalarRelationFilter, ArtistWhereInput> | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    postImages?: PostImageListRelationFilter
   }
 
   export type PostOrderByWithRelationInput = {
@@ -20668,11 +20834,11 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     artistId?: SortOrderInput | SortOrder
-    user?: UserOrderByWithRelationInput
-    likes?: LikeOrderByRelationAggregateInput
     comments?: CommentOrderByRelationAggregateInput
-    postImages?: PostImageOrderByRelationAggregateInput
+    likes?: LikeOrderByRelationAggregateInput
     artist?: ArtistOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+    postImages?: PostImageOrderByRelationAggregateInput
     _relevance?: PostOrderByRelevanceInput
   }
 
@@ -20687,11 +20853,11 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
     artistId?: IntNullableFilter<"Post"> | number | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    likes?: LikeListRelationFilter
     comments?: CommentListRelationFilter
-    postImages?: PostImageListRelationFilter
+    likes?: LikeListRelationFilter
     artist?: XOR<ArtistNullableScalarRelationFilter, ArtistWhereInput> | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    postImages?: PostImageListRelationFilter
   }, "id">
 
   export type PostOrderByWithAggregationInput = {
@@ -20783,8 +20949,8 @@ export namespace Prisma {
     userId?: IntFilter<"Like"> | number
     postId?: IntFilter<"Like"> | number
     createdAt?: DateTimeFilter<"Like"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     post?: XOR<PostScalarRelationFilter, PostWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type LikeOrderByWithRelationInput = {
@@ -20792,8 +20958,8 @@ export namespace Prisma {
     userId?: SortOrder
     postId?: SortOrder
     createdAt?: SortOrder
-    user?: UserOrderByWithRelationInput
     post?: PostOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type LikeWhereUniqueInput = Prisma.AtLeast<{
@@ -20805,8 +20971,8 @@ export namespace Prisma {
     userId?: IntFilter<"Like"> | number
     postId?: IntFilter<"Like"> | number
     createdAt?: DateTimeFilter<"Like"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     post?: XOR<PostScalarRelationFilter, PostWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "userId_postId">
 
   export type LikeOrderByWithAggregationInput = {
@@ -20842,8 +21008,8 @@ export namespace Prisma {
     postId?: IntFilter<"Comment"> | number
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     post?: XOR<PostScalarRelationFilter, PostWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type CommentOrderByWithRelationInput = {
@@ -20854,8 +21020,8 @@ export namespace Prisma {
     postId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
     post?: PostOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
     _relevance?: CommentOrderByRelevanceInput
   }
 
@@ -20870,8 +21036,8 @@ export namespace Prisma {
     postId?: IntFilter<"Comment"> | number
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     post?: XOR<PostScalarRelationFilter, PostWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type CommentOrderByWithAggregationInput = {
@@ -20917,8 +21083,10 @@ export namespace Prisma {
     venueId?: IntFilter<"Event"> | number
     createdAt?: DateTimeFilter<"Event"> | Date | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
-    venue?: XOR<VenueScalarRelationFilter, VenueWhereInput>
+    createdByUserId?: IntNullableFilter<"Event"> | number | null
     artists?: ArtistEventListRelationFilter
+    createdByUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    venue?: XOR<VenueScalarRelationFilter, VenueWhereInput>
   }
 
   export type EventOrderByWithRelationInput = {
@@ -20933,8 +21101,10 @@ export namespace Prisma {
     venueId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    venue?: VenueOrderByWithRelationInput
+    createdByUserId?: SortOrderInput | SortOrder
     artists?: ArtistEventOrderByRelationAggregateInput
+    createdByUser?: UserOrderByWithRelationInput
+    venue?: VenueOrderByWithRelationInput
     _relevance?: EventOrderByRelevanceInput
   }
 
@@ -20953,8 +21123,10 @@ export namespace Prisma {
     venueId?: IntFilter<"Event"> | number
     createdAt?: DateTimeFilter<"Event"> | Date | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
-    venue?: XOR<VenueScalarRelationFilter, VenueWhereInput>
+    createdByUserId?: IntNullableFilter<"Event"> | number | null
     artists?: ArtistEventListRelationFilter
+    createdByUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    venue?: XOR<VenueScalarRelationFilter, VenueWhereInput>
   }, "id">
 
   export type EventOrderByWithAggregationInput = {
@@ -20969,6 +21141,7 @@ export namespace Prisma {
     venueId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdByUserId?: SortOrderInput | SortOrder
     _count?: EventCountOrderByAggregateInput
     _avg?: EventAvgOrderByAggregateInput
     _max?: EventMaxOrderByAggregateInput
@@ -20991,6 +21164,7 @@ export namespace Prisma {
     venueId?: IntWithAggregatesFilter<"Event"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
+    createdByUserId?: IntNullableWithAggregatesFilter<"Event"> | number | null
   }
 
   export type ArtistEventWhereInput = {
@@ -21159,16 +21333,16 @@ export namespace Prisma {
     userId?: IntFilter<"ChatRoomUser"> | number
     chatRoomId?: IntFilter<"ChatRoomUser"> | number
     joinedAt?: DateTimeFilter<"ChatRoomUser"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     chatRoom?: XOR<ChatRoomScalarRelationFilter, ChatRoomWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type ChatRoomUserOrderByWithRelationInput = {
     userId?: SortOrder
     chatRoomId?: SortOrder
     joinedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
     chatRoom?: ChatRoomOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type ChatRoomUserWhereUniqueInput = Prisma.AtLeast<{
@@ -21179,8 +21353,8 @@ export namespace Prisma {
     userId?: IntFilter<"ChatRoomUser"> | number
     chatRoomId?: IntFilter<"ChatRoomUser"> | number
     joinedAt?: DateTimeFilter<"ChatRoomUser"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     chatRoom?: XOR<ChatRoomScalarRelationFilter, ChatRoomWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "userId_chatRoomId">
 
   export type ChatRoomUserOrderByWithAggregationInput = {
@@ -21213,8 +21387,8 @@ export namespace Prisma {
     chatRoomId?: IntFilter<"Message"> | number
     isRead?: BoolFilter<"Message"> | boolean
     createdAt?: DateTimeFilter<"Message"> | Date | string
-    sender?: XOR<UserScalarRelationFilter, UserWhereInput>
     chatRoom?: XOR<ChatRoomScalarRelationFilter, ChatRoomWhereInput>
+    sender?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type MessageOrderByWithRelationInput = {
@@ -21224,8 +21398,8 @@ export namespace Prisma {
     chatRoomId?: SortOrder
     isRead?: SortOrder
     createdAt?: SortOrder
-    sender?: UserOrderByWithRelationInput
     chatRoom?: ChatRoomOrderByWithRelationInput
+    sender?: UserOrderByWithRelationInput
     _relevance?: MessageOrderByRelevanceInput
   }
 
@@ -21239,8 +21413,8 @@ export namespace Prisma {
     chatRoomId?: IntFilter<"Message"> | number
     isRead?: BoolFilter<"Message"> | boolean
     createdAt?: DateTimeFilter<"Message"> | Date | string
-    sender?: XOR<UserScalarRelationFilter, UserWhereInput>
     chatRoom?: XOR<ChatRoomScalarRelationFilter, ChatRoomWhereInput>
+    sender?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type MessageOrderByWithAggregationInput = {
@@ -21365,12 +21539,14 @@ export namespace Prisma {
     gender?: $Enums.Gender
     createdAt?: Date | string
     updatedAt?: Date | string
-    favArtists?: FavArtistCreateNestedManyWithoutUserInput
-    posts?: PostCreateNestedManyWithoutUserInput
-    likes?: LikeCreateNestedManyWithoutUserInput
-    comments?: CommentCreateNestedManyWithoutUserInput
-    messages?: MessageCreateNestedManyWithoutSenderInput
+    createdArtists?: ArtistCreateNestedManyWithoutCreatedByUserInput
     chatRooms?: ChatRoomUserCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -21387,12 +21563,14 @@ export namespace Prisma {
     gender?: $Enums.Gender
     createdAt?: Date | string
     updatedAt?: Date | string
-    favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutUserInput
-    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
-    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
-    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    createdArtists?: ArtistUncheckedCreateNestedManyWithoutCreatedByUserInput
     chatRooms?: ChatRoomUserUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserUpdateInput = {
@@ -21408,12 +21586,14 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    favArtists?: FavArtistUpdateManyWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutUserNestedInput
-    likes?: LikeUpdateManyWithoutUserNestedInput
-    comments?: CommentUpdateManyWithoutUserNestedInput
-    messages?: MessageUpdateManyWithoutSenderNestedInput
+    createdArtists?: ArtistUpdateManyWithoutCreatedByUserNestedInput
     chatRooms?: ChatRoomUserUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    favArtists?: FavArtistUpdateManyWithoutUserNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -21430,12 +21610,14 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    favArtists?: FavArtistUncheckedUpdateManyWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
-    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
-    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
-    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    createdArtists?: ArtistUncheckedUpdateManyWithoutCreatedByUserNestedInput
     chatRooms?: ChatRoomUserUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    favArtists?: FavArtistUncheckedUpdateManyWithoutUserNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -21492,11 +21674,12 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     agency?: AgencyCreateNestedOneWithoutArtistsInput
-    genres?: ArtistGenreCreateNestedManyWithoutArtistInput
+    createdByUser?: UserCreateNestedOneWithoutCreatedArtistsInput
     events?: ArtistEventCreateNestedManyWithoutArtistInput
+    genres?: ArtistGenreCreateNestedManyWithoutArtistInput
     favByUsers?: FavArtistCreateNestedManyWithoutArtistInput
-    songs?: SongCreateNestedManyWithoutArtistInput
     posts?: PostCreateNestedManyWithoutArtistInput
+    songs?: SongCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistUncheckedCreateInput = {
@@ -21507,11 +21690,12 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     agencyId?: number | null
-    genres?: ArtistGenreUncheckedCreateNestedManyWithoutArtistInput
+    createdByUserId?: number | null
     events?: ArtistEventUncheckedCreateNestedManyWithoutArtistInput
+    genres?: ArtistGenreUncheckedCreateNestedManyWithoutArtistInput
     favByUsers?: FavArtistUncheckedCreateNestedManyWithoutArtistInput
-    songs?: SongUncheckedCreateNestedManyWithoutArtistInput
     posts?: PostUncheckedCreateNestedManyWithoutArtistInput
+    songs?: SongUncheckedCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistUpdateInput = {
@@ -21521,11 +21705,12 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agency?: AgencyUpdateOneWithoutArtistsNestedInput
-    genres?: ArtistGenreUpdateManyWithoutArtistNestedInput
+    createdByUser?: UserUpdateOneWithoutCreatedArtistsNestedInput
     events?: ArtistEventUpdateManyWithoutArtistNestedInput
+    genres?: ArtistGenreUpdateManyWithoutArtistNestedInput
     favByUsers?: FavArtistUpdateManyWithoutArtistNestedInput
-    songs?: SongUpdateManyWithoutArtistNestedInput
     posts?: PostUpdateManyWithoutArtistNestedInput
+    songs?: SongUpdateManyWithoutArtistNestedInput
   }
 
   export type ArtistUncheckedUpdateInput = {
@@ -21536,11 +21721,12 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agencyId?: NullableIntFieldUpdateOperationsInput | number | null
-    genres?: ArtistGenreUncheckedUpdateManyWithoutArtistNestedInput
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
     events?: ArtistEventUncheckedUpdateManyWithoutArtistNestedInput
+    genres?: ArtistGenreUncheckedUpdateManyWithoutArtistNestedInput
     favByUsers?: FavArtistUncheckedUpdateManyWithoutArtistNestedInput
-    songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
     posts?: PostUncheckedUpdateManyWithoutArtistNestedInput
+    songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
   }
 
   export type ArtistCreateManyInput = {
@@ -21551,6 +21737,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     agencyId?: number | null
+    createdByUserId?: number | null
   }
 
   export type ArtistUpdateManyMutationInput = {
@@ -21569,6 +21756,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agencyId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type AgencyCreateInput = {
@@ -21693,8 +21881,8 @@ export namespace Prisma {
 
   export type FavArtistCreateInput = {
     createdAt?: Date | string
-    user: UserCreateNestedOneWithoutFavArtistsInput
     artist: ArtistCreateNestedOneWithoutFavByUsersInput
+    user: UserCreateNestedOneWithoutFavArtistsInput
   }
 
   export type FavArtistUncheckedCreateInput = {
@@ -21706,8 +21894,8 @@ export namespace Prisma {
 
   export type FavArtistUpdateInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutFavArtistsNestedInput
     artist?: ArtistUpdateOneRequiredWithoutFavByUsersNestedInput
+    user?: UserUpdateOneRequiredWithoutFavArtistsNestedInput
   }
 
   export type FavArtistUncheckedUpdateInput = {
@@ -21740,11 +21928,11 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutPostsInput
-    likes?: LikeCreateNestedManyWithoutPostInput
     comments?: CommentCreateNestedManyWithoutPostInput
-    postImages?: PostImageCreateNestedManyWithoutPostInput
+    likes?: LikeCreateNestedManyWithoutPostInput
     artist?: ArtistCreateNestedOneWithoutPostsInput
+    user: UserCreateNestedOneWithoutPostsInput
+    postImages?: PostImageCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateInput = {
@@ -21755,8 +21943,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     artistId?: number | null
-    likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
+    likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     postImages?: PostImageUncheckedCreateNestedManyWithoutPostInput
   }
 
@@ -21765,11 +21953,11 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutPostsNestedInput
-    likes?: LikeUpdateManyWithoutPostNestedInput
     comments?: CommentUpdateManyWithoutPostNestedInput
-    postImages?: PostImageUpdateManyWithoutPostNestedInput
+    likes?: LikeUpdateManyWithoutPostNestedInput
     artist?: ArtistUpdateOneWithoutPostsNestedInput
+    user?: UserUpdateOneRequiredWithoutPostsNestedInput
+    postImages?: PostImageUpdateManyWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateInput = {
@@ -21780,8 +21968,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     artistId?: NullableIntFieldUpdateOperationsInput | number | null
-    likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
   }
 
@@ -21859,8 +22047,8 @@ export namespace Prisma {
 
   export type LikeCreateInput = {
     createdAt?: Date | string
-    user: UserCreateNestedOneWithoutLikesInput
     post: PostCreateNestedOneWithoutLikesInput
+    user: UserCreateNestedOneWithoutLikesInput
   }
 
   export type LikeUncheckedCreateInput = {
@@ -21872,8 +22060,8 @@ export namespace Prisma {
 
   export type LikeUpdateInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutLikesNestedInput
     post?: PostUpdateOneRequiredWithoutLikesNestedInput
+    user?: UserUpdateOneRequiredWithoutLikesNestedInput
   }
 
   export type LikeUncheckedUpdateInput = {
@@ -21906,8 +22094,8 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutCommentsInput
     post: PostCreateNestedOneWithoutCommentsInput
+    user: UserCreateNestedOneWithoutCommentsInput
   }
 
   export type CommentUncheckedCreateInput = {
@@ -21925,8 +22113,8 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutCommentsNestedInput
     post?: PostUpdateOneRequiredWithoutCommentsNestedInput
+    user?: UserUpdateOneRequiredWithoutCommentsNestedInput
   }
 
   export type CommentUncheckedUpdateInput = {
@@ -21976,8 +22164,9 @@ export namespace Prisma {
     endTime?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    venue: VenueCreateNestedOneWithoutEventsInput
     artists?: ArtistEventCreateNestedManyWithoutEventInput
+    createdByUser?: UserCreateNestedOneWithoutCreatedEventsInput
+    venue: VenueCreateNestedOneWithoutEventsInput
   }
 
   export type EventUncheckedCreateInput = {
@@ -21992,6 +22181,7 @@ export namespace Prisma {
     venueId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdByUserId?: number | null
     artists?: ArtistEventUncheckedCreateNestedManyWithoutEventInput
   }
 
@@ -22005,8 +22195,9 @@ export namespace Prisma {
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    venue?: VenueUpdateOneRequiredWithoutEventsNestedInput
     artists?: ArtistEventUpdateManyWithoutEventNestedInput
+    createdByUser?: UserUpdateOneWithoutCreatedEventsNestedInput
+    venue?: VenueUpdateOneRequiredWithoutEventsNestedInput
   }
 
   export type EventUncheckedUpdateInput = {
@@ -22021,6 +22212,7 @@ export namespace Prisma {
     venueId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
     artists?: ArtistEventUncheckedUpdateManyWithoutEventNestedInput
   }
 
@@ -22036,6 +22228,7 @@ export namespace Prisma {
     venueId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdByUserId?: number | null
   }
 
   export type EventUpdateManyMutationInput = {
@@ -22062,6 +22255,7 @@ export namespace Prisma {
     venueId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ArtistEventCreateInput = {
@@ -22211,8 +22405,8 @@ export namespace Prisma {
 
   export type ChatRoomUserCreateInput = {
     joinedAt?: Date | string
-    user: UserCreateNestedOneWithoutChatRoomsInput
     chatRoom: ChatRoomCreateNestedOneWithoutUsersInput
+    user: UserCreateNestedOneWithoutChatRoomsInput
   }
 
   export type ChatRoomUserUncheckedCreateInput = {
@@ -22223,8 +22417,8 @@ export namespace Prisma {
 
   export type ChatRoomUserUpdateInput = {
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutChatRoomsNestedInput
     chatRoom?: ChatRoomUpdateOneRequiredWithoutUsersNestedInput
+    user?: UserUpdateOneRequiredWithoutChatRoomsNestedInput
   }
 
   export type ChatRoomUserUncheckedUpdateInput = {
@@ -22253,8 +22447,8 @@ export namespace Prisma {
     content: string
     isRead?: boolean
     createdAt?: Date | string
-    sender: UserCreateNestedOneWithoutMessagesInput
     chatRoom: ChatRoomCreateNestedOneWithoutMessagesInput
+    sender: UserCreateNestedOneWithoutMessagesInput
   }
 
   export type MessageUncheckedCreateInput = {
@@ -22270,8 +22464,8 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sender?: UserUpdateOneRequiredWithoutMessagesNestedInput
     chatRoom?: ChatRoomUpdateOneRequiredWithoutMessagesNestedInput
+    sender?: UserUpdateOneRequiredWithoutMessagesNestedInput
   }
 
   export type MessageUncheckedUpdateInput = {
@@ -22460,34 +22654,10 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type FavArtistListRelationFilter = {
-    every?: FavArtistWhereInput
-    some?: FavArtistWhereInput
-    none?: FavArtistWhereInput
-  }
-
-  export type PostListRelationFilter = {
-    every?: PostWhereInput
-    some?: PostWhereInput
-    none?: PostWhereInput
-  }
-
-  export type LikeListRelationFilter = {
-    every?: LikeWhereInput
-    some?: LikeWhereInput
-    none?: LikeWhereInput
-  }
-
-  export type CommentListRelationFilter = {
-    every?: CommentWhereInput
-    some?: CommentWhereInput
-    none?: CommentWhereInput
-  }
-
-  export type MessageListRelationFilter = {
-    every?: MessageWhereInput
-    some?: MessageWhereInput
-    none?: MessageWhereInput
+  export type ArtistListRelationFilter = {
+    every?: ArtistWhereInput
+    some?: ArtistWhereInput
+    none?: ArtistWhereInput
   }
 
   export type ChatRoomUserListRelationFilter = {
@@ -22496,20 +22666,52 @@ export namespace Prisma {
     none?: ChatRoomUserWhereInput
   }
 
+  export type CommentListRelationFilter = {
+    every?: CommentWhereInput
+    some?: CommentWhereInput
+    none?: CommentWhereInput
+  }
+
+  export type FavArtistListRelationFilter = {
+    every?: FavArtistWhereInput
+    some?: FavArtistWhereInput
+    none?: FavArtistWhereInput
+  }
+
+  export type LikeListRelationFilter = {
+    every?: LikeWhereInput
+    some?: LikeWhereInput
+    none?: LikeWhereInput
+  }
+
+  export type MessageListRelationFilter = {
+    every?: MessageWhereInput
+    some?: MessageWhereInput
+    none?: MessageWhereInput
+  }
+
+  export type PostListRelationFilter = {
+    every?: PostWhereInput
+    some?: PostWhereInput
+    none?: PostWhereInput
+  }
+
+  export type EventListRelationFilter = {
+    every?: EventWhereInput
+    some?: EventWhereInput
+    none?: EventWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
-  export type FavArtistOrderByRelationAggregateInput = {
+  export type ArtistOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type PostOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type LikeOrderByRelationAggregateInput = {
+  export type ChatRoomUserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -22517,11 +22719,23 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type FavArtistOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LikeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type MessageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type ChatRoomUserOrderByRelationAggregateInput = {
+  export type PostOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EventOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -22689,10 +22903,9 @@ export namespace Prisma {
     isNot?: AgencyWhereInput | null
   }
 
-  export type ArtistGenreListRelationFilter = {
-    every?: ArtistGenreWhereInput
-    some?: ArtistGenreWhereInput
-    none?: ArtistGenreWhereInput
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
   }
 
   export type ArtistEventListRelationFilter = {
@@ -22701,17 +22914,23 @@ export namespace Prisma {
     none?: ArtistEventWhereInput
   }
 
+  export type ArtistGenreListRelationFilter = {
+    every?: ArtistGenreWhereInput
+    some?: ArtistGenreWhereInput
+    none?: ArtistGenreWhereInput
+  }
+
   export type SongListRelationFilter = {
     every?: SongWhereInput
     some?: SongWhereInput
     none?: SongWhereInput
   }
 
-  export type ArtistGenreOrderByRelationAggregateInput = {
+  export type ArtistEventOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type ArtistEventOrderByRelationAggregateInput = {
+  export type ArtistGenreOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -22733,11 +22952,13 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     agencyId?: SortOrder
+    createdByUserId?: SortOrder
   }
 
   export type ArtistAvgOrderByAggregateInput = {
     id?: SortOrder
     agencyId?: SortOrder
+    createdByUserId?: SortOrder
   }
 
   export type ArtistMaxOrderByAggregateInput = {
@@ -22748,6 +22969,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     agencyId?: SortOrder
+    createdByUserId?: SortOrder
   }
 
   export type ArtistMinOrderByAggregateInput = {
@@ -22758,11 +22980,13 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     agencyId?: SortOrder
+    createdByUserId?: SortOrder
   }
 
   export type ArtistSumOrderByAggregateInput = {
     id?: SortOrder
     agencyId?: SortOrder
+    createdByUserId?: SortOrder
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -22779,16 +23003,6 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type ArtistListRelationFilter = {
-    every?: ArtistWhereInput
-    some?: ArtistWhereInput
-    none?: ArtistWhereInput
-  }
-
-  export type ArtistOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type AgencyOrderByRelevanceInput = {
@@ -22938,15 +23152,15 @@ export namespace Prisma {
     artistId?: SortOrder
   }
 
+  export type ArtistNullableScalarRelationFilter = {
+    is?: ArtistWhereInput | null
+    isNot?: ArtistWhereInput | null
+  }
+
   export type PostImageListRelationFilter = {
     every?: PostImageWhereInput
     some?: PostImageWhereInput
     none?: PostImageWhereInput
-  }
-
-  export type ArtistNullableScalarRelationFilter = {
-    is?: ArtistWhereInput | null
-    isNot?: ArtistWhereInput | null
   }
 
   export type PostImageOrderByRelationAggregateInput = {
@@ -23170,11 +23384,13 @@ export namespace Prisma {
     venueId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdByUserId?: SortOrder
   }
 
   export type EventAvgOrderByAggregateInput = {
     id?: SortOrder
     venueId?: SortOrder
+    createdByUserId?: SortOrder
   }
 
   export type EventMaxOrderByAggregateInput = {
@@ -23189,6 +23405,7 @@ export namespace Prisma {
     venueId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdByUserId?: SortOrder
   }
 
   export type EventMinOrderByAggregateInput = {
@@ -23203,11 +23420,13 @@ export namespace Prisma {
     venueId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdByUserId?: SortOrder
   }
 
   export type EventSumOrderByAggregateInput = {
     id?: SortOrder
     venueId?: SortOrder
+    createdByUserId?: SortOrder
   }
 
   export type EnumEventStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -23278,16 +23497,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type EventListRelationFilter = {
-    every?: EventWhereInput
-    some?: EventWhereInput
-    none?: EventWhereInput
-  }
-
-  export type EventOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type VenueOrderByRelevanceInput = {
@@ -23532,39 +23741,11 @@ export namespace Prisma {
     artistId?: SortOrder
   }
 
-  export type FavArtistCreateNestedManyWithoutUserInput = {
-    create?: XOR<FavArtistCreateWithoutUserInput, FavArtistUncheckedCreateWithoutUserInput> | FavArtistCreateWithoutUserInput[] | FavArtistUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FavArtistCreateOrConnectWithoutUserInput | FavArtistCreateOrConnectWithoutUserInput[]
-    createMany?: FavArtistCreateManyUserInputEnvelope
-    connect?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
-  }
-
-  export type PostCreateNestedManyWithoutUserInput = {
-    create?: XOR<PostCreateWithoutUserInput, PostUncheckedCreateWithoutUserInput> | PostCreateWithoutUserInput[] | PostUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutUserInput | PostCreateOrConnectWithoutUserInput[]
-    createMany?: PostCreateManyUserInputEnvelope
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-  }
-
-  export type LikeCreateNestedManyWithoutUserInput = {
-    create?: XOR<LikeCreateWithoutUserInput, LikeUncheckedCreateWithoutUserInput> | LikeCreateWithoutUserInput[] | LikeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: LikeCreateOrConnectWithoutUserInput | LikeCreateOrConnectWithoutUserInput[]
-    createMany?: LikeCreateManyUserInputEnvelope
-    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
-  }
-
-  export type CommentCreateNestedManyWithoutUserInput = {
-    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
-    createMany?: CommentCreateManyUserInputEnvelope
-    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
-  }
-
-  export type MessageCreateNestedManyWithoutSenderInput = {
-    create?: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput> | MessageCreateWithoutSenderInput[] | MessageUncheckedCreateWithoutSenderInput[]
-    connectOrCreate?: MessageCreateOrConnectWithoutSenderInput | MessageCreateOrConnectWithoutSenderInput[]
-    createMany?: MessageCreateManySenderInputEnvelope
-    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  export type ArtistCreateNestedManyWithoutCreatedByUserInput = {
+    create?: XOR<ArtistCreateWithoutCreatedByUserInput, ArtistUncheckedCreateWithoutCreatedByUserInput> | ArtistCreateWithoutCreatedByUserInput[] | ArtistUncheckedCreateWithoutCreatedByUserInput[]
+    connectOrCreate?: ArtistCreateOrConnectWithoutCreatedByUserInput | ArtistCreateOrConnectWithoutCreatedByUserInput[]
+    createMany?: ArtistCreateManyCreatedByUserInputEnvelope
+    connect?: ArtistWhereUniqueInput | ArtistWhereUniqueInput[]
   }
 
   export type ChatRoomUserCreateNestedManyWithoutUserInput = {
@@ -23574,25 +23755,60 @@ export namespace Prisma {
     connect?: ChatRoomUserWhereUniqueInput | ChatRoomUserWhereUniqueInput[]
   }
 
-  export type FavArtistUncheckedCreateNestedManyWithoutUserInput = {
+  export type CommentCreateNestedManyWithoutUserInput = {
+    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
+    createMany?: CommentCreateManyUserInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
+  export type FavArtistCreateNestedManyWithoutUserInput = {
     create?: XOR<FavArtistCreateWithoutUserInput, FavArtistUncheckedCreateWithoutUserInput> | FavArtistCreateWithoutUserInput[] | FavArtistUncheckedCreateWithoutUserInput[]
     connectOrCreate?: FavArtistCreateOrConnectWithoutUserInput | FavArtistCreateOrConnectWithoutUserInput[]
     createMany?: FavArtistCreateManyUserInputEnvelope
     connect?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
   }
 
-  export type PostUncheckedCreateNestedManyWithoutUserInput = {
+  export type LikeCreateNestedManyWithoutUserInput = {
+    create?: XOR<LikeCreateWithoutUserInput, LikeUncheckedCreateWithoutUserInput> | LikeCreateWithoutUserInput[] | LikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LikeCreateOrConnectWithoutUserInput | LikeCreateOrConnectWithoutUserInput[]
+    createMany?: LikeCreateManyUserInputEnvelope
+    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+  }
+
+  export type MessageCreateNestedManyWithoutSenderInput = {
+    create?: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput> | MessageCreateWithoutSenderInput[] | MessageUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutSenderInput | MessageCreateOrConnectWithoutSenderInput[]
+    createMany?: MessageCreateManySenderInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type PostCreateNestedManyWithoutUserInput = {
     create?: XOR<PostCreateWithoutUserInput, PostUncheckedCreateWithoutUserInput> | PostCreateWithoutUserInput[] | PostUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PostCreateOrConnectWithoutUserInput | PostCreateOrConnectWithoutUserInput[]
     createMany?: PostCreateManyUserInputEnvelope
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
-  export type LikeUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<LikeCreateWithoutUserInput, LikeUncheckedCreateWithoutUserInput> | LikeCreateWithoutUserInput[] | LikeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: LikeCreateOrConnectWithoutUserInput | LikeCreateOrConnectWithoutUserInput[]
-    createMany?: LikeCreateManyUserInputEnvelope
-    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+  export type EventCreateNestedManyWithoutCreatedByUserInput = {
+    create?: XOR<EventCreateWithoutCreatedByUserInput, EventUncheckedCreateWithoutCreatedByUserInput> | EventCreateWithoutCreatedByUserInput[] | EventUncheckedCreateWithoutCreatedByUserInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutCreatedByUserInput | EventCreateOrConnectWithoutCreatedByUserInput[]
+    createMany?: EventCreateManyCreatedByUserInputEnvelope
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
+  export type ArtistUncheckedCreateNestedManyWithoutCreatedByUserInput = {
+    create?: XOR<ArtistCreateWithoutCreatedByUserInput, ArtistUncheckedCreateWithoutCreatedByUserInput> | ArtistCreateWithoutCreatedByUserInput[] | ArtistUncheckedCreateWithoutCreatedByUserInput[]
+    connectOrCreate?: ArtistCreateOrConnectWithoutCreatedByUserInput | ArtistCreateOrConnectWithoutCreatedByUserInput[]
+    createMany?: ArtistCreateManyCreatedByUserInputEnvelope
+    connect?: ArtistWhereUniqueInput | ArtistWhereUniqueInput[]
+  }
+
+  export type ChatRoomUserUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ChatRoomUserCreateWithoutUserInput, ChatRoomUserUncheckedCreateWithoutUserInput> | ChatRoomUserCreateWithoutUserInput[] | ChatRoomUserUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ChatRoomUserCreateOrConnectWithoutUserInput | ChatRoomUserCreateOrConnectWithoutUserInput[]
+    createMany?: ChatRoomUserCreateManyUserInputEnvelope
+    connect?: ChatRoomUserWhereUniqueInput | ChatRoomUserWhereUniqueInput[]
   }
 
   export type CommentUncheckedCreateNestedManyWithoutUserInput = {
@@ -23602,6 +23818,20 @@ export namespace Prisma {
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
   }
 
+  export type FavArtistUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<FavArtistCreateWithoutUserInput, FavArtistUncheckedCreateWithoutUserInput> | FavArtistCreateWithoutUserInput[] | FavArtistUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FavArtistCreateOrConnectWithoutUserInput | FavArtistCreateOrConnectWithoutUserInput[]
+    createMany?: FavArtistCreateManyUserInputEnvelope
+    connect?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
+  }
+
+  export type LikeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<LikeCreateWithoutUserInput, LikeUncheckedCreateWithoutUserInput> | LikeCreateWithoutUserInput[] | LikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LikeCreateOrConnectWithoutUserInput | LikeCreateOrConnectWithoutUserInput[]
+    createMany?: LikeCreateManyUserInputEnvelope
+    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+  }
+
   export type MessageUncheckedCreateNestedManyWithoutSenderInput = {
     create?: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput> | MessageCreateWithoutSenderInput[] | MessageUncheckedCreateWithoutSenderInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutSenderInput | MessageCreateOrConnectWithoutSenderInput[]
@@ -23609,11 +23839,18 @@ export namespace Prisma {
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
-  export type ChatRoomUserUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ChatRoomUserCreateWithoutUserInput, ChatRoomUserUncheckedCreateWithoutUserInput> | ChatRoomUserCreateWithoutUserInput[] | ChatRoomUserUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ChatRoomUserCreateOrConnectWithoutUserInput | ChatRoomUserCreateOrConnectWithoutUserInput[]
-    createMany?: ChatRoomUserCreateManyUserInputEnvelope
-    connect?: ChatRoomUserWhereUniqueInput | ChatRoomUserWhereUniqueInput[]
+  export type PostUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<PostCreateWithoutUserInput, PostUncheckedCreateWithoutUserInput> | PostCreateWithoutUserInput[] | PostUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutUserInput | PostCreateOrConnectWithoutUserInput[]
+    createMany?: PostCreateManyUserInputEnvelope
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type EventUncheckedCreateNestedManyWithoutCreatedByUserInput = {
+    create?: XOR<EventCreateWithoutCreatedByUserInput, EventUncheckedCreateWithoutCreatedByUserInput> | EventCreateWithoutCreatedByUserInput[] | EventUncheckedCreateWithoutCreatedByUserInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutCreatedByUserInput | EventCreateOrConnectWithoutCreatedByUserInput[]
+    createMany?: EventCreateManyCreatedByUserInputEnvelope
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -23636,74 +23873,18 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type FavArtistUpdateManyWithoutUserNestedInput = {
-    create?: XOR<FavArtistCreateWithoutUserInput, FavArtistUncheckedCreateWithoutUserInput> | FavArtistCreateWithoutUserInput[] | FavArtistUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FavArtistCreateOrConnectWithoutUserInput | FavArtistCreateOrConnectWithoutUserInput[]
-    upsert?: FavArtistUpsertWithWhereUniqueWithoutUserInput | FavArtistUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: FavArtistCreateManyUserInputEnvelope
-    set?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
-    disconnect?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
-    delete?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
-    connect?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
-    update?: FavArtistUpdateWithWhereUniqueWithoutUserInput | FavArtistUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: FavArtistUpdateManyWithWhereWithoutUserInput | FavArtistUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: FavArtistScalarWhereInput | FavArtistScalarWhereInput[]
-  }
-
-  export type PostUpdateManyWithoutUserNestedInput = {
-    create?: XOR<PostCreateWithoutUserInput, PostUncheckedCreateWithoutUserInput> | PostCreateWithoutUserInput[] | PostUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutUserInput | PostCreateOrConnectWithoutUserInput[]
-    upsert?: PostUpsertWithWhereUniqueWithoutUserInput | PostUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: PostCreateManyUserInputEnvelope
-    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    update?: PostUpdateWithWhereUniqueWithoutUserInput | PostUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: PostUpdateManyWithWhereWithoutUserInput | PostUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
-  }
-
-  export type LikeUpdateManyWithoutUserNestedInput = {
-    create?: XOR<LikeCreateWithoutUserInput, LikeUncheckedCreateWithoutUserInput> | LikeCreateWithoutUserInput[] | LikeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: LikeCreateOrConnectWithoutUserInput | LikeCreateOrConnectWithoutUserInput[]
-    upsert?: LikeUpsertWithWhereUniqueWithoutUserInput | LikeUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: LikeCreateManyUserInputEnvelope
-    set?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
-    disconnect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
-    delete?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
-    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
-    update?: LikeUpdateWithWhereUniqueWithoutUserInput | LikeUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: LikeUpdateManyWithWhereWithoutUserInput | LikeUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: LikeScalarWhereInput | LikeScalarWhereInput[]
-  }
-
-  export type CommentUpdateManyWithoutUserNestedInput = {
-    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
-    upsert?: CommentUpsertWithWhereUniqueWithoutUserInput | CommentUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: CommentCreateManyUserInputEnvelope
-    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
-    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
-    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
-    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
-    update?: CommentUpdateWithWhereUniqueWithoutUserInput | CommentUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: CommentUpdateManyWithWhereWithoutUserInput | CommentUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
-  }
-
-  export type MessageUpdateManyWithoutSenderNestedInput = {
-    create?: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput> | MessageCreateWithoutSenderInput[] | MessageUncheckedCreateWithoutSenderInput[]
-    connectOrCreate?: MessageCreateOrConnectWithoutSenderInput | MessageCreateOrConnectWithoutSenderInput[]
-    upsert?: MessageUpsertWithWhereUniqueWithoutSenderInput | MessageUpsertWithWhereUniqueWithoutSenderInput[]
-    createMany?: MessageCreateManySenderInputEnvelope
-    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    update?: MessageUpdateWithWhereUniqueWithoutSenderInput | MessageUpdateWithWhereUniqueWithoutSenderInput[]
-    updateMany?: MessageUpdateManyWithWhereWithoutSenderInput | MessageUpdateManyWithWhereWithoutSenderInput[]
-    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  export type ArtistUpdateManyWithoutCreatedByUserNestedInput = {
+    create?: XOR<ArtistCreateWithoutCreatedByUserInput, ArtistUncheckedCreateWithoutCreatedByUserInput> | ArtistCreateWithoutCreatedByUserInput[] | ArtistUncheckedCreateWithoutCreatedByUserInput[]
+    connectOrCreate?: ArtistCreateOrConnectWithoutCreatedByUserInput | ArtistCreateOrConnectWithoutCreatedByUserInput[]
+    upsert?: ArtistUpsertWithWhereUniqueWithoutCreatedByUserInput | ArtistUpsertWithWhereUniqueWithoutCreatedByUserInput[]
+    createMany?: ArtistCreateManyCreatedByUserInputEnvelope
+    set?: ArtistWhereUniqueInput | ArtistWhereUniqueInput[]
+    disconnect?: ArtistWhereUniqueInput | ArtistWhereUniqueInput[]
+    delete?: ArtistWhereUniqueInput | ArtistWhereUniqueInput[]
+    connect?: ArtistWhereUniqueInput | ArtistWhereUniqueInput[]
+    update?: ArtistUpdateWithWhereUniqueWithoutCreatedByUserInput | ArtistUpdateWithWhereUniqueWithoutCreatedByUserInput[]
+    updateMany?: ArtistUpdateManyWithWhereWithoutCreatedByUserInput | ArtistUpdateManyWithWhereWithoutCreatedByUserInput[]
+    deleteMany?: ArtistScalarWhereInput | ArtistScalarWhereInput[]
   }
 
   export type ChatRoomUserUpdateManyWithoutUserNestedInput = {
@@ -23720,57 +23901,7 @@ export namespace Prisma {
     deleteMany?: ChatRoomUserScalarWhereInput | ChatRoomUserScalarWhereInput[]
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type FavArtistUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<FavArtistCreateWithoutUserInput, FavArtistUncheckedCreateWithoutUserInput> | FavArtistCreateWithoutUserInput[] | FavArtistUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FavArtistCreateOrConnectWithoutUserInput | FavArtistCreateOrConnectWithoutUserInput[]
-    upsert?: FavArtistUpsertWithWhereUniqueWithoutUserInput | FavArtistUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: FavArtistCreateManyUserInputEnvelope
-    set?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
-    disconnect?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
-    delete?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
-    connect?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
-    update?: FavArtistUpdateWithWhereUniqueWithoutUserInput | FavArtistUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: FavArtistUpdateManyWithWhereWithoutUserInput | FavArtistUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: FavArtistScalarWhereInput | FavArtistScalarWhereInput[]
-  }
-
-  export type PostUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<PostCreateWithoutUserInput, PostUncheckedCreateWithoutUserInput> | PostCreateWithoutUserInput[] | PostUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutUserInput | PostCreateOrConnectWithoutUserInput[]
-    upsert?: PostUpsertWithWhereUniqueWithoutUserInput | PostUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: PostCreateManyUserInputEnvelope
-    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    update?: PostUpdateWithWhereUniqueWithoutUserInput | PostUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: PostUpdateManyWithWhereWithoutUserInput | PostUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
-  }
-
-  export type LikeUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<LikeCreateWithoutUserInput, LikeUncheckedCreateWithoutUserInput> | LikeCreateWithoutUserInput[] | LikeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: LikeCreateOrConnectWithoutUserInput | LikeCreateOrConnectWithoutUserInput[]
-    upsert?: LikeUpsertWithWhereUniqueWithoutUserInput | LikeUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: LikeCreateManyUserInputEnvelope
-    set?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
-    disconnect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
-    delete?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
-    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
-    update?: LikeUpdateWithWhereUniqueWithoutUserInput | LikeUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: LikeUpdateManyWithWhereWithoutUserInput | LikeUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: LikeScalarWhereInput | LikeScalarWhereInput[]
-  }
-
-  export type CommentUncheckedUpdateManyWithoutUserNestedInput = {
+  export type CommentUpdateManyWithoutUserNestedInput = {
     create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
     connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
     upsert?: CommentUpsertWithWhereUniqueWithoutUserInput | CommentUpsertWithWhereUniqueWithoutUserInput[]
@@ -23784,7 +23915,35 @@ export namespace Prisma {
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
-  export type MessageUncheckedUpdateManyWithoutSenderNestedInput = {
+  export type FavArtistUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FavArtistCreateWithoutUserInput, FavArtistUncheckedCreateWithoutUserInput> | FavArtistCreateWithoutUserInput[] | FavArtistUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FavArtistCreateOrConnectWithoutUserInput | FavArtistCreateOrConnectWithoutUserInput[]
+    upsert?: FavArtistUpsertWithWhereUniqueWithoutUserInput | FavArtistUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FavArtistCreateManyUserInputEnvelope
+    set?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
+    disconnect?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
+    delete?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
+    connect?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
+    update?: FavArtistUpdateWithWhereUniqueWithoutUserInput | FavArtistUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FavArtistUpdateManyWithWhereWithoutUserInput | FavArtistUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FavArtistScalarWhereInput | FavArtistScalarWhereInput[]
+  }
+
+  export type LikeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<LikeCreateWithoutUserInput, LikeUncheckedCreateWithoutUserInput> | LikeCreateWithoutUserInput[] | LikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LikeCreateOrConnectWithoutUserInput | LikeCreateOrConnectWithoutUserInput[]
+    upsert?: LikeUpsertWithWhereUniqueWithoutUserInput | LikeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: LikeCreateManyUserInputEnvelope
+    set?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+    disconnect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+    delete?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+    update?: LikeUpdateWithWhereUniqueWithoutUserInput | LikeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: LikeUpdateManyWithWhereWithoutUserInput | LikeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: LikeScalarWhereInput | LikeScalarWhereInput[]
+  }
+
+  export type MessageUpdateManyWithoutSenderNestedInput = {
     create?: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput> | MessageCreateWithoutSenderInput[] | MessageUncheckedCreateWithoutSenderInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutSenderInput | MessageCreateOrConnectWithoutSenderInput[]
     upsert?: MessageUpsertWithWhereUniqueWithoutSenderInput | MessageUpsertWithWhereUniqueWithoutSenderInput[]
@@ -23796,6 +23955,56 @@ export namespace Prisma {
     update?: MessageUpdateWithWhereUniqueWithoutSenderInput | MessageUpdateWithWhereUniqueWithoutSenderInput[]
     updateMany?: MessageUpdateManyWithWhereWithoutSenderInput | MessageUpdateManyWithWhereWithoutSenderInput[]
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type PostUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PostCreateWithoutUserInput, PostUncheckedCreateWithoutUserInput> | PostCreateWithoutUserInput[] | PostUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutUserInput | PostCreateOrConnectWithoutUserInput[]
+    upsert?: PostUpsertWithWhereUniqueWithoutUserInput | PostUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PostCreateManyUserInputEnvelope
+    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    update?: PostUpdateWithWhereUniqueWithoutUserInput | PostUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PostUpdateManyWithWhereWithoutUserInput | PostUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
+  export type EventUpdateManyWithoutCreatedByUserNestedInput = {
+    create?: XOR<EventCreateWithoutCreatedByUserInput, EventUncheckedCreateWithoutCreatedByUserInput> | EventCreateWithoutCreatedByUserInput[] | EventUncheckedCreateWithoutCreatedByUserInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutCreatedByUserInput | EventCreateOrConnectWithoutCreatedByUserInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutCreatedByUserInput | EventUpsertWithWhereUniqueWithoutCreatedByUserInput[]
+    createMany?: EventCreateManyCreatedByUserInputEnvelope
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutCreatedByUserInput | EventUpdateWithWhereUniqueWithoutCreatedByUserInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutCreatedByUserInput | EventUpdateManyWithWhereWithoutCreatedByUserInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type ArtistUncheckedUpdateManyWithoutCreatedByUserNestedInput = {
+    create?: XOR<ArtistCreateWithoutCreatedByUserInput, ArtistUncheckedCreateWithoutCreatedByUserInput> | ArtistCreateWithoutCreatedByUserInput[] | ArtistUncheckedCreateWithoutCreatedByUserInput[]
+    connectOrCreate?: ArtistCreateOrConnectWithoutCreatedByUserInput | ArtistCreateOrConnectWithoutCreatedByUserInput[]
+    upsert?: ArtistUpsertWithWhereUniqueWithoutCreatedByUserInput | ArtistUpsertWithWhereUniqueWithoutCreatedByUserInput[]
+    createMany?: ArtistCreateManyCreatedByUserInputEnvelope
+    set?: ArtistWhereUniqueInput | ArtistWhereUniqueInput[]
+    disconnect?: ArtistWhereUniqueInput | ArtistWhereUniqueInput[]
+    delete?: ArtistWhereUniqueInput | ArtistWhereUniqueInput[]
+    connect?: ArtistWhereUniqueInput | ArtistWhereUniqueInput[]
+    update?: ArtistUpdateWithWhereUniqueWithoutCreatedByUserInput | ArtistUpdateWithWhereUniqueWithoutCreatedByUserInput[]
+    updateMany?: ArtistUpdateManyWithWhereWithoutCreatedByUserInput | ArtistUpdateManyWithWhereWithoutCreatedByUserInput[]
+    deleteMany?: ArtistScalarWhereInput | ArtistScalarWhereInput[]
   }
 
   export type ChatRoomUserUncheckedUpdateManyWithoutUserNestedInput = {
@@ -23812,17 +24021,100 @@ export namespace Prisma {
     deleteMany?: ChatRoomUserScalarWhereInput | ChatRoomUserScalarWhereInput[]
   }
 
+  export type CommentUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutUserInput | CommentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CommentCreateManyUserInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutUserInput | CommentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutUserInput | CommentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
+  export type FavArtistUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FavArtistCreateWithoutUserInput, FavArtistUncheckedCreateWithoutUserInput> | FavArtistCreateWithoutUserInput[] | FavArtistUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FavArtistCreateOrConnectWithoutUserInput | FavArtistCreateOrConnectWithoutUserInput[]
+    upsert?: FavArtistUpsertWithWhereUniqueWithoutUserInput | FavArtistUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FavArtistCreateManyUserInputEnvelope
+    set?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
+    disconnect?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
+    delete?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
+    connect?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
+    update?: FavArtistUpdateWithWhereUniqueWithoutUserInput | FavArtistUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FavArtistUpdateManyWithWhereWithoutUserInput | FavArtistUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FavArtistScalarWhereInput | FavArtistScalarWhereInput[]
+  }
+
+  export type LikeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<LikeCreateWithoutUserInput, LikeUncheckedCreateWithoutUserInput> | LikeCreateWithoutUserInput[] | LikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LikeCreateOrConnectWithoutUserInput | LikeCreateOrConnectWithoutUserInput[]
+    upsert?: LikeUpsertWithWhereUniqueWithoutUserInput | LikeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: LikeCreateManyUserInputEnvelope
+    set?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+    disconnect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+    delete?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+    update?: LikeUpdateWithWhereUniqueWithoutUserInput | LikeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: LikeUpdateManyWithWhereWithoutUserInput | LikeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: LikeScalarWhereInput | LikeScalarWhereInput[]
+  }
+
+  export type MessageUncheckedUpdateManyWithoutSenderNestedInput = {
+    create?: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput> | MessageCreateWithoutSenderInput[] | MessageUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutSenderInput | MessageCreateOrConnectWithoutSenderInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutSenderInput | MessageUpsertWithWhereUniqueWithoutSenderInput[]
+    createMany?: MessageCreateManySenderInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutSenderInput | MessageUpdateWithWhereUniqueWithoutSenderInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutSenderInput | MessageUpdateManyWithWhereWithoutSenderInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type PostUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PostCreateWithoutUserInput, PostUncheckedCreateWithoutUserInput> | PostCreateWithoutUserInput[] | PostUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutUserInput | PostCreateOrConnectWithoutUserInput[]
+    upsert?: PostUpsertWithWhereUniqueWithoutUserInput | PostUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PostCreateManyUserInputEnvelope
+    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    update?: PostUpdateWithWhereUniqueWithoutUserInput | PostUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PostUpdateManyWithWhereWithoutUserInput | PostUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
+  export type EventUncheckedUpdateManyWithoutCreatedByUserNestedInput = {
+    create?: XOR<EventCreateWithoutCreatedByUserInput, EventUncheckedCreateWithoutCreatedByUserInput> | EventCreateWithoutCreatedByUserInput[] | EventUncheckedCreateWithoutCreatedByUserInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutCreatedByUserInput | EventCreateOrConnectWithoutCreatedByUserInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutCreatedByUserInput | EventUpsertWithWhereUniqueWithoutCreatedByUserInput[]
+    createMany?: EventCreateManyCreatedByUserInputEnvelope
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutCreatedByUserInput | EventUpdateWithWhereUniqueWithoutCreatedByUserInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutCreatedByUserInput | EventUpdateManyWithWhereWithoutCreatedByUserInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
   export type AgencyCreateNestedOneWithoutArtistsInput = {
     create?: XOR<AgencyCreateWithoutArtistsInput, AgencyUncheckedCreateWithoutArtistsInput>
     connectOrCreate?: AgencyCreateOrConnectWithoutArtistsInput
     connect?: AgencyWhereUniqueInput
   }
 
-  export type ArtistGenreCreateNestedManyWithoutArtistInput = {
-    create?: XOR<ArtistGenreCreateWithoutArtistInput, ArtistGenreUncheckedCreateWithoutArtistInput> | ArtistGenreCreateWithoutArtistInput[] | ArtistGenreUncheckedCreateWithoutArtistInput[]
-    connectOrCreate?: ArtistGenreCreateOrConnectWithoutArtistInput | ArtistGenreCreateOrConnectWithoutArtistInput[]
-    createMany?: ArtistGenreCreateManyArtistInputEnvelope
-    connect?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
+  export type UserCreateNestedOneWithoutCreatedArtistsInput = {
+    create?: XOR<UserCreateWithoutCreatedArtistsInput, UserUncheckedCreateWithoutCreatedArtistsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedArtistsInput
+    connect?: UserWhereUniqueInput
   }
 
   export type ArtistEventCreateNestedManyWithoutArtistInput = {
@@ -23832,18 +24124,18 @@ export namespace Prisma {
     connect?: ArtistEventWhereUniqueInput | ArtistEventWhereUniqueInput[]
   }
 
+  export type ArtistGenreCreateNestedManyWithoutArtistInput = {
+    create?: XOR<ArtistGenreCreateWithoutArtistInput, ArtistGenreUncheckedCreateWithoutArtistInput> | ArtistGenreCreateWithoutArtistInput[] | ArtistGenreUncheckedCreateWithoutArtistInput[]
+    connectOrCreate?: ArtistGenreCreateOrConnectWithoutArtistInput | ArtistGenreCreateOrConnectWithoutArtistInput[]
+    createMany?: ArtistGenreCreateManyArtistInputEnvelope
+    connect?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
+  }
+
   export type FavArtistCreateNestedManyWithoutArtistInput = {
     create?: XOR<FavArtistCreateWithoutArtistInput, FavArtistUncheckedCreateWithoutArtistInput> | FavArtistCreateWithoutArtistInput[] | FavArtistUncheckedCreateWithoutArtistInput[]
     connectOrCreate?: FavArtistCreateOrConnectWithoutArtistInput | FavArtistCreateOrConnectWithoutArtistInput[]
     createMany?: FavArtistCreateManyArtistInputEnvelope
     connect?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
-  }
-
-  export type SongCreateNestedManyWithoutArtistInput = {
-    create?: XOR<SongCreateWithoutArtistInput, SongUncheckedCreateWithoutArtistInput> | SongCreateWithoutArtistInput[] | SongUncheckedCreateWithoutArtistInput[]
-    connectOrCreate?: SongCreateOrConnectWithoutArtistInput | SongCreateOrConnectWithoutArtistInput[]
-    createMany?: SongCreateManyArtistInputEnvelope
-    connect?: SongWhereUniqueInput | SongWhereUniqueInput[]
   }
 
   export type PostCreateNestedManyWithoutArtistInput = {
@@ -23853,11 +24145,11 @@ export namespace Prisma {
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
-  export type ArtistGenreUncheckedCreateNestedManyWithoutArtistInput = {
-    create?: XOR<ArtistGenreCreateWithoutArtistInput, ArtistGenreUncheckedCreateWithoutArtistInput> | ArtistGenreCreateWithoutArtistInput[] | ArtistGenreUncheckedCreateWithoutArtistInput[]
-    connectOrCreate?: ArtistGenreCreateOrConnectWithoutArtistInput | ArtistGenreCreateOrConnectWithoutArtistInput[]
-    createMany?: ArtistGenreCreateManyArtistInputEnvelope
-    connect?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
+  export type SongCreateNestedManyWithoutArtistInput = {
+    create?: XOR<SongCreateWithoutArtistInput, SongUncheckedCreateWithoutArtistInput> | SongCreateWithoutArtistInput[] | SongUncheckedCreateWithoutArtistInput[]
+    connectOrCreate?: SongCreateOrConnectWithoutArtistInput | SongCreateOrConnectWithoutArtistInput[]
+    createMany?: SongCreateManyArtistInputEnvelope
+    connect?: SongWhereUniqueInput | SongWhereUniqueInput[]
   }
 
   export type ArtistEventUncheckedCreateNestedManyWithoutArtistInput = {
@@ -23867,6 +24159,13 @@ export namespace Prisma {
     connect?: ArtistEventWhereUniqueInput | ArtistEventWhereUniqueInput[]
   }
 
+  export type ArtistGenreUncheckedCreateNestedManyWithoutArtistInput = {
+    create?: XOR<ArtistGenreCreateWithoutArtistInput, ArtistGenreUncheckedCreateWithoutArtistInput> | ArtistGenreCreateWithoutArtistInput[] | ArtistGenreUncheckedCreateWithoutArtistInput[]
+    connectOrCreate?: ArtistGenreCreateOrConnectWithoutArtistInput | ArtistGenreCreateOrConnectWithoutArtistInput[]
+    createMany?: ArtistGenreCreateManyArtistInputEnvelope
+    connect?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
+  }
+
   export type FavArtistUncheckedCreateNestedManyWithoutArtistInput = {
     create?: XOR<FavArtistCreateWithoutArtistInput, FavArtistUncheckedCreateWithoutArtistInput> | FavArtistCreateWithoutArtistInput[] | FavArtistUncheckedCreateWithoutArtistInput[]
     connectOrCreate?: FavArtistCreateOrConnectWithoutArtistInput | FavArtistCreateOrConnectWithoutArtistInput[]
@@ -23874,18 +24173,18 @@ export namespace Prisma {
     connect?: FavArtistWhereUniqueInput | FavArtistWhereUniqueInput[]
   }
 
-  export type SongUncheckedCreateNestedManyWithoutArtistInput = {
-    create?: XOR<SongCreateWithoutArtistInput, SongUncheckedCreateWithoutArtistInput> | SongCreateWithoutArtistInput[] | SongUncheckedCreateWithoutArtistInput[]
-    connectOrCreate?: SongCreateOrConnectWithoutArtistInput | SongCreateOrConnectWithoutArtistInput[]
-    createMany?: SongCreateManyArtistInputEnvelope
-    connect?: SongWhereUniqueInput | SongWhereUniqueInput[]
-  }
-
   export type PostUncheckedCreateNestedManyWithoutArtistInput = {
     create?: XOR<PostCreateWithoutArtistInput, PostUncheckedCreateWithoutArtistInput> | PostCreateWithoutArtistInput[] | PostUncheckedCreateWithoutArtistInput[]
     connectOrCreate?: PostCreateOrConnectWithoutArtistInput | PostCreateOrConnectWithoutArtistInput[]
     createMany?: PostCreateManyArtistInputEnvelope
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type SongUncheckedCreateNestedManyWithoutArtistInput = {
+    create?: XOR<SongCreateWithoutArtistInput, SongUncheckedCreateWithoutArtistInput> | SongCreateWithoutArtistInput[] | SongUncheckedCreateWithoutArtistInput[]
+    connectOrCreate?: SongCreateOrConnectWithoutArtistInput | SongCreateOrConnectWithoutArtistInput[]
+    createMany?: SongCreateManyArtistInputEnvelope
+    connect?: SongWhereUniqueInput | SongWhereUniqueInput[]
   }
 
   export type AgencyUpdateOneWithoutArtistsNestedInput = {
@@ -23898,18 +24197,14 @@ export namespace Prisma {
     update?: XOR<XOR<AgencyUpdateToOneWithWhereWithoutArtistsInput, AgencyUpdateWithoutArtistsInput>, AgencyUncheckedUpdateWithoutArtistsInput>
   }
 
-  export type ArtistGenreUpdateManyWithoutArtistNestedInput = {
-    create?: XOR<ArtistGenreCreateWithoutArtistInput, ArtistGenreUncheckedCreateWithoutArtistInput> | ArtistGenreCreateWithoutArtistInput[] | ArtistGenreUncheckedCreateWithoutArtistInput[]
-    connectOrCreate?: ArtistGenreCreateOrConnectWithoutArtistInput | ArtistGenreCreateOrConnectWithoutArtistInput[]
-    upsert?: ArtistGenreUpsertWithWhereUniqueWithoutArtistInput | ArtistGenreUpsertWithWhereUniqueWithoutArtistInput[]
-    createMany?: ArtistGenreCreateManyArtistInputEnvelope
-    set?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
-    disconnect?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
-    delete?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
-    connect?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
-    update?: ArtistGenreUpdateWithWhereUniqueWithoutArtistInput | ArtistGenreUpdateWithWhereUniqueWithoutArtistInput[]
-    updateMany?: ArtistGenreUpdateManyWithWhereWithoutArtistInput | ArtistGenreUpdateManyWithWhereWithoutArtistInput[]
-    deleteMany?: ArtistGenreScalarWhereInput | ArtistGenreScalarWhereInput[]
+  export type UserUpdateOneWithoutCreatedArtistsNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedArtistsInput, UserUncheckedCreateWithoutCreatedArtistsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedArtistsInput
+    upsert?: UserUpsertWithoutCreatedArtistsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedArtistsInput, UserUpdateWithoutCreatedArtistsInput>, UserUncheckedUpdateWithoutCreatedArtistsInput>
   }
 
   export type ArtistEventUpdateManyWithoutArtistNestedInput = {
@@ -23926,6 +24221,20 @@ export namespace Prisma {
     deleteMany?: ArtistEventScalarWhereInput | ArtistEventScalarWhereInput[]
   }
 
+  export type ArtistGenreUpdateManyWithoutArtistNestedInput = {
+    create?: XOR<ArtistGenreCreateWithoutArtistInput, ArtistGenreUncheckedCreateWithoutArtistInput> | ArtistGenreCreateWithoutArtistInput[] | ArtistGenreUncheckedCreateWithoutArtistInput[]
+    connectOrCreate?: ArtistGenreCreateOrConnectWithoutArtistInput | ArtistGenreCreateOrConnectWithoutArtistInput[]
+    upsert?: ArtistGenreUpsertWithWhereUniqueWithoutArtistInput | ArtistGenreUpsertWithWhereUniqueWithoutArtistInput[]
+    createMany?: ArtistGenreCreateManyArtistInputEnvelope
+    set?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
+    disconnect?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
+    delete?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
+    connect?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
+    update?: ArtistGenreUpdateWithWhereUniqueWithoutArtistInput | ArtistGenreUpdateWithWhereUniqueWithoutArtistInput[]
+    updateMany?: ArtistGenreUpdateManyWithWhereWithoutArtistInput | ArtistGenreUpdateManyWithWhereWithoutArtistInput[]
+    deleteMany?: ArtistGenreScalarWhereInput | ArtistGenreScalarWhereInput[]
+  }
+
   export type FavArtistUpdateManyWithoutArtistNestedInput = {
     create?: XOR<FavArtistCreateWithoutArtistInput, FavArtistUncheckedCreateWithoutArtistInput> | FavArtistCreateWithoutArtistInput[] | FavArtistUncheckedCreateWithoutArtistInput[]
     connectOrCreate?: FavArtistCreateOrConnectWithoutArtistInput | FavArtistCreateOrConnectWithoutArtistInput[]
@@ -23938,20 +24247,6 @@ export namespace Prisma {
     update?: FavArtistUpdateWithWhereUniqueWithoutArtistInput | FavArtistUpdateWithWhereUniqueWithoutArtistInput[]
     updateMany?: FavArtistUpdateManyWithWhereWithoutArtistInput | FavArtistUpdateManyWithWhereWithoutArtistInput[]
     deleteMany?: FavArtistScalarWhereInput | FavArtistScalarWhereInput[]
-  }
-
-  export type SongUpdateManyWithoutArtistNestedInput = {
-    create?: XOR<SongCreateWithoutArtistInput, SongUncheckedCreateWithoutArtistInput> | SongCreateWithoutArtistInput[] | SongUncheckedCreateWithoutArtistInput[]
-    connectOrCreate?: SongCreateOrConnectWithoutArtistInput | SongCreateOrConnectWithoutArtistInput[]
-    upsert?: SongUpsertWithWhereUniqueWithoutArtistInput | SongUpsertWithWhereUniqueWithoutArtistInput[]
-    createMany?: SongCreateManyArtistInputEnvelope
-    set?: SongWhereUniqueInput | SongWhereUniqueInput[]
-    disconnect?: SongWhereUniqueInput | SongWhereUniqueInput[]
-    delete?: SongWhereUniqueInput | SongWhereUniqueInput[]
-    connect?: SongWhereUniqueInput | SongWhereUniqueInput[]
-    update?: SongUpdateWithWhereUniqueWithoutArtistInput | SongUpdateWithWhereUniqueWithoutArtistInput[]
-    updateMany?: SongUpdateManyWithWhereWithoutArtistInput | SongUpdateManyWithWhereWithoutArtistInput[]
-    deleteMany?: SongScalarWhereInput | SongScalarWhereInput[]
   }
 
   export type PostUpdateManyWithoutArtistNestedInput = {
@@ -23968,26 +24263,26 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
+  export type SongUpdateManyWithoutArtistNestedInput = {
+    create?: XOR<SongCreateWithoutArtistInput, SongUncheckedCreateWithoutArtistInput> | SongCreateWithoutArtistInput[] | SongUncheckedCreateWithoutArtistInput[]
+    connectOrCreate?: SongCreateOrConnectWithoutArtistInput | SongCreateOrConnectWithoutArtistInput[]
+    upsert?: SongUpsertWithWhereUniqueWithoutArtistInput | SongUpsertWithWhereUniqueWithoutArtistInput[]
+    createMany?: SongCreateManyArtistInputEnvelope
+    set?: SongWhereUniqueInput | SongWhereUniqueInput[]
+    disconnect?: SongWhereUniqueInput | SongWhereUniqueInput[]
+    delete?: SongWhereUniqueInput | SongWhereUniqueInput[]
+    connect?: SongWhereUniqueInput | SongWhereUniqueInput[]
+    update?: SongUpdateWithWhereUniqueWithoutArtistInput | SongUpdateWithWhereUniqueWithoutArtistInput[]
+    updateMany?: SongUpdateManyWithWhereWithoutArtistInput | SongUpdateManyWithWhereWithoutArtistInput[]
+    deleteMany?: SongScalarWhereInput | SongScalarWhereInput[]
+  }
+
   export type NullableIntFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type ArtistGenreUncheckedUpdateManyWithoutArtistNestedInput = {
-    create?: XOR<ArtistGenreCreateWithoutArtistInput, ArtistGenreUncheckedCreateWithoutArtistInput> | ArtistGenreCreateWithoutArtistInput[] | ArtistGenreUncheckedCreateWithoutArtistInput[]
-    connectOrCreate?: ArtistGenreCreateOrConnectWithoutArtistInput | ArtistGenreCreateOrConnectWithoutArtistInput[]
-    upsert?: ArtistGenreUpsertWithWhereUniqueWithoutArtistInput | ArtistGenreUpsertWithWhereUniqueWithoutArtistInput[]
-    createMany?: ArtistGenreCreateManyArtistInputEnvelope
-    set?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
-    disconnect?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
-    delete?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
-    connect?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
-    update?: ArtistGenreUpdateWithWhereUniqueWithoutArtistInput | ArtistGenreUpdateWithWhereUniqueWithoutArtistInput[]
-    updateMany?: ArtistGenreUpdateManyWithWhereWithoutArtistInput | ArtistGenreUpdateManyWithWhereWithoutArtistInput[]
-    deleteMany?: ArtistGenreScalarWhereInput | ArtistGenreScalarWhereInput[]
   }
 
   export type ArtistEventUncheckedUpdateManyWithoutArtistNestedInput = {
@@ -24004,6 +24299,20 @@ export namespace Prisma {
     deleteMany?: ArtistEventScalarWhereInput | ArtistEventScalarWhereInput[]
   }
 
+  export type ArtistGenreUncheckedUpdateManyWithoutArtistNestedInput = {
+    create?: XOR<ArtistGenreCreateWithoutArtistInput, ArtistGenreUncheckedCreateWithoutArtistInput> | ArtistGenreCreateWithoutArtistInput[] | ArtistGenreUncheckedCreateWithoutArtistInput[]
+    connectOrCreate?: ArtistGenreCreateOrConnectWithoutArtistInput | ArtistGenreCreateOrConnectWithoutArtistInput[]
+    upsert?: ArtistGenreUpsertWithWhereUniqueWithoutArtistInput | ArtistGenreUpsertWithWhereUniqueWithoutArtistInput[]
+    createMany?: ArtistGenreCreateManyArtistInputEnvelope
+    set?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
+    disconnect?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
+    delete?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
+    connect?: ArtistGenreWhereUniqueInput | ArtistGenreWhereUniqueInput[]
+    update?: ArtistGenreUpdateWithWhereUniqueWithoutArtistInput | ArtistGenreUpdateWithWhereUniqueWithoutArtistInput[]
+    updateMany?: ArtistGenreUpdateManyWithWhereWithoutArtistInput | ArtistGenreUpdateManyWithWhereWithoutArtistInput[]
+    deleteMany?: ArtistGenreScalarWhereInput | ArtistGenreScalarWhereInput[]
+  }
+
   export type FavArtistUncheckedUpdateManyWithoutArtistNestedInput = {
     create?: XOR<FavArtistCreateWithoutArtistInput, FavArtistUncheckedCreateWithoutArtistInput> | FavArtistCreateWithoutArtistInput[] | FavArtistUncheckedCreateWithoutArtistInput[]
     connectOrCreate?: FavArtistCreateOrConnectWithoutArtistInput | FavArtistCreateOrConnectWithoutArtistInput[]
@@ -24018,20 +24327,6 @@ export namespace Prisma {
     deleteMany?: FavArtistScalarWhereInput | FavArtistScalarWhereInput[]
   }
 
-  export type SongUncheckedUpdateManyWithoutArtistNestedInput = {
-    create?: XOR<SongCreateWithoutArtistInput, SongUncheckedCreateWithoutArtistInput> | SongCreateWithoutArtistInput[] | SongUncheckedCreateWithoutArtistInput[]
-    connectOrCreate?: SongCreateOrConnectWithoutArtistInput | SongCreateOrConnectWithoutArtistInput[]
-    upsert?: SongUpsertWithWhereUniqueWithoutArtistInput | SongUpsertWithWhereUniqueWithoutArtistInput[]
-    createMany?: SongCreateManyArtistInputEnvelope
-    set?: SongWhereUniqueInput | SongWhereUniqueInput[]
-    disconnect?: SongWhereUniqueInput | SongWhereUniqueInput[]
-    delete?: SongWhereUniqueInput | SongWhereUniqueInput[]
-    connect?: SongWhereUniqueInput | SongWhereUniqueInput[]
-    update?: SongUpdateWithWhereUniqueWithoutArtistInput | SongUpdateWithWhereUniqueWithoutArtistInput[]
-    updateMany?: SongUpdateManyWithWhereWithoutArtistInput | SongUpdateManyWithWhereWithoutArtistInput[]
-    deleteMany?: SongScalarWhereInput | SongScalarWhereInput[]
-  }
-
   export type PostUncheckedUpdateManyWithoutArtistNestedInput = {
     create?: XOR<PostCreateWithoutArtistInput, PostUncheckedCreateWithoutArtistInput> | PostCreateWithoutArtistInput[] | PostUncheckedCreateWithoutArtistInput[]
     connectOrCreate?: PostCreateOrConnectWithoutArtistInput | PostCreateOrConnectWithoutArtistInput[]
@@ -24044,6 +24339,20 @@ export namespace Prisma {
     update?: PostUpdateWithWhereUniqueWithoutArtistInput | PostUpdateWithWhereUniqueWithoutArtistInput[]
     updateMany?: PostUpdateManyWithWhereWithoutArtistInput | PostUpdateManyWithWhereWithoutArtistInput[]
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
+  export type SongUncheckedUpdateManyWithoutArtistNestedInput = {
+    create?: XOR<SongCreateWithoutArtistInput, SongUncheckedCreateWithoutArtistInput> | SongCreateWithoutArtistInput[] | SongUncheckedCreateWithoutArtistInput[]
+    connectOrCreate?: SongCreateOrConnectWithoutArtistInput | SongCreateOrConnectWithoutArtistInput[]
+    upsert?: SongUpsertWithWhereUniqueWithoutArtistInput | SongUpsertWithWhereUniqueWithoutArtistInput[]
+    createMany?: SongCreateManyArtistInputEnvelope
+    set?: SongWhereUniqueInput | SongWhereUniqueInput[]
+    disconnect?: SongWhereUniqueInput | SongWhereUniqueInput[]
+    delete?: SongWhereUniqueInput | SongWhereUniqueInput[]
+    connect?: SongWhereUniqueInput | SongWhereUniqueInput[]
+    update?: SongUpdateWithWhereUniqueWithoutArtistInput | SongUpdateWithWhereUniqueWithoutArtistInput[]
+    updateMany?: SongUpdateManyWithWhereWithoutArtistInput | SongUpdateManyWithWhereWithoutArtistInput[]
+    deleteMany?: SongScalarWhereInput | SongScalarWhereInput[]
   }
 
   export type ArtistCreateNestedManyWithoutAgencyInput = {
@@ -24158,24 +24467,16 @@ export namespace Prisma {
     update?: XOR<XOR<GenreUpdateToOneWithWhereWithoutArtistsInput, GenreUpdateWithoutArtistsInput>, GenreUncheckedUpdateWithoutArtistsInput>
   }
 
-  export type UserCreateNestedOneWithoutFavArtistsInput = {
-    create?: XOR<UserCreateWithoutFavArtistsInput, UserUncheckedCreateWithoutFavArtistsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutFavArtistsInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type ArtistCreateNestedOneWithoutFavByUsersInput = {
     create?: XOR<ArtistCreateWithoutFavByUsersInput, ArtistUncheckedCreateWithoutFavByUsersInput>
     connectOrCreate?: ArtistCreateOrConnectWithoutFavByUsersInput
     connect?: ArtistWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutFavArtistsNestedInput = {
+  export type UserCreateNestedOneWithoutFavArtistsInput = {
     create?: XOR<UserCreateWithoutFavArtistsInput, UserUncheckedCreateWithoutFavArtistsInput>
     connectOrCreate?: UserCreateOrConnectWithoutFavArtistsInput
-    upsert?: UserUpsertWithoutFavArtistsInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFavArtistsInput, UserUpdateWithoutFavArtistsInput>, UserUncheckedUpdateWithoutFavArtistsInput>
   }
 
   export type ArtistUpdateOneRequiredWithoutFavByUsersNestedInput = {
@@ -24186,17 +24487,12 @@ export namespace Prisma {
     update?: XOR<XOR<ArtistUpdateToOneWithWhereWithoutFavByUsersInput, ArtistUpdateWithoutFavByUsersInput>, ArtistUncheckedUpdateWithoutFavByUsersInput>
   }
 
-  export type UserCreateNestedOneWithoutPostsInput = {
-    create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPostsInput
+  export type UserUpdateOneRequiredWithoutFavArtistsNestedInput = {
+    create?: XOR<UserCreateWithoutFavArtistsInput, UserUncheckedCreateWithoutFavArtistsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFavArtistsInput
+    upsert?: UserUpsertWithoutFavArtistsInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type LikeCreateNestedManyWithoutPostInput = {
-    create?: XOR<LikeCreateWithoutPostInput, LikeUncheckedCreateWithoutPostInput> | LikeCreateWithoutPostInput[] | LikeUncheckedCreateWithoutPostInput[]
-    connectOrCreate?: LikeCreateOrConnectWithoutPostInput | LikeCreateOrConnectWithoutPostInput[]
-    createMany?: LikeCreateManyPostInputEnvelope
-    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFavArtistsInput, UserUpdateWithoutFavArtistsInput>, UserUncheckedUpdateWithoutFavArtistsInput>
   }
 
   export type CommentCreateNestedManyWithoutPostInput = {
@@ -24206,11 +24502,11 @@ export namespace Prisma {
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
   }
 
-  export type PostImageCreateNestedManyWithoutPostInput = {
-    create?: XOR<PostImageCreateWithoutPostInput, PostImageUncheckedCreateWithoutPostInput> | PostImageCreateWithoutPostInput[] | PostImageUncheckedCreateWithoutPostInput[]
-    connectOrCreate?: PostImageCreateOrConnectWithoutPostInput | PostImageCreateOrConnectWithoutPostInput[]
-    createMany?: PostImageCreateManyPostInputEnvelope
-    connect?: PostImageWhereUniqueInput | PostImageWhereUniqueInput[]
+  export type LikeCreateNestedManyWithoutPostInput = {
+    create?: XOR<LikeCreateWithoutPostInput, LikeUncheckedCreateWithoutPostInput> | LikeCreateWithoutPostInput[] | LikeUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: LikeCreateOrConnectWithoutPostInput | LikeCreateOrConnectWithoutPostInput[]
+    createMany?: LikeCreateManyPostInputEnvelope
+    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
   }
 
   export type ArtistCreateNestedOneWithoutPostsInput = {
@@ -24219,11 +24515,17 @@ export namespace Prisma {
     connect?: ArtistWhereUniqueInput
   }
 
-  export type LikeUncheckedCreateNestedManyWithoutPostInput = {
-    create?: XOR<LikeCreateWithoutPostInput, LikeUncheckedCreateWithoutPostInput> | LikeCreateWithoutPostInput[] | LikeUncheckedCreateWithoutPostInput[]
-    connectOrCreate?: LikeCreateOrConnectWithoutPostInput | LikeCreateOrConnectWithoutPostInput[]
-    createMany?: LikeCreateManyPostInputEnvelope
-    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+  export type UserCreateNestedOneWithoutPostsInput = {
+    create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPostsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type PostImageCreateNestedManyWithoutPostInput = {
+    create?: XOR<PostImageCreateWithoutPostInput, PostImageUncheckedCreateWithoutPostInput> | PostImageCreateWithoutPostInput[] | PostImageUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: PostImageCreateOrConnectWithoutPostInput | PostImageCreateOrConnectWithoutPostInput[]
+    createMany?: PostImageCreateManyPostInputEnvelope
+    connect?: PostImageWhereUniqueInput | PostImageWhereUniqueInput[]
   }
 
   export type CommentUncheckedCreateNestedManyWithoutPostInput = {
@@ -24233,33 +24535,18 @@ export namespace Prisma {
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
   }
 
+  export type LikeUncheckedCreateNestedManyWithoutPostInput = {
+    create?: XOR<LikeCreateWithoutPostInput, LikeUncheckedCreateWithoutPostInput> | LikeCreateWithoutPostInput[] | LikeUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: LikeCreateOrConnectWithoutPostInput | LikeCreateOrConnectWithoutPostInput[]
+    createMany?: LikeCreateManyPostInputEnvelope
+    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+  }
+
   export type PostImageUncheckedCreateNestedManyWithoutPostInput = {
     create?: XOR<PostImageCreateWithoutPostInput, PostImageUncheckedCreateWithoutPostInput> | PostImageCreateWithoutPostInput[] | PostImageUncheckedCreateWithoutPostInput[]
     connectOrCreate?: PostImageCreateOrConnectWithoutPostInput | PostImageCreateOrConnectWithoutPostInput[]
     createMany?: PostImageCreateManyPostInputEnvelope
     connect?: PostImageWhereUniqueInput | PostImageWhereUniqueInput[]
-  }
-
-  export type UserUpdateOneRequiredWithoutPostsNestedInput = {
-    create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPostsInput
-    upsert?: UserUpsertWithoutPostsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPostsInput, UserUpdateWithoutPostsInput>, UserUncheckedUpdateWithoutPostsInput>
-  }
-
-  export type LikeUpdateManyWithoutPostNestedInput = {
-    create?: XOR<LikeCreateWithoutPostInput, LikeUncheckedCreateWithoutPostInput> | LikeCreateWithoutPostInput[] | LikeUncheckedCreateWithoutPostInput[]
-    connectOrCreate?: LikeCreateOrConnectWithoutPostInput | LikeCreateOrConnectWithoutPostInput[]
-    upsert?: LikeUpsertWithWhereUniqueWithoutPostInput | LikeUpsertWithWhereUniqueWithoutPostInput[]
-    createMany?: LikeCreateManyPostInputEnvelope
-    set?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
-    disconnect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
-    delete?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
-    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
-    update?: LikeUpdateWithWhereUniqueWithoutPostInput | LikeUpdateWithWhereUniqueWithoutPostInput[]
-    updateMany?: LikeUpdateManyWithWhereWithoutPostInput | LikeUpdateManyWithWhereWithoutPostInput[]
-    deleteMany?: LikeScalarWhereInput | LikeScalarWhereInput[]
   }
 
   export type CommentUpdateManyWithoutPostNestedInput = {
@@ -24276,6 +24563,38 @@ export namespace Prisma {
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
+  export type LikeUpdateManyWithoutPostNestedInput = {
+    create?: XOR<LikeCreateWithoutPostInput, LikeUncheckedCreateWithoutPostInput> | LikeCreateWithoutPostInput[] | LikeUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: LikeCreateOrConnectWithoutPostInput | LikeCreateOrConnectWithoutPostInput[]
+    upsert?: LikeUpsertWithWhereUniqueWithoutPostInput | LikeUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: LikeCreateManyPostInputEnvelope
+    set?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+    disconnect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+    delete?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+    connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+    update?: LikeUpdateWithWhereUniqueWithoutPostInput | LikeUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: LikeUpdateManyWithWhereWithoutPostInput | LikeUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: LikeScalarWhereInput | LikeScalarWhereInput[]
+  }
+
+  export type ArtistUpdateOneWithoutPostsNestedInput = {
+    create?: XOR<ArtistCreateWithoutPostsInput, ArtistUncheckedCreateWithoutPostsInput>
+    connectOrCreate?: ArtistCreateOrConnectWithoutPostsInput
+    upsert?: ArtistUpsertWithoutPostsInput
+    disconnect?: ArtistWhereInput | boolean
+    delete?: ArtistWhereInput | boolean
+    connect?: ArtistWhereUniqueInput
+    update?: XOR<XOR<ArtistUpdateToOneWithWhereWithoutPostsInput, ArtistUpdateWithoutPostsInput>, ArtistUncheckedUpdateWithoutPostsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutPostsNestedInput = {
+    create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPostsInput
+    upsert?: UserUpsertWithoutPostsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPostsInput, UserUpdateWithoutPostsInput>, UserUncheckedUpdateWithoutPostsInput>
+  }
+
   export type PostImageUpdateManyWithoutPostNestedInput = {
     create?: XOR<PostImageCreateWithoutPostInput, PostImageUncheckedCreateWithoutPostInput> | PostImageCreateWithoutPostInput[] | PostImageUncheckedCreateWithoutPostInput[]
     connectOrCreate?: PostImageCreateOrConnectWithoutPostInput | PostImageCreateOrConnectWithoutPostInput[]
@@ -24290,14 +24609,18 @@ export namespace Prisma {
     deleteMany?: PostImageScalarWhereInput | PostImageScalarWhereInput[]
   }
 
-  export type ArtistUpdateOneWithoutPostsNestedInput = {
-    create?: XOR<ArtistCreateWithoutPostsInput, ArtistUncheckedCreateWithoutPostsInput>
-    connectOrCreate?: ArtistCreateOrConnectWithoutPostsInput
-    upsert?: ArtistUpsertWithoutPostsInput
-    disconnect?: ArtistWhereInput | boolean
-    delete?: ArtistWhereInput | boolean
-    connect?: ArtistWhereUniqueInput
-    update?: XOR<XOR<ArtistUpdateToOneWithWhereWithoutPostsInput, ArtistUpdateWithoutPostsInput>, ArtistUncheckedUpdateWithoutPostsInput>
+  export type CommentUncheckedUpdateManyWithoutPostNestedInput = {
+    create?: XOR<CommentCreateWithoutPostInput, CommentUncheckedCreateWithoutPostInput> | CommentCreateWithoutPostInput[] | CommentUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutPostInput | CommentCreateOrConnectWithoutPostInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutPostInput | CommentUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: CommentCreateManyPostInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutPostInput | CommentUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutPostInput | CommentUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
   export type LikeUncheckedUpdateManyWithoutPostNestedInput = {
@@ -24312,20 +24635,6 @@ export namespace Prisma {
     update?: LikeUpdateWithWhereUniqueWithoutPostInput | LikeUpdateWithWhereUniqueWithoutPostInput[]
     updateMany?: LikeUpdateManyWithWhereWithoutPostInput | LikeUpdateManyWithWhereWithoutPostInput[]
     deleteMany?: LikeScalarWhereInput | LikeScalarWhereInput[]
-  }
-
-  export type CommentUncheckedUpdateManyWithoutPostNestedInput = {
-    create?: XOR<CommentCreateWithoutPostInput, CommentUncheckedCreateWithoutPostInput> | CommentCreateWithoutPostInput[] | CommentUncheckedCreateWithoutPostInput[]
-    connectOrCreate?: CommentCreateOrConnectWithoutPostInput | CommentCreateOrConnectWithoutPostInput[]
-    upsert?: CommentUpsertWithWhereUniqueWithoutPostInput | CommentUpsertWithWhereUniqueWithoutPostInput[]
-    createMany?: CommentCreateManyPostInputEnvelope
-    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
-    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
-    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
-    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
-    update?: CommentUpdateWithWhereUniqueWithoutPostInput | CommentUpdateWithWhereUniqueWithoutPostInput[]
-    updateMany?: CommentUpdateManyWithWhereWithoutPostInput | CommentUpdateManyWithWhereWithoutPostInput[]
-    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
   export type PostImageUncheckedUpdateManyWithoutPostNestedInput = {
@@ -24356,24 +24665,16 @@ export namespace Prisma {
     update?: XOR<XOR<PostUpdateToOneWithWhereWithoutPostImagesInput, PostUpdateWithoutPostImagesInput>, PostUncheckedUpdateWithoutPostImagesInput>
   }
 
-  export type UserCreateNestedOneWithoutLikesInput = {
-    create?: XOR<UserCreateWithoutLikesInput, UserUncheckedCreateWithoutLikesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutLikesInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type PostCreateNestedOneWithoutLikesInput = {
     create?: XOR<PostCreateWithoutLikesInput, PostUncheckedCreateWithoutLikesInput>
     connectOrCreate?: PostCreateOrConnectWithoutLikesInput
     connect?: PostWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutLikesNestedInput = {
+  export type UserCreateNestedOneWithoutLikesInput = {
     create?: XOR<UserCreateWithoutLikesInput, UserUncheckedCreateWithoutLikesInput>
     connectOrCreate?: UserCreateOrConnectWithoutLikesInput
-    upsert?: UserUpsertWithoutLikesInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutLikesInput, UserUpdateWithoutLikesInput>, UserUncheckedUpdateWithoutLikesInput>
   }
 
   export type PostUpdateOneRequiredWithoutLikesNestedInput = {
@@ -24384,10 +24685,12 @@ export namespace Prisma {
     update?: XOR<XOR<PostUpdateToOneWithWhereWithoutLikesInput, PostUpdateWithoutLikesInput>, PostUncheckedUpdateWithoutLikesInput>
   }
 
-  export type UserCreateNestedOneWithoutCommentsInput = {
-    create?: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutCommentsInput
+  export type UserUpdateOneRequiredWithoutLikesNestedInput = {
+    create?: XOR<UserCreateWithoutLikesInput, UserUncheckedCreateWithoutLikesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLikesInput
+    upsert?: UserUpsertWithoutLikesInput
     connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutLikesInput, UserUpdateWithoutLikesInput>, UserUncheckedUpdateWithoutLikesInput>
   }
 
   export type PostCreateNestedOneWithoutCommentsInput = {
@@ -24396,12 +24699,10 @@ export namespace Prisma {
     connect?: PostWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutCommentsNestedInput = {
+  export type UserCreateNestedOneWithoutCommentsInput = {
     create?: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
     connectOrCreate?: UserCreateOrConnectWithoutCommentsInput
-    upsert?: UserUpsertWithoutCommentsInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCommentsInput, UserUpdateWithoutCommentsInput>, UserUncheckedUpdateWithoutCommentsInput>
   }
 
   export type PostUpdateOneRequiredWithoutCommentsNestedInput = {
@@ -24412,10 +24713,12 @@ export namespace Prisma {
     update?: XOR<XOR<PostUpdateToOneWithWhereWithoutCommentsInput, PostUpdateWithoutCommentsInput>, PostUncheckedUpdateWithoutCommentsInput>
   }
 
-  export type VenueCreateNestedOneWithoutEventsInput = {
-    create?: XOR<VenueCreateWithoutEventsInput, VenueUncheckedCreateWithoutEventsInput>
-    connectOrCreate?: VenueCreateOrConnectWithoutEventsInput
-    connect?: VenueWhereUniqueInput
+  export type UserUpdateOneRequiredWithoutCommentsNestedInput = {
+    create?: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCommentsInput
+    upsert?: UserUpsertWithoutCommentsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCommentsInput, UserUpdateWithoutCommentsInput>, UserUncheckedUpdateWithoutCommentsInput>
   }
 
   export type ArtistEventCreateNestedManyWithoutEventInput = {
@@ -24423,6 +24726,18 @@ export namespace Prisma {
     connectOrCreate?: ArtistEventCreateOrConnectWithoutEventInput | ArtistEventCreateOrConnectWithoutEventInput[]
     createMany?: ArtistEventCreateManyEventInputEnvelope
     connect?: ArtistEventWhereUniqueInput | ArtistEventWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedOneWithoutCreatedEventsInput = {
+    create?: XOR<UserCreateWithoutCreatedEventsInput, UserUncheckedCreateWithoutCreatedEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedEventsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type VenueCreateNestedOneWithoutEventsInput = {
+    create?: XOR<VenueCreateWithoutEventsInput, VenueUncheckedCreateWithoutEventsInput>
+    connectOrCreate?: VenueCreateOrConnectWithoutEventsInput
+    connect?: VenueWhereUniqueInput
   }
 
   export type ArtistEventUncheckedCreateNestedManyWithoutEventInput = {
@@ -24440,14 +24755,6 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
-  export type VenueUpdateOneRequiredWithoutEventsNestedInput = {
-    create?: XOR<VenueCreateWithoutEventsInput, VenueUncheckedCreateWithoutEventsInput>
-    connectOrCreate?: VenueCreateOrConnectWithoutEventsInput
-    upsert?: VenueUpsertWithoutEventsInput
-    connect?: VenueWhereUniqueInput
-    update?: XOR<XOR<VenueUpdateToOneWithWhereWithoutEventsInput, VenueUpdateWithoutEventsInput>, VenueUncheckedUpdateWithoutEventsInput>
-  }
-
   export type ArtistEventUpdateManyWithoutEventNestedInput = {
     create?: XOR<ArtistEventCreateWithoutEventInput, ArtistEventUncheckedCreateWithoutEventInput> | ArtistEventCreateWithoutEventInput[] | ArtistEventUncheckedCreateWithoutEventInput[]
     connectOrCreate?: ArtistEventCreateOrConnectWithoutEventInput | ArtistEventCreateOrConnectWithoutEventInput[]
@@ -24460,6 +24767,24 @@ export namespace Prisma {
     update?: ArtistEventUpdateWithWhereUniqueWithoutEventInput | ArtistEventUpdateWithWhereUniqueWithoutEventInput[]
     updateMany?: ArtistEventUpdateManyWithWhereWithoutEventInput | ArtistEventUpdateManyWithWhereWithoutEventInput[]
     deleteMany?: ArtistEventScalarWhereInput | ArtistEventScalarWhereInput[]
+  }
+
+  export type UserUpdateOneWithoutCreatedEventsNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedEventsInput, UserUncheckedCreateWithoutCreatedEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedEventsInput
+    upsert?: UserUpsertWithoutCreatedEventsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedEventsInput, UserUpdateWithoutCreatedEventsInput>, UserUncheckedUpdateWithoutCreatedEventsInput>
+  }
+
+  export type VenueUpdateOneRequiredWithoutEventsNestedInput = {
+    create?: XOR<VenueCreateWithoutEventsInput, VenueUncheckedCreateWithoutEventsInput>
+    connectOrCreate?: VenueCreateOrConnectWithoutEventsInput
+    upsert?: VenueUpsertWithoutEventsInput
+    connect?: VenueWhereUniqueInput
+    update?: XOR<XOR<VenueUpdateToOneWithWhereWithoutEventsInput, VenueUpdateWithoutEventsInput>, VenueUncheckedUpdateWithoutEventsInput>
   }
 
   export type ArtistEventUncheckedUpdateManyWithoutEventNestedInput = {
@@ -24642,24 +24967,16 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutChatRoomsInput = {
-    create?: XOR<UserCreateWithoutChatRoomsInput, UserUncheckedCreateWithoutChatRoomsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutChatRoomsInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type ChatRoomCreateNestedOneWithoutUsersInput = {
     create?: XOR<ChatRoomCreateWithoutUsersInput, ChatRoomUncheckedCreateWithoutUsersInput>
     connectOrCreate?: ChatRoomCreateOrConnectWithoutUsersInput
     connect?: ChatRoomWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutChatRoomsNestedInput = {
+  export type UserCreateNestedOneWithoutChatRoomsInput = {
     create?: XOR<UserCreateWithoutChatRoomsInput, UserUncheckedCreateWithoutChatRoomsInput>
     connectOrCreate?: UserCreateOrConnectWithoutChatRoomsInput
-    upsert?: UserUpsertWithoutChatRoomsInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutChatRoomsInput, UserUpdateWithoutChatRoomsInput>, UserUncheckedUpdateWithoutChatRoomsInput>
   }
 
   export type ChatRoomUpdateOneRequiredWithoutUsersNestedInput = {
@@ -24670,10 +24987,12 @@ export namespace Prisma {
     update?: XOR<XOR<ChatRoomUpdateToOneWithWhereWithoutUsersInput, ChatRoomUpdateWithoutUsersInput>, ChatRoomUncheckedUpdateWithoutUsersInput>
   }
 
-  export type UserCreateNestedOneWithoutMessagesInput = {
-    create?: XOR<UserCreateWithoutMessagesInput, UserUncheckedCreateWithoutMessagesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutMessagesInput
+  export type UserUpdateOneRequiredWithoutChatRoomsNestedInput = {
+    create?: XOR<UserCreateWithoutChatRoomsInput, UserUncheckedCreateWithoutChatRoomsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutChatRoomsInput
+    upsert?: UserUpsertWithoutChatRoomsInput
     connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutChatRoomsInput, UserUpdateWithoutChatRoomsInput>, UserUncheckedUpdateWithoutChatRoomsInput>
   }
 
   export type ChatRoomCreateNestedOneWithoutMessagesInput = {
@@ -24682,12 +25001,10 @@ export namespace Prisma {
     connect?: ChatRoomWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutMessagesNestedInput = {
+  export type UserCreateNestedOneWithoutMessagesInput = {
     create?: XOR<UserCreateWithoutMessagesInput, UserUncheckedCreateWithoutMessagesInput>
     connectOrCreate?: UserCreateOrConnectWithoutMessagesInput
-    upsert?: UserUpsertWithoutMessagesInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMessagesInput, UserUpdateWithoutMessagesInput>, UserUncheckedUpdateWithoutMessagesInput>
   }
 
   export type ChatRoomUpdateOneRequiredWithoutMessagesNestedInput = {
@@ -24696,6 +25013,14 @@ export namespace Prisma {
     upsert?: ChatRoomUpsertWithoutMessagesInput
     connect?: ChatRoomWhereUniqueInput
     update?: XOR<XOR<ChatRoomUpdateToOneWithWhereWithoutMessagesInput, ChatRoomUpdateWithoutMessagesInput>, ChatRoomUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutMessagesNestedInput = {
+    create?: XOR<UserCreateWithoutMessagesInput, UserUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMessagesInput
+    upsert?: UserUpsertWithoutMessagesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMessagesInput, UserUpdateWithoutMessagesInput>, UserUncheckedUpdateWithoutMessagesInput>
   }
 
   export type ArtistCreateNestedOneWithoutSongsInput = {
@@ -24984,78 +25309,62 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type FavArtistCreateWithoutUserInput = {
+  export type ArtistCreateWithoutCreatedByUserInput = {
+    artistName: string
+    profileImage?: string | null
+    biography?: string | null
     createdAt?: Date | string
-    artist: ArtistCreateNestedOneWithoutFavByUsersInput
+    updatedAt?: Date | string
+    agency?: AgencyCreateNestedOneWithoutArtistsInput
+    events?: ArtistEventCreateNestedManyWithoutArtistInput
+    genres?: ArtistGenreCreateNestedManyWithoutArtistInput
+    favByUsers?: FavArtistCreateNestedManyWithoutArtistInput
+    posts?: PostCreateNestedManyWithoutArtistInput
+    songs?: SongCreateNestedManyWithoutArtistInput
   }
 
-  export type FavArtistUncheckedCreateWithoutUserInput = {
+  export type ArtistUncheckedCreateWithoutCreatedByUserInput = {
     id?: number
-    artistId: number
+    artistName: string
+    profileImage?: string | null
+    biography?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
+    agencyId?: number | null
+    events?: ArtistEventUncheckedCreateNestedManyWithoutArtistInput
+    genres?: ArtistGenreUncheckedCreateNestedManyWithoutArtistInput
+    favByUsers?: FavArtistUncheckedCreateNestedManyWithoutArtistInput
+    posts?: PostUncheckedCreateNestedManyWithoutArtistInput
+    songs?: SongUncheckedCreateNestedManyWithoutArtistInput
   }
 
-  export type FavArtistCreateOrConnectWithoutUserInput = {
-    where: FavArtistWhereUniqueInput
-    create: XOR<FavArtistCreateWithoutUserInput, FavArtistUncheckedCreateWithoutUserInput>
+  export type ArtistCreateOrConnectWithoutCreatedByUserInput = {
+    where: ArtistWhereUniqueInput
+    create: XOR<ArtistCreateWithoutCreatedByUserInput, ArtistUncheckedCreateWithoutCreatedByUserInput>
   }
 
-  export type FavArtistCreateManyUserInputEnvelope = {
-    data: FavArtistCreateManyUserInput | FavArtistCreateManyUserInput[]
+  export type ArtistCreateManyCreatedByUserInputEnvelope = {
+    data: ArtistCreateManyCreatedByUserInput | ArtistCreateManyCreatedByUserInput[]
     skipDuplicates?: boolean
   }
 
-  export type PostCreateWithoutUserInput = {
-    title: string
-    content: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    likes?: LikeCreateNestedManyWithoutPostInput
-    comments?: CommentCreateNestedManyWithoutPostInput
-    postImages?: PostImageCreateNestedManyWithoutPostInput
-    artist?: ArtistCreateNestedOneWithoutPostsInput
+  export type ChatRoomUserCreateWithoutUserInput = {
+    joinedAt?: Date | string
+    chatRoom: ChatRoomCreateNestedOneWithoutUsersInput
   }
 
-  export type PostUncheckedCreateWithoutUserInput = {
-    id?: number
-    title: string
-    content: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    artistId?: number | null
-    likes?: LikeUncheckedCreateNestedManyWithoutPostInput
-    comments?: CommentUncheckedCreateNestedManyWithoutPostInput
-    postImages?: PostImageUncheckedCreateNestedManyWithoutPostInput
+  export type ChatRoomUserUncheckedCreateWithoutUserInput = {
+    chatRoomId: number
+    joinedAt?: Date | string
   }
 
-  export type PostCreateOrConnectWithoutUserInput = {
-    where: PostWhereUniqueInput
-    create: XOR<PostCreateWithoutUserInput, PostUncheckedCreateWithoutUserInput>
+  export type ChatRoomUserCreateOrConnectWithoutUserInput = {
+    where: ChatRoomUserWhereUniqueInput
+    create: XOR<ChatRoomUserCreateWithoutUserInput, ChatRoomUserUncheckedCreateWithoutUserInput>
   }
 
-  export type PostCreateManyUserInputEnvelope = {
-    data: PostCreateManyUserInput | PostCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type LikeCreateWithoutUserInput = {
-    createdAt?: Date | string
-    post: PostCreateNestedOneWithoutLikesInput
-  }
-
-  export type LikeUncheckedCreateWithoutUserInput = {
-    id?: number
-    postId: number
-    createdAt?: Date | string
-  }
-
-  export type LikeCreateOrConnectWithoutUserInput = {
-    where: LikeWhereUniqueInput
-    create: XOR<LikeCreateWithoutUserInput, LikeUncheckedCreateWithoutUserInput>
-  }
-
-  export type LikeCreateManyUserInputEnvelope = {
-    data: LikeCreateManyUserInput | LikeCreateManyUserInput[]
+  export type ChatRoomUserCreateManyUserInputEnvelope = {
+    data: ChatRoomUserCreateManyUserInput | ChatRoomUserCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -25086,6 +25395,48 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type FavArtistCreateWithoutUserInput = {
+    createdAt?: Date | string
+    artist: ArtistCreateNestedOneWithoutFavByUsersInput
+  }
+
+  export type FavArtistUncheckedCreateWithoutUserInput = {
+    id?: number
+    artistId: number
+    createdAt?: Date | string
+  }
+
+  export type FavArtistCreateOrConnectWithoutUserInput = {
+    where: FavArtistWhereUniqueInput
+    create: XOR<FavArtistCreateWithoutUserInput, FavArtistUncheckedCreateWithoutUserInput>
+  }
+
+  export type FavArtistCreateManyUserInputEnvelope = {
+    data: FavArtistCreateManyUserInput | FavArtistCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LikeCreateWithoutUserInput = {
+    createdAt?: Date | string
+    post: PostCreateNestedOneWithoutLikesInput
+  }
+
+  export type LikeUncheckedCreateWithoutUserInput = {
+    id?: number
+    postId: number
+    createdAt?: Date | string
+  }
+
+  export type LikeCreateOrConnectWithoutUserInput = {
+    where: LikeWhereUniqueInput
+    create: XOR<LikeCreateWithoutUserInput, LikeUncheckedCreateWithoutUserInput>
+  }
+
+  export type LikeCreateManyUserInputEnvelope = {
+    data: LikeCreateManyUserInput | LikeCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type MessageCreateWithoutSenderInput = {
     content: string
     isRead?: boolean
@@ -25111,105 +25462,131 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ChatRoomUserCreateWithoutUserInput = {
-    joinedAt?: Date | string
-    chatRoom: ChatRoomCreateNestedOneWithoutUsersInput
+  export type PostCreateWithoutUserInput = {
+    title: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    comments?: CommentCreateNestedManyWithoutPostInput
+    likes?: LikeCreateNestedManyWithoutPostInput
+    artist?: ArtistCreateNestedOneWithoutPostsInput
+    postImages?: PostImageCreateNestedManyWithoutPostInput
   }
 
-  export type ChatRoomUserUncheckedCreateWithoutUserInput = {
-    chatRoomId: number
-    joinedAt?: Date | string
+  export type PostUncheckedCreateWithoutUserInput = {
+    id?: number
+    title: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    artistId?: number | null
+    comments?: CommentUncheckedCreateNestedManyWithoutPostInput
+    likes?: LikeUncheckedCreateNestedManyWithoutPostInput
+    postImages?: PostImageUncheckedCreateNestedManyWithoutPostInput
   }
 
-  export type ChatRoomUserCreateOrConnectWithoutUserInput = {
-    where: ChatRoomUserWhereUniqueInput
-    create: XOR<ChatRoomUserCreateWithoutUserInput, ChatRoomUserUncheckedCreateWithoutUserInput>
-  }
-
-  export type ChatRoomUserCreateManyUserInputEnvelope = {
-    data: ChatRoomUserCreateManyUserInput | ChatRoomUserCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type FavArtistUpsertWithWhereUniqueWithoutUserInput = {
-    where: FavArtistWhereUniqueInput
-    update: XOR<FavArtistUpdateWithoutUserInput, FavArtistUncheckedUpdateWithoutUserInput>
-    create: XOR<FavArtistCreateWithoutUserInput, FavArtistUncheckedCreateWithoutUserInput>
-  }
-
-  export type FavArtistUpdateWithWhereUniqueWithoutUserInput = {
-    where: FavArtistWhereUniqueInput
-    data: XOR<FavArtistUpdateWithoutUserInput, FavArtistUncheckedUpdateWithoutUserInput>
-  }
-
-  export type FavArtistUpdateManyWithWhereWithoutUserInput = {
-    where: FavArtistScalarWhereInput
-    data: XOR<FavArtistUpdateManyMutationInput, FavArtistUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type FavArtistScalarWhereInput = {
-    AND?: FavArtistScalarWhereInput | FavArtistScalarWhereInput[]
-    OR?: FavArtistScalarWhereInput[]
-    NOT?: FavArtistScalarWhereInput | FavArtistScalarWhereInput[]
-    id?: IntFilter<"FavArtist"> | number
-    userId?: IntFilter<"FavArtist"> | number
-    artistId?: IntFilter<"FavArtist"> | number
-    createdAt?: DateTimeFilter<"FavArtist"> | Date | string
-  }
-
-  export type PostUpsertWithWhereUniqueWithoutUserInput = {
+  export type PostCreateOrConnectWithoutUserInput = {
     where: PostWhereUniqueInput
-    update: XOR<PostUpdateWithoutUserInput, PostUncheckedUpdateWithoutUserInput>
     create: XOR<PostCreateWithoutUserInput, PostUncheckedCreateWithoutUserInput>
   }
 
-  export type PostUpdateWithWhereUniqueWithoutUserInput = {
-    where: PostWhereUniqueInput
-    data: XOR<PostUpdateWithoutUserInput, PostUncheckedUpdateWithoutUserInput>
+  export type PostCreateManyUserInputEnvelope = {
+    data: PostCreateManyUserInput | PostCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
-  export type PostUpdateManyWithWhereWithoutUserInput = {
-    where: PostScalarWhereInput
-    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutUserInput>
+  export type EventCreateWithoutCreatedByUserInput = {
+    eventName: string
+    description?: string | null
+    posterImage?: string | null
+    status?: $Enums.EventStatus
+    ticketLink?: string | null
+    startTime: Date | string
+    endTime?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    artists?: ArtistEventCreateNestedManyWithoutEventInput
+    venue: VenueCreateNestedOneWithoutEventsInput
   }
 
-  export type PostScalarWhereInput = {
-    AND?: PostScalarWhereInput | PostScalarWhereInput[]
-    OR?: PostScalarWhereInput[]
-    NOT?: PostScalarWhereInput | PostScalarWhereInput[]
-    id?: IntFilter<"Post"> | number
-    title?: StringFilter<"Post"> | string
-    content?: StringFilter<"Post"> | string
-    userId?: IntFilter<"Post"> | number
-    createdAt?: DateTimeFilter<"Post"> | Date | string
-    updatedAt?: DateTimeFilter<"Post"> | Date | string
-    artistId?: IntNullableFilter<"Post"> | number | null
+  export type EventUncheckedCreateWithoutCreatedByUserInput = {
+    id?: number
+    eventName: string
+    description?: string | null
+    posterImage?: string | null
+    status?: $Enums.EventStatus
+    ticketLink?: string | null
+    startTime: Date | string
+    endTime?: Date | string | null
+    venueId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    artists?: ArtistEventUncheckedCreateNestedManyWithoutEventInput
   }
 
-  export type LikeUpsertWithWhereUniqueWithoutUserInput = {
-    where: LikeWhereUniqueInput
-    update: XOR<LikeUpdateWithoutUserInput, LikeUncheckedUpdateWithoutUserInput>
-    create: XOR<LikeCreateWithoutUserInput, LikeUncheckedCreateWithoutUserInput>
+  export type EventCreateOrConnectWithoutCreatedByUserInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutCreatedByUserInput, EventUncheckedCreateWithoutCreatedByUserInput>
   }
 
-  export type LikeUpdateWithWhereUniqueWithoutUserInput = {
-    where: LikeWhereUniqueInput
-    data: XOR<LikeUpdateWithoutUserInput, LikeUncheckedUpdateWithoutUserInput>
+  export type EventCreateManyCreatedByUserInputEnvelope = {
+    data: EventCreateManyCreatedByUserInput | EventCreateManyCreatedByUserInput[]
+    skipDuplicates?: boolean
   }
 
-  export type LikeUpdateManyWithWhereWithoutUserInput = {
-    where: LikeScalarWhereInput
-    data: XOR<LikeUpdateManyMutationInput, LikeUncheckedUpdateManyWithoutUserInput>
+  export type ArtistUpsertWithWhereUniqueWithoutCreatedByUserInput = {
+    where: ArtistWhereUniqueInput
+    update: XOR<ArtistUpdateWithoutCreatedByUserInput, ArtistUncheckedUpdateWithoutCreatedByUserInput>
+    create: XOR<ArtistCreateWithoutCreatedByUserInput, ArtistUncheckedCreateWithoutCreatedByUserInput>
   }
 
-  export type LikeScalarWhereInput = {
-    AND?: LikeScalarWhereInput | LikeScalarWhereInput[]
-    OR?: LikeScalarWhereInput[]
-    NOT?: LikeScalarWhereInput | LikeScalarWhereInput[]
-    id?: IntFilter<"Like"> | number
-    userId?: IntFilter<"Like"> | number
-    postId?: IntFilter<"Like"> | number
-    createdAt?: DateTimeFilter<"Like"> | Date | string
+  export type ArtistUpdateWithWhereUniqueWithoutCreatedByUserInput = {
+    where: ArtistWhereUniqueInput
+    data: XOR<ArtistUpdateWithoutCreatedByUserInput, ArtistUncheckedUpdateWithoutCreatedByUserInput>
+  }
+
+  export type ArtistUpdateManyWithWhereWithoutCreatedByUserInput = {
+    where: ArtistScalarWhereInput
+    data: XOR<ArtistUpdateManyMutationInput, ArtistUncheckedUpdateManyWithoutCreatedByUserInput>
+  }
+
+  export type ArtistScalarWhereInput = {
+    AND?: ArtistScalarWhereInput | ArtistScalarWhereInput[]
+    OR?: ArtistScalarWhereInput[]
+    NOT?: ArtistScalarWhereInput | ArtistScalarWhereInput[]
+    id?: IntFilter<"Artist"> | number
+    artistName?: StringFilter<"Artist"> | string
+    profileImage?: StringNullableFilter<"Artist"> | string | null
+    biography?: StringNullableFilter<"Artist"> | string | null
+    createdAt?: DateTimeFilter<"Artist"> | Date | string
+    updatedAt?: DateTimeFilter<"Artist"> | Date | string
+    agencyId?: IntNullableFilter<"Artist"> | number | null
+    createdByUserId?: IntNullableFilter<"Artist"> | number | null
+  }
+
+  export type ChatRoomUserUpsertWithWhereUniqueWithoutUserInput = {
+    where: ChatRoomUserWhereUniqueInput
+    update: XOR<ChatRoomUserUpdateWithoutUserInput, ChatRoomUserUncheckedUpdateWithoutUserInput>
+    create: XOR<ChatRoomUserCreateWithoutUserInput, ChatRoomUserUncheckedCreateWithoutUserInput>
+  }
+
+  export type ChatRoomUserUpdateWithWhereUniqueWithoutUserInput = {
+    where: ChatRoomUserWhereUniqueInput
+    data: XOR<ChatRoomUserUpdateWithoutUserInput, ChatRoomUserUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ChatRoomUserUpdateManyWithWhereWithoutUserInput = {
+    where: ChatRoomUserScalarWhereInput
+    data: XOR<ChatRoomUserUpdateManyMutationInput, ChatRoomUserUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ChatRoomUserScalarWhereInput = {
+    AND?: ChatRoomUserScalarWhereInput | ChatRoomUserScalarWhereInput[]
+    OR?: ChatRoomUserScalarWhereInput[]
+    NOT?: ChatRoomUserScalarWhereInput | ChatRoomUserScalarWhereInput[]
+    userId?: IntFilter<"ChatRoomUser"> | number
+    chatRoomId?: IntFilter<"ChatRoomUser"> | number
+    joinedAt?: DateTimeFilter<"ChatRoomUser"> | Date | string
   }
 
   export type CommentUpsertWithWhereUniqueWithoutUserInput = {
@@ -25241,6 +25618,58 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
   }
 
+  export type FavArtistUpsertWithWhereUniqueWithoutUserInput = {
+    where: FavArtistWhereUniqueInput
+    update: XOR<FavArtistUpdateWithoutUserInput, FavArtistUncheckedUpdateWithoutUserInput>
+    create: XOR<FavArtistCreateWithoutUserInput, FavArtistUncheckedCreateWithoutUserInput>
+  }
+
+  export type FavArtistUpdateWithWhereUniqueWithoutUserInput = {
+    where: FavArtistWhereUniqueInput
+    data: XOR<FavArtistUpdateWithoutUserInput, FavArtistUncheckedUpdateWithoutUserInput>
+  }
+
+  export type FavArtistUpdateManyWithWhereWithoutUserInput = {
+    where: FavArtistScalarWhereInput
+    data: XOR<FavArtistUpdateManyMutationInput, FavArtistUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type FavArtistScalarWhereInput = {
+    AND?: FavArtistScalarWhereInput | FavArtistScalarWhereInput[]
+    OR?: FavArtistScalarWhereInput[]
+    NOT?: FavArtistScalarWhereInput | FavArtistScalarWhereInput[]
+    id?: IntFilter<"FavArtist"> | number
+    userId?: IntFilter<"FavArtist"> | number
+    artistId?: IntFilter<"FavArtist"> | number
+    createdAt?: DateTimeFilter<"FavArtist"> | Date | string
+  }
+
+  export type LikeUpsertWithWhereUniqueWithoutUserInput = {
+    where: LikeWhereUniqueInput
+    update: XOR<LikeUpdateWithoutUserInput, LikeUncheckedUpdateWithoutUserInput>
+    create: XOR<LikeCreateWithoutUserInput, LikeUncheckedCreateWithoutUserInput>
+  }
+
+  export type LikeUpdateWithWhereUniqueWithoutUserInput = {
+    where: LikeWhereUniqueInput
+    data: XOR<LikeUpdateWithoutUserInput, LikeUncheckedUpdateWithoutUserInput>
+  }
+
+  export type LikeUpdateManyWithWhereWithoutUserInput = {
+    where: LikeScalarWhereInput
+    data: XOR<LikeUpdateManyMutationInput, LikeUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type LikeScalarWhereInput = {
+    AND?: LikeScalarWhereInput | LikeScalarWhereInput[]
+    OR?: LikeScalarWhereInput[]
+    NOT?: LikeScalarWhereInput | LikeScalarWhereInput[]
+    id?: IntFilter<"Like"> | number
+    userId?: IntFilter<"Like"> | number
+    postId?: IntFilter<"Like"> | number
+    createdAt?: DateTimeFilter<"Like"> | Date | string
+  }
+
   export type MessageUpsertWithWhereUniqueWithoutSenderInput = {
     where: MessageWhereUniqueInput
     update: XOR<MessageUpdateWithoutSenderInput, MessageUncheckedUpdateWithoutSenderInput>
@@ -25269,29 +25698,67 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Message"> | Date | string
   }
 
-  export type ChatRoomUserUpsertWithWhereUniqueWithoutUserInput = {
-    where: ChatRoomUserWhereUniqueInput
-    update: XOR<ChatRoomUserUpdateWithoutUserInput, ChatRoomUserUncheckedUpdateWithoutUserInput>
-    create: XOR<ChatRoomUserCreateWithoutUserInput, ChatRoomUserUncheckedCreateWithoutUserInput>
+  export type PostUpsertWithWhereUniqueWithoutUserInput = {
+    where: PostWhereUniqueInput
+    update: XOR<PostUpdateWithoutUserInput, PostUncheckedUpdateWithoutUserInput>
+    create: XOR<PostCreateWithoutUserInput, PostUncheckedCreateWithoutUserInput>
   }
 
-  export type ChatRoomUserUpdateWithWhereUniqueWithoutUserInput = {
-    where: ChatRoomUserWhereUniqueInput
-    data: XOR<ChatRoomUserUpdateWithoutUserInput, ChatRoomUserUncheckedUpdateWithoutUserInput>
+  export type PostUpdateWithWhereUniqueWithoutUserInput = {
+    where: PostWhereUniqueInput
+    data: XOR<PostUpdateWithoutUserInput, PostUncheckedUpdateWithoutUserInput>
   }
 
-  export type ChatRoomUserUpdateManyWithWhereWithoutUserInput = {
-    where: ChatRoomUserScalarWhereInput
-    data: XOR<ChatRoomUserUpdateManyMutationInput, ChatRoomUserUncheckedUpdateManyWithoutUserInput>
+  export type PostUpdateManyWithWhereWithoutUserInput = {
+    where: PostScalarWhereInput
+    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type ChatRoomUserScalarWhereInput = {
-    AND?: ChatRoomUserScalarWhereInput | ChatRoomUserScalarWhereInput[]
-    OR?: ChatRoomUserScalarWhereInput[]
-    NOT?: ChatRoomUserScalarWhereInput | ChatRoomUserScalarWhereInput[]
-    userId?: IntFilter<"ChatRoomUser"> | number
-    chatRoomId?: IntFilter<"ChatRoomUser"> | number
-    joinedAt?: DateTimeFilter<"ChatRoomUser"> | Date | string
+  export type PostScalarWhereInput = {
+    AND?: PostScalarWhereInput | PostScalarWhereInput[]
+    OR?: PostScalarWhereInput[]
+    NOT?: PostScalarWhereInput | PostScalarWhereInput[]
+    id?: IntFilter<"Post"> | number
+    title?: StringFilter<"Post"> | string
+    content?: StringFilter<"Post"> | string
+    userId?: IntFilter<"Post"> | number
+    createdAt?: DateTimeFilter<"Post"> | Date | string
+    updatedAt?: DateTimeFilter<"Post"> | Date | string
+    artistId?: IntNullableFilter<"Post"> | number | null
+  }
+
+  export type EventUpsertWithWhereUniqueWithoutCreatedByUserInput = {
+    where: EventWhereUniqueInput
+    update: XOR<EventUpdateWithoutCreatedByUserInput, EventUncheckedUpdateWithoutCreatedByUserInput>
+    create: XOR<EventCreateWithoutCreatedByUserInput, EventUncheckedCreateWithoutCreatedByUserInput>
+  }
+
+  export type EventUpdateWithWhereUniqueWithoutCreatedByUserInput = {
+    where: EventWhereUniqueInput
+    data: XOR<EventUpdateWithoutCreatedByUserInput, EventUncheckedUpdateWithoutCreatedByUserInput>
+  }
+
+  export type EventUpdateManyWithWhereWithoutCreatedByUserInput = {
+    where: EventScalarWhereInput
+    data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyWithoutCreatedByUserInput>
+  }
+
+  export type EventScalarWhereInput = {
+    AND?: EventScalarWhereInput | EventScalarWhereInput[]
+    OR?: EventScalarWhereInput[]
+    NOT?: EventScalarWhereInput | EventScalarWhereInput[]
+    id?: IntFilter<"Event"> | number
+    eventName?: StringFilter<"Event"> | string
+    description?: StringNullableFilter<"Event"> | string | null
+    posterImage?: StringNullableFilter<"Event"> | string | null
+    status?: EnumEventStatusFilter<"Event"> | $Enums.EventStatus
+    ticketLink?: StringNullableFilter<"Event"> | string | null
+    startTime?: DateTimeFilter<"Event"> | Date | string
+    endTime?: DateTimeNullableFilter<"Event"> | Date | string | null
+    venueId?: IntFilter<"Event"> | number
+    createdAt?: DateTimeFilter<"Event"> | Date | string
+    updatedAt?: DateTimeFilter<"Event"> | Date | string
+    createdByUserId?: IntNullableFilter<"Event"> | number | null
   }
 
   export type AgencyCreateWithoutArtistsInput = {
@@ -25312,22 +25779,54 @@ export namespace Prisma {
     create: XOR<AgencyCreateWithoutArtistsInput, AgencyUncheckedCreateWithoutArtistsInput>
   }
 
-  export type ArtistGenreCreateWithoutArtistInput = {
-    genre: GenreCreateNestedOneWithoutArtistsInput
+  export type UserCreateWithoutCreatedArtistsInput = {
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    chatRooms?: ChatRoomUserCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
   }
 
-  export type ArtistGenreUncheckedCreateWithoutArtistInput = {
-    genreId: number
+  export type UserUncheckedCreateWithoutCreatedArtistsInput = {
+    id?: number
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    chatRooms?: ChatRoomUserUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
   }
 
-  export type ArtistGenreCreateOrConnectWithoutArtistInput = {
-    where: ArtistGenreWhereUniqueInput
-    create: XOR<ArtistGenreCreateWithoutArtistInput, ArtistGenreUncheckedCreateWithoutArtistInput>
-  }
-
-  export type ArtistGenreCreateManyArtistInputEnvelope = {
-    data: ArtistGenreCreateManyArtistInput | ArtistGenreCreateManyArtistInput[]
-    skipDuplicates?: boolean
+  export type UserCreateOrConnectWithoutCreatedArtistsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedArtistsInput, UserUncheckedCreateWithoutCreatedArtistsInput>
   }
 
   export type ArtistEventCreateWithoutArtistInput = {
@@ -25345,6 +25844,24 @@ export namespace Prisma {
 
   export type ArtistEventCreateManyArtistInputEnvelope = {
     data: ArtistEventCreateManyArtistInput | ArtistEventCreateManyArtistInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ArtistGenreCreateWithoutArtistInput = {
+    genre: GenreCreateNestedOneWithoutArtistsInput
+  }
+
+  export type ArtistGenreUncheckedCreateWithoutArtistInput = {
+    genreId: number
+  }
+
+  export type ArtistGenreCreateOrConnectWithoutArtistInput = {
+    where: ArtistGenreWhereUniqueInput
+    create: XOR<ArtistGenreCreateWithoutArtistInput, ArtistGenreUncheckedCreateWithoutArtistInput>
+  }
+
+  export type ArtistGenreCreateManyArtistInputEnvelope = {
+    data: ArtistGenreCreateManyArtistInput | ArtistGenreCreateManyArtistInput[]
     skipDuplicates?: boolean
   }
 
@@ -25366,6 +25883,39 @@ export namespace Prisma {
 
   export type FavArtistCreateManyArtistInputEnvelope = {
     data: FavArtistCreateManyArtistInput | FavArtistCreateManyArtistInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PostCreateWithoutArtistInput = {
+    title: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    comments?: CommentCreateNestedManyWithoutPostInput
+    likes?: LikeCreateNestedManyWithoutPostInput
+    user: UserCreateNestedOneWithoutPostsInput
+    postImages?: PostImageCreateNestedManyWithoutPostInput
+  }
+
+  export type PostUncheckedCreateWithoutArtistInput = {
+    id?: number
+    title: string
+    content: string
+    userId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    comments?: CommentUncheckedCreateNestedManyWithoutPostInput
+    likes?: LikeUncheckedCreateNestedManyWithoutPostInput
+    postImages?: PostImageUncheckedCreateNestedManyWithoutPostInput
+  }
+
+  export type PostCreateOrConnectWithoutArtistInput = {
+    where: PostWhereUniqueInput
+    create: XOR<PostCreateWithoutArtistInput, PostUncheckedCreateWithoutArtistInput>
+  }
+
+  export type PostCreateManyArtistInputEnvelope = {
+    data: PostCreateManyArtistInput | PostCreateManyArtistInput[]
     skipDuplicates?: boolean
   }
 
@@ -25402,39 +25952,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type PostCreateWithoutArtistInput = {
-    title: string
-    content: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutPostsInput
-    likes?: LikeCreateNestedManyWithoutPostInput
-    comments?: CommentCreateNestedManyWithoutPostInput
-    postImages?: PostImageCreateNestedManyWithoutPostInput
-  }
-
-  export type PostUncheckedCreateWithoutArtistInput = {
-    id?: number
-    title: string
-    content: string
-    userId: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    likes?: LikeUncheckedCreateNestedManyWithoutPostInput
-    comments?: CommentUncheckedCreateNestedManyWithoutPostInput
-    postImages?: PostImageUncheckedCreateNestedManyWithoutPostInput
-  }
-
-  export type PostCreateOrConnectWithoutArtistInput = {
-    where: PostWhereUniqueInput
-    create: XOR<PostCreateWithoutArtistInput, PostUncheckedCreateWithoutArtistInput>
-  }
-
-  export type PostCreateManyArtistInputEnvelope = {
-    data: PostCreateManyArtistInput | PostCreateManyArtistInput[]
-    skipDuplicates?: boolean
-  }
-
   export type AgencyUpsertWithoutArtistsInput = {
     update: XOR<AgencyUpdateWithoutArtistsInput, AgencyUncheckedUpdateWithoutArtistsInput>
     create: XOR<AgencyCreateWithoutArtistsInput, AgencyUncheckedCreateWithoutArtistsInput>
@@ -25459,28 +25976,60 @@ export namespace Prisma {
     socialMedia?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type ArtistGenreUpsertWithWhereUniqueWithoutArtistInput = {
-    where: ArtistGenreWhereUniqueInput
-    update: XOR<ArtistGenreUpdateWithoutArtistInput, ArtistGenreUncheckedUpdateWithoutArtistInput>
-    create: XOR<ArtistGenreCreateWithoutArtistInput, ArtistGenreUncheckedCreateWithoutArtistInput>
+  export type UserUpsertWithoutCreatedArtistsInput = {
+    update: XOR<UserUpdateWithoutCreatedArtistsInput, UserUncheckedUpdateWithoutCreatedArtistsInput>
+    create: XOR<UserCreateWithoutCreatedArtistsInput, UserUncheckedCreateWithoutCreatedArtistsInput>
+    where?: UserWhereInput
   }
 
-  export type ArtistGenreUpdateWithWhereUniqueWithoutArtistInput = {
-    where: ArtistGenreWhereUniqueInput
-    data: XOR<ArtistGenreUpdateWithoutArtistInput, ArtistGenreUncheckedUpdateWithoutArtistInput>
+  export type UserUpdateToOneWithWhereWithoutCreatedArtistsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedArtistsInput, UserUncheckedUpdateWithoutCreatedArtistsInput>
   }
 
-  export type ArtistGenreUpdateManyWithWhereWithoutArtistInput = {
-    where: ArtistGenreScalarWhereInput
-    data: XOR<ArtistGenreUpdateManyMutationInput, ArtistGenreUncheckedUpdateManyWithoutArtistInput>
+  export type UserUpdateWithoutCreatedArtistsInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chatRooms?: ChatRoomUserUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    favArtists?: FavArtistUpdateManyWithoutUserNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
   }
 
-  export type ArtistGenreScalarWhereInput = {
-    AND?: ArtistGenreScalarWhereInput | ArtistGenreScalarWhereInput[]
-    OR?: ArtistGenreScalarWhereInput[]
-    NOT?: ArtistGenreScalarWhereInput | ArtistGenreScalarWhereInput[]
-    artistId?: IntFilter<"ArtistGenre"> | number
-    genreId?: IntFilter<"ArtistGenre"> | number
+  export type UserUncheckedUpdateWithoutCreatedArtistsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chatRooms?: ChatRoomUserUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    favArtists?: FavArtistUncheckedUpdateManyWithoutUserNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type ArtistEventUpsertWithWhereUniqueWithoutArtistInput = {
@@ -25507,6 +26056,30 @@ export namespace Prisma {
     eventId?: IntFilter<"ArtistEvent"> | number
   }
 
+  export type ArtistGenreUpsertWithWhereUniqueWithoutArtistInput = {
+    where: ArtistGenreWhereUniqueInput
+    update: XOR<ArtistGenreUpdateWithoutArtistInput, ArtistGenreUncheckedUpdateWithoutArtistInput>
+    create: XOR<ArtistGenreCreateWithoutArtistInput, ArtistGenreUncheckedCreateWithoutArtistInput>
+  }
+
+  export type ArtistGenreUpdateWithWhereUniqueWithoutArtistInput = {
+    where: ArtistGenreWhereUniqueInput
+    data: XOR<ArtistGenreUpdateWithoutArtistInput, ArtistGenreUncheckedUpdateWithoutArtistInput>
+  }
+
+  export type ArtistGenreUpdateManyWithWhereWithoutArtistInput = {
+    where: ArtistGenreScalarWhereInput
+    data: XOR<ArtistGenreUpdateManyMutationInput, ArtistGenreUncheckedUpdateManyWithoutArtistInput>
+  }
+
+  export type ArtistGenreScalarWhereInput = {
+    AND?: ArtistGenreScalarWhereInput | ArtistGenreScalarWhereInput[]
+    OR?: ArtistGenreScalarWhereInput[]
+    NOT?: ArtistGenreScalarWhereInput | ArtistGenreScalarWhereInput[]
+    artistId?: IntFilter<"ArtistGenre"> | number
+    genreId?: IntFilter<"ArtistGenre"> | number
+  }
+
   export type FavArtistUpsertWithWhereUniqueWithoutArtistInput = {
     where: FavArtistWhereUniqueInput
     update: XOR<FavArtistUpdateWithoutArtistInput, FavArtistUncheckedUpdateWithoutArtistInput>
@@ -25521,6 +26094,22 @@ export namespace Prisma {
   export type FavArtistUpdateManyWithWhereWithoutArtistInput = {
     where: FavArtistScalarWhereInput
     data: XOR<FavArtistUpdateManyMutationInput, FavArtistUncheckedUpdateManyWithoutArtistInput>
+  }
+
+  export type PostUpsertWithWhereUniqueWithoutArtistInput = {
+    where: PostWhereUniqueInput
+    update: XOR<PostUpdateWithoutArtistInput, PostUncheckedUpdateWithoutArtistInput>
+    create: XOR<PostCreateWithoutArtistInput, PostUncheckedCreateWithoutArtistInput>
+  }
+
+  export type PostUpdateWithWhereUniqueWithoutArtistInput = {
+    where: PostWhereUniqueInput
+    data: XOR<PostUpdateWithoutArtistInput, PostUncheckedUpdateWithoutArtistInput>
+  }
+
+  export type PostUpdateManyWithWhereWithoutArtistInput = {
+    where: PostScalarWhereInput
+    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutArtistInput>
   }
 
   export type SongUpsertWithWhereUniqueWithoutArtistInput = {
@@ -25555,33 +26144,18 @@ export namespace Prisma {
     artistId?: IntFilter<"Song"> | number
   }
 
-  export type PostUpsertWithWhereUniqueWithoutArtistInput = {
-    where: PostWhereUniqueInput
-    update: XOR<PostUpdateWithoutArtistInput, PostUncheckedUpdateWithoutArtistInput>
-    create: XOR<PostCreateWithoutArtistInput, PostUncheckedCreateWithoutArtistInput>
-  }
-
-  export type PostUpdateWithWhereUniqueWithoutArtistInput = {
-    where: PostWhereUniqueInput
-    data: XOR<PostUpdateWithoutArtistInput, PostUncheckedUpdateWithoutArtistInput>
-  }
-
-  export type PostUpdateManyWithWhereWithoutArtistInput = {
-    where: PostScalarWhereInput
-    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutArtistInput>
-  }
-
   export type ArtistCreateWithoutAgencyInput = {
     artistName: string
     profileImage?: string | null
     biography?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    genres?: ArtistGenreCreateNestedManyWithoutArtistInput
+    createdByUser?: UserCreateNestedOneWithoutCreatedArtistsInput
     events?: ArtistEventCreateNestedManyWithoutArtistInput
+    genres?: ArtistGenreCreateNestedManyWithoutArtistInput
     favByUsers?: FavArtistCreateNestedManyWithoutArtistInput
-    songs?: SongCreateNestedManyWithoutArtistInput
     posts?: PostCreateNestedManyWithoutArtistInput
+    songs?: SongCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistUncheckedCreateWithoutAgencyInput = {
@@ -25591,11 +26165,12 @@ export namespace Prisma {
     biography?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    genres?: ArtistGenreUncheckedCreateNestedManyWithoutArtistInput
+    createdByUserId?: number | null
     events?: ArtistEventUncheckedCreateNestedManyWithoutArtistInput
+    genres?: ArtistGenreUncheckedCreateNestedManyWithoutArtistInput
     favByUsers?: FavArtistUncheckedCreateNestedManyWithoutArtistInput
-    songs?: SongUncheckedCreateNestedManyWithoutArtistInput
     posts?: PostUncheckedCreateNestedManyWithoutArtistInput
+    songs?: SongUncheckedCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistCreateOrConnectWithoutAgencyInput = {
@@ -25622,19 +26197,6 @@ export namespace Prisma {
   export type ArtistUpdateManyWithWhereWithoutAgencyInput = {
     where: ArtistScalarWhereInput
     data: XOR<ArtistUpdateManyMutationInput, ArtistUncheckedUpdateManyWithoutAgencyInput>
-  }
-
-  export type ArtistScalarWhereInput = {
-    AND?: ArtistScalarWhereInput | ArtistScalarWhereInput[]
-    OR?: ArtistScalarWhereInput[]
-    NOT?: ArtistScalarWhereInput | ArtistScalarWhereInput[]
-    id?: IntFilter<"Artist"> | number
-    artistName?: StringFilter<"Artist"> | string
-    profileImage?: StringNullableFilter<"Artist"> | string | null
-    biography?: StringNullableFilter<"Artist"> | string | null
-    createdAt?: DateTimeFilter<"Artist"> | Date | string
-    updatedAt?: DateTimeFilter<"Artist"> | Date | string
-    agencyId?: IntNullableFilter<"Artist"> | number | null
   }
 
   export type ArtistGenreCreateWithoutGenreInput = {
@@ -25678,10 +26240,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     agency?: AgencyCreateNestedOneWithoutArtistsInput
+    createdByUser?: UserCreateNestedOneWithoutCreatedArtistsInput
     events?: ArtistEventCreateNestedManyWithoutArtistInput
     favByUsers?: FavArtistCreateNestedManyWithoutArtistInput
-    songs?: SongCreateNestedManyWithoutArtistInput
     posts?: PostCreateNestedManyWithoutArtistInput
+    songs?: SongCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistUncheckedCreateWithoutGenresInput = {
@@ -25692,10 +26255,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     agencyId?: number | null
+    createdByUserId?: number | null
     events?: ArtistEventUncheckedCreateNestedManyWithoutArtistInput
     favByUsers?: FavArtistUncheckedCreateNestedManyWithoutArtistInput
-    songs?: SongUncheckedCreateNestedManyWithoutArtistInput
     posts?: PostUncheckedCreateNestedManyWithoutArtistInput
+    songs?: SongUncheckedCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistCreateOrConnectWithoutGenresInput = {
@@ -25735,10 +26299,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agency?: AgencyUpdateOneWithoutArtistsNestedInput
+    createdByUser?: UserUpdateOneWithoutCreatedArtistsNestedInput
     events?: ArtistEventUpdateManyWithoutArtistNestedInput
     favByUsers?: FavArtistUpdateManyWithoutArtistNestedInput
-    songs?: SongUpdateManyWithoutArtistNestedInput
     posts?: PostUpdateManyWithoutArtistNestedInput
+    songs?: SongUpdateManyWithoutArtistNestedInput
   }
 
   export type ArtistUncheckedUpdateWithoutGenresInput = {
@@ -25749,10 +26314,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agencyId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
     events?: ArtistEventUncheckedUpdateManyWithoutArtistNestedInput
     favByUsers?: FavArtistUncheckedUpdateManyWithoutArtistNestedInput
-    songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
     posts?: PostUncheckedUpdateManyWithoutArtistNestedInput
+    songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
   }
 
   export type GenreUpsertWithoutArtistsInput = {
@@ -25775,6 +26341,40 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
   }
 
+  export type ArtistCreateWithoutFavByUsersInput = {
+    artistName: string
+    profileImage?: string | null
+    biography?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    agency?: AgencyCreateNestedOneWithoutArtistsInput
+    createdByUser?: UserCreateNestedOneWithoutCreatedArtistsInput
+    events?: ArtistEventCreateNestedManyWithoutArtistInput
+    genres?: ArtistGenreCreateNestedManyWithoutArtistInput
+    posts?: PostCreateNestedManyWithoutArtistInput
+    songs?: SongCreateNestedManyWithoutArtistInput
+  }
+
+  export type ArtistUncheckedCreateWithoutFavByUsersInput = {
+    id?: number
+    artistName: string
+    profileImage?: string | null
+    biography?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    agencyId?: number | null
+    createdByUserId?: number | null
+    events?: ArtistEventUncheckedCreateNestedManyWithoutArtistInput
+    genres?: ArtistGenreUncheckedCreateNestedManyWithoutArtistInput
+    posts?: PostUncheckedCreateNestedManyWithoutArtistInput
+    songs?: SongUncheckedCreateNestedManyWithoutArtistInput
+  }
+
+  export type ArtistCreateOrConnectWithoutFavByUsersInput = {
+    where: ArtistWhereUniqueInput
+    create: XOR<ArtistCreateWithoutFavByUsersInput, ArtistUncheckedCreateWithoutFavByUsersInput>
+  }
+
   export type UserCreateWithoutFavArtistsInput = {
     username: string
     email: string
@@ -25788,11 +26388,13 @@ export namespace Prisma {
     gender?: $Enums.Gender
     createdAt?: Date | string
     updatedAt?: Date | string
-    posts?: PostCreateNestedManyWithoutUserInput
-    likes?: LikeCreateNestedManyWithoutUserInput
-    comments?: CommentCreateNestedManyWithoutUserInput
-    messages?: MessageCreateNestedManyWithoutSenderInput
+    createdArtists?: ArtistCreateNestedManyWithoutCreatedByUserInput
     chatRooms?: ChatRoomUserCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserUncheckedCreateWithoutFavArtistsInput = {
@@ -25809,11 +26411,13 @@ export namespace Prisma {
     gender?: $Enums.Gender
     createdAt?: Date | string
     updatedAt?: Date | string
-    posts?: PostUncheckedCreateNestedManyWithoutUserInput
-    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
-    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
-    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    createdArtists?: ArtistUncheckedCreateNestedManyWithoutCreatedByUserInput
     chatRooms?: ChatRoomUserUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
   }
 
   export type UserCreateOrConnectWithoutFavArtistsInput = {
@@ -25821,36 +26425,44 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutFavArtistsInput, UserUncheckedCreateWithoutFavArtistsInput>
   }
 
-  export type ArtistCreateWithoutFavByUsersInput = {
-    artistName: string
-    profileImage?: string | null
-    biography?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    agency?: AgencyCreateNestedOneWithoutArtistsInput
-    genres?: ArtistGenreCreateNestedManyWithoutArtistInput
-    events?: ArtistEventCreateNestedManyWithoutArtistInput
-    songs?: SongCreateNestedManyWithoutArtistInput
-    posts?: PostCreateNestedManyWithoutArtistInput
-  }
-
-  export type ArtistUncheckedCreateWithoutFavByUsersInput = {
-    id?: number
-    artistName: string
-    profileImage?: string | null
-    biography?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    agencyId?: number | null
-    genres?: ArtistGenreUncheckedCreateNestedManyWithoutArtistInput
-    events?: ArtistEventUncheckedCreateNestedManyWithoutArtistInput
-    songs?: SongUncheckedCreateNestedManyWithoutArtistInput
-    posts?: PostUncheckedCreateNestedManyWithoutArtistInput
-  }
-
-  export type ArtistCreateOrConnectWithoutFavByUsersInput = {
-    where: ArtistWhereUniqueInput
+  export type ArtistUpsertWithoutFavByUsersInput = {
+    update: XOR<ArtistUpdateWithoutFavByUsersInput, ArtistUncheckedUpdateWithoutFavByUsersInput>
     create: XOR<ArtistCreateWithoutFavByUsersInput, ArtistUncheckedCreateWithoutFavByUsersInput>
+    where?: ArtistWhereInput
+  }
+
+  export type ArtistUpdateToOneWithWhereWithoutFavByUsersInput = {
+    where?: ArtistWhereInput
+    data: XOR<ArtistUpdateWithoutFavByUsersInput, ArtistUncheckedUpdateWithoutFavByUsersInput>
+  }
+
+  export type ArtistUpdateWithoutFavByUsersInput = {
+    artistName?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    agency?: AgencyUpdateOneWithoutArtistsNestedInput
+    createdByUser?: UserUpdateOneWithoutCreatedArtistsNestedInput
+    events?: ArtistEventUpdateManyWithoutArtistNestedInput
+    genres?: ArtistGenreUpdateManyWithoutArtistNestedInput
+    posts?: PostUpdateManyWithoutArtistNestedInput
+    songs?: SongUpdateManyWithoutArtistNestedInput
+  }
+
+  export type ArtistUncheckedUpdateWithoutFavByUsersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    artistName?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    agencyId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
+    events?: ArtistEventUncheckedUpdateManyWithoutArtistNestedInput
+    genres?: ArtistGenreUncheckedUpdateManyWithoutArtistNestedInput
+    posts?: PostUncheckedUpdateManyWithoutArtistNestedInput
+    songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
   }
 
   export type UserUpsertWithoutFavArtistsInput = {
@@ -25877,11 +26489,13 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    posts?: PostUpdateManyWithoutUserNestedInput
-    likes?: LikeUpdateManyWithoutUserNestedInput
-    comments?: CommentUpdateManyWithoutUserNestedInput
-    messages?: MessageUpdateManyWithoutSenderNestedInput
+    createdArtists?: ArtistUpdateManyWithoutCreatedByUserNestedInput
     chatRooms?: ChatRoomUserUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFavArtistsInput = {
@@ -25898,116 +26512,13 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
-    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
-    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
-    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    createdArtists?: ArtistUncheckedUpdateManyWithoutCreatedByUserNestedInput
     chatRooms?: ChatRoomUserUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type ArtistUpsertWithoutFavByUsersInput = {
-    update: XOR<ArtistUpdateWithoutFavByUsersInput, ArtistUncheckedUpdateWithoutFavByUsersInput>
-    create: XOR<ArtistCreateWithoutFavByUsersInput, ArtistUncheckedCreateWithoutFavByUsersInput>
-    where?: ArtistWhereInput
-  }
-
-  export type ArtistUpdateToOneWithWhereWithoutFavByUsersInput = {
-    where?: ArtistWhereInput
-    data: XOR<ArtistUpdateWithoutFavByUsersInput, ArtistUncheckedUpdateWithoutFavByUsersInput>
-  }
-
-  export type ArtistUpdateWithoutFavByUsersInput = {
-    artistName?: StringFieldUpdateOperationsInput | string
-    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
-    biography?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    agency?: AgencyUpdateOneWithoutArtistsNestedInput
-    genres?: ArtistGenreUpdateManyWithoutArtistNestedInput
-    events?: ArtistEventUpdateManyWithoutArtistNestedInput
-    songs?: SongUpdateManyWithoutArtistNestedInput
-    posts?: PostUpdateManyWithoutArtistNestedInput
-  }
-
-  export type ArtistUncheckedUpdateWithoutFavByUsersInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    artistName?: StringFieldUpdateOperationsInput | string
-    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
-    biography?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    agencyId?: NullableIntFieldUpdateOperationsInput | number | null
-    genres?: ArtistGenreUncheckedUpdateManyWithoutArtistNestedInput
-    events?: ArtistEventUncheckedUpdateManyWithoutArtistNestedInput
-    songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
-    posts?: PostUncheckedUpdateManyWithoutArtistNestedInput
-  }
-
-  export type UserCreateWithoutPostsInput = {
-    username: string
-    email: string
-    telephone?: string | null
-    firstName: string
-    lastName: string
-    password: string
-    profileImage?: string | null
-    nationalId?: string | null
-    role?: $Enums.Role
-    gender?: $Enums.Gender
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    favArtists?: FavArtistCreateNestedManyWithoutUserInput
-    likes?: LikeCreateNestedManyWithoutUserInput
-    comments?: CommentCreateNestedManyWithoutUserInput
-    messages?: MessageCreateNestedManyWithoutSenderInput
-    chatRooms?: ChatRoomUserCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutPostsInput = {
-    id?: number
-    username: string
-    email: string
-    telephone?: string | null
-    firstName: string
-    lastName: string
-    password: string
-    profileImage?: string | null
-    nationalId?: string | null
-    role?: $Enums.Role
-    gender?: $Enums.Gender
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
-    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
-    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
-    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    chatRooms?: ChatRoomUserUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutPostsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
-  }
-
-  export type LikeCreateWithoutPostInput = {
-    createdAt?: Date | string
-    user: UserCreateNestedOneWithoutLikesInput
-  }
-
-  export type LikeUncheckedCreateWithoutPostInput = {
-    id?: number
-    userId: number
-    createdAt?: Date | string
-  }
-
-  export type LikeCreateOrConnectWithoutPostInput = {
-    where: LikeWhereUniqueInput
-    create: XOR<LikeCreateWithoutPostInput, LikeUncheckedCreateWithoutPostInput>
-  }
-
-  export type LikeCreateManyPostInputEnvelope = {
-    data: LikeCreateManyPostInput | LikeCreateManyPostInput[]
-    skipDuplicates?: boolean
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type CommentCreateWithoutPostInput = {
@@ -26037,6 +26548,111 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type LikeCreateWithoutPostInput = {
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutLikesInput
+  }
+
+  export type LikeUncheckedCreateWithoutPostInput = {
+    id?: number
+    userId: number
+    createdAt?: Date | string
+  }
+
+  export type LikeCreateOrConnectWithoutPostInput = {
+    where: LikeWhereUniqueInput
+    create: XOR<LikeCreateWithoutPostInput, LikeUncheckedCreateWithoutPostInput>
+  }
+
+  export type LikeCreateManyPostInputEnvelope = {
+    data: LikeCreateManyPostInput | LikeCreateManyPostInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ArtistCreateWithoutPostsInput = {
+    artistName: string
+    profileImage?: string | null
+    biography?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    agency?: AgencyCreateNestedOneWithoutArtistsInput
+    createdByUser?: UserCreateNestedOneWithoutCreatedArtistsInput
+    events?: ArtistEventCreateNestedManyWithoutArtistInput
+    genres?: ArtistGenreCreateNestedManyWithoutArtistInput
+    favByUsers?: FavArtistCreateNestedManyWithoutArtistInput
+    songs?: SongCreateNestedManyWithoutArtistInput
+  }
+
+  export type ArtistUncheckedCreateWithoutPostsInput = {
+    id?: number
+    artistName: string
+    profileImage?: string | null
+    biography?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    agencyId?: number | null
+    createdByUserId?: number | null
+    events?: ArtistEventUncheckedCreateNestedManyWithoutArtistInput
+    genres?: ArtistGenreUncheckedCreateNestedManyWithoutArtistInput
+    favByUsers?: FavArtistUncheckedCreateNestedManyWithoutArtistInput
+    songs?: SongUncheckedCreateNestedManyWithoutArtistInput
+  }
+
+  export type ArtistCreateOrConnectWithoutPostsInput = {
+    where: ArtistWhereUniqueInput
+    create: XOR<ArtistCreateWithoutPostsInput, ArtistUncheckedCreateWithoutPostsInput>
+  }
+
+  export type UserCreateWithoutPostsInput = {
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdArtists?: ArtistCreateNestedManyWithoutCreatedByUserInput
+    chatRooms?: ChatRoomUserCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
+  }
+
+  export type UserUncheckedCreateWithoutPostsInput = {
+    id?: number
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdArtists?: ArtistUncheckedCreateNestedManyWithoutCreatedByUserInput
+    chatRooms?: ChatRoomUserUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
+  }
+
+  export type UserCreateOrConnectWithoutPostsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
+  }
+
   export type PostImageCreateWithoutPostInput = {
     url?: string | null
     createdAt?: Date | string
@@ -26058,36 +26674,76 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ArtistCreateWithoutPostsInput = {
-    artistName: string
-    profileImage?: string | null
-    biography?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    agency?: AgencyCreateNestedOneWithoutArtistsInput
-    genres?: ArtistGenreCreateNestedManyWithoutArtistInput
-    events?: ArtistEventCreateNestedManyWithoutArtistInput
-    favByUsers?: FavArtistCreateNestedManyWithoutArtistInput
-    songs?: SongCreateNestedManyWithoutArtistInput
+  export type CommentUpsertWithWhereUniqueWithoutPostInput = {
+    where: CommentWhereUniqueInput
+    update: XOR<CommentUpdateWithoutPostInput, CommentUncheckedUpdateWithoutPostInput>
+    create: XOR<CommentCreateWithoutPostInput, CommentUncheckedCreateWithoutPostInput>
   }
 
-  export type ArtistUncheckedCreateWithoutPostsInput = {
-    id?: number
-    artistName: string
-    profileImage?: string | null
-    biography?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    agencyId?: number | null
-    genres?: ArtistGenreUncheckedCreateNestedManyWithoutArtistInput
-    events?: ArtistEventUncheckedCreateNestedManyWithoutArtistInput
-    favByUsers?: FavArtistUncheckedCreateNestedManyWithoutArtistInput
-    songs?: SongUncheckedCreateNestedManyWithoutArtistInput
+  export type CommentUpdateWithWhereUniqueWithoutPostInput = {
+    where: CommentWhereUniqueInput
+    data: XOR<CommentUpdateWithoutPostInput, CommentUncheckedUpdateWithoutPostInput>
   }
 
-  export type ArtistCreateOrConnectWithoutPostsInput = {
-    where: ArtistWhereUniqueInput
+  export type CommentUpdateManyWithWhereWithoutPostInput = {
+    where: CommentScalarWhereInput
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutPostInput>
+  }
+
+  export type LikeUpsertWithWhereUniqueWithoutPostInput = {
+    where: LikeWhereUniqueInput
+    update: XOR<LikeUpdateWithoutPostInput, LikeUncheckedUpdateWithoutPostInput>
+    create: XOR<LikeCreateWithoutPostInput, LikeUncheckedCreateWithoutPostInput>
+  }
+
+  export type LikeUpdateWithWhereUniqueWithoutPostInput = {
+    where: LikeWhereUniqueInput
+    data: XOR<LikeUpdateWithoutPostInput, LikeUncheckedUpdateWithoutPostInput>
+  }
+
+  export type LikeUpdateManyWithWhereWithoutPostInput = {
+    where: LikeScalarWhereInput
+    data: XOR<LikeUpdateManyMutationInput, LikeUncheckedUpdateManyWithoutPostInput>
+  }
+
+  export type ArtistUpsertWithoutPostsInput = {
+    update: XOR<ArtistUpdateWithoutPostsInput, ArtistUncheckedUpdateWithoutPostsInput>
     create: XOR<ArtistCreateWithoutPostsInput, ArtistUncheckedCreateWithoutPostsInput>
+    where?: ArtistWhereInput
+  }
+
+  export type ArtistUpdateToOneWithWhereWithoutPostsInput = {
+    where?: ArtistWhereInput
+    data: XOR<ArtistUpdateWithoutPostsInput, ArtistUncheckedUpdateWithoutPostsInput>
+  }
+
+  export type ArtistUpdateWithoutPostsInput = {
+    artistName?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    agency?: AgencyUpdateOneWithoutArtistsNestedInput
+    createdByUser?: UserUpdateOneWithoutCreatedArtistsNestedInput
+    events?: ArtistEventUpdateManyWithoutArtistNestedInput
+    genres?: ArtistGenreUpdateManyWithoutArtistNestedInput
+    favByUsers?: FavArtistUpdateManyWithoutArtistNestedInput
+    songs?: SongUpdateManyWithoutArtistNestedInput
+  }
+
+  export type ArtistUncheckedUpdateWithoutPostsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    artistName?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    agencyId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
+    events?: ArtistEventUncheckedUpdateManyWithoutArtistNestedInput
+    genres?: ArtistGenreUncheckedUpdateManyWithoutArtistNestedInput
+    favByUsers?: FavArtistUncheckedUpdateManyWithoutArtistNestedInput
+    songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
   }
 
   export type UserUpsertWithoutPostsInput = {
@@ -26114,11 +26770,13 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdArtists?: ArtistUpdateManyWithoutCreatedByUserNestedInput
+    chatRooms?: ChatRoomUserUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
     favArtists?: FavArtistUpdateManyWithoutUserNestedInput
     likes?: LikeUpdateManyWithoutUserNestedInput
-    comments?: CommentUpdateManyWithoutUserNestedInput
     messages?: MessageUpdateManyWithoutSenderNestedInput
-    chatRooms?: ChatRoomUserUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -26135,43 +26793,13 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdArtists?: ArtistUncheckedUpdateManyWithoutCreatedByUserNestedInput
+    chatRooms?: ChatRoomUserUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     favArtists?: FavArtistUncheckedUpdateManyWithoutUserNestedInput
     likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
-    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    chatRooms?: ChatRoomUserUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type LikeUpsertWithWhereUniqueWithoutPostInput = {
-    where: LikeWhereUniqueInput
-    update: XOR<LikeUpdateWithoutPostInput, LikeUncheckedUpdateWithoutPostInput>
-    create: XOR<LikeCreateWithoutPostInput, LikeUncheckedCreateWithoutPostInput>
-  }
-
-  export type LikeUpdateWithWhereUniqueWithoutPostInput = {
-    where: LikeWhereUniqueInput
-    data: XOR<LikeUpdateWithoutPostInput, LikeUncheckedUpdateWithoutPostInput>
-  }
-
-  export type LikeUpdateManyWithWhereWithoutPostInput = {
-    where: LikeScalarWhereInput
-    data: XOR<LikeUpdateManyMutationInput, LikeUncheckedUpdateManyWithoutPostInput>
-  }
-
-  export type CommentUpsertWithWhereUniqueWithoutPostInput = {
-    where: CommentWhereUniqueInput
-    update: XOR<CommentUpdateWithoutPostInput, CommentUncheckedUpdateWithoutPostInput>
-    create: XOR<CommentCreateWithoutPostInput, CommentUncheckedCreateWithoutPostInput>
-  }
-
-  export type CommentUpdateWithWhereUniqueWithoutPostInput = {
-    where: CommentWhereUniqueInput
-    data: XOR<CommentUpdateWithoutPostInput, CommentUncheckedUpdateWithoutPostInput>
-  }
-
-  export type CommentUpdateManyWithWhereWithoutPostInput = {
-    where: CommentScalarWhereInput
-    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutPostInput>
+    createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type PostImageUpsertWithWhereUniqueWithoutPostInput = {
@@ -26200,53 +26828,15 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"PostImage"> | Date | string
   }
 
-  export type ArtistUpsertWithoutPostsInput = {
-    update: XOR<ArtistUpdateWithoutPostsInput, ArtistUncheckedUpdateWithoutPostsInput>
-    create: XOR<ArtistCreateWithoutPostsInput, ArtistUncheckedCreateWithoutPostsInput>
-    where?: ArtistWhereInput
-  }
-
-  export type ArtistUpdateToOneWithWhereWithoutPostsInput = {
-    where?: ArtistWhereInput
-    data: XOR<ArtistUpdateWithoutPostsInput, ArtistUncheckedUpdateWithoutPostsInput>
-  }
-
-  export type ArtistUpdateWithoutPostsInput = {
-    artistName?: StringFieldUpdateOperationsInput | string
-    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
-    biography?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    agency?: AgencyUpdateOneWithoutArtistsNestedInput
-    genres?: ArtistGenreUpdateManyWithoutArtistNestedInput
-    events?: ArtistEventUpdateManyWithoutArtistNestedInput
-    favByUsers?: FavArtistUpdateManyWithoutArtistNestedInput
-    songs?: SongUpdateManyWithoutArtistNestedInput
-  }
-
-  export type ArtistUncheckedUpdateWithoutPostsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    artistName?: StringFieldUpdateOperationsInput | string
-    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
-    biography?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    agencyId?: NullableIntFieldUpdateOperationsInput | number | null
-    genres?: ArtistGenreUncheckedUpdateManyWithoutArtistNestedInput
-    events?: ArtistEventUncheckedUpdateManyWithoutArtistNestedInput
-    favByUsers?: FavArtistUncheckedUpdateManyWithoutArtistNestedInput
-    songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
-  }
-
   export type PostCreateWithoutPostImagesInput = {
     title: string
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutPostsInput
-    likes?: LikeCreateNestedManyWithoutPostInput
     comments?: CommentCreateNestedManyWithoutPostInput
+    likes?: LikeCreateNestedManyWithoutPostInput
     artist?: ArtistCreateNestedOneWithoutPostsInput
+    user: UserCreateNestedOneWithoutPostsInput
   }
 
   export type PostUncheckedCreateWithoutPostImagesInput = {
@@ -26257,8 +26847,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     artistId?: number | null
-    likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
+    likes?: LikeUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PostCreateOrConnectWithoutPostImagesInput = {
@@ -26282,10 +26872,10 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutPostsNestedInput
-    likes?: LikeUpdateManyWithoutPostNestedInput
     comments?: CommentUpdateManyWithoutPostNestedInput
+    likes?: LikeUpdateManyWithoutPostNestedInput
     artist?: ArtistUpdateOneWithoutPostsNestedInput
+    user?: UserUpdateOneRequiredWithoutPostsNestedInput
   }
 
   export type PostUncheckedUpdateWithoutPostImagesInput = {
@@ -26296,54 +26886,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     artistId?: NullableIntFieldUpdateOperationsInput | number | null
-    likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
-  }
-
-  export type UserCreateWithoutLikesInput = {
-    username: string
-    email: string
-    telephone?: string | null
-    firstName: string
-    lastName: string
-    password: string
-    profileImage?: string | null
-    nationalId?: string | null
-    role?: $Enums.Role
-    gender?: $Enums.Gender
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    favArtists?: FavArtistCreateNestedManyWithoutUserInput
-    posts?: PostCreateNestedManyWithoutUserInput
-    comments?: CommentCreateNestedManyWithoutUserInput
-    messages?: MessageCreateNestedManyWithoutSenderInput
-    chatRooms?: ChatRoomUserCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutLikesInput = {
-    id?: number
-    username: string
-    email: string
-    telephone?: string | null
-    firstName: string
-    lastName: string
-    password: string
-    profileImage?: string | null
-    nationalId?: string | null
-    role?: $Enums.Role
-    gender?: $Enums.Gender
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutUserInput
-    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
-    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    chatRooms?: ChatRoomUserUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutLikesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutLikesInput, UserUncheckedCreateWithoutLikesInput>
+    likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type PostCreateWithoutLikesInput = {
@@ -26351,10 +26895,10 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutPostsInput
     comments?: CommentCreateNestedManyWithoutPostInput
-    postImages?: PostImageCreateNestedManyWithoutPostInput
     artist?: ArtistCreateNestedOneWithoutPostsInput
+    user: UserCreateNestedOneWithoutPostsInput
+    postImages?: PostImageCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateWithoutLikesInput = {
@@ -26372,6 +26916,90 @@ export namespace Prisma {
   export type PostCreateOrConnectWithoutLikesInput = {
     where: PostWhereUniqueInput
     create: XOR<PostCreateWithoutLikesInput, PostUncheckedCreateWithoutLikesInput>
+  }
+
+  export type UserCreateWithoutLikesInput = {
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdArtists?: ArtistCreateNestedManyWithoutCreatedByUserInput
+    chatRooms?: ChatRoomUserCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
+  }
+
+  export type UserUncheckedCreateWithoutLikesInput = {
+    id?: number
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdArtists?: ArtistUncheckedCreateNestedManyWithoutCreatedByUserInput
+    chatRooms?: ChatRoomUserUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
+  }
+
+  export type UserCreateOrConnectWithoutLikesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutLikesInput, UserUncheckedCreateWithoutLikesInput>
+  }
+
+  export type PostUpsertWithoutLikesInput = {
+    update: XOR<PostUpdateWithoutLikesInput, PostUncheckedUpdateWithoutLikesInput>
+    create: XOR<PostCreateWithoutLikesInput, PostUncheckedCreateWithoutLikesInput>
+    where?: PostWhereInput
+  }
+
+  export type PostUpdateToOneWithWhereWithoutLikesInput = {
+    where?: PostWhereInput
+    data: XOR<PostUpdateWithoutLikesInput, PostUncheckedUpdateWithoutLikesInput>
+  }
+
+  export type PostUpdateWithoutLikesInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    comments?: CommentUpdateManyWithoutPostNestedInput
+    artist?: ArtistUpdateOneWithoutPostsNestedInput
+    user?: UserUpdateOneRequiredWithoutPostsNestedInput
+    postImages?: PostImageUpdateManyWithoutPostNestedInput
+  }
+
+  export type PostUncheckedUpdateWithoutLikesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    userId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    artistId?: NullableIntFieldUpdateOperationsInput | number | null
+    comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
+    postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type UserUpsertWithoutLikesInput = {
@@ -26398,11 +27026,13 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    favArtists?: FavArtistUpdateManyWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutUserNestedInput
-    comments?: CommentUpdateManyWithoutUserNestedInput
-    messages?: MessageUpdateManyWithoutSenderNestedInput
+    createdArtists?: ArtistUpdateManyWithoutCreatedByUserNestedInput
     chatRooms?: ChatRoomUserUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    favArtists?: FavArtistUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLikesInput = {
@@ -26419,91 +27049,13 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    favArtists?: FavArtistUncheckedUpdateManyWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
-    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
-    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    createdArtists?: ArtistUncheckedUpdateManyWithoutCreatedByUserNestedInput
     chatRooms?: ChatRoomUserUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type PostUpsertWithoutLikesInput = {
-    update: XOR<PostUpdateWithoutLikesInput, PostUncheckedUpdateWithoutLikesInput>
-    create: XOR<PostCreateWithoutLikesInput, PostUncheckedCreateWithoutLikesInput>
-    where?: PostWhereInput
-  }
-
-  export type PostUpdateToOneWithWhereWithoutLikesInput = {
-    where?: PostWhereInput
-    data: XOR<PostUpdateWithoutLikesInput, PostUncheckedUpdateWithoutLikesInput>
-  }
-
-  export type PostUpdateWithoutLikesInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutPostsNestedInput
-    comments?: CommentUpdateManyWithoutPostNestedInput
-    postImages?: PostImageUpdateManyWithoutPostNestedInput
-    artist?: ArtistUpdateOneWithoutPostsNestedInput
-  }
-
-  export type PostUncheckedUpdateWithoutLikesInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    userId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    artistId?: NullableIntFieldUpdateOperationsInput | number | null
-    comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
-    postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
-  }
-
-  export type UserCreateWithoutCommentsInput = {
-    username: string
-    email: string
-    telephone?: string | null
-    firstName: string
-    lastName: string
-    password: string
-    profileImage?: string | null
-    nationalId?: string | null
-    role?: $Enums.Role
-    gender?: $Enums.Gender
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    favArtists?: FavArtistCreateNestedManyWithoutUserInput
-    posts?: PostCreateNestedManyWithoutUserInput
-    likes?: LikeCreateNestedManyWithoutUserInput
-    messages?: MessageCreateNestedManyWithoutSenderInput
-    chatRooms?: ChatRoomUserCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutCommentsInput = {
-    id?: number
-    username: string
-    email: string
-    telephone?: string | null
-    firstName: string
-    lastName: string
-    password: string
-    profileImage?: string | null
-    nationalId?: string | null
-    role?: $Enums.Role
-    gender?: $Enums.Gender
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutUserInput
-    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
-    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    chatRooms?: ChatRoomUserUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutCommentsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    favArtists?: FavArtistUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type PostCreateWithoutCommentsInput = {
@@ -26511,10 +27063,10 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutPostsInput
     likes?: LikeCreateNestedManyWithoutPostInput
-    postImages?: PostImageCreateNestedManyWithoutPostInput
     artist?: ArtistCreateNestedOneWithoutPostsInput
+    user: UserCreateNestedOneWithoutPostsInput
+    postImages?: PostImageCreateNestedManyWithoutPostInput
   }
 
   export type PostUncheckedCreateWithoutCommentsInput = {
@@ -26532,6 +27084,90 @@ export namespace Prisma {
   export type PostCreateOrConnectWithoutCommentsInput = {
     where: PostWhereUniqueInput
     create: XOR<PostCreateWithoutCommentsInput, PostUncheckedCreateWithoutCommentsInput>
+  }
+
+  export type UserCreateWithoutCommentsInput = {
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdArtists?: ArtistCreateNestedManyWithoutCreatedByUserInput
+    chatRooms?: ChatRoomUserCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCommentsInput = {
+    id?: number
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdArtists?: ArtistUncheckedCreateNestedManyWithoutCreatedByUserInput
+    chatRooms?: ChatRoomUserUncheckedCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCommentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+  }
+
+  export type PostUpsertWithoutCommentsInput = {
+    update: XOR<PostUpdateWithoutCommentsInput, PostUncheckedUpdateWithoutCommentsInput>
+    create: XOR<PostCreateWithoutCommentsInput, PostUncheckedCreateWithoutCommentsInput>
+    where?: PostWhereInput
+  }
+
+  export type PostUpdateToOneWithWhereWithoutCommentsInput = {
+    where?: PostWhereInput
+    data: XOR<PostUpdateWithoutCommentsInput, PostUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type PostUpdateWithoutCommentsInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    likes?: LikeUpdateManyWithoutPostNestedInput
+    artist?: ArtistUpdateOneWithoutPostsNestedInput
+    user?: UserUpdateOneRequiredWithoutPostsNestedInput
+    postImages?: PostImageUpdateManyWithoutPostNestedInput
+  }
+
+  export type PostUncheckedUpdateWithoutCommentsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    userId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    artistId?: NullableIntFieldUpdateOperationsInput | number | null
+    likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
+    postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type UserUpsertWithoutCommentsInput = {
@@ -26558,11 +27194,13 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdArtists?: ArtistUpdateManyWithoutCreatedByUserNestedInput
+    chatRooms?: ChatRoomUserUpdateManyWithoutUserNestedInput
     favArtists?: FavArtistUpdateManyWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutUserNestedInput
     likes?: LikeUpdateManyWithoutUserNestedInput
     messages?: MessageUpdateManyWithoutSenderNestedInput
-    chatRooms?: ChatRoomUserUpdateManyWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -26579,45 +27217,81 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdArtists?: ArtistUncheckedUpdateManyWithoutCreatedByUserNestedInput
+    chatRooms?: ChatRoomUserUncheckedUpdateManyWithoutUserNestedInput
     favArtists?: FavArtistUncheckedUpdateManyWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    chatRooms?: ChatRoomUserUncheckedUpdateManyWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
-  export type PostUpsertWithoutCommentsInput = {
-    update: XOR<PostUpdateWithoutCommentsInput, PostUncheckedUpdateWithoutCommentsInput>
-    create: XOR<PostCreateWithoutCommentsInput, PostUncheckedCreateWithoutCommentsInput>
-    where?: PostWhereInput
+  export type ArtistEventCreateWithoutEventInput = {
+    artist: ArtistCreateNestedOneWithoutEventsInput
   }
 
-  export type PostUpdateToOneWithWhereWithoutCommentsInput = {
-    where?: PostWhereInput
-    data: XOR<PostUpdateWithoutCommentsInput, PostUncheckedUpdateWithoutCommentsInput>
+  export type ArtistEventUncheckedCreateWithoutEventInput = {
+    artistId: number
   }
 
-  export type PostUpdateWithoutCommentsInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutPostsNestedInput
-    likes?: LikeUpdateManyWithoutPostNestedInput
-    postImages?: PostImageUpdateManyWithoutPostNestedInput
-    artist?: ArtistUpdateOneWithoutPostsNestedInput
+  export type ArtistEventCreateOrConnectWithoutEventInput = {
+    where: ArtistEventWhereUniqueInput
+    create: XOR<ArtistEventCreateWithoutEventInput, ArtistEventUncheckedCreateWithoutEventInput>
   }
 
-  export type PostUncheckedUpdateWithoutCommentsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    userId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    artistId?: NullableIntFieldUpdateOperationsInput | number | null
-    likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
-    postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
+  export type ArtistEventCreateManyEventInputEnvelope = {
+    data: ArtistEventCreateManyEventInput | ArtistEventCreateManyEventInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserCreateWithoutCreatedEventsInput = {
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdArtists?: ArtistCreateNestedManyWithoutCreatedByUserInput
+    chatRooms?: ChatRoomUserCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedEventsInput = {
+    id?: number
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdArtists?: ArtistUncheckedCreateNestedManyWithoutCreatedByUserInput
+    chatRooms?: ChatRoomUserUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedEventsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedEventsInput, UserUncheckedCreateWithoutCreatedEventsInput>
   }
 
   export type VenueCreateWithoutEventsInput = {
@@ -26640,22 +27314,76 @@ export namespace Prisma {
     create: XOR<VenueCreateWithoutEventsInput, VenueUncheckedCreateWithoutEventsInput>
   }
 
-  export type ArtistEventCreateWithoutEventInput = {
-    artist: ArtistCreateNestedOneWithoutEventsInput
-  }
-
-  export type ArtistEventUncheckedCreateWithoutEventInput = {
-    artistId: number
-  }
-
-  export type ArtistEventCreateOrConnectWithoutEventInput = {
+  export type ArtistEventUpsertWithWhereUniqueWithoutEventInput = {
     where: ArtistEventWhereUniqueInput
+    update: XOR<ArtistEventUpdateWithoutEventInput, ArtistEventUncheckedUpdateWithoutEventInput>
     create: XOR<ArtistEventCreateWithoutEventInput, ArtistEventUncheckedCreateWithoutEventInput>
   }
 
-  export type ArtistEventCreateManyEventInputEnvelope = {
-    data: ArtistEventCreateManyEventInput | ArtistEventCreateManyEventInput[]
-    skipDuplicates?: boolean
+  export type ArtistEventUpdateWithWhereUniqueWithoutEventInput = {
+    where: ArtistEventWhereUniqueInput
+    data: XOR<ArtistEventUpdateWithoutEventInput, ArtistEventUncheckedUpdateWithoutEventInput>
+  }
+
+  export type ArtistEventUpdateManyWithWhereWithoutEventInput = {
+    where: ArtistEventScalarWhereInput
+    data: XOR<ArtistEventUpdateManyMutationInput, ArtistEventUncheckedUpdateManyWithoutEventInput>
+  }
+
+  export type UserUpsertWithoutCreatedEventsInput = {
+    update: XOR<UserUpdateWithoutCreatedEventsInput, UserUncheckedUpdateWithoutCreatedEventsInput>
+    create: XOR<UserCreateWithoutCreatedEventsInput, UserUncheckedCreateWithoutCreatedEventsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedEventsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedEventsInput, UserUncheckedUpdateWithoutCreatedEventsInput>
+  }
+
+  export type UserUpdateWithoutCreatedEventsInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdArtists?: ArtistUpdateManyWithoutCreatedByUserNestedInput
+    chatRooms?: ChatRoomUserUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    favArtists?: FavArtistUpdateManyWithoutUserNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedEventsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdArtists?: ArtistUncheckedUpdateManyWithoutCreatedByUserNestedInput
+    chatRooms?: ChatRoomUserUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    favArtists?: FavArtistUncheckedUpdateManyWithoutUserNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type VenueUpsertWithoutEventsInput = {
@@ -26684,22 +27412,6 @@ export namespace Prisma {
     lng?: FloatFieldUpdateOperationsInput | number
   }
 
-  export type ArtistEventUpsertWithWhereUniqueWithoutEventInput = {
-    where: ArtistEventWhereUniqueInput
-    update: XOR<ArtistEventUpdateWithoutEventInput, ArtistEventUncheckedUpdateWithoutEventInput>
-    create: XOR<ArtistEventCreateWithoutEventInput, ArtistEventUncheckedCreateWithoutEventInput>
-  }
-
-  export type ArtistEventUpdateWithWhereUniqueWithoutEventInput = {
-    where: ArtistEventWhereUniqueInput
-    data: XOR<ArtistEventUpdateWithoutEventInput, ArtistEventUncheckedUpdateWithoutEventInput>
-  }
-
-  export type ArtistEventUpdateManyWithWhereWithoutEventInput = {
-    where: ArtistEventScalarWhereInput
-    data: XOR<ArtistEventUpdateManyMutationInput, ArtistEventUncheckedUpdateManyWithoutEventInput>
-  }
-
   export type ArtistCreateWithoutEventsInput = {
     artistName: string
     profileImage?: string | null
@@ -26707,10 +27419,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     agency?: AgencyCreateNestedOneWithoutArtistsInput
+    createdByUser?: UserCreateNestedOneWithoutCreatedArtistsInput
     genres?: ArtistGenreCreateNestedManyWithoutArtistInput
     favByUsers?: FavArtistCreateNestedManyWithoutArtistInput
-    songs?: SongCreateNestedManyWithoutArtistInput
     posts?: PostCreateNestedManyWithoutArtistInput
+    songs?: SongCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistUncheckedCreateWithoutEventsInput = {
@@ -26721,10 +27434,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     agencyId?: number | null
+    createdByUserId?: number | null
     genres?: ArtistGenreUncheckedCreateNestedManyWithoutArtistInput
     favByUsers?: FavArtistUncheckedCreateNestedManyWithoutArtistInput
-    songs?: SongUncheckedCreateNestedManyWithoutArtistInput
     posts?: PostUncheckedCreateNestedManyWithoutArtistInput
+    songs?: SongUncheckedCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistCreateOrConnectWithoutEventsInput = {
@@ -26742,6 +27456,7 @@ export namespace Prisma {
     endTime?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdByUser?: UserCreateNestedOneWithoutCreatedEventsInput
     venue: VenueCreateNestedOneWithoutEventsInput
   }
 
@@ -26757,6 +27472,7 @@ export namespace Prisma {
     venueId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdByUserId?: number | null
   }
 
   export type EventCreateOrConnectWithoutArtistsInput = {
@@ -26782,10 +27498,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agency?: AgencyUpdateOneWithoutArtistsNestedInput
+    createdByUser?: UserUpdateOneWithoutCreatedArtistsNestedInput
     genres?: ArtistGenreUpdateManyWithoutArtistNestedInput
     favByUsers?: FavArtistUpdateManyWithoutArtistNestedInput
-    songs?: SongUpdateManyWithoutArtistNestedInput
     posts?: PostUpdateManyWithoutArtistNestedInput
+    songs?: SongUpdateManyWithoutArtistNestedInput
   }
 
   export type ArtistUncheckedUpdateWithoutEventsInput = {
@@ -26796,10 +27513,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agencyId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
     genres?: ArtistGenreUncheckedUpdateManyWithoutArtistNestedInput
     favByUsers?: FavArtistUncheckedUpdateManyWithoutArtistNestedInput
-    songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
     posts?: PostUncheckedUpdateManyWithoutArtistNestedInput
+    songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
   }
 
   export type EventUpsertWithoutArtistsInput = {
@@ -26823,6 +27541,7 @@ export namespace Prisma {
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdByUser?: UserUpdateOneWithoutCreatedEventsNestedInput
     venue?: VenueUpdateOneRequiredWithoutEventsNestedInput
   }
 
@@ -26838,6 +27557,7 @@ export namespace Prisma {
     venueId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type EventCreateWithoutVenueInput = {
@@ -26851,6 +27571,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     artists?: ArtistEventCreateNestedManyWithoutEventInput
+    createdByUser?: UserCreateNestedOneWithoutCreatedEventsInput
   }
 
   export type EventUncheckedCreateWithoutVenueInput = {
@@ -26864,6 +27585,7 @@ export namespace Prisma {
     endTime?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdByUserId?: number | null
     artists?: ArtistEventUncheckedCreateNestedManyWithoutEventInput
   }
 
@@ -26891,23 +27613,6 @@ export namespace Prisma {
   export type EventUpdateManyWithWhereWithoutVenueInput = {
     where: EventScalarWhereInput
     data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyWithoutVenueInput>
-  }
-
-  export type EventScalarWhereInput = {
-    AND?: EventScalarWhereInput | EventScalarWhereInput[]
-    OR?: EventScalarWhereInput[]
-    NOT?: EventScalarWhereInput | EventScalarWhereInput[]
-    id?: IntFilter<"Event"> | number
-    eventName?: StringFilter<"Event"> | string
-    description?: StringNullableFilter<"Event"> | string | null
-    posterImage?: StringNullableFilter<"Event"> | string | null
-    status?: EnumEventStatusFilter<"Event"> | $Enums.EventStatus
-    ticketLink?: StringNullableFilter<"Event"> | string | null
-    startTime?: DateTimeFilter<"Event"> | Date | string
-    endTime?: DateTimeNullableFilter<"Event"> | Date | string | null
-    venueId?: IntFilter<"Event"> | number
-    createdAt?: DateTimeFilter<"Event"> | Date | string
-    updatedAt?: DateTimeFilter<"Event"> | Date | string
   }
 
   export type ChatRoomUserCreateWithoutChatRoomInput = {
@@ -26987,52 +27692,6 @@ export namespace Prisma {
     data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutChatRoomInput>
   }
 
-  export type UserCreateWithoutChatRoomsInput = {
-    username: string
-    email: string
-    telephone?: string | null
-    firstName: string
-    lastName: string
-    password: string
-    profileImage?: string | null
-    nationalId?: string | null
-    role?: $Enums.Role
-    gender?: $Enums.Gender
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    favArtists?: FavArtistCreateNestedManyWithoutUserInput
-    posts?: PostCreateNestedManyWithoutUserInput
-    likes?: LikeCreateNestedManyWithoutUserInput
-    comments?: CommentCreateNestedManyWithoutUserInput
-    messages?: MessageCreateNestedManyWithoutSenderInput
-  }
-
-  export type UserUncheckedCreateWithoutChatRoomsInput = {
-    id?: number
-    username: string
-    email: string
-    telephone?: string | null
-    firstName: string
-    lastName: string
-    password: string
-    profileImage?: string | null
-    nationalId?: string | null
-    role?: $Enums.Role
-    gender?: $Enums.Gender
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutUserInput
-    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
-    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
-    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
-  }
-
-  export type UserCreateOrConnectWithoutChatRoomsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutChatRoomsInput, UserUncheckedCreateWithoutChatRoomsInput>
-  }
-
   export type ChatRoomCreateWithoutUsersInput = {
     isGroup?: boolean
     createdAt?: Date | string
@@ -27053,56 +27712,54 @@ export namespace Prisma {
     create: XOR<ChatRoomCreateWithoutUsersInput, ChatRoomUncheckedCreateWithoutUsersInput>
   }
 
-  export type UserUpsertWithoutChatRoomsInput = {
-    update: XOR<UserUpdateWithoutChatRoomsInput, UserUncheckedUpdateWithoutChatRoomsInput>
+  export type UserCreateWithoutChatRoomsInput = {
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdArtists?: ArtistCreateNestedManyWithoutCreatedByUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
+  }
+
+  export type UserUncheckedCreateWithoutChatRoomsInput = {
+    id?: number
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdArtists?: ArtistUncheckedCreateNestedManyWithoutCreatedByUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
+  }
+
+  export type UserCreateOrConnectWithoutChatRoomsInput = {
+    where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutChatRoomsInput, UserUncheckedCreateWithoutChatRoomsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutChatRoomsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutChatRoomsInput, UserUncheckedUpdateWithoutChatRoomsInput>
-  }
-
-  export type UserUpdateWithoutChatRoomsInput = {
-    username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    telephone?: NullableStringFieldUpdateOperationsInput | string | null
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
-    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    favArtists?: FavArtistUpdateManyWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutUserNestedInput
-    likes?: LikeUpdateManyWithoutUserNestedInput
-    comments?: CommentUpdateManyWithoutUserNestedInput
-    messages?: MessageUpdateManyWithoutSenderNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutChatRoomsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    telephone?: NullableStringFieldUpdateOperationsInput | string | null
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
-    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    favArtists?: FavArtistUncheckedUpdateManyWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
-    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
-    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
-    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
   }
 
   export type ChatRoomUpsertWithoutUsersInput = {
@@ -27131,50 +27788,60 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutChatRoomNestedInput
   }
 
-  export type UserCreateWithoutMessagesInput = {
-    username: string
-    email: string
-    telephone?: string | null
-    firstName: string
-    lastName: string
-    password: string
-    profileImage?: string | null
-    nationalId?: string | null
-    role?: $Enums.Role
-    gender?: $Enums.Gender
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    favArtists?: FavArtistCreateNestedManyWithoutUserInput
-    posts?: PostCreateNestedManyWithoutUserInput
-    likes?: LikeCreateNestedManyWithoutUserInput
-    comments?: CommentCreateNestedManyWithoutUserInput
-    chatRooms?: ChatRoomUserCreateNestedManyWithoutUserInput
+  export type UserUpsertWithoutChatRoomsInput = {
+    update: XOR<UserUpdateWithoutChatRoomsInput, UserUncheckedUpdateWithoutChatRoomsInput>
+    create: XOR<UserCreateWithoutChatRoomsInput, UserUncheckedCreateWithoutChatRoomsInput>
+    where?: UserWhereInput
   }
 
-  export type UserUncheckedCreateWithoutMessagesInput = {
-    id?: number
-    username: string
-    email: string
-    telephone?: string | null
-    firstName: string
-    lastName: string
-    password: string
-    profileImage?: string | null
-    nationalId?: string | null
-    role?: $Enums.Role
-    gender?: $Enums.Gender
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutUserInput
-    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
-    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
-    chatRooms?: ChatRoomUserUncheckedCreateNestedManyWithoutUserInput
+  export type UserUpdateToOneWithWhereWithoutChatRoomsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutChatRoomsInput, UserUncheckedUpdateWithoutChatRoomsInput>
   }
 
-  export type UserCreateOrConnectWithoutMessagesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutMessagesInput, UserUncheckedCreateWithoutMessagesInput>
+  export type UserUpdateWithoutChatRoomsInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdArtists?: ArtistUpdateManyWithoutCreatedByUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    favArtists?: FavArtistUpdateManyWithoutUserNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutChatRoomsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdArtists?: ArtistUncheckedUpdateManyWithoutCreatedByUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    favArtists?: FavArtistUncheckedUpdateManyWithoutUserNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
   }
 
   export type ChatRoomCreateWithoutMessagesInput = {
@@ -27197,56 +27864,54 @@ export namespace Prisma {
     create: XOR<ChatRoomCreateWithoutMessagesInput, ChatRoomUncheckedCreateWithoutMessagesInput>
   }
 
-  export type UserUpsertWithoutMessagesInput = {
-    update: XOR<UserUpdateWithoutMessagesInput, UserUncheckedUpdateWithoutMessagesInput>
+  export type UserCreateWithoutMessagesInput = {
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdArtists?: ArtistCreateNestedManyWithoutCreatedByUserInput
+    chatRooms?: ChatRoomUserCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
+  }
+
+  export type UserUncheckedCreateWithoutMessagesInput = {
+    id?: number
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdArtists?: ArtistUncheckedCreateNestedManyWithoutCreatedByUserInput
+    chatRooms?: ChatRoomUserUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
+  }
+
+  export type UserCreateOrConnectWithoutMessagesInput = {
+    where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutMessagesInput, UserUncheckedCreateWithoutMessagesInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutMessagesInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutMessagesInput, UserUncheckedUpdateWithoutMessagesInput>
-  }
-
-  export type UserUpdateWithoutMessagesInput = {
-    username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    telephone?: NullableStringFieldUpdateOperationsInput | string | null
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
-    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    favArtists?: FavArtistUpdateManyWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutUserNestedInput
-    likes?: LikeUpdateManyWithoutUserNestedInput
-    comments?: CommentUpdateManyWithoutUserNestedInput
-    chatRooms?: ChatRoomUserUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutMessagesInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    telephone?: NullableStringFieldUpdateOperationsInput | string | null
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
-    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    favArtists?: FavArtistUncheckedUpdateManyWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
-    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
-    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
-    chatRooms?: ChatRoomUserUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ChatRoomUpsertWithoutMessagesInput = {
@@ -27275,6 +27940,62 @@ export namespace Prisma {
     users?: ChatRoomUserUncheckedUpdateManyWithoutChatRoomNestedInput
   }
 
+  export type UserUpsertWithoutMessagesInput = {
+    update: XOR<UserUpdateWithoutMessagesInput, UserUncheckedUpdateWithoutMessagesInput>
+    create: XOR<UserCreateWithoutMessagesInput, UserUncheckedCreateWithoutMessagesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMessagesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMessagesInput, UserUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type UserUpdateWithoutMessagesInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdArtists?: ArtistUpdateManyWithoutCreatedByUserNestedInput
+    chatRooms?: ChatRoomUserUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    favArtists?: FavArtistUpdateManyWithoutUserNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMessagesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdArtists?: ArtistUncheckedUpdateManyWithoutCreatedByUserNestedInput
+    chatRooms?: ChatRoomUserUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    favArtists?: FavArtistUncheckedUpdateManyWithoutUserNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  }
+
   export type ArtistCreateWithoutSongsInput = {
     artistName: string
     profileImage?: string | null
@@ -27282,8 +28003,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     agency?: AgencyCreateNestedOneWithoutArtistsInput
-    genres?: ArtistGenreCreateNestedManyWithoutArtistInput
+    createdByUser?: UserCreateNestedOneWithoutCreatedArtistsInput
     events?: ArtistEventCreateNestedManyWithoutArtistInput
+    genres?: ArtistGenreCreateNestedManyWithoutArtistInput
     favByUsers?: FavArtistCreateNestedManyWithoutArtistInput
     posts?: PostCreateNestedManyWithoutArtistInput
   }
@@ -27296,8 +28018,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     agencyId?: number | null
-    genres?: ArtistGenreUncheckedCreateNestedManyWithoutArtistInput
+    createdByUserId?: number | null
     events?: ArtistEventUncheckedCreateNestedManyWithoutArtistInput
+    genres?: ArtistGenreUncheckedCreateNestedManyWithoutArtistInput
     favByUsers?: FavArtistUncheckedCreateNestedManyWithoutArtistInput
     posts?: PostUncheckedCreateNestedManyWithoutArtistInput
   }
@@ -27325,8 +28048,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agency?: AgencyUpdateOneWithoutArtistsNestedInput
-    genres?: ArtistGenreUpdateManyWithoutArtistNestedInput
+    createdByUser?: UserUpdateOneWithoutCreatedArtistsNestedInput
     events?: ArtistEventUpdateManyWithoutArtistNestedInput
+    genres?: ArtistGenreUpdateManyWithoutArtistNestedInput
     favByUsers?: FavArtistUpdateManyWithoutArtistNestedInput
     posts?: PostUpdateManyWithoutArtistNestedInput
   }
@@ -27339,15 +28063,54 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agencyId?: NullableIntFieldUpdateOperationsInput | number | null
-    genres?: ArtistGenreUncheckedUpdateManyWithoutArtistNestedInput
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
     events?: ArtistEventUncheckedUpdateManyWithoutArtistNestedInput
+    genres?: ArtistGenreUncheckedUpdateManyWithoutArtistNestedInput
     favByUsers?: FavArtistUncheckedUpdateManyWithoutArtistNestedInput
     posts?: PostUncheckedUpdateManyWithoutArtistNestedInput
+  }
+
+  export type ArtistCreateManyCreatedByUserInput = {
+    id?: number
+    artistName: string
+    profileImage?: string | null
+    biography?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    agencyId?: number | null
+  }
+
+  export type ChatRoomUserCreateManyUserInput = {
+    chatRoomId: number
+    joinedAt?: Date | string
+  }
+
+  export type CommentCreateManyUserInput = {
+    id?: number
+    content: string
+    image?: string | null
+    postId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type FavArtistCreateManyUserInput = {
     id?: number
     artistId: number
+    createdAt?: Date | string
+  }
+
+  export type LikeCreateManyUserInput = {
+    id?: number
+    postId: number
+    createdAt?: Date | string
+  }
+
+  export type MessageCreateManySenderInput = {
+    id?: number
+    content: string
+    chatRoomId: number
+    isRead?: boolean
     createdAt?: Date | string
   }
 
@@ -27360,98 +28123,72 @@ export namespace Prisma {
     artistId?: number | null
   }
 
-  export type LikeCreateManyUserInput = {
+  export type EventCreateManyCreatedByUserInput = {
     id?: number
-    postId: number
-    createdAt?: Date | string
-  }
-
-  export type CommentCreateManyUserInput = {
-    id?: number
-    content: string
-    image?: string | null
-    postId: number
+    eventName: string
+    description?: string | null
+    posterImage?: string | null
+    status?: $Enums.EventStatus
+    ticketLink?: string | null
+    startTime: Date | string
+    endTime?: Date | string | null
+    venueId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type MessageCreateManySenderInput = {
-    id?: number
-    content: string
-    chatRoomId: number
-    isRead?: boolean
-    createdAt?: Date | string
-  }
-
-  export type ChatRoomUserCreateManyUserInput = {
-    chatRoomId: number
-    joinedAt?: Date | string
-  }
-
-  export type FavArtistUpdateWithoutUserInput = {
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    artist?: ArtistUpdateOneRequiredWithoutFavByUsersNestedInput
-  }
-
-  export type FavArtistUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    artistId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type FavArtistUncheckedUpdateManyWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    artistId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PostUpdateWithoutUserInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
+  export type ArtistUpdateWithoutCreatedByUserInput = {
+    artistName?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    likes?: LikeUpdateManyWithoutPostNestedInput
-    comments?: CommentUpdateManyWithoutPostNestedInput
-    postImages?: PostImageUpdateManyWithoutPostNestedInput
-    artist?: ArtistUpdateOneWithoutPostsNestedInput
+    agency?: AgencyUpdateOneWithoutArtistsNestedInput
+    events?: ArtistEventUpdateManyWithoutArtistNestedInput
+    genres?: ArtistGenreUpdateManyWithoutArtistNestedInput
+    favByUsers?: FavArtistUpdateManyWithoutArtistNestedInput
+    posts?: PostUpdateManyWithoutArtistNestedInput
+    songs?: SongUpdateManyWithoutArtistNestedInput
   }
 
-  export type PostUncheckedUpdateWithoutUserInput = {
+  export type ArtistUncheckedUpdateWithoutCreatedByUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
+    artistName?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    artistId?: NullableIntFieldUpdateOperationsInput | number | null
-    likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
-    comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
-    postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
+    agencyId?: NullableIntFieldUpdateOperationsInput | number | null
+    events?: ArtistEventUncheckedUpdateManyWithoutArtistNestedInput
+    genres?: ArtistGenreUncheckedUpdateManyWithoutArtistNestedInput
+    favByUsers?: FavArtistUncheckedUpdateManyWithoutArtistNestedInput
+    posts?: PostUncheckedUpdateManyWithoutArtistNestedInput
+    songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
   }
 
-  export type PostUncheckedUpdateManyWithoutUserInput = {
+  export type ArtistUncheckedUpdateManyWithoutCreatedByUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
+    artistName?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    artistId?: NullableIntFieldUpdateOperationsInput | number | null
+    agencyId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
-  export type LikeUpdateWithoutUserInput = {
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    post?: PostUpdateOneRequiredWithoutLikesNestedInput
+  export type ChatRoomUserUpdateWithoutUserInput = {
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chatRoom?: ChatRoomUpdateOneRequiredWithoutUsersNestedInput
   }
 
-  export type LikeUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    postId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type ChatRoomUserUncheckedUpdateWithoutUserInput = {
+    chatRoomId?: IntFieldUpdateOperationsInput | number
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type LikeUncheckedUpdateManyWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    postId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type ChatRoomUserUncheckedUpdateManyWithoutUserInput = {
+    chatRoomId?: IntFieldUpdateOperationsInput | number
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CommentUpdateWithoutUserInput = {
@@ -27480,6 +28217,40 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type FavArtistUpdateWithoutUserInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    artist?: ArtistUpdateOneRequiredWithoutFavByUsersNestedInput
+  }
+
+  export type FavArtistUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    artistId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FavArtistUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    artistId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LikeUpdateWithoutUserInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    post?: PostUpdateOneRequiredWithoutLikesNestedInput
+  }
+
+  export type LikeUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    postId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LikeUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    postId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type MessageUpdateWithoutSenderInput = {
     content?: StringFieldUpdateOperationsInput | string
     isRead?: BoolFieldUpdateOperationsInput | boolean
@@ -27503,33 +28274,102 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ChatRoomUserUpdateWithoutUserInput = {
-    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    chatRoom?: ChatRoomUpdateOneRequiredWithoutUsersNestedInput
+  export type PostUpdateWithoutUserInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    comments?: CommentUpdateManyWithoutPostNestedInput
+    likes?: LikeUpdateManyWithoutPostNestedInput
+    artist?: ArtistUpdateOneWithoutPostsNestedInput
+    postImages?: PostImageUpdateManyWithoutPostNestedInput
   }
 
-  export type ChatRoomUserUncheckedUpdateWithoutUserInput = {
-    chatRoomId?: IntFieldUpdateOperationsInput | number
-    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type PostUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    artistId?: NullableIntFieldUpdateOperationsInput | number | null
+    comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
+    postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
   }
 
-  export type ChatRoomUserUncheckedUpdateManyWithoutUserInput = {
-    chatRoomId?: IntFieldUpdateOperationsInput | number
-    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type PostUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    artistId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
-  export type ArtistGenreCreateManyArtistInput = {
-    genreId: number
+  export type EventUpdateWithoutCreatedByUserInput = {
+    eventName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    posterImage?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    ticketLink?: NullableStringFieldUpdateOperationsInput | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    artists?: ArtistEventUpdateManyWithoutEventNestedInput
+    venue?: VenueUpdateOneRequiredWithoutEventsNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutCreatedByUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    eventName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    posterImage?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    ticketLink?: NullableStringFieldUpdateOperationsInput | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    venueId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    artists?: ArtistEventUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateManyWithoutCreatedByUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    eventName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    posterImage?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    ticketLink?: NullableStringFieldUpdateOperationsInput | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    venueId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ArtistEventCreateManyArtistInput = {
     eventId: number
   }
 
+  export type ArtistGenreCreateManyArtistInput = {
+    genreId: number
+  }
+
   export type FavArtistCreateManyArtistInput = {
     id?: number
     userId: number
     createdAt?: Date | string
+  }
+
+  export type PostCreateManyArtistInput = {
+    id?: number
+    title: string
+    content: string
+    userId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SongCreateManyArtistInput = {
@@ -27544,13 +28384,16 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type PostCreateManyArtistInput = {
-    id?: number
-    title: string
-    content: string
-    userId: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+  export type ArtistEventUpdateWithoutArtistInput = {
+    event?: EventUpdateOneRequiredWithoutArtistsNestedInput
+  }
+
+  export type ArtistEventUncheckedUpdateWithoutArtistInput = {
+    eventId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ArtistEventUncheckedUpdateManyWithoutArtistInput = {
+    eventId?: IntFieldUpdateOperationsInput | number
   }
 
   export type ArtistGenreUpdateWithoutArtistInput = {
@@ -27563,18 +28406,6 @@ export namespace Prisma {
 
   export type ArtistGenreUncheckedUpdateManyWithoutArtistInput = {
     genreId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type ArtistEventUpdateWithoutArtistInput = {
-    event?: EventUpdateOneRequiredWithoutArtistsNestedInput
-  }
-
-  export type ArtistEventUncheckedUpdateWithoutArtistInput = {
-    eventId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type ArtistEventUncheckedUpdateManyWithoutArtistInput = {
-    eventId?: IntFieldUpdateOperationsInput | number
   }
 
   export type FavArtistUpdateWithoutArtistInput = {
@@ -27592,6 +28423,38 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PostUpdateWithoutArtistInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    comments?: CommentUpdateManyWithoutPostNestedInput
+    likes?: LikeUpdateManyWithoutPostNestedInput
+    user?: UserUpdateOneRequiredWithoutPostsNestedInput
+    postImages?: PostImageUpdateManyWithoutPostNestedInput
+  }
+
+  export type PostUncheckedUpdateWithoutArtistInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    userId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
+    postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
+  }
+
+  export type PostUncheckedUpdateManyWithoutArtistInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    userId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SongUpdateWithoutArtistInput = {
@@ -27629,38 +28492,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PostUpdateWithoutArtistInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutPostsNestedInput
-    likes?: LikeUpdateManyWithoutPostNestedInput
-    comments?: CommentUpdateManyWithoutPostNestedInput
-    postImages?: PostImageUpdateManyWithoutPostNestedInput
-  }
-
-  export type PostUncheckedUpdateWithoutArtistInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    userId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
-    comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
-    postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
-  }
-
-  export type PostUncheckedUpdateManyWithoutArtistInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    userId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type ArtistCreateManyAgencyInput = {
     id?: number
     artistName: string
@@ -27668,6 +28499,7 @@ export namespace Prisma {
     biography?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdByUserId?: number | null
   }
 
   export type ArtistUpdateWithoutAgencyInput = {
@@ -27676,11 +28508,12 @@ export namespace Prisma {
     biography?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    genres?: ArtistGenreUpdateManyWithoutArtistNestedInput
+    createdByUser?: UserUpdateOneWithoutCreatedArtistsNestedInput
     events?: ArtistEventUpdateManyWithoutArtistNestedInput
+    genres?: ArtistGenreUpdateManyWithoutArtistNestedInput
     favByUsers?: FavArtistUpdateManyWithoutArtistNestedInput
-    songs?: SongUpdateManyWithoutArtistNestedInput
     posts?: PostUpdateManyWithoutArtistNestedInput
+    songs?: SongUpdateManyWithoutArtistNestedInput
   }
 
   export type ArtistUncheckedUpdateWithoutAgencyInput = {
@@ -27690,11 +28523,12 @@ export namespace Prisma {
     biography?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    genres?: ArtistGenreUncheckedUpdateManyWithoutArtistNestedInput
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
     events?: ArtistEventUncheckedUpdateManyWithoutArtistNestedInput
+    genres?: ArtistGenreUncheckedUpdateManyWithoutArtistNestedInput
     favByUsers?: FavArtistUncheckedUpdateManyWithoutArtistNestedInput
-    songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
     posts?: PostUncheckedUpdateManyWithoutArtistNestedInput
+    songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
   }
 
   export type ArtistUncheckedUpdateManyWithoutAgencyInput = {
@@ -27704,6 +28538,7 @@ export namespace Prisma {
     biography?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ArtistGenreCreateManyGenreInput = {
@@ -27722,12 +28557,6 @@ export namespace Prisma {
     artistId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type LikeCreateManyPostInput = {
-    id?: number
-    userId: number
-    createdAt?: Date | string
-  }
-
   export type CommentCreateManyPostInput = {
     id?: number
     content: string
@@ -27737,27 +28566,16 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type LikeCreateManyPostInput = {
+    id?: number
+    userId: number
+    createdAt?: Date | string
+  }
+
   export type PostImageCreateManyPostInput = {
     id?: number
     url?: string | null
     createdAt?: Date | string
-  }
-
-  export type LikeUpdateWithoutPostInput = {
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutLikesNestedInput
-  }
-
-  export type LikeUncheckedUpdateWithoutPostInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    userId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type LikeUncheckedUpdateManyWithoutPostInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    userId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CommentUpdateWithoutPostInput = {
@@ -27784,6 +28602,23 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LikeUpdateWithoutPostInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutLikesNestedInput
+  }
+
+  export type LikeUncheckedUpdateWithoutPostInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LikeUncheckedUpdateManyWithoutPostInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PostImageUpdateWithoutPostInput = {
@@ -27830,6 +28665,7 @@ export namespace Prisma {
     endTime?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdByUserId?: number | null
   }
 
   export type EventUpdateWithoutVenueInput = {
@@ -27843,6 +28679,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     artists?: ArtistEventUpdateManyWithoutEventNestedInput
+    createdByUser?: UserUpdateOneWithoutCreatedEventsNestedInput
   }
 
   export type EventUncheckedUpdateWithoutVenueInput = {
@@ -27856,6 +28693,7 @@ export namespace Prisma {
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
     artists?: ArtistEventUncheckedUpdateManyWithoutEventNestedInput
   }
 
@@ -27870,6 +28708,7 @@ export namespace Prisma {
     endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ChatRoomUserCreateManyChatRoomInput = {
