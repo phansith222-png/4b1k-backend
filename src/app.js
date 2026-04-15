@@ -8,9 +8,15 @@ import postsRouter from './routes/posts.route.js';
 import artistsRouter from './routes/artist.route.js';
 import eventsRouter from './routes/events.route.js';
 import adminRouter from './routes/admin.route.js';
-
+import cors from 'cors';
 
 const app = express()
+
+app.use(cors({
+    origin: ["http://localhost:5173"],
+    methods:["GET","POST","PUT","PATCH","DELETE"],
+    credentials:true
+}))
 
 app.use(express.json())
 
