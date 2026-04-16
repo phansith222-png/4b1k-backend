@@ -13,13 +13,16 @@ export async function getAllPostController (req,res,next) {
 
 
 export async function getPostController (req,res,next) {
-    const id = Number(req.params.id)
+    const {postId} = req.params.id
     try {
-        const foundPost = await getAPost(id)
+        const getPost = await getAPost(Number(postId))
         if(!foundPost) {
             return next (createHttpError[404]('Post Not Found'))
         }
-        res.status(200).json({foundPost})
+        res.status(200).json({
+            message : 'get post successfully',
+            post : getPost
+        })
 
     }catch(error) {
         next(error)
@@ -41,12 +44,13 @@ export async function createPostController (req,res,next) {
 export async function deletePostController (req,res,next) {
     
     try {
-        const id = Number(req.params.id)
+        const {postId} = req.params
         const userId = req.user.id
-        const deletedPost = await deletePost(id,userId)
+        const deletedPost = await deletePost(Number(postId),userId)
 
         res.status(200).json({
-            message : "deleted success"
+            message : "deleted success",
+            post : deletedPost
         })
     }catch(error) {
         next(error)
@@ -56,12 +60,12 @@ export async function deletePostController (req,res,next) {
 export async function editPostController (req,res,next) {
 
     try {
-        const id = Number(req.params.id)
+        const {postId} = req.params
         const userId = req.user.id
         const { title,content,postImages,artistId} = req.body
 
         const updatePost = await editPost(
-            id,
+            Number(postId),
             userId,
             title,
             content,
