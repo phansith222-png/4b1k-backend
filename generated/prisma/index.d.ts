@@ -98,6 +98,16 @@ export type Message = $Result.DefaultSelection<Prisma.$MessagePayload>
  * 
  */
 export type Song = $Result.DefaultSelection<Prisma.$SongPayload>
+/**
+ * Model News
+ * 
+ */
+export type News = $Result.DefaultSelection<Prisma.$NewsPayload>
+/**
+ * Model NewsArtist
+ * 
+ */
+export type NewsArtist = $Result.DefaultSelection<Prisma.$NewsArtistPayload>
 
 /**
  * Enums
@@ -433,6 +443,26 @@ export class PrismaClient<
     * ```
     */
   get song(): Prisma.SongDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.news`: Exposes CRUD operations for the **News** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more News
+    * const news = await prisma.news.findMany()
+    * ```
+    */
+  get news(): Prisma.NewsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.newsArtist`: Exposes CRUD operations for the **NewsArtist** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more NewsArtists
+    * const newsArtists = await prisma.newsArtist.findMany()
+    * ```
+    */
+  get newsArtist(): Prisma.NewsArtistDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -883,7 +913,9 @@ export namespace Prisma {
     ChatRoom: 'ChatRoom',
     ChatRoomUser: 'ChatRoomUser',
     Message: 'Message',
-    Song: 'Song'
+    Song: 'Song',
+    News: 'News',
+    NewsArtist: 'NewsArtist'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -899,7 +931,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "artist" | "agency" | "genre" | "artistGenre" | "favArtist" | "post" | "postImage" | "like" | "comment" | "event" | "artistEvent" | "venue" | "chatRoom" | "chatRoomUser" | "message" | "song"
+      modelProps: "user" | "artist" | "agency" | "genre" | "artistGenre" | "favArtist" | "post" | "postImage" | "like" | "comment" | "event" | "artistEvent" | "venue" | "chatRoom" | "chatRoomUser" | "message" | "song" | "news" | "newsArtist"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2025,6 +2057,138 @@ export namespace Prisma {
           }
         }
       }
+      News: {
+        payload: Prisma.$NewsPayload<ExtArgs>
+        fields: Prisma.NewsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NewsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NewsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsPayload>
+          }
+          findFirst: {
+            args: Prisma.NewsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NewsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsPayload>
+          }
+          findMany: {
+            args: Prisma.NewsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsPayload>[]
+          }
+          create: {
+            args: Prisma.NewsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsPayload>
+          }
+          createMany: {
+            args: Prisma.NewsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.NewsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsPayload>
+          }
+          update: {
+            args: Prisma.NewsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsPayload>
+          }
+          deleteMany: {
+            args: Prisma.NewsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NewsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.NewsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsPayload>
+          }
+          aggregate: {
+            args: Prisma.NewsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNews>
+          }
+          groupBy: {
+            args: Prisma.NewsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NewsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NewsCountArgs<ExtArgs>
+            result: $Utils.Optional<NewsCountAggregateOutputType> | number
+          }
+        }
+      }
+      NewsArtist: {
+        payload: Prisma.$NewsArtistPayload<ExtArgs>
+        fields: Prisma.NewsArtistFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NewsArtistFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArtistPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NewsArtistFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArtistPayload>
+          }
+          findFirst: {
+            args: Prisma.NewsArtistFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArtistPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NewsArtistFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArtistPayload>
+          }
+          findMany: {
+            args: Prisma.NewsArtistFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArtistPayload>[]
+          }
+          create: {
+            args: Prisma.NewsArtistCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArtistPayload>
+          }
+          createMany: {
+            args: Prisma.NewsArtistCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.NewsArtistDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArtistPayload>
+          }
+          update: {
+            args: Prisma.NewsArtistUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArtistPayload>
+          }
+          deleteMany: {
+            args: Prisma.NewsArtistDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NewsArtistUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.NewsArtistUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArtistPayload>
+          }
+          aggregate: {
+            args: Prisma.NewsArtistAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNewsArtist>
+          }
+          groupBy: {
+            args: Prisma.NewsArtistGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NewsArtistGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NewsArtistCountArgs<ExtArgs>
+            result: $Utils.Optional<NewsArtistCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2150,6 +2314,8 @@ export namespace Prisma {
     chatRoomUser?: ChatRoomUserOmit
     message?: MessageOmit
     song?: SongOmit
+    news?: NewsOmit
+    newsArtist?: NewsArtistOmit
   }
 
   /* Types for Logging */
@@ -2238,6 +2404,7 @@ export namespace Prisma {
     messages: number
     posts: number
     createdEvents: number
+    news: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2249,6 +2416,7 @@ export namespace Prisma {
     messages?: boolean | UserCountOutputTypeCountMessagesArgs
     posts?: boolean | UserCountOutputTypeCountPostsArgs
     createdEvents?: boolean | UserCountOutputTypeCountCreatedEventsArgs
+    news?: boolean | UserCountOutputTypeCountNewsArgs
   }
 
   // Custom InputTypes
@@ -2318,6 +2486,13 @@ export namespace Prisma {
     where?: EventWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountNewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NewsWhereInput
+  }
+
 
   /**
    * Count Type ArtistCountOutputType
@@ -2329,6 +2504,7 @@ export namespace Prisma {
     favByUsers: number
     posts: number
     songs: number
+    news: number
   }
 
   export type ArtistCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2337,6 +2513,7 @@ export namespace Prisma {
     favByUsers?: boolean | ArtistCountOutputTypeCountFavByUsersArgs
     posts?: boolean | ArtistCountOutputTypeCountPostsArgs
     songs?: boolean | ArtistCountOutputTypeCountSongsArgs
+    news?: boolean | ArtistCountOutputTypeCountNewsArgs
   }
 
   // Custom InputTypes
@@ -2383,6 +2560,13 @@ export namespace Prisma {
    */
   export type ArtistCountOutputTypeCountSongsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SongWhereInput
+  }
+
+  /**
+   * ArtistCountOutputType without action
+   */
+  export type ArtistCountOutputTypeCountNewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NewsArtistWhereInput
   }
 
 
@@ -2596,6 +2780,37 @@ export namespace Prisma {
    */
   export type ChatRoomCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MessageWhereInput
+  }
+
+
+  /**
+   * Count Type NewsCountOutputType
+   */
+
+  export type NewsCountOutputType = {
+    artists: number
+  }
+
+  export type NewsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    artists?: boolean | NewsCountOutputTypeCountArtistsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * NewsCountOutputType without action
+   */
+  export type NewsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsCountOutputType
+     */
+    select?: NewsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * NewsCountOutputType without action
+   */
+  export type NewsCountOutputTypeCountArtistsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NewsArtistWhereInput
   }
 
 
@@ -2873,6 +3088,7 @@ export namespace Prisma {
     messages?: boolean | User$messagesArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
     createdEvents?: boolean | User$createdEventsArgs<ExtArgs>
+    news?: boolean | User$newsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2904,6 +3120,7 @@ export namespace Prisma {
     messages?: boolean | User$messagesArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
     createdEvents?: boolean | User$createdEventsArgs<ExtArgs>
+    news?: boolean | User$newsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2918,6 +3135,7 @@ export namespace Prisma {
       messages: Prisma.$MessagePayload<ExtArgs>[]
       posts: Prisma.$PostPayload<ExtArgs>[]
       createdEvents: Prisma.$EventPayload<ExtArgs>[]
+      news: Prisma.$NewsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3281,6 +3499,7 @@ export namespace Prisma {
     messages<T extends User$messagesArgs<ExtArgs> = {}>(args?: Subset<T, User$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     createdEvents<T extends User$createdEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    news<T extends User$newsArgs<ExtArgs> = {}>(args?: Subset<T, User$newsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3863,6 +4082,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.news
+   */
+  export type User$newsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the News
+     */
+    select?: NewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the News
+     */
+    omit?: NewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsInclude<ExtArgs> | null
+    where?: NewsWhereInput
+    orderBy?: NewsOrderByWithRelationInput | NewsOrderByWithRelationInput[]
+    cursor?: NewsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NewsScalarFieldEnum | NewsScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4118,6 +4361,7 @@ export namespace Prisma {
     favByUsers?: boolean | Artist$favByUsersArgs<ExtArgs>
     posts?: boolean | Artist$postsArgs<ExtArgs>
     songs?: boolean | Artist$songsArgs<ExtArgs>
+    news?: boolean | Artist$newsArgs<ExtArgs>
     _count?: boolean | ArtistCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["artist"]>
 
@@ -4143,6 +4387,7 @@ export namespace Prisma {
     favByUsers?: boolean | Artist$favByUsersArgs<ExtArgs>
     posts?: boolean | Artist$postsArgs<ExtArgs>
     songs?: boolean | Artist$songsArgs<ExtArgs>
+    news?: boolean | Artist$newsArgs<ExtArgs>
     _count?: boolean | ArtistCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -4156,6 +4401,7 @@ export namespace Prisma {
       favByUsers: Prisma.$FavArtistPayload<ExtArgs>[]
       posts: Prisma.$PostPayload<ExtArgs>[]
       songs: Prisma.$SongPayload<ExtArgs>[]
+      news: Prisma.$NewsArtistPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -4513,6 +4759,7 @@ export namespace Prisma {
     favByUsers<T extends Artist$favByUsersArgs<ExtArgs> = {}>(args?: Subset<T, Artist$favByUsersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavArtistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     posts<T extends Artist$postsArgs<ExtArgs> = {}>(args?: Subset<T, Artist$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     songs<T extends Artist$songsArgs<ExtArgs> = {}>(args?: Subset<T, Artist$songsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SongPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    news<T extends Artist$newsArgs<ExtArgs> = {}>(args?: Subset<T, Artist$newsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArtistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5053,6 +5300,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SongScalarFieldEnum | SongScalarFieldEnum[]
+  }
+
+  /**
+   * Artist.news
+   */
+  export type Artist$newsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArtist
+     */
+    select?: NewsArtistSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArtist
+     */
+    omit?: NewsArtistOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArtistInclude<ExtArgs> | null
+    where?: NewsArtistWhereInput
+    orderBy?: NewsArtistOrderByWithRelationInput | NewsArtistOrderByWithRelationInput[]
+    cursor?: NewsArtistWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NewsArtistScalarFieldEnum | NewsArtistScalarFieldEnum[]
   }
 
   /**
@@ -20012,6 +20283,1973 @@ export namespace Prisma {
 
 
   /**
+   * Model News
+   */
+
+  export type AggregateNews = {
+    _count: NewsCountAggregateOutputType | null
+    _avg: NewsAvgAggregateOutputType | null
+    _sum: NewsSumAggregateOutputType | null
+    _min: NewsMinAggregateOutputType | null
+    _max: NewsMaxAggregateOutputType | null
+  }
+
+  export type NewsAvgAggregateOutputType = {
+    id: number | null
+    authorId: number | null
+  }
+
+  export type NewsSumAggregateOutputType = {
+    id: number | null
+    authorId: number | null
+  }
+
+  export type NewsMinAggregateOutputType = {
+    id: number | null
+    title: string | null
+    content: string | null
+    coverImage: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    authorId: number | null
+  }
+
+  export type NewsMaxAggregateOutputType = {
+    id: number | null
+    title: string | null
+    content: string | null
+    coverImage: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    authorId: number | null
+  }
+
+  export type NewsCountAggregateOutputType = {
+    id: number
+    title: number
+    content: number
+    coverImage: number
+    createdAt: number
+    updatedAt: number
+    authorId: number
+    _all: number
+  }
+
+
+  export type NewsAvgAggregateInputType = {
+    id?: true
+    authorId?: true
+  }
+
+  export type NewsSumAggregateInputType = {
+    id?: true
+    authorId?: true
+  }
+
+  export type NewsMinAggregateInputType = {
+    id?: true
+    title?: true
+    content?: true
+    coverImage?: true
+    createdAt?: true
+    updatedAt?: true
+    authorId?: true
+  }
+
+  export type NewsMaxAggregateInputType = {
+    id?: true
+    title?: true
+    content?: true
+    coverImage?: true
+    createdAt?: true
+    updatedAt?: true
+    authorId?: true
+  }
+
+  export type NewsCountAggregateInputType = {
+    id?: true
+    title?: true
+    content?: true
+    coverImage?: true
+    createdAt?: true
+    updatedAt?: true
+    authorId?: true
+    _all?: true
+  }
+
+  export type NewsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which News to aggregate.
+     */
+    where?: NewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of News to fetch.
+     */
+    orderBy?: NewsOrderByWithRelationInput | NewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` News from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` News.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned News
+    **/
+    _count?: true | NewsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: NewsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: NewsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NewsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NewsMaxAggregateInputType
+  }
+
+  export type GetNewsAggregateType<T extends NewsAggregateArgs> = {
+        [P in keyof T & keyof AggregateNews]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNews[P]>
+      : GetScalarType<T[P], AggregateNews[P]>
+  }
+
+
+
+
+  export type NewsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NewsWhereInput
+    orderBy?: NewsOrderByWithAggregationInput | NewsOrderByWithAggregationInput[]
+    by: NewsScalarFieldEnum[] | NewsScalarFieldEnum
+    having?: NewsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NewsCountAggregateInputType | true
+    _avg?: NewsAvgAggregateInputType
+    _sum?: NewsSumAggregateInputType
+    _min?: NewsMinAggregateInputType
+    _max?: NewsMaxAggregateInputType
+  }
+
+  export type NewsGroupByOutputType = {
+    id: number
+    title: string
+    content: string
+    coverImage: string | null
+    createdAt: Date
+    updatedAt: Date
+    authorId: number
+    _count: NewsCountAggregateOutputType | null
+    _avg: NewsAvgAggregateOutputType | null
+    _sum: NewsSumAggregateOutputType | null
+    _min: NewsMinAggregateOutputType | null
+    _max: NewsMaxAggregateOutputType | null
+  }
+
+  type GetNewsGroupByPayload<T extends NewsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NewsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NewsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NewsGroupByOutputType[P]>
+            : GetScalarType<T[P], NewsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NewsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    content?: boolean
+    coverImage?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    authorId?: boolean
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    artists?: boolean | News$artistsArgs<ExtArgs>
+    _count?: boolean | NewsCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["news"]>
+
+
+
+  export type NewsSelectScalar = {
+    id?: boolean
+    title?: boolean
+    content?: boolean
+    coverImage?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    authorId?: boolean
+  }
+
+  export type NewsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "coverImage" | "createdAt" | "updatedAt" | "authorId", ExtArgs["result"]["news"]>
+  export type NewsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    artists?: boolean | News$artistsArgs<ExtArgs>
+    _count?: boolean | NewsCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $NewsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "News"
+    objects: {
+      author: Prisma.$UserPayload<ExtArgs>
+      artists: Prisma.$NewsArtistPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      title: string
+      content: string
+      coverImage: string | null
+      createdAt: Date
+      updatedAt: Date
+      authorId: number
+    }, ExtArgs["result"]["news"]>
+    composites: {}
+  }
+
+  type NewsGetPayload<S extends boolean | null | undefined | NewsDefaultArgs> = $Result.GetResult<Prisma.$NewsPayload, S>
+
+  type NewsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NewsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NewsCountAggregateInputType | true
+    }
+
+  export interface NewsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['News'], meta: { name: 'News' } }
+    /**
+     * Find zero or one News that matches the filter.
+     * @param {NewsFindUniqueArgs} args - Arguments to find a News
+     * @example
+     * // Get one News
+     * const news = await prisma.news.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NewsFindUniqueArgs>(args: SelectSubset<T, NewsFindUniqueArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one News that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NewsFindUniqueOrThrowArgs} args - Arguments to find a News
+     * @example
+     * // Get one News
+     * const news = await prisma.news.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NewsFindUniqueOrThrowArgs>(args: SelectSubset<T, NewsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first News that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsFindFirstArgs} args - Arguments to find a News
+     * @example
+     * // Get one News
+     * const news = await prisma.news.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NewsFindFirstArgs>(args?: SelectSubset<T, NewsFindFirstArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first News that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsFindFirstOrThrowArgs} args - Arguments to find a News
+     * @example
+     * // Get one News
+     * const news = await prisma.news.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NewsFindFirstOrThrowArgs>(args?: SelectSubset<T, NewsFindFirstOrThrowArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more News that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all News
+     * const news = await prisma.news.findMany()
+     * 
+     * // Get first 10 News
+     * const news = await prisma.news.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const newsWithIdOnly = await prisma.news.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends NewsFindManyArgs>(args?: SelectSubset<T, NewsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a News.
+     * @param {NewsCreateArgs} args - Arguments to create a News.
+     * @example
+     * // Create one News
+     * const News = await prisma.news.create({
+     *   data: {
+     *     // ... data to create a News
+     *   }
+     * })
+     * 
+     */
+    create<T extends NewsCreateArgs>(args: SelectSubset<T, NewsCreateArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many News.
+     * @param {NewsCreateManyArgs} args - Arguments to create many News.
+     * @example
+     * // Create many News
+     * const news = await prisma.news.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NewsCreateManyArgs>(args?: SelectSubset<T, NewsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a News.
+     * @param {NewsDeleteArgs} args - Arguments to delete one News.
+     * @example
+     * // Delete one News
+     * const News = await prisma.news.delete({
+     *   where: {
+     *     // ... filter to delete one News
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NewsDeleteArgs>(args: SelectSubset<T, NewsDeleteArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one News.
+     * @param {NewsUpdateArgs} args - Arguments to update one News.
+     * @example
+     * // Update one News
+     * const news = await prisma.news.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NewsUpdateArgs>(args: SelectSubset<T, NewsUpdateArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more News.
+     * @param {NewsDeleteManyArgs} args - Arguments to filter News to delete.
+     * @example
+     * // Delete a few News
+     * const { count } = await prisma.news.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NewsDeleteManyArgs>(args?: SelectSubset<T, NewsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more News.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many News
+     * const news = await prisma.news.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NewsUpdateManyArgs>(args: SelectSubset<T, NewsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one News.
+     * @param {NewsUpsertArgs} args - Arguments to update or create a News.
+     * @example
+     * // Update or create a News
+     * const news = await prisma.news.upsert({
+     *   create: {
+     *     // ... data to create a News
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the News we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NewsUpsertArgs>(args: SelectSubset<T, NewsUpsertArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of News.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsCountArgs} args - Arguments to filter News to count.
+     * @example
+     * // Count the number of News
+     * const count = await prisma.news.count({
+     *   where: {
+     *     // ... the filter for the News we want to count
+     *   }
+     * })
+    **/
+    count<T extends NewsCountArgs>(
+      args?: Subset<T, NewsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NewsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a News.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NewsAggregateArgs>(args: Subset<T, NewsAggregateArgs>): Prisma.PrismaPromise<GetNewsAggregateType<T>>
+
+    /**
+     * Group by News.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NewsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NewsGroupByArgs['orderBy'] }
+        : { orderBy?: NewsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NewsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNewsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the News model
+   */
+  readonly fields: NewsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for News.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NewsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    artists<T extends News$artistsArgs<ExtArgs> = {}>(args?: Subset<T, News$artistsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArtistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the News model
+   */
+  interface NewsFieldRefs {
+    readonly id: FieldRef<"News", 'Int'>
+    readonly title: FieldRef<"News", 'String'>
+    readonly content: FieldRef<"News", 'String'>
+    readonly coverImage: FieldRef<"News", 'String'>
+    readonly createdAt: FieldRef<"News", 'DateTime'>
+    readonly updatedAt: FieldRef<"News", 'DateTime'>
+    readonly authorId: FieldRef<"News", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * News findUnique
+   */
+  export type NewsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the News
+     */
+    select?: NewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the News
+     */
+    omit?: NewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsInclude<ExtArgs> | null
+    /**
+     * Filter, which News to fetch.
+     */
+    where: NewsWhereUniqueInput
+  }
+
+  /**
+   * News findUniqueOrThrow
+   */
+  export type NewsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the News
+     */
+    select?: NewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the News
+     */
+    omit?: NewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsInclude<ExtArgs> | null
+    /**
+     * Filter, which News to fetch.
+     */
+    where: NewsWhereUniqueInput
+  }
+
+  /**
+   * News findFirst
+   */
+  export type NewsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the News
+     */
+    select?: NewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the News
+     */
+    omit?: NewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsInclude<ExtArgs> | null
+    /**
+     * Filter, which News to fetch.
+     */
+    where?: NewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of News to fetch.
+     */
+    orderBy?: NewsOrderByWithRelationInput | NewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for News.
+     */
+    cursor?: NewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` News from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` News.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of News.
+     */
+    distinct?: NewsScalarFieldEnum | NewsScalarFieldEnum[]
+  }
+
+  /**
+   * News findFirstOrThrow
+   */
+  export type NewsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the News
+     */
+    select?: NewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the News
+     */
+    omit?: NewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsInclude<ExtArgs> | null
+    /**
+     * Filter, which News to fetch.
+     */
+    where?: NewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of News to fetch.
+     */
+    orderBy?: NewsOrderByWithRelationInput | NewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for News.
+     */
+    cursor?: NewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` News from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` News.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of News.
+     */
+    distinct?: NewsScalarFieldEnum | NewsScalarFieldEnum[]
+  }
+
+  /**
+   * News findMany
+   */
+  export type NewsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the News
+     */
+    select?: NewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the News
+     */
+    omit?: NewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsInclude<ExtArgs> | null
+    /**
+     * Filter, which News to fetch.
+     */
+    where?: NewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of News to fetch.
+     */
+    orderBy?: NewsOrderByWithRelationInput | NewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing News.
+     */
+    cursor?: NewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` News from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` News.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of News.
+     */
+    distinct?: NewsScalarFieldEnum | NewsScalarFieldEnum[]
+  }
+
+  /**
+   * News create
+   */
+  export type NewsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the News
+     */
+    select?: NewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the News
+     */
+    omit?: NewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a News.
+     */
+    data: XOR<NewsCreateInput, NewsUncheckedCreateInput>
+  }
+
+  /**
+   * News createMany
+   */
+  export type NewsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many News.
+     */
+    data: NewsCreateManyInput | NewsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * News update
+   */
+  export type NewsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the News
+     */
+    select?: NewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the News
+     */
+    omit?: NewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a News.
+     */
+    data: XOR<NewsUpdateInput, NewsUncheckedUpdateInput>
+    /**
+     * Choose, which News to update.
+     */
+    where: NewsWhereUniqueInput
+  }
+
+  /**
+   * News updateMany
+   */
+  export type NewsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update News.
+     */
+    data: XOR<NewsUpdateManyMutationInput, NewsUncheckedUpdateManyInput>
+    /**
+     * Filter which News to update
+     */
+    where?: NewsWhereInput
+    /**
+     * Limit how many News to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * News upsert
+   */
+  export type NewsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the News
+     */
+    select?: NewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the News
+     */
+    omit?: NewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the News to update in case it exists.
+     */
+    where: NewsWhereUniqueInput
+    /**
+     * In case the News found by the `where` argument doesn't exist, create a new News with this data.
+     */
+    create: XOR<NewsCreateInput, NewsUncheckedCreateInput>
+    /**
+     * In case the News was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NewsUpdateInput, NewsUncheckedUpdateInput>
+  }
+
+  /**
+   * News delete
+   */
+  export type NewsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the News
+     */
+    select?: NewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the News
+     */
+    omit?: NewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsInclude<ExtArgs> | null
+    /**
+     * Filter which News to delete.
+     */
+    where: NewsWhereUniqueInput
+  }
+
+  /**
+   * News deleteMany
+   */
+  export type NewsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which News to delete
+     */
+    where?: NewsWhereInput
+    /**
+     * Limit how many News to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * News.artists
+   */
+  export type News$artistsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArtist
+     */
+    select?: NewsArtistSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArtist
+     */
+    omit?: NewsArtistOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArtistInclude<ExtArgs> | null
+    where?: NewsArtistWhereInput
+    orderBy?: NewsArtistOrderByWithRelationInput | NewsArtistOrderByWithRelationInput[]
+    cursor?: NewsArtistWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NewsArtistScalarFieldEnum | NewsArtistScalarFieldEnum[]
+  }
+
+  /**
+   * News without action
+   */
+  export type NewsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the News
+     */
+    select?: NewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the News
+     */
+    omit?: NewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model NewsArtist
+   */
+
+  export type AggregateNewsArtist = {
+    _count: NewsArtistCountAggregateOutputType | null
+    _avg: NewsArtistAvgAggregateOutputType | null
+    _sum: NewsArtistSumAggregateOutputType | null
+    _min: NewsArtistMinAggregateOutputType | null
+    _max: NewsArtistMaxAggregateOutputType | null
+  }
+
+  export type NewsArtistAvgAggregateOutputType = {
+    newsId: number | null
+    artistId: number | null
+  }
+
+  export type NewsArtistSumAggregateOutputType = {
+    newsId: number | null
+    artistId: number | null
+  }
+
+  export type NewsArtistMinAggregateOutputType = {
+    newsId: number | null
+    artistId: number | null
+  }
+
+  export type NewsArtistMaxAggregateOutputType = {
+    newsId: number | null
+    artistId: number | null
+  }
+
+  export type NewsArtistCountAggregateOutputType = {
+    newsId: number
+    artistId: number
+    _all: number
+  }
+
+
+  export type NewsArtistAvgAggregateInputType = {
+    newsId?: true
+    artistId?: true
+  }
+
+  export type NewsArtistSumAggregateInputType = {
+    newsId?: true
+    artistId?: true
+  }
+
+  export type NewsArtistMinAggregateInputType = {
+    newsId?: true
+    artistId?: true
+  }
+
+  export type NewsArtistMaxAggregateInputType = {
+    newsId?: true
+    artistId?: true
+  }
+
+  export type NewsArtistCountAggregateInputType = {
+    newsId?: true
+    artistId?: true
+    _all?: true
+  }
+
+  export type NewsArtistAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NewsArtist to aggregate.
+     */
+    where?: NewsArtistWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NewsArtists to fetch.
+     */
+    orderBy?: NewsArtistOrderByWithRelationInput | NewsArtistOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NewsArtistWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NewsArtists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NewsArtists.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned NewsArtists
+    **/
+    _count?: true | NewsArtistCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: NewsArtistAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: NewsArtistSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NewsArtistMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NewsArtistMaxAggregateInputType
+  }
+
+  export type GetNewsArtistAggregateType<T extends NewsArtistAggregateArgs> = {
+        [P in keyof T & keyof AggregateNewsArtist]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNewsArtist[P]>
+      : GetScalarType<T[P], AggregateNewsArtist[P]>
+  }
+
+
+
+
+  export type NewsArtistGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NewsArtistWhereInput
+    orderBy?: NewsArtistOrderByWithAggregationInput | NewsArtistOrderByWithAggregationInput[]
+    by: NewsArtistScalarFieldEnum[] | NewsArtistScalarFieldEnum
+    having?: NewsArtistScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NewsArtistCountAggregateInputType | true
+    _avg?: NewsArtistAvgAggregateInputType
+    _sum?: NewsArtistSumAggregateInputType
+    _min?: NewsArtistMinAggregateInputType
+    _max?: NewsArtistMaxAggregateInputType
+  }
+
+  export type NewsArtistGroupByOutputType = {
+    newsId: number
+    artistId: number
+    _count: NewsArtistCountAggregateOutputType | null
+    _avg: NewsArtistAvgAggregateOutputType | null
+    _sum: NewsArtistSumAggregateOutputType | null
+    _min: NewsArtistMinAggregateOutputType | null
+    _max: NewsArtistMaxAggregateOutputType | null
+  }
+
+  type GetNewsArtistGroupByPayload<T extends NewsArtistGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NewsArtistGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NewsArtistGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NewsArtistGroupByOutputType[P]>
+            : GetScalarType<T[P], NewsArtistGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NewsArtistSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    newsId?: boolean
+    artistId?: boolean
+    news?: boolean | NewsDefaultArgs<ExtArgs>
+    artist?: boolean | ArtistDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["newsArtist"]>
+
+
+
+  export type NewsArtistSelectScalar = {
+    newsId?: boolean
+    artistId?: boolean
+  }
+
+  export type NewsArtistOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"newsId" | "artistId", ExtArgs["result"]["newsArtist"]>
+  export type NewsArtistInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    news?: boolean | NewsDefaultArgs<ExtArgs>
+    artist?: boolean | ArtistDefaultArgs<ExtArgs>
+  }
+
+  export type $NewsArtistPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "NewsArtist"
+    objects: {
+      news: Prisma.$NewsPayload<ExtArgs>
+      artist: Prisma.$ArtistPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      newsId: number
+      artistId: number
+    }, ExtArgs["result"]["newsArtist"]>
+    composites: {}
+  }
+
+  type NewsArtistGetPayload<S extends boolean | null | undefined | NewsArtistDefaultArgs> = $Result.GetResult<Prisma.$NewsArtistPayload, S>
+
+  type NewsArtistCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NewsArtistFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NewsArtistCountAggregateInputType | true
+    }
+
+  export interface NewsArtistDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['NewsArtist'], meta: { name: 'NewsArtist' } }
+    /**
+     * Find zero or one NewsArtist that matches the filter.
+     * @param {NewsArtistFindUniqueArgs} args - Arguments to find a NewsArtist
+     * @example
+     * // Get one NewsArtist
+     * const newsArtist = await prisma.newsArtist.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NewsArtistFindUniqueArgs>(args: SelectSubset<T, NewsArtistFindUniqueArgs<ExtArgs>>): Prisma__NewsArtistClient<$Result.GetResult<Prisma.$NewsArtistPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one NewsArtist that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NewsArtistFindUniqueOrThrowArgs} args - Arguments to find a NewsArtist
+     * @example
+     * // Get one NewsArtist
+     * const newsArtist = await prisma.newsArtist.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NewsArtistFindUniqueOrThrowArgs>(args: SelectSubset<T, NewsArtistFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NewsArtistClient<$Result.GetResult<Prisma.$NewsArtistPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NewsArtist that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsArtistFindFirstArgs} args - Arguments to find a NewsArtist
+     * @example
+     * // Get one NewsArtist
+     * const newsArtist = await prisma.newsArtist.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NewsArtistFindFirstArgs>(args?: SelectSubset<T, NewsArtistFindFirstArgs<ExtArgs>>): Prisma__NewsArtistClient<$Result.GetResult<Prisma.$NewsArtistPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NewsArtist that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsArtistFindFirstOrThrowArgs} args - Arguments to find a NewsArtist
+     * @example
+     * // Get one NewsArtist
+     * const newsArtist = await prisma.newsArtist.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NewsArtistFindFirstOrThrowArgs>(args?: SelectSubset<T, NewsArtistFindFirstOrThrowArgs<ExtArgs>>): Prisma__NewsArtistClient<$Result.GetResult<Prisma.$NewsArtistPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more NewsArtists that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsArtistFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all NewsArtists
+     * const newsArtists = await prisma.newsArtist.findMany()
+     * 
+     * // Get first 10 NewsArtists
+     * const newsArtists = await prisma.newsArtist.findMany({ take: 10 })
+     * 
+     * // Only select the `newsId`
+     * const newsArtistWithNewsIdOnly = await prisma.newsArtist.findMany({ select: { newsId: true } })
+     * 
+     */
+    findMany<T extends NewsArtistFindManyArgs>(args?: SelectSubset<T, NewsArtistFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArtistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a NewsArtist.
+     * @param {NewsArtistCreateArgs} args - Arguments to create a NewsArtist.
+     * @example
+     * // Create one NewsArtist
+     * const NewsArtist = await prisma.newsArtist.create({
+     *   data: {
+     *     // ... data to create a NewsArtist
+     *   }
+     * })
+     * 
+     */
+    create<T extends NewsArtistCreateArgs>(args: SelectSubset<T, NewsArtistCreateArgs<ExtArgs>>): Prisma__NewsArtistClient<$Result.GetResult<Prisma.$NewsArtistPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many NewsArtists.
+     * @param {NewsArtistCreateManyArgs} args - Arguments to create many NewsArtists.
+     * @example
+     * // Create many NewsArtists
+     * const newsArtist = await prisma.newsArtist.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NewsArtistCreateManyArgs>(args?: SelectSubset<T, NewsArtistCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a NewsArtist.
+     * @param {NewsArtistDeleteArgs} args - Arguments to delete one NewsArtist.
+     * @example
+     * // Delete one NewsArtist
+     * const NewsArtist = await prisma.newsArtist.delete({
+     *   where: {
+     *     // ... filter to delete one NewsArtist
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NewsArtistDeleteArgs>(args: SelectSubset<T, NewsArtistDeleteArgs<ExtArgs>>): Prisma__NewsArtistClient<$Result.GetResult<Prisma.$NewsArtistPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one NewsArtist.
+     * @param {NewsArtistUpdateArgs} args - Arguments to update one NewsArtist.
+     * @example
+     * // Update one NewsArtist
+     * const newsArtist = await prisma.newsArtist.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NewsArtistUpdateArgs>(args: SelectSubset<T, NewsArtistUpdateArgs<ExtArgs>>): Prisma__NewsArtistClient<$Result.GetResult<Prisma.$NewsArtistPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more NewsArtists.
+     * @param {NewsArtistDeleteManyArgs} args - Arguments to filter NewsArtists to delete.
+     * @example
+     * // Delete a few NewsArtists
+     * const { count } = await prisma.newsArtist.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NewsArtistDeleteManyArgs>(args?: SelectSubset<T, NewsArtistDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NewsArtists.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsArtistUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many NewsArtists
+     * const newsArtist = await prisma.newsArtist.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NewsArtistUpdateManyArgs>(args: SelectSubset<T, NewsArtistUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one NewsArtist.
+     * @param {NewsArtistUpsertArgs} args - Arguments to update or create a NewsArtist.
+     * @example
+     * // Update or create a NewsArtist
+     * const newsArtist = await prisma.newsArtist.upsert({
+     *   create: {
+     *     // ... data to create a NewsArtist
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the NewsArtist we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NewsArtistUpsertArgs>(args: SelectSubset<T, NewsArtistUpsertArgs<ExtArgs>>): Prisma__NewsArtistClient<$Result.GetResult<Prisma.$NewsArtistPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of NewsArtists.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsArtistCountArgs} args - Arguments to filter NewsArtists to count.
+     * @example
+     * // Count the number of NewsArtists
+     * const count = await prisma.newsArtist.count({
+     *   where: {
+     *     // ... the filter for the NewsArtists we want to count
+     *   }
+     * })
+    **/
+    count<T extends NewsArtistCountArgs>(
+      args?: Subset<T, NewsArtistCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NewsArtistCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a NewsArtist.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsArtistAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NewsArtistAggregateArgs>(args: Subset<T, NewsArtistAggregateArgs>): Prisma.PrismaPromise<GetNewsArtistAggregateType<T>>
+
+    /**
+     * Group by NewsArtist.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsArtistGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NewsArtistGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NewsArtistGroupByArgs['orderBy'] }
+        : { orderBy?: NewsArtistGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NewsArtistGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNewsArtistGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the NewsArtist model
+   */
+  readonly fields: NewsArtistFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for NewsArtist.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NewsArtistClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    news<T extends NewsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NewsDefaultArgs<ExtArgs>>): Prisma__NewsClient<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    artist<T extends ArtistDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ArtistDefaultArgs<ExtArgs>>): Prisma__ArtistClient<$Result.GetResult<Prisma.$ArtistPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the NewsArtist model
+   */
+  interface NewsArtistFieldRefs {
+    readonly newsId: FieldRef<"NewsArtist", 'Int'>
+    readonly artistId: FieldRef<"NewsArtist", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * NewsArtist findUnique
+   */
+  export type NewsArtistFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArtist
+     */
+    select?: NewsArtistSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArtist
+     */
+    omit?: NewsArtistOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArtistInclude<ExtArgs> | null
+    /**
+     * Filter, which NewsArtist to fetch.
+     */
+    where: NewsArtistWhereUniqueInput
+  }
+
+  /**
+   * NewsArtist findUniqueOrThrow
+   */
+  export type NewsArtistFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArtist
+     */
+    select?: NewsArtistSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArtist
+     */
+    omit?: NewsArtistOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArtistInclude<ExtArgs> | null
+    /**
+     * Filter, which NewsArtist to fetch.
+     */
+    where: NewsArtistWhereUniqueInput
+  }
+
+  /**
+   * NewsArtist findFirst
+   */
+  export type NewsArtistFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArtist
+     */
+    select?: NewsArtistSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArtist
+     */
+    omit?: NewsArtistOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArtistInclude<ExtArgs> | null
+    /**
+     * Filter, which NewsArtist to fetch.
+     */
+    where?: NewsArtistWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NewsArtists to fetch.
+     */
+    orderBy?: NewsArtistOrderByWithRelationInput | NewsArtistOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NewsArtists.
+     */
+    cursor?: NewsArtistWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NewsArtists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NewsArtists.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NewsArtists.
+     */
+    distinct?: NewsArtistScalarFieldEnum | NewsArtistScalarFieldEnum[]
+  }
+
+  /**
+   * NewsArtist findFirstOrThrow
+   */
+  export type NewsArtistFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArtist
+     */
+    select?: NewsArtistSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArtist
+     */
+    omit?: NewsArtistOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArtistInclude<ExtArgs> | null
+    /**
+     * Filter, which NewsArtist to fetch.
+     */
+    where?: NewsArtistWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NewsArtists to fetch.
+     */
+    orderBy?: NewsArtistOrderByWithRelationInput | NewsArtistOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NewsArtists.
+     */
+    cursor?: NewsArtistWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NewsArtists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NewsArtists.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NewsArtists.
+     */
+    distinct?: NewsArtistScalarFieldEnum | NewsArtistScalarFieldEnum[]
+  }
+
+  /**
+   * NewsArtist findMany
+   */
+  export type NewsArtistFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArtist
+     */
+    select?: NewsArtistSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArtist
+     */
+    omit?: NewsArtistOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArtistInclude<ExtArgs> | null
+    /**
+     * Filter, which NewsArtists to fetch.
+     */
+    where?: NewsArtistWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NewsArtists to fetch.
+     */
+    orderBy?: NewsArtistOrderByWithRelationInput | NewsArtistOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing NewsArtists.
+     */
+    cursor?: NewsArtistWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NewsArtists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NewsArtists.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NewsArtists.
+     */
+    distinct?: NewsArtistScalarFieldEnum | NewsArtistScalarFieldEnum[]
+  }
+
+  /**
+   * NewsArtist create
+   */
+  export type NewsArtistCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArtist
+     */
+    select?: NewsArtistSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArtist
+     */
+    omit?: NewsArtistOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArtistInclude<ExtArgs> | null
+    /**
+     * The data needed to create a NewsArtist.
+     */
+    data: XOR<NewsArtistCreateInput, NewsArtistUncheckedCreateInput>
+  }
+
+  /**
+   * NewsArtist createMany
+   */
+  export type NewsArtistCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many NewsArtists.
+     */
+    data: NewsArtistCreateManyInput | NewsArtistCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * NewsArtist update
+   */
+  export type NewsArtistUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArtist
+     */
+    select?: NewsArtistSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArtist
+     */
+    omit?: NewsArtistOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArtistInclude<ExtArgs> | null
+    /**
+     * The data needed to update a NewsArtist.
+     */
+    data: XOR<NewsArtistUpdateInput, NewsArtistUncheckedUpdateInput>
+    /**
+     * Choose, which NewsArtist to update.
+     */
+    where: NewsArtistWhereUniqueInput
+  }
+
+  /**
+   * NewsArtist updateMany
+   */
+  export type NewsArtistUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update NewsArtists.
+     */
+    data: XOR<NewsArtistUpdateManyMutationInput, NewsArtistUncheckedUpdateManyInput>
+    /**
+     * Filter which NewsArtists to update
+     */
+    where?: NewsArtistWhereInput
+    /**
+     * Limit how many NewsArtists to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * NewsArtist upsert
+   */
+  export type NewsArtistUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArtist
+     */
+    select?: NewsArtistSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArtist
+     */
+    omit?: NewsArtistOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArtistInclude<ExtArgs> | null
+    /**
+     * The filter to search for the NewsArtist to update in case it exists.
+     */
+    where: NewsArtistWhereUniqueInput
+    /**
+     * In case the NewsArtist found by the `where` argument doesn't exist, create a new NewsArtist with this data.
+     */
+    create: XOR<NewsArtistCreateInput, NewsArtistUncheckedCreateInput>
+    /**
+     * In case the NewsArtist was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NewsArtistUpdateInput, NewsArtistUncheckedUpdateInput>
+  }
+
+  /**
+   * NewsArtist delete
+   */
+  export type NewsArtistDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArtist
+     */
+    select?: NewsArtistSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArtist
+     */
+    omit?: NewsArtistOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArtistInclude<ExtArgs> | null
+    /**
+     * Filter which NewsArtist to delete.
+     */
+    where: NewsArtistWhereUniqueInput
+  }
+
+  /**
+   * NewsArtist deleteMany
+   */
+  export type NewsArtistDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NewsArtists to delete
+     */
+    where?: NewsArtistWhereInput
+    /**
+     * Limit how many NewsArtists to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * NewsArtist without action
+   */
+  export type NewsArtistDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArtist
+     */
+    select?: NewsArtistSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArtist
+     */
+    omit?: NewsArtistOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArtistInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -20224,6 +22462,27 @@ export namespace Prisma {
   export type SongScalarFieldEnum = (typeof SongScalarFieldEnum)[keyof typeof SongScalarFieldEnum]
 
 
+  export const NewsScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    content: 'content',
+    coverImage: 'coverImage',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    authorId: 'authorId'
+  };
+
+  export type NewsScalarFieldEnum = (typeof NewsScalarFieldEnum)[keyof typeof NewsScalarFieldEnum]
+
+
+  export const NewsArtistScalarFieldEnum: {
+    newsId: 'newsId',
+    artistId: 'artistId'
+  };
+
+  export type NewsArtistScalarFieldEnum = (typeof NewsArtistScalarFieldEnum)[keyof typeof NewsArtistScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -20336,6 +22595,15 @@ export namespace Prisma {
   export type SongOrderByRelevanceFieldEnum = (typeof SongOrderByRelevanceFieldEnum)[keyof typeof SongOrderByRelevanceFieldEnum]
 
 
+  export const NewsOrderByRelevanceFieldEnum: {
+    title: 'title',
+    content: 'content',
+    coverImage: 'coverImage'
+  };
+
+  export type NewsOrderByRelevanceFieldEnum = (typeof NewsOrderByRelevanceFieldEnum)[keyof typeof NewsOrderByRelevanceFieldEnum]
+
+
   /**
    * Field references
    */
@@ -20425,6 +22693,7 @@ export namespace Prisma {
     messages?: MessageListRelationFilter
     posts?: PostListRelationFilter
     createdEvents?: EventListRelationFilter
+    news?: NewsListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -20449,6 +22718,7 @@ export namespace Prisma {
     messages?: MessageOrderByRelationAggregateInput
     posts?: PostOrderByRelationAggregateInput
     createdEvents?: EventOrderByRelationAggregateInput
+    news?: NewsOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
   }
 
@@ -20477,6 +22747,7 @@ export namespace Prisma {
     messages?: MessageListRelationFilter
     posts?: PostListRelationFilter
     createdEvents?: EventListRelationFilter
+    news?: NewsListRelationFilter
   }, "id" | "username" | "email" | "telephone">
 
   export type UserOrderByWithAggregationInput = {
@@ -20538,6 +22809,7 @@ export namespace Prisma {
     favByUsers?: FavArtistListRelationFilter
     posts?: PostListRelationFilter
     songs?: SongListRelationFilter
+    news?: NewsArtistListRelationFilter
   }
 
   export type ArtistOrderByWithRelationInput = {
@@ -20556,6 +22828,7 @@ export namespace Prisma {
     favByUsers?: FavArtistOrderByRelationAggregateInput
     posts?: PostOrderByRelationAggregateInput
     songs?: SongOrderByRelationAggregateInput
+    news?: NewsArtistOrderByRelationAggregateInput
     _relevance?: ArtistOrderByRelevanceInput
   }
 
@@ -20578,6 +22851,7 @@ export namespace Prisma {
     favByUsers?: FavArtistListRelationFilter
     posts?: PostListRelationFilter
     songs?: SongListRelationFilter
+    news?: NewsArtistListRelationFilter
   }, "id">
 
   export type ArtistOrderByWithAggregationInput = {
@@ -21526,6 +23800,123 @@ export namespace Prisma {
     artistId?: IntWithAggregatesFilter<"Song"> | number
   }
 
+  export type NewsWhereInput = {
+    AND?: NewsWhereInput | NewsWhereInput[]
+    OR?: NewsWhereInput[]
+    NOT?: NewsWhereInput | NewsWhereInput[]
+    id?: IntFilter<"News"> | number
+    title?: StringFilter<"News"> | string
+    content?: StringFilter<"News"> | string
+    coverImage?: StringNullableFilter<"News"> | string | null
+    createdAt?: DateTimeFilter<"News"> | Date | string
+    updatedAt?: DateTimeFilter<"News"> | Date | string
+    authorId?: IntFilter<"News"> | number
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    artists?: NewsArtistListRelationFilter
+  }
+
+  export type NewsOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    coverImage?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    authorId?: SortOrder
+    author?: UserOrderByWithRelationInput
+    artists?: NewsArtistOrderByRelationAggregateInput
+    _relevance?: NewsOrderByRelevanceInput
+  }
+
+  export type NewsWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: NewsWhereInput | NewsWhereInput[]
+    OR?: NewsWhereInput[]
+    NOT?: NewsWhereInput | NewsWhereInput[]
+    title?: StringFilter<"News"> | string
+    content?: StringFilter<"News"> | string
+    coverImage?: StringNullableFilter<"News"> | string | null
+    createdAt?: DateTimeFilter<"News"> | Date | string
+    updatedAt?: DateTimeFilter<"News"> | Date | string
+    authorId?: IntFilter<"News"> | number
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    artists?: NewsArtistListRelationFilter
+  }, "id">
+
+  export type NewsOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    coverImage?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    authorId?: SortOrder
+    _count?: NewsCountOrderByAggregateInput
+    _avg?: NewsAvgOrderByAggregateInput
+    _max?: NewsMaxOrderByAggregateInput
+    _min?: NewsMinOrderByAggregateInput
+    _sum?: NewsSumOrderByAggregateInput
+  }
+
+  export type NewsScalarWhereWithAggregatesInput = {
+    AND?: NewsScalarWhereWithAggregatesInput | NewsScalarWhereWithAggregatesInput[]
+    OR?: NewsScalarWhereWithAggregatesInput[]
+    NOT?: NewsScalarWhereWithAggregatesInput | NewsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"News"> | number
+    title?: StringWithAggregatesFilter<"News"> | string
+    content?: StringWithAggregatesFilter<"News"> | string
+    coverImage?: StringNullableWithAggregatesFilter<"News"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"News"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"News"> | Date | string
+    authorId?: IntWithAggregatesFilter<"News"> | number
+  }
+
+  export type NewsArtistWhereInput = {
+    AND?: NewsArtistWhereInput | NewsArtistWhereInput[]
+    OR?: NewsArtistWhereInput[]
+    NOT?: NewsArtistWhereInput | NewsArtistWhereInput[]
+    newsId?: IntFilter<"NewsArtist"> | number
+    artistId?: IntFilter<"NewsArtist"> | number
+    news?: XOR<NewsScalarRelationFilter, NewsWhereInput>
+    artist?: XOR<ArtistScalarRelationFilter, ArtistWhereInput>
+  }
+
+  export type NewsArtistOrderByWithRelationInput = {
+    newsId?: SortOrder
+    artistId?: SortOrder
+    news?: NewsOrderByWithRelationInput
+    artist?: ArtistOrderByWithRelationInput
+  }
+
+  export type NewsArtistWhereUniqueInput = Prisma.AtLeast<{
+    newsId_artistId?: NewsArtistNewsIdArtistIdCompoundUniqueInput
+    AND?: NewsArtistWhereInput | NewsArtistWhereInput[]
+    OR?: NewsArtistWhereInput[]
+    NOT?: NewsArtistWhereInput | NewsArtistWhereInput[]
+    newsId?: IntFilter<"NewsArtist"> | number
+    artistId?: IntFilter<"NewsArtist"> | number
+    news?: XOR<NewsScalarRelationFilter, NewsWhereInput>
+    artist?: XOR<ArtistScalarRelationFilter, ArtistWhereInput>
+  }, "newsId_artistId">
+
+  export type NewsArtistOrderByWithAggregationInput = {
+    newsId?: SortOrder
+    artistId?: SortOrder
+    _count?: NewsArtistCountOrderByAggregateInput
+    _avg?: NewsArtistAvgOrderByAggregateInput
+    _max?: NewsArtistMaxOrderByAggregateInput
+    _min?: NewsArtistMinOrderByAggregateInput
+    _sum?: NewsArtistSumOrderByAggregateInput
+  }
+
+  export type NewsArtistScalarWhereWithAggregatesInput = {
+    AND?: NewsArtistScalarWhereWithAggregatesInput | NewsArtistScalarWhereWithAggregatesInput[]
+    OR?: NewsArtistScalarWhereWithAggregatesInput[]
+    NOT?: NewsArtistScalarWhereWithAggregatesInput | NewsArtistScalarWhereWithAggregatesInput[]
+    newsId?: IntWithAggregatesFilter<"NewsArtist"> | number
+    artistId?: IntWithAggregatesFilter<"NewsArtist"> | number
+  }
+
   export type UserCreateInput = {
     username: string
     email: string
@@ -21547,6 +23938,7 @@ export namespace Prisma {
     messages?: MessageCreateNestedManyWithoutSenderInput
     posts?: PostCreateNestedManyWithoutUserInput
     createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
+    news?: NewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -21571,6 +23963,7 @@ export namespace Prisma {
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
+    news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUpdateInput = {
@@ -21594,6 +23987,7 @@ export namespace Prisma {
     messages?: MessageUpdateManyWithoutSenderNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
     createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
+    news?: NewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -21618,6 +24012,7 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
+    news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -21680,6 +24075,7 @@ export namespace Prisma {
     favByUsers?: FavArtistCreateNestedManyWithoutArtistInput
     posts?: PostCreateNestedManyWithoutArtistInput
     songs?: SongCreateNestedManyWithoutArtistInput
+    news?: NewsArtistCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistUncheckedCreateInput = {
@@ -21696,6 +24092,7 @@ export namespace Prisma {
     favByUsers?: FavArtistUncheckedCreateNestedManyWithoutArtistInput
     posts?: PostUncheckedCreateNestedManyWithoutArtistInput
     songs?: SongUncheckedCreateNestedManyWithoutArtistInput
+    news?: NewsArtistUncheckedCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistUpdateInput = {
@@ -21711,6 +24108,7 @@ export namespace Prisma {
     favByUsers?: FavArtistUpdateManyWithoutArtistNestedInput
     posts?: PostUpdateManyWithoutArtistNestedInput
     songs?: SongUpdateManyWithoutArtistNestedInput
+    news?: NewsArtistUpdateManyWithoutArtistNestedInput
   }
 
   export type ArtistUncheckedUpdateInput = {
@@ -21727,6 +24125,7 @@ export namespace Prisma {
     favByUsers?: FavArtistUncheckedUpdateManyWithoutArtistNestedInput
     posts?: PostUncheckedUpdateManyWithoutArtistNestedInput
     songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
+    news?: NewsArtistUncheckedUpdateManyWithoutArtistNestedInput
   }
 
   export type ArtistCreateManyInput = {
@@ -22588,6 +24987,110 @@ export namespace Prisma {
     artistId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type NewsCreateInput = {
+    title: string
+    content: string
+    coverImage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    author: UserCreateNestedOneWithoutNewsInput
+    artists?: NewsArtistCreateNestedManyWithoutNewsInput
+  }
+
+  export type NewsUncheckedCreateInput = {
+    id?: number
+    title: string
+    content: string
+    coverImage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    authorId: number
+    artists?: NewsArtistUncheckedCreateNestedManyWithoutNewsInput
+  }
+
+  export type NewsUpdateInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutNewsNestedInput
+    artists?: NewsArtistUpdateManyWithoutNewsNestedInput
+  }
+
+  export type NewsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authorId?: IntFieldUpdateOperationsInput | number
+    artists?: NewsArtistUncheckedUpdateManyWithoutNewsNestedInput
+  }
+
+  export type NewsCreateManyInput = {
+    id?: number
+    title: string
+    content: string
+    coverImage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    authorId: number
+  }
+
+  export type NewsUpdateManyMutationInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NewsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authorId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type NewsArtistCreateInput = {
+    news: NewsCreateNestedOneWithoutArtistsInput
+    artist: ArtistCreateNestedOneWithoutNewsInput
+  }
+
+  export type NewsArtistUncheckedCreateInput = {
+    newsId: number
+    artistId: number
+  }
+
+  export type NewsArtistUpdateInput = {
+    news?: NewsUpdateOneRequiredWithoutArtistsNestedInput
+    artist?: ArtistUpdateOneRequiredWithoutNewsNestedInput
+  }
+
+  export type NewsArtistUncheckedUpdateInput = {
+    newsId?: IntFieldUpdateOperationsInput | number
+    artistId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type NewsArtistCreateManyInput = {
+    newsId: number
+    artistId: number
+  }
+
+  export type NewsArtistUpdateManyMutationInput = {
+
+  }
+
+  export type NewsArtistUncheckedUpdateManyInput = {
+    newsId?: IntFieldUpdateOperationsInput | number
+    artistId?: IntFieldUpdateOperationsInput | number
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -22702,6 +25205,12 @@ export namespace Prisma {
     none?: EventWhereInput
   }
 
+  export type NewsListRelationFilter = {
+    every?: NewsWhereInput
+    some?: NewsWhereInput
+    none?: NewsWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -22736,6 +25245,10 @@ export namespace Prisma {
   }
 
   export type EventOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type NewsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -22926,6 +25439,12 @@ export namespace Prisma {
     none?: SongWhereInput
   }
 
+  export type NewsArtistListRelationFilter = {
+    every?: NewsArtistWhereInput
+    some?: NewsArtistWhereInput
+    none?: NewsArtistWhereInput
+  }
+
   export type ArtistEventOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -22935,6 +25454,10 @@ export namespace Prisma {
   }
 
   export type SongOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type NewsArtistOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -23741,6 +26264,87 @@ export namespace Prisma {
     artistId?: SortOrder
   }
 
+  export type NewsOrderByRelevanceInput = {
+    fields: NewsOrderByRelevanceFieldEnum | NewsOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type NewsCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    coverImage?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    authorId?: SortOrder
+  }
+
+  export type NewsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    authorId?: SortOrder
+  }
+
+  export type NewsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    coverImage?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    authorId?: SortOrder
+  }
+
+  export type NewsMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    coverImage?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    authorId?: SortOrder
+  }
+
+  export type NewsSumOrderByAggregateInput = {
+    id?: SortOrder
+    authorId?: SortOrder
+  }
+
+  export type NewsScalarRelationFilter = {
+    is?: NewsWhereInput
+    isNot?: NewsWhereInput
+  }
+
+  export type NewsArtistNewsIdArtistIdCompoundUniqueInput = {
+    newsId: number
+    artistId: number
+  }
+
+  export type NewsArtistCountOrderByAggregateInput = {
+    newsId?: SortOrder
+    artistId?: SortOrder
+  }
+
+  export type NewsArtistAvgOrderByAggregateInput = {
+    newsId?: SortOrder
+    artistId?: SortOrder
+  }
+
+  export type NewsArtistMaxOrderByAggregateInput = {
+    newsId?: SortOrder
+    artistId?: SortOrder
+  }
+
+  export type NewsArtistMinOrderByAggregateInput = {
+    newsId?: SortOrder
+    artistId?: SortOrder
+  }
+
+  export type NewsArtistSumOrderByAggregateInput = {
+    newsId?: SortOrder
+    artistId?: SortOrder
+  }
+
   export type ArtistCreateNestedManyWithoutCreatedByUserInput = {
     create?: XOR<ArtistCreateWithoutCreatedByUserInput, ArtistUncheckedCreateWithoutCreatedByUserInput> | ArtistCreateWithoutCreatedByUserInput[] | ArtistUncheckedCreateWithoutCreatedByUserInput[]
     connectOrCreate?: ArtistCreateOrConnectWithoutCreatedByUserInput | ArtistCreateOrConnectWithoutCreatedByUserInput[]
@@ -23797,6 +26401,13 @@ export namespace Prisma {
     connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
   }
 
+  export type NewsCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<NewsCreateWithoutAuthorInput, NewsUncheckedCreateWithoutAuthorInput> | NewsCreateWithoutAuthorInput[] | NewsUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: NewsCreateOrConnectWithoutAuthorInput | NewsCreateOrConnectWithoutAuthorInput[]
+    createMany?: NewsCreateManyAuthorInputEnvelope
+    connect?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
+  }
+
   export type ArtistUncheckedCreateNestedManyWithoutCreatedByUserInput = {
     create?: XOR<ArtistCreateWithoutCreatedByUserInput, ArtistUncheckedCreateWithoutCreatedByUserInput> | ArtistCreateWithoutCreatedByUserInput[] | ArtistUncheckedCreateWithoutCreatedByUserInput[]
     connectOrCreate?: ArtistCreateOrConnectWithoutCreatedByUserInput | ArtistCreateOrConnectWithoutCreatedByUserInput[]
@@ -23851,6 +26462,13 @@ export namespace Prisma {
     connectOrCreate?: EventCreateOrConnectWithoutCreatedByUserInput | EventCreateOrConnectWithoutCreatedByUserInput[]
     createMany?: EventCreateManyCreatedByUserInputEnvelope
     connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
+  export type NewsUncheckedCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<NewsCreateWithoutAuthorInput, NewsUncheckedCreateWithoutAuthorInput> | NewsCreateWithoutAuthorInput[] | NewsUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: NewsCreateOrConnectWithoutAuthorInput | NewsCreateOrConnectWithoutAuthorInput[]
+    createMany?: NewsCreateManyAuthorInputEnvelope
+    connect?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -23985,6 +26603,20 @@ export namespace Prisma {
     deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
   }
 
+  export type NewsUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<NewsCreateWithoutAuthorInput, NewsUncheckedCreateWithoutAuthorInput> | NewsCreateWithoutAuthorInput[] | NewsUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: NewsCreateOrConnectWithoutAuthorInput | NewsCreateOrConnectWithoutAuthorInput[]
+    upsert?: NewsUpsertWithWhereUniqueWithoutAuthorInput | NewsUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: NewsCreateManyAuthorInputEnvelope
+    set?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
+    disconnect?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
+    delete?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
+    connect?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
+    update?: NewsUpdateWithWhereUniqueWithoutAuthorInput | NewsUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: NewsUpdateManyWithWhereWithoutAuthorInput | NewsUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: NewsScalarWhereInput | NewsScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -24105,6 +26737,20 @@ export namespace Prisma {
     deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
   }
 
+  export type NewsUncheckedUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<NewsCreateWithoutAuthorInput, NewsUncheckedCreateWithoutAuthorInput> | NewsCreateWithoutAuthorInput[] | NewsUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: NewsCreateOrConnectWithoutAuthorInput | NewsCreateOrConnectWithoutAuthorInput[]
+    upsert?: NewsUpsertWithWhereUniqueWithoutAuthorInput | NewsUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: NewsCreateManyAuthorInputEnvelope
+    set?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
+    disconnect?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
+    delete?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
+    connect?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
+    update?: NewsUpdateWithWhereUniqueWithoutAuthorInput | NewsUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: NewsUpdateManyWithWhereWithoutAuthorInput | NewsUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: NewsScalarWhereInput | NewsScalarWhereInput[]
+  }
+
   export type AgencyCreateNestedOneWithoutArtistsInput = {
     create?: XOR<AgencyCreateWithoutArtistsInput, AgencyUncheckedCreateWithoutArtistsInput>
     connectOrCreate?: AgencyCreateOrConnectWithoutArtistsInput
@@ -24152,6 +26798,13 @@ export namespace Prisma {
     connect?: SongWhereUniqueInput | SongWhereUniqueInput[]
   }
 
+  export type NewsArtistCreateNestedManyWithoutArtistInput = {
+    create?: XOR<NewsArtistCreateWithoutArtistInput, NewsArtistUncheckedCreateWithoutArtistInput> | NewsArtistCreateWithoutArtistInput[] | NewsArtistUncheckedCreateWithoutArtistInput[]
+    connectOrCreate?: NewsArtistCreateOrConnectWithoutArtistInput | NewsArtistCreateOrConnectWithoutArtistInput[]
+    createMany?: NewsArtistCreateManyArtistInputEnvelope
+    connect?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+  }
+
   export type ArtistEventUncheckedCreateNestedManyWithoutArtistInput = {
     create?: XOR<ArtistEventCreateWithoutArtistInput, ArtistEventUncheckedCreateWithoutArtistInput> | ArtistEventCreateWithoutArtistInput[] | ArtistEventUncheckedCreateWithoutArtistInput[]
     connectOrCreate?: ArtistEventCreateOrConnectWithoutArtistInput | ArtistEventCreateOrConnectWithoutArtistInput[]
@@ -24185,6 +26838,13 @@ export namespace Prisma {
     connectOrCreate?: SongCreateOrConnectWithoutArtistInput | SongCreateOrConnectWithoutArtistInput[]
     createMany?: SongCreateManyArtistInputEnvelope
     connect?: SongWhereUniqueInput | SongWhereUniqueInput[]
+  }
+
+  export type NewsArtistUncheckedCreateNestedManyWithoutArtistInput = {
+    create?: XOR<NewsArtistCreateWithoutArtistInput, NewsArtistUncheckedCreateWithoutArtistInput> | NewsArtistCreateWithoutArtistInput[] | NewsArtistUncheckedCreateWithoutArtistInput[]
+    connectOrCreate?: NewsArtistCreateOrConnectWithoutArtistInput | NewsArtistCreateOrConnectWithoutArtistInput[]
+    createMany?: NewsArtistCreateManyArtistInputEnvelope
+    connect?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
   }
 
   export type AgencyUpdateOneWithoutArtistsNestedInput = {
@@ -24277,6 +26937,20 @@ export namespace Prisma {
     deleteMany?: SongScalarWhereInput | SongScalarWhereInput[]
   }
 
+  export type NewsArtistUpdateManyWithoutArtistNestedInput = {
+    create?: XOR<NewsArtistCreateWithoutArtistInput, NewsArtistUncheckedCreateWithoutArtistInput> | NewsArtistCreateWithoutArtistInput[] | NewsArtistUncheckedCreateWithoutArtistInput[]
+    connectOrCreate?: NewsArtistCreateOrConnectWithoutArtistInput | NewsArtistCreateOrConnectWithoutArtistInput[]
+    upsert?: NewsArtistUpsertWithWhereUniqueWithoutArtistInput | NewsArtistUpsertWithWhereUniqueWithoutArtistInput[]
+    createMany?: NewsArtistCreateManyArtistInputEnvelope
+    set?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+    disconnect?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+    delete?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+    connect?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+    update?: NewsArtistUpdateWithWhereUniqueWithoutArtistInput | NewsArtistUpdateWithWhereUniqueWithoutArtistInput[]
+    updateMany?: NewsArtistUpdateManyWithWhereWithoutArtistInput | NewsArtistUpdateManyWithWhereWithoutArtistInput[]
+    deleteMany?: NewsArtistScalarWhereInput | NewsArtistScalarWhereInput[]
+  }
+
   export type NullableIntFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
@@ -24353,6 +27027,20 @@ export namespace Prisma {
     update?: SongUpdateWithWhereUniqueWithoutArtistInput | SongUpdateWithWhereUniqueWithoutArtistInput[]
     updateMany?: SongUpdateManyWithWhereWithoutArtistInput | SongUpdateManyWithWhereWithoutArtistInput[]
     deleteMany?: SongScalarWhereInput | SongScalarWhereInput[]
+  }
+
+  export type NewsArtistUncheckedUpdateManyWithoutArtistNestedInput = {
+    create?: XOR<NewsArtistCreateWithoutArtistInput, NewsArtistUncheckedCreateWithoutArtistInput> | NewsArtistCreateWithoutArtistInput[] | NewsArtistUncheckedCreateWithoutArtistInput[]
+    connectOrCreate?: NewsArtistCreateOrConnectWithoutArtistInput | NewsArtistCreateOrConnectWithoutArtistInput[]
+    upsert?: NewsArtistUpsertWithWhereUniqueWithoutArtistInput | NewsArtistUpsertWithWhereUniqueWithoutArtistInput[]
+    createMany?: NewsArtistCreateManyArtistInputEnvelope
+    set?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+    disconnect?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+    delete?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+    connect?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+    update?: NewsArtistUpdateWithWhereUniqueWithoutArtistInput | NewsArtistUpdateWithWhereUniqueWithoutArtistInput[]
+    updateMany?: NewsArtistUpdateManyWithWhereWithoutArtistInput | NewsArtistUpdateManyWithWhereWithoutArtistInput[]
+    deleteMany?: NewsArtistScalarWhereInput | NewsArtistScalarWhereInput[]
   }
 
   export type ArtistCreateNestedManyWithoutAgencyInput = {
@@ -25037,6 +27725,90 @@ export namespace Prisma {
     update?: XOR<XOR<ArtistUpdateToOneWithWhereWithoutSongsInput, ArtistUpdateWithoutSongsInput>, ArtistUncheckedUpdateWithoutSongsInput>
   }
 
+  export type UserCreateNestedOneWithoutNewsInput = {
+    create?: XOR<UserCreateWithoutNewsInput, UserUncheckedCreateWithoutNewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNewsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type NewsArtistCreateNestedManyWithoutNewsInput = {
+    create?: XOR<NewsArtistCreateWithoutNewsInput, NewsArtistUncheckedCreateWithoutNewsInput> | NewsArtistCreateWithoutNewsInput[] | NewsArtistUncheckedCreateWithoutNewsInput[]
+    connectOrCreate?: NewsArtistCreateOrConnectWithoutNewsInput | NewsArtistCreateOrConnectWithoutNewsInput[]
+    createMany?: NewsArtistCreateManyNewsInputEnvelope
+    connect?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+  }
+
+  export type NewsArtistUncheckedCreateNestedManyWithoutNewsInput = {
+    create?: XOR<NewsArtistCreateWithoutNewsInput, NewsArtistUncheckedCreateWithoutNewsInput> | NewsArtistCreateWithoutNewsInput[] | NewsArtistUncheckedCreateWithoutNewsInput[]
+    connectOrCreate?: NewsArtistCreateOrConnectWithoutNewsInput | NewsArtistCreateOrConnectWithoutNewsInput[]
+    createMany?: NewsArtistCreateManyNewsInputEnvelope
+    connect?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutNewsNestedInput = {
+    create?: XOR<UserCreateWithoutNewsInput, UserUncheckedCreateWithoutNewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNewsInput
+    upsert?: UserUpsertWithoutNewsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNewsInput, UserUpdateWithoutNewsInput>, UserUncheckedUpdateWithoutNewsInput>
+  }
+
+  export type NewsArtistUpdateManyWithoutNewsNestedInput = {
+    create?: XOR<NewsArtistCreateWithoutNewsInput, NewsArtistUncheckedCreateWithoutNewsInput> | NewsArtistCreateWithoutNewsInput[] | NewsArtistUncheckedCreateWithoutNewsInput[]
+    connectOrCreate?: NewsArtistCreateOrConnectWithoutNewsInput | NewsArtistCreateOrConnectWithoutNewsInput[]
+    upsert?: NewsArtistUpsertWithWhereUniqueWithoutNewsInput | NewsArtistUpsertWithWhereUniqueWithoutNewsInput[]
+    createMany?: NewsArtistCreateManyNewsInputEnvelope
+    set?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+    disconnect?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+    delete?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+    connect?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+    update?: NewsArtistUpdateWithWhereUniqueWithoutNewsInput | NewsArtistUpdateWithWhereUniqueWithoutNewsInput[]
+    updateMany?: NewsArtistUpdateManyWithWhereWithoutNewsInput | NewsArtistUpdateManyWithWhereWithoutNewsInput[]
+    deleteMany?: NewsArtistScalarWhereInput | NewsArtistScalarWhereInput[]
+  }
+
+  export type NewsArtistUncheckedUpdateManyWithoutNewsNestedInput = {
+    create?: XOR<NewsArtistCreateWithoutNewsInput, NewsArtistUncheckedCreateWithoutNewsInput> | NewsArtistCreateWithoutNewsInput[] | NewsArtistUncheckedCreateWithoutNewsInput[]
+    connectOrCreate?: NewsArtistCreateOrConnectWithoutNewsInput | NewsArtistCreateOrConnectWithoutNewsInput[]
+    upsert?: NewsArtistUpsertWithWhereUniqueWithoutNewsInput | NewsArtistUpsertWithWhereUniqueWithoutNewsInput[]
+    createMany?: NewsArtistCreateManyNewsInputEnvelope
+    set?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+    disconnect?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+    delete?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+    connect?: NewsArtistWhereUniqueInput | NewsArtistWhereUniqueInput[]
+    update?: NewsArtistUpdateWithWhereUniqueWithoutNewsInput | NewsArtistUpdateWithWhereUniqueWithoutNewsInput[]
+    updateMany?: NewsArtistUpdateManyWithWhereWithoutNewsInput | NewsArtistUpdateManyWithWhereWithoutNewsInput[]
+    deleteMany?: NewsArtistScalarWhereInput | NewsArtistScalarWhereInput[]
+  }
+
+  export type NewsCreateNestedOneWithoutArtistsInput = {
+    create?: XOR<NewsCreateWithoutArtistsInput, NewsUncheckedCreateWithoutArtistsInput>
+    connectOrCreate?: NewsCreateOrConnectWithoutArtistsInput
+    connect?: NewsWhereUniqueInput
+  }
+
+  export type ArtistCreateNestedOneWithoutNewsInput = {
+    create?: XOR<ArtistCreateWithoutNewsInput, ArtistUncheckedCreateWithoutNewsInput>
+    connectOrCreate?: ArtistCreateOrConnectWithoutNewsInput
+    connect?: ArtistWhereUniqueInput
+  }
+
+  export type NewsUpdateOneRequiredWithoutArtistsNestedInput = {
+    create?: XOR<NewsCreateWithoutArtistsInput, NewsUncheckedCreateWithoutArtistsInput>
+    connectOrCreate?: NewsCreateOrConnectWithoutArtistsInput
+    upsert?: NewsUpsertWithoutArtistsInput
+    connect?: NewsWhereUniqueInput
+    update?: XOR<XOR<NewsUpdateToOneWithWhereWithoutArtistsInput, NewsUpdateWithoutArtistsInput>, NewsUncheckedUpdateWithoutArtistsInput>
+  }
+
+  export type ArtistUpdateOneRequiredWithoutNewsNestedInput = {
+    create?: XOR<ArtistCreateWithoutNewsInput, ArtistUncheckedCreateWithoutNewsInput>
+    connectOrCreate?: ArtistCreateOrConnectWithoutNewsInput
+    upsert?: ArtistUpsertWithoutNewsInput
+    connect?: ArtistWhereUniqueInput
+    update?: XOR<XOR<ArtistUpdateToOneWithWhereWithoutNewsInput, ArtistUpdateWithoutNewsInput>, ArtistUncheckedUpdateWithoutNewsInput>
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -25321,6 +28093,7 @@ export namespace Prisma {
     favByUsers?: FavArtistCreateNestedManyWithoutArtistInput
     posts?: PostCreateNestedManyWithoutArtistInput
     songs?: SongCreateNestedManyWithoutArtistInput
+    news?: NewsArtistCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistUncheckedCreateWithoutCreatedByUserInput = {
@@ -25336,6 +28109,7 @@ export namespace Prisma {
     favByUsers?: FavArtistUncheckedCreateNestedManyWithoutArtistInput
     posts?: PostUncheckedCreateNestedManyWithoutArtistInput
     songs?: SongUncheckedCreateNestedManyWithoutArtistInput
+    news?: NewsArtistUncheckedCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistCreateOrConnectWithoutCreatedByUserInput = {
@@ -25531,6 +28305,35 @@ export namespace Prisma {
 
   export type EventCreateManyCreatedByUserInputEnvelope = {
     data: EventCreateManyCreatedByUserInput | EventCreateManyCreatedByUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NewsCreateWithoutAuthorInput = {
+    title: string
+    content: string
+    coverImage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    artists?: NewsArtistCreateNestedManyWithoutNewsInput
+  }
+
+  export type NewsUncheckedCreateWithoutAuthorInput = {
+    id?: number
+    title: string
+    content: string
+    coverImage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    artists?: NewsArtistUncheckedCreateNestedManyWithoutNewsInput
+  }
+
+  export type NewsCreateOrConnectWithoutAuthorInput = {
+    where: NewsWhereUniqueInput
+    create: XOR<NewsCreateWithoutAuthorInput, NewsUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type NewsCreateManyAuthorInputEnvelope = {
+    data: NewsCreateManyAuthorInput | NewsCreateManyAuthorInput[]
     skipDuplicates?: boolean
   }
 
@@ -25761,6 +28564,35 @@ export namespace Prisma {
     createdByUserId?: IntNullableFilter<"Event"> | number | null
   }
 
+  export type NewsUpsertWithWhereUniqueWithoutAuthorInput = {
+    where: NewsWhereUniqueInput
+    update: XOR<NewsUpdateWithoutAuthorInput, NewsUncheckedUpdateWithoutAuthorInput>
+    create: XOR<NewsCreateWithoutAuthorInput, NewsUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type NewsUpdateWithWhereUniqueWithoutAuthorInput = {
+    where: NewsWhereUniqueInput
+    data: XOR<NewsUpdateWithoutAuthorInput, NewsUncheckedUpdateWithoutAuthorInput>
+  }
+
+  export type NewsUpdateManyWithWhereWithoutAuthorInput = {
+    where: NewsScalarWhereInput
+    data: XOR<NewsUpdateManyMutationInput, NewsUncheckedUpdateManyWithoutAuthorInput>
+  }
+
+  export type NewsScalarWhereInput = {
+    AND?: NewsScalarWhereInput | NewsScalarWhereInput[]
+    OR?: NewsScalarWhereInput[]
+    NOT?: NewsScalarWhereInput | NewsScalarWhereInput[]
+    id?: IntFilter<"News"> | number
+    title?: StringFilter<"News"> | string
+    content?: StringFilter<"News"> | string
+    coverImage?: StringNullableFilter<"News"> | string | null
+    createdAt?: DateTimeFilter<"News"> | Date | string
+    updatedAt?: DateTimeFilter<"News"> | Date | string
+    authorId?: IntFilter<"News"> | number
+  }
+
   export type AgencyCreateWithoutArtistsInput = {
     name: string
     description?: string | null
@@ -25799,6 +28631,7 @@ export namespace Prisma {
     messages?: MessageCreateNestedManyWithoutSenderInput
     posts?: PostCreateNestedManyWithoutUserInput
     createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
+    news?: NewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutCreatedArtistsInput = {
@@ -25822,6 +28655,7 @@ export namespace Prisma {
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
+    news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutCreatedArtistsInput = {
@@ -25952,6 +28786,24 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type NewsArtistCreateWithoutArtistInput = {
+    news: NewsCreateNestedOneWithoutArtistsInput
+  }
+
+  export type NewsArtistUncheckedCreateWithoutArtistInput = {
+    newsId: number
+  }
+
+  export type NewsArtistCreateOrConnectWithoutArtistInput = {
+    where: NewsArtistWhereUniqueInput
+    create: XOR<NewsArtistCreateWithoutArtistInput, NewsArtistUncheckedCreateWithoutArtistInput>
+  }
+
+  export type NewsArtistCreateManyArtistInputEnvelope = {
+    data: NewsArtistCreateManyArtistInput | NewsArtistCreateManyArtistInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AgencyUpsertWithoutArtistsInput = {
     update: XOR<AgencyUpdateWithoutArtistsInput, AgencyUncheckedUpdateWithoutArtistsInput>
     create: XOR<AgencyCreateWithoutArtistsInput, AgencyUncheckedCreateWithoutArtistsInput>
@@ -26007,6 +28859,7 @@ export namespace Prisma {
     messages?: MessageUpdateManyWithoutSenderNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
     createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
+    news?: NewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedArtistsInput = {
@@ -26030,6 +28883,7 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
+    news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type ArtistEventUpsertWithWhereUniqueWithoutArtistInput = {
@@ -26144,6 +28998,30 @@ export namespace Prisma {
     artistId?: IntFilter<"Song"> | number
   }
 
+  export type NewsArtistUpsertWithWhereUniqueWithoutArtistInput = {
+    where: NewsArtistWhereUniqueInput
+    update: XOR<NewsArtistUpdateWithoutArtistInput, NewsArtistUncheckedUpdateWithoutArtistInput>
+    create: XOR<NewsArtistCreateWithoutArtistInput, NewsArtistUncheckedCreateWithoutArtistInput>
+  }
+
+  export type NewsArtistUpdateWithWhereUniqueWithoutArtistInput = {
+    where: NewsArtistWhereUniqueInput
+    data: XOR<NewsArtistUpdateWithoutArtistInput, NewsArtistUncheckedUpdateWithoutArtistInput>
+  }
+
+  export type NewsArtistUpdateManyWithWhereWithoutArtistInput = {
+    where: NewsArtistScalarWhereInput
+    data: XOR<NewsArtistUpdateManyMutationInput, NewsArtistUncheckedUpdateManyWithoutArtistInput>
+  }
+
+  export type NewsArtistScalarWhereInput = {
+    AND?: NewsArtistScalarWhereInput | NewsArtistScalarWhereInput[]
+    OR?: NewsArtistScalarWhereInput[]
+    NOT?: NewsArtistScalarWhereInput | NewsArtistScalarWhereInput[]
+    newsId?: IntFilter<"NewsArtist"> | number
+    artistId?: IntFilter<"NewsArtist"> | number
+  }
+
   export type ArtistCreateWithoutAgencyInput = {
     artistName: string
     profileImage?: string | null
@@ -26156,6 +29034,7 @@ export namespace Prisma {
     favByUsers?: FavArtistCreateNestedManyWithoutArtistInput
     posts?: PostCreateNestedManyWithoutArtistInput
     songs?: SongCreateNestedManyWithoutArtistInput
+    news?: NewsArtistCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistUncheckedCreateWithoutAgencyInput = {
@@ -26171,6 +29050,7 @@ export namespace Prisma {
     favByUsers?: FavArtistUncheckedCreateNestedManyWithoutArtistInput
     posts?: PostUncheckedCreateNestedManyWithoutArtistInput
     songs?: SongUncheckedCreateNestedManyWithoutArtistInput
+    news?: NewsArtistUncheckedCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistCreateOrConnectWithoutAgencyInput = {
@@ -26245,6 +29125,7 @@ export namespace Prisma {
     favByUsers?: FavArtistCreateNestedManyWithoutArtistInput
     posts?: PostCreateNestedManyWithoutArtistInput
     songs?: SongCreateNestedManyWithoutArtistInput
+    news?: NewsArtistCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistUncheckedCreateWithoutGenresInput = {
@@ -26260,6 +29141,7 @@ export namespace Prisma {
     favByUsers?: FavArtistUncheckedCreateNestedManyWithoutArtistInput
     posts?: PostUncheckedCreateNestedManyWithoutArtistInput
     songs?: SongUncheckedCreateNestedManyWithoutArtistInput
+    news?: NewsArtistUncheckedCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistCreateOrConnectWithoutGenresInput = {
@@ -26304,6 +29186,7 @@ export namespace Prisma {
     favByUsers?: FavArtistUpdateManyWithoutArtistNestedInput
     posts?: PostUpdateManyWithoutArtistNestedInput
     songs?: SongUpdateManyWithoutArtistNestedInput
+    news?: NewsArtistUpdateManyWithoutArtistNestedInput
   }
 
   export type ArtistUncheckedUpdateWithoutGenresInput = {
@@ -26319,6 +29202,7 @@ export namespace Prisma {
     favByUsers?: FavArtistUncheckedUpdateManyWithoutArtistNestedInput
     posts?: PostUncheckedUpdateManyWithoutArtistNestedInput
     songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
+    news?: NewsArtistUncheckedUpdateManyWithoutArtistNestedInput
   }
 
   export type GenreUpsertWithoutArtistsInput = {
@@ -26353,6 +29237,7 @@ export namespace Prisma {
     genres?: ArtistGenreCreateNestedManyWithoutArtistInput
     posts?: PostCreateNestedManyWithoutArtistInput
     songs?: SongCreateNestedManyWithoutArtistInput
+    news?: NewsArtistCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistUncheckedCreateWithoutFavByUsersInput = {
@@ -26368,6 +29253,7 @@ export namespace Prisma {
     genres?: ArtistGenreUncheckedCreateNestedManyWithoutArtistInput
     posts?: PostUncheckedCreateNestedManyWithoutArtistInput
     songs?: SongUncheckedCreateNestedManyWithoutArtistInput
+    news?: NewsArtistUncheckedCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistCreateOrConnectWithoutFavByUsersInput = {
@@ -26395,6 +29281,7 @@ export namespace Prisma {
     messages?: MessageCreateNestedManyWithoutSenderInput
     posts?: PostCreateNestedManyWithoutUserInput
     createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
+    news?: NewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutFavArtistsInput = {
@@ -26418,6 +29305,7 @@ export namespace Prisma {
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
+    news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutFavArtistsInput = {
@@ -26448,6 +29336,7 @@ export namespace Prisma {
     genres?: ArtistGenreUpdateManyWithoutArtistNestedInput
     posts?: PostUpdateManyWithoutArtistNestedInput
     songs?: SongUpdateManyWithoutArtistNestedInput
+    news?: NewsArtistUpdateManyWithoutArtistNestedInput
   }
 
   export type ArtistUncheckedUpdateWithoutFavByUsersInput = {
@@ -26463,6 +29352,7 @@ export namespace Prisma {
     genres?: ArtistGenreUncheckedUpdateManyWithoutArtistNestedInput
     posts?: PostUncheckedUpdateManyWithoutArtistNestedInput
     songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
+    news?: NewsArtistUncheckedUpdateManyWithoutArtistNestedInput
   }
 
   export type UserUpsertWithoutFavArtistsInput = {
@@ -26496,6 +29386,7 @@ export namespace Prisma {
     messages?: MessageUpdateManyWithoutSenderNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
     createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
+    news?: NewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFavArtistsInput = {
@@ -26519,6 +29410,7 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
+    news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type CommentCreateWithoutPostInput = {
@@ -26581,6 +29473,7 @@ export namespace Prisma {
     genres?: ArtistGenreCreateNestedManyWithoutArtistInput
     favByUsers?: FavArtistCreateNestedManyWithoutArtistInput
     songs?: SongCreateNestedManyWithoutArtistInput
+    news?: NewsArtistCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistUncheckedCreateWithoutPostsInput = {
@@ -26596,6 +29489,7 @@ export namespace Prisma {
     genres?: ArtistGenreUncheckedCreateNestedManyWithoutArtistInput
     favByUsers?: FavArtistUncheckedCreateNestedManyWithoutArtistInput
     songs?: SongUncheckedCreateNestedManyWithoutArtistInput
+    news?: NewsArtistUncheckedCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistCreateOrConnectWithoutPostsInput = {
@@ -26623,6 +29517,7 @@ export namespace Prisma {
     likes?: LikeCreateNestedManyWithoutUserInput
     messages?: MessageCreateNestedManyWithoutSenderInput
     createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
+    news?: NewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -26646,6 +29541,7 @@ export namespace Prisma {
     likes?: LikeUncheckedCreateNestedManyWithoutUserInput
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
+    news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -26729,6 +29625,7 @@ export namespace Prisma {
     genres?: ArtistGenreUpdateManyWithoutArtistNestedInput
     favByUsers?: FavArtistUpdateManyWithoutArtistNestedInput
     songs?: SongUpdateManyWithoutArtistNestedInput
+    news?: NewsArtistUpdateManyWithoutArtistNestedInput
   }
 
   export type ArtistUncheckedUpdateWithoutPostsInput = {
@@ -26744,6 +29641,7 @@ export namespace Prisma {
     genres?: ArtistGenreUncheckedUpdateManyWithoutArtistNestedInput
     favByUsers?: FavArtistUncheckedUpdateManyWithoutArtistNestedInput
     songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
+    news?: NewsArtistUncheckedUpdateManyWithoutArtistNestedInput
   }
 
   export type UserUpsertWithoutPostsInput = {
@@ -26777,6 +29675,7 @@ export namespace Prisma {
     likes?: LikeUpdateManyWithoutUserNestedInput
     messages?: MessageUpdateManyWithoutSenderNestedInput
     createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
+    news?: NewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -26800,6 +29699,7 @@ export namespace Prisma {
     likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
+    news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type PostImageUpsertWithWhereUniqueWithoutPostInput = {
@@ -26938,6 +29838,7 @@ export namespace Prisma {
     messages?: MessageCreateNestedManyWithoutSenderInput
     posts?: PostCreateNestedManyWithoutUserInput
     createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
+    news?: NewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutLikesInput = {
@@ -26961,6 +29862,7 @@ export namespace Prisma {
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
+    news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutLikesInput = {
@@ -27033,6 +29935,7 @@ export namespace Prisma {
     messages?: MessageUpdateManyWithoutSenderNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
     createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
+    news?: NewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLikesInput = {
@@ -27056,6 +29959,7 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
+    news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type PostCreateWithoutCommentsInput = {
@@ -27106,6 +30010,7 @@ export namespace Prisma {
     messages?: MessageCreateNestedManyWithoutSenderInput
     posts?: PostCreateNestedManyWithoutUserInput
     createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
+    news?: NewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutCommentsInput = {
@@ -27129,6 +30034,7 @@ export namespace Prisma {
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
+    news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutCommentsInput = {
@@ -27201,6 +30107,7 @@ export namespace Prisma {
     messages?: MessageUpdateManyWithoutSenderNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
     createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
+    news?: NewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -27224,6 +30131,7 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
+    news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type ArtistEventCreateWithoutEventInput = {
@@ -27264,6 +30172,7 @@ export namespace Prisma {
     likes?: LikeCreateNestedManyWithoutUserInput
     messages?: MessageCreateNestedManyWithoutSenderInput
     posts?: PostCreateNestedManyWithoutUserInput
+    news?: NewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutCreatedEventsInput = {
@@ -27287,6 +30196,7 @@ export namespace Prisma {
     likes?: LikeUncheckedCreateNestedManyWithoutUserInput
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutCreatedEventsInput = {
@@ -27361,6 +30271,7 @@ export namespace Prisma {
     likes?: LikeUpdateManyWithoutUserNestedInput
     messages?: MessageUpdateManyWithoutSenderNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
+    news?: NewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedEventsInput = {
@@ -27384,6 +30295,7 @@ export namespace Prisma {
     likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type VenueUpsertWithoutEventsInput = {
@@ -27424,6 +30336,7 @@ export namespace Prisma {
     favByUsers?: FavArtistCreateNestedManyWithoutArtistInput
     posts?: PostCreateNestedManyWithoutArtistInput
     songs?: SongCreateNestedManyWithoutArtistInput
+    news?: NewsArtistCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistUncheckedCreateWithoutEventsInput = {
@@ -27439,6 +30352,7 @@ export namespace Prisma {
     favByUsers?: FavArtistUncheckedCreateNestedManyWithoutArtistInput
     posts?: PostUncheckedCreateNestedManyWithoutArtistInput
     songs?: SongUncheckedCreateNestedManyWithoutArtistInput
+    news?: NewsArtistUncheckedCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistCreateOrConnectWithoutEventsInput = {
@@ -27503,6 +30417,7 @@ export namespace Prisma {
     favByUsers?: FavArtistUpdateManyWithoutArtistNestedInput
     posts?: PostUpdateManyWithoutArtistNestedInput
     songs?: SongUpdateManyWithoutArtistNestedInput
+    news?: NewsArtistUpdateManyWithoutArtistNestedInput
   }
 
   export type ArtistUncheckedUpdateWithoutEventsInput = {
@@ -27518,6 +30433,7 @@ export namespace Prisma {
     favByUsers?: FavArtistUncheckedUpdateManyWithoutArtistNestedInput
     posts?: PostUncheckedUpdateManyWithoutArtistNestedInput
     songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
+    news?: NewsArtistUncheckedUpdateManyWithoutArtistNestedInput
   }
 
   export type EventUpsertWithoutArtistsInput = {
@@ -27732,6 +30648,7 @@ export namespace Prisma {
     messages?: MessageCreateNestedManyWithoutSenderInput
     posts?: PostCreateNestedManyWithoutUserInput
     createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
+    news?: NewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutChatRoomsInput = {
@@ -27755,6 +30672,7 @@ export namespace Prisma {
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
+    news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutChatRoomsInput = {
@@ -27819,6 +30737,7 @@ export namespace Prisma {
     messages?: MessageUpdateManyWithoutSenderNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
     createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
+    news?: NewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChatRoomsInput = {
@@ -27842,6 +30761,7 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
+    news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type ChatRoomCreateWithoutMessagesInput = {
@@ -27884,6 +30804,7 @@ export namespace Prisma {
     likes?: LikeCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutUserInput
     createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
+    news?: NewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutMessagesInput = {
@@ -27907,6 +30828,7 @@ export namespace Prisma {
     likes?: LikeUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
+    news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutMessagesInput = {
@@ -27971,6 +30893,7 @@ export namespace Prisma {
     likes?: LikeUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
     createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
+    news?: NewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessagesInput = {
@@ -27994,6 +30917,7 @@ export namespace Prisma {
     likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
+    news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type ArtistCreateWithoutSongsInput = {
@@ -28008,6 +30932,7 @@ export namespace Prisma {
     genres?: ArtistGenreCreateNestedManyWithoutArtistInput
     favByUsers?: FavArtistCreateNestedManyWithoutArtistInput
     posts?: PostCreateNestedManyWithoutArtistInput
+    news?: NewsArtistCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistUncheckedCreateWithoutSongsInput = {
@@ -28023,6 +30948,7 @@ export namespace Prisma {
     genres?: ArtistGenreUncheckedCreateNestedManyWithoutArtistInput
     favByUsers?: FavArtistUncheckedCreateNestedManyWithoutArtistInput
     posts?: PostUncheckedCreateNestedManyWithoutArtistInput
+    news?: NewsArtistUncheckedCreateNestedManyWithoutArtistInput
   }
 
   export type ArtistCreateOrConnectWithoutSongsInput = {
@@ -28053,6 +30979,7 @@ export namespace Prisma {
     genres?: ArtistGenreUpdateManyWithoutArtistNestedInput
     favByUsers?: FavArtistUpdateManyWithoutArtistNestedInput
     posts?: PostUpdateManyWithoutArtistNestedInput
+    news?: NewsArtistUpdateManyWithoutArtistNestedInput
   }
 
   export type ArtistUncheckedUpdateWithoutSongsInput = {
@@ -28068,6 +30995,283 @@ export namespace Prisma {
     genres?: ArtistGenreUncheckedUpdateManyWithoutArtistNestedInput
     favByUsers?: FavArtistUncheckedUpdateManyWithoutArtistNestedInput
     posts?: PostUncheckedUpdateManyWithoutArtistNestedInput
+    news?: NewsArtistUncheckedUpdateManyWithoutArtistNestedInput
+  }
+
+  export type UserCreateWithoutNewsInput = {
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdArtists?: ArtistCreateNestedManyWithoutCreatedByUserInput
+    chatRooms?: ChatRoomUserCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
+  }
+
+  export type UserUncheckedCreateWithoutNewsInput = {
+    id?: number
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdArtists?: ArtistUncheckedCreateNestedManyWithoutCreatedByUserInput
+    chatRooms?: ChatRoomUserUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
+  }
+
+  export type UserCreateOrConnectWithoutNewsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutNewsInput, UserUncheckedCreateWithoutNewsInput>
+  }
+
+  export type NewsArtistCreateWithoutNewsInput = {
+    artist: ArtistCreateNestedOneWithoutNewsInput
+  }
+
+  export type NewsArtistUncheckedCreateWithoutNewsInput = {
+    artistId: number
+  }
+
+  export type NewsArtistCreateOrConnectWithoutNewsInput = {
+    where: NewsArtistWhereUniqueInput
+    create: XOR<NewsArtistCreateWithoutNewsInput, NewsArtistUncheckedCreateWithoutNewsInput>
+  }
+
+  export type NewsArtistCreateManyNewsInputEnvelope = {
+    data: NewsArtistCreateManyNewsInput | NewsArtistCreateManyNewsInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutNewsInput = {
+    update: XOR<UserUpdateWithoutNewsInput, UserUncheckedUpdateWithoutNewsInput>
+    create: XOR<UserCreateWithoutNewsInput, UserUncheckedCreateWithoutNewsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutNewsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutNewsInput, UserUncheckedUpdateWithoutNewsInput>
+  }
+
+  export type UserUpdateWithoutNewsInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdArtists?: ArtistUpdateManyWithoutCreatedByUserNestedInput
+    chatRooms?: ChatRoomUserUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    favArtists?: FavArtistUpdateManyWithoutUserNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutNewsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdArtists?: ArtistUncheckedUpdateManyWithoutCreatedByUserNestedInput
+    chatRooms?: ChatRoomUserUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    favArtists?: FavArtistUncheckedUpdateManyWithoutUserNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  }
+
+  export type NewsArtistUpsertWithWhereUniqueWithoutNewsInput = {
+    where: NewsArtistWhereUniqueInput
+    update: XOR<NewsArtistUpdateWithoutNewsInput, NewsArtistUncheckedUpdateWithoutNewsInput>
+    create: XOR<NewsArtistCreateWithoutNewsInput, NewsArtistUncheckedCreateWithoutNewsInput>
+  }
+
+  export type NewsArtistUpdateWithWhereUniqueWithoutNewsInput = {
+    where: NewsArtistWhereUniqueInput
+    data: XOR<NewsArtistUpdateWithoutNewsInput, NewsArtistUncheckedUpdateWithoutNewsInput>
+  }
+
+  export type NewsArtistUpdateManyWithWhereWithoutNewsInput = {
+    where: NewsArtistScalarWhereInput
+    data: XOR<NewsArtistUpdateManyMutationInput, NewsArtistUncheckedUpdateManyWithoutNewsInput>
+  }
+
+  export type NewsCreateWithoutArtistsInput = {
+    title: string
+    content: string
+    coverImage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    author: UserCreateNestedOneWithoutNewsInput
+  }
+
+  export type NewsUncheckedCreateWithoutArtistsInput = {
+    id?: number
+    title: string
+    content: string
+    coverImage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    authorId: number
+  }
+
+  export type NewsCreateOrConnectWithoutArtistsInput = {
+    where: NewsWhereUniqueInput
+    create: XOR<NewsCreateWithoutArtistsInput, NewsUncheckedCreateWithoutArtistsInput>
+  }
+
+  export type ArtistCreateWithoutNewsInput = {
+    artistName: string
+    profileImage?: string | null
+    biography?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    agency?: AgencyCreateNestedOneWithoutArtistsInput
+    createdByUser?: UserCreateNestedOneWithoutCreatedArtistsInput
+    events?: ArtistEventCreateNestedManyWithoutArtistInput
+    genres?: ArtistGenreCreateNestedManyWithoutArtistInput
+    favByUsers?: FavArtistCreateNestedManyWithoutArtistInput
+    posts?: PostCreateNestedManyWithoutArtistInput
+    songs?: SongCreateNestedManyWithoutArtistInput
+  }
+
+  export type ArtistUncheckedCreateWithoutNewsInput = {
+    id?: number
+    artistName: string
+    profileImage?: string | null
+    biography?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    agencyId?: number | null
+    createdByUserId?: number | null
+    events?: ArtistEventUncheckedCreateNestedManyWithoutArtistInput
+    genres?: ArtistGenreUncheckedCreateNestedManyWithoutArtistInput
+    favByUsers?: FavArtistUncheckedCreateNestedManyWithoutArtistInput
+    posts?: PostUncheckedCreateNestedManyWithoutArtistInput
+    songs?: SongUncheckedCreateNestedManyWithoutArtistInput
+  }
+
+  export type ArtistCreateOrConnectWithoutNewsInput = {
+    where: ArtistWhereUniqueInput
+    create: XOR<ArtistCreateWithoutNewsInput, ArtistUncheckedCreateWithoutNewsInput>
+  }
+
+  export type NewsUpsertWithoutArtistsInput = {
+    update: XOR<NewsUpdateWithoutArtistsInput, NewsUncheckedUpdateWithoutArtistsInput>
+    create: XOR<NewsCreateWithoutArtistsInput, NewsUncheckedCreateWithoutArtistsInput>
+    where?: NewsWhereInput
+  }
+
+  export type NewsUpdateToOneWithWhereWithoutArtistsInput = {
+    where?: NewsWhereInput
+    data: XOR<NewsUpdateWithoutArtistsInput, NewsUncheckedUpdateWithoutArtistsInput>
+  }
+
+  export type NewsUpdateWithoutArtistsInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutNewsNestedInput
+  }
+
+  export type NewsUncheckedUpdateWithoutArtistsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authorId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ArtistUpsertWithoutNewsInput = {
+    update: XOR<ArtistUpdateWithoutNewsInput, ArtistUncheckedUpdateWithoutNewsInput>
+    create: XOR<ArtistCreateWithoutNewsInput, ArtistUncheckedCreateWithoutNewsInput>
+    where?: ArtistWhereInput
+  }
+
+  export type ArtistUpdateToOneWithWhereWithoutNewsInput = {
+    where?: ArtistWhereInput
+    data: XOR<ArtistUpdateWithoutNewsInput, ArtistUncheckedUpdateWithoutNewsInput>
+  }
+
+  export type ArtistUpdateWithoutNewsInput = {
+    artistName?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    agency?: AgencyUpdateOneWithoutArtistsNestedInput
+    createdByUser?: UserUpdateOneWithoutCreatedArtistsNestedInput
+    events?: ArtistEventUpdateManyWithoutArtistNestedInput
+    genres?: ArtistGenreUpdateManyWithoutArtistNestedInput
+    favByUsers?: FavArtistUpdateManyWithoutArtistNestedInput
+    posts?: PostUpdateManyWithoutArtistNestedInput
+    songs?: SongUpdateManyWithoutArtistNestedInput
+  }
+
+  export type ArtistUncheckedUpdateWithoutNewsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    artistName?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    agencyId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdByUserId?: NullableIntFieldUpdateOperationsInput | number | null
+    events?: ArtistEventUncheckedUpdateManyWithoutArtistNestedInput
+    genres?: ArtistGenreUncheckedUpdateManyWithoutArtistNestedInput
+    favByUsers?: FavArtistUncheckedUpdateManyWithoutArtistNestedInput
+    posts?: PostUncheckedUpdateManyWithoutArtistNestedInput
+    songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
   }
 
   export type ArtistCreateManyCreatedByUserInput = {
@@ -28137,6 +31341,15 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type NewsCreateManyAuthorInput = {
+    id?: number
+    title: string
+    content: string
+    coverImage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ArtistUpdateWithoutCreatedByUserInput = {
     artistName?: StringFieldUpdateOperationsInput | string
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28149,6 +31362,7 @@ export namespace Prisma {
     favByUsers?: FavArtistUpdateManyWithoutArtistNestedInput
     posts?: PostUpdateManyWithoutArtistNestedInput
     songs?: SongUpdateManyWithoutArtistNestedInput
+    news?: NewsArtistUpdateManyWithoutArtistNestedInput
   }
 
   export type ArtistUncheckedUpdateWithoutCreatedByUserInput = {
@@ -28164,6 +31378,7 @@ export namespace Prisma {
     favByUsers?: FavArtistUncheckedUpdateManyWithoutArtistNestedInput
     posts?: PostUncheckedUpdateManyWithoutArtistNestedInput
     songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
+    news?: NewsArtistUncheckedUpdateManyWithoutArtistNestedInput
   }
 
   export type ArtistUncheckedUpdateManyWithoutCreatedByUserInput = {
@@ -28349,6 +31564,34 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type NewsUpdateWithoutAuthorInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    artists?: NewsArtistUpdateManyWithoutNewsNestedInput
+  }
+
+  export type NewsUncheckedUpdateWithoutAuthorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    artists?: NewsArtistUncheckedUpdateManyWithoutNewsNestedInput
+  }
+
+  export type NewsUncheckedUpdateManyWithoutAuthorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ArtistEventCreateManyArtistInput = {
     eventId: number
   }
@@ -28382,6 +31625,10 @@ export namespace Prisma {
     releaseDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type NewsArtistCreateManyArtistInput = {
+    newsId: number
   }
 
   export type ArtistEventUpdateWithoutArtistInput = {
@@ -28492,6 +31739,18 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type NewsArtistUpdateWithoutArtistInput = {
+    news?: NewsUpdateOneRequiredWithoutArtistsNestedInput
+  }
+
+  export type NewsArtistUncheckedUpdateWithoutArtistInput = {
+    newsId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type NewsArtistUncheckedUpdateManyWithoutArtistInput = {
+    newsId?: IntFieldUpdateOperationsInput | number
+  }
+
   export type ArtistCreateManyAgencyInput = {
     id?: number
     artistName: string
@@ -28514,6 +31773,7 @@ export namespace Prisma {
     favByUsers?: FavArtistUpdateManyWithoutArtistNestedInput
     posts?: PostUpdateManyWithoutArtistNestedInput
     songs?: SongUpdateManyWithoutArtistNestedInput
+    news?: NewsArtistUpdateManyWithoutArtistNestedInput
   }
 
   export type ArtistUncheckedUpdateWithoutAgencyInput = {
@@ -28529,6 +31789,7 @@ export namespace Prisma {
     favByUsers?: FavArtistUncheckedUpdateManyWithoutArtistNestedInput
     posts?: PostUncheckedUpdateManyWithoutArtistNestedInput
     songs?: SongUncheckedUpdateManyWithoutArtistNestedInput
+    news?: NewsArtistUncheckedUpdateManyWithoutArtistNestedInput
   }
 
   export type ArtistUncheckedUpdateManyWithoutAgencyInput = {
@@ -28760,6 +32021,22 @@ export namespace Prisma {
     senderId?: IntFieldUpdateOperationsInput | number
     isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NewsArtistCreateManyNewsInput = {
+    artistId: number
+  }
+
+  export type NewsArtistUpdateWithoutNewsInput = {
+    artist?: ArtistUpdateOneRequiredWithoutNewsNestedInput
+  }
+
+  export type NewsArtistUncheckedUpdateWithoutNewsInput = {
+    artistId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type NewsArtistUncheckedUpdateManyWithoutNewsInput = {
+    artistId?: IntFieldUpdateOperationsInput | number
   }
 
 
