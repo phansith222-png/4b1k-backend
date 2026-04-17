@@ -108,6 +108,30 @@ export const commentPost = async (content,userId,postId) => {
     return result
 }
 
+export const getAllLike = async (postId) => {
+    const foundPost = await prisma.post.findUnique({
+        where : {id : postId}
+    })
+
+    if (!foundPost) {
+        return (createHttpError[404]('cannot found Post'))
+    }
+
+    const result = await prisma.like.findMany({
+        where : { postId : postId},
+        include : {
+            user : {
+                select : {
+                    username : true,
+                    profileImage : true                }
+            }
+        }
+    })
+
+    return result
+
+}
+
 export const likePost = async (userId,postId) => {
 
     const postData = await prisma.like.findUnique({

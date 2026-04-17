@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors'
-import { commentPost, createPost, deleteComment, deletePost, editComment, editPost, getAllPosts, getAPost, likePost, unlikePost } from '../service.js/post.service.js'
+import { commentPost, createPost, deleteComment, deletePost, editComment, editPost, getAllLike, getAllPosts, getAPost, likePost, unlikePost } from '../service.js/post.service.js'
 
 export async function getAllPostController (req,res,next) {
     
@@ -107,6 +107,22 @@ export async function commentPostController (req,res,next) {
             message : 'comment successfully',
             data : newComment
         })
+    }catch (error) {
+        next(error)
+    }
+}
+
+export async function getAllLikeController (req,res,next) {
+    try {
+        const {postId} = req.params
+
+        const getLike = await getAllLike(postId)
+
+        res.status(200).json({
+            message : 'get all like successfully',
+            getLike : getLike
+        })
+
     }catch (error) {
         next(error)
     }
