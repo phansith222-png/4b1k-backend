@@ -2,37 +2,45 @@ import createHttpError from 'http-errors'
 import jwt from 'jsonwebtoken'
 import { getUserby } from '../service.js/auth.service.js'
 
-export default async function authenicateMiddleware (req,res,next) {
+export default async function authenicateMiddleware (req, res, next) {
     const authorization = req.headers.authorization
-    // console.log('authorization', authorization)
+    
+    // บรรทัดนี้ช่วยเช็คใน Terminal ว่า Frontend ส่งมาจริงไหม
+    console.log('--- Checking Header ---')
+    console.log('Auth Value:', authorization) 
 
-    //startWith คืออะไร
-    if(!authorization || !authorization.startsWith('Bearer ')) {
-        return next(createHttpError[401]('Unauthorized 1'))
+    if (!authorization || !authorization.startsWith('Bearer ')) {
+        return next(createHttpError[401]('Unauthorized 1: No Token or Wrong Format'))
     }
 
-    const [,token] = authorization.split(' ')
+    const token = authorization.split(' ')[1]
 
-    //in case no have token
-    if(!token) {
-        return next(createHttpError[401]('Unauthorized 2 token'))
+    if (!token) {
+        return next(createHttpError[401]('Unauthorized 2: Token is missing'))
     }
 
-    //token verify
-    const payload = jwt.verify(token,process.env.JWT_SECRET)
-    // console.log('payload',payload)
+    try {
+        const payload = jwt.verify(token, process.env.JWT_SECRET)
+        const foundUser = await getUserby('id', payload.id)
 
-    const foundUser = await getUserby('id',payload.id)
-
-    if(!foundUser) {
-        return next(createHttpError[401]('Unauthorized 3 user'))
-    }
+        if (!foundUser) {
+            return next(createHttpError[401]('Unauthorized 3: User not found'))
+        }
 
     const {createdAt,updatedAt,...userInfo} = foundUser
 
+<<<<<<< HEAD
     req.user = userInfo
     // console.log('req.user', req.user)
     next()
 }
 
 
+=======
+        req.user = userInfo
+        next()
+    } catch (err) {
+        return next(createHttpError[401]('Unauthorized: Invalid Token'))
+    }
+}
+>>>>>>> dev
