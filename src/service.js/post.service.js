@@ -18,9 +18,9 @@ export const getAllPosts = async() => {
     return result
 }
 
-export const getAPost = async(id) => {
+export const getAPost = async(postId) => {
     const result = await prisma.post.findUnique({
-        where : {id : id}
+        where : {id : postId}
     })
     return result
 }
@@ -43,36 +43,35 @@ export const createPost = async(title,content,postImages,userId,artistId) => {
     return result
 }
 
-export const deletePost = async(id,userId) => {
+export const deletePost = async(postId,userId) => {
 
-    const foundPost = await getAPost(id)
+    const foundPost = await getAPost(postId)
+
     if(!foundPost) {
         return (createHttpError[404]('Post not found'))
     }
-    if(userId != foundPost.id) {
+    if(userId != foundPost.userId) {
         return (createHttpError[404]('Cannot delete this post'))
     }
-    const result = await prisma.post.deleteMany(
-        {where : {id : id}}
+    const result = await prisma.post.delete(
+        {where : {id : postId}}
     )
 
     return result
 }
 
-export const editPost = async(id,userId,title,content,postImages,artistId) => {
-    const foundPost = await getAPost(id)
-    console.log(foundPost)
+export const editPost = async(postId,userId,title,content,postImages,artistId) => {
+    const foundPost = await getAPost(postId)
+    // console.log(foundPost)
     if(!foundPost) {
         return (createHttpError[404]('Post not found'))
     }
      if(userId != foundPost.userId) {
-        console.log("edit post",userId)
-        console.log(foundPost.id)
          return (createHttpError[404]('Cannot delete this post'))
     }
 
     const result = await prisma.post.update({
-        where : {id : id},
+        where : {id : postId},
         data : {
             title : title,
             content : content,

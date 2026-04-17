@@ -226,6 +226,66 @@ const messagesData = [
   { content: "ไว้ไปคอนด้วยกันนะ!", senderId: 3, chatRoomId: 3 }
 ];
 
+
+const newsData = [
+  // ข่าวที่ 1
+  { title: "Taylor Swift ประกาศทัวร์คอนเสิร์ตในเอเชียตะวันออกเฉียงใต้!", content: "Global Pop Icon ทัวร์ครั้งใหม่ที่ทุกคนรอคอย เริ่มกดบัตรเดือนหน้า แฟนๆ เตรียมตัวให้พร้อม!", coverImage: "https://example.com/images/news/taylor-tour.jpg", authorId: 1 },
+  // ข่าวที่ 2
+  { title: "Rolling Loud Thailand 2026 ประกาศ Line up สุดเดือด!", content: "เทศกาลฮิปฮอปที่ใหญ่ที่สุดในโลกกลับมาอีกครั้ง นำทัพโดย Kendrick Lamar, Travis Scott และแร็ปเปอร์ชาวไทยอย่าง F.HERO และ MILLI", coverImage: "https://example.com/images/news/rolling-loud.jpg", authorId: 2 },
+  // ข่าวที่ 3
+  { title: "อัปเดตระบบการจองคิวซื้อบัตรแบบใหม่", content: "เพื่อป้องกันปัญหาบอทและตั๋วผี ทางเราได้อัปเดตระบบต่อคิวแบบใหม่ (Virtual Waiting Room) ที่จะเริ่มใช้ในเดือนนี้", coverImage: "https://example.com/images/news/system-update.jpg", authorId: 1 },
+  // ข่าวที่ 4
+  { title: "การคอลแลปส์สุดเซอร์ไพรส์: Jeff Satur x NIKI", content: "เตรียมพบกับซิงเกิลใหม่แนว R&B ที่เป็นการร่วมงานกันข้ามประเทศระหว่าง Jeff Satur และ NIKI จากค่าย 88rising", coverImage: "https://example.com/images/news/jeff-niki-collab.jpg", authorId: 2 },
+  // ข่าวที่ 5
+  { title: "Bodyslam จัดคอนเสิร์ตใหญ่ ณ ราชมังคลากีฬาสถาน", content: "วงร็อคอันดับ 1 ของไทย กลับมาทวงบัลลังก์ความยิ่งใหญ่อีกครั้งกับคอนเสิร์ตความจุระดับ 50,000 คน", coverImage: "https://example.com/images/news/bodyslam-live.jpg", authorId: 1 },
+  // ข่าวที่ 6
+  { title: "เจ้าแม่ Pop/R&B ไทย: INK WARUNTORN และ BOWKYLION กวาดรางวัลเรียบ!", content: "ในงานประกาศรางวัลเพลงแห่งปี ทั้งสองศิลปินหญิงคว้ารางวัลไปได้อย่างภาคภูมิใจ", coverImage: "https://example.com/images/news/ink-bowky.jpg", authorId: 1 },
+  // ข่าวที่ 7
+  { title: "Early Bird Promotion! ลดราคาพิเศษสำหรับสมาชิก", content: "เฉพาะสมาชิกที่สมัครแพ็กเกจพรีเมียม รับส่วนลดค่าบัตรคอนเสิร์ต 10% ทุกงานตลอดปีนี้", coverImage: "https://example.com/images/news/promo.jpg", authorId: 2 },
+  // ข่าวที่ 8
+  { title: "EDM Festival ดึง 3 ดีเจระดับท็อปลงสเตจเดียวกัน", content: "มันส์ข้ามคืนไปกับ Martin Garrix, Zedd และ Illenium ในงานเทศกาลดนตรีอิเล็กทรอนิกส์ส่งท้ายปี", coverImage: "https://example.com/images/news/edm-fest.jpg", authorId: 2 },
+  // ข่าวที่ 9
+  { title: "NONT TANONT ปล่อยอัลบั้มเต็มชุดใหม่", content: "นักร้องเสียงนุ่มเตรียมปล่อย 10 เพลงใหม่ที่จะทำให้คุณใจละลาย ฟังพร้อมกันทุกสตรีมมิ่งคืนนี้", coverImage: "https://example.com/images/news/nont-album.jpg", authorId: 1 },
+  // ข่าวที่ 10
+  { title: "ประกาศ: เลื่อนการจำหน่ายบัตรชั่วคราว (วันที่ 15 พฤษภาคม)", content: "เนื่องจากกระแสตอบรับอย่างล้นหลาม เซิร์ฟเวอร์ขัดข้องชั่วคราว ทางเราขอเลื่อนการจำหน่ายบัตรออกไป 2 ชั่วโมง", coverImage: null, authorId: 2 }
+];
+
+const newsArtistsData = [
+  // ข่าวที่ 1 (Taylor Swift)
+  { newsId: 1, artistId: 3 }, 
+  
+  // ข่าวที่ 2 (Rolling Loud)
+  { newsId: 2, artistId: 14 }, // Kendrick Lamar
+  { newsId: 2, artistId: 15 }, // Travis Scott
+  { newsId: 2, artistId: 13 }, // F.HERO
+  { newsId: 2, artistId: 12 }, // MILLI
+
+  // ข่าวที่ 3 ไม่มีศิลปิน (ข้าม)
+
+  // ข่าวที่ 4 (Jeff x NIKI)
+  { newsId: 4, artistId: 17 }, // Jeff Satur
+  { newsId: 4, artistId: 19 }, // NIKI
+
+  // ข่าวที่ 5 (Bodyslam)
+  { newsId: 5, artistId: 6 },  // Bodyslam
+
+  // ข่าวที่ 6 (Ink x Bowky)
+  { newsId: 6, artistId: 2 },  // INK WARUNTORN
+  { newsId: 6, artistId: 20 }, // BOWKYLION
+
+  // ข่าวที่ 7 ไม่มีศิลปิน (ข้าม)
+
+  // ข่าวที่ 8 (EDM)
+  { newsId: 8, artistId: 21 }, // Martin Garrix
+  { newsId: 8, artistId: 22 }, // Zedd
+  { newsId: 8, artistId: 25 }, // Illenium
+
+  // ข่าวที่ 9 (Nont)
+  { newsId: 9, artistId: 1 },  // NONT TANONT
+
+  // ข่าวที่ 10 ไม่มีศิลปิน (ข้าม)
+];
+
 async function resetData() {
     console.log('Clean table')
 
@@ -246,6 +306,8 @@ async function resetData() {
         prisma.$executeRawUnsafe('TRUNCATE TABLE `ChatRoom`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `Message`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `Song`;'),
+        prisma.$executeRawUnsafe('TRUNCATE TABLE `News`;'),
+        prisma.$executeRawUnsafe('TRUNCATE TABLE `NewsArtist`;'),
         prisma.$executeRawUnsafe('SET FOREIGN_KEY_CHECKS = 1;'),
     ]);
     console.log('Start seeding')
@@ -329,6 +391,17 @@ async function resetData() {
         data: messagesData,
         skipDuplicates: true,
     })
+
+        await prisma.news.createMany({
+        data: newsData,
+        skipDuplicates: true,
+    })
+
+        await prisma.newsArtist.createMany({
+        data: newsArtistsData,
+        skipDuplicates: true,
+    })
+
 
 }
 

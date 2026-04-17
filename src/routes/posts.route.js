@@ -7,11 +7,11 @@ postsRouter.post('/',createPostController)
 
 postsRouter.get('/',getAllPostController)
 
-postsRouter.get('/:id',getPostController)
+postsRouter.get('/:postId',getPostController)
 
-postsRouter.delete('/:id',deletePostController)
+postsRouter.delete('/:postId',deletePostController)
 
-postsRouter.patch('/:id',editPostController)
+postsRouter.patch('/:postId',editPostController)
 
 postsRouter.post('/:postId/comments',commentPostController)
 
@@ -22,11 +22,5 @@ postsRouter.delete('/:postId/like',deleteLikePostController)
 postsRouter.patch('/:postId/comments/:commentId',editCommentController)
 
 postsRouter.delete('/:postId/comments/:commentId',deleteCommentController)
-
-// postsRouter.delete('/:postId',adminDeletePostController)
-
-// postsRouter.delete('/:postId/comments/:commentId',(req,res) => {
-//     res.json('admin delete user comment')
-// })
 
 export default postsRouter
