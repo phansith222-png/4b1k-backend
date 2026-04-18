@@ -116,12 +116,15 @@ export async function getAllLikeController (req,res,next) {
     try {
         const {postId} = req.params
 
-        const getLike = await getAllLike(postId)
+        const likes = await getAllLike(Number(postId))
 
         res.status(200).json({
             message : 'get all like successfully',
-            getLike : getLike
+            postId : postId,
+            likes : likes,
+            totalLikes : likes.length
         })
+
 
     }catch (error) {
         next(error)

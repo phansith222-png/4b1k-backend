@@ -67,6 +67,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxN
     "userId" : "3"
 }
 
+### get all like
+GET {{BASE_URL}}/posts/6/like
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc2NTEyMjY0LCJleHAiOjE3NzcxMTcwNjR9.KkS_GbmWeSjmOlxi-71ePSA9SvchJ8yd_8c7gXEF5-M
+
 ### edit comment
 DELETE  {{BASE_URL}}/posts/3/comments/3
 Content-Type: application/json

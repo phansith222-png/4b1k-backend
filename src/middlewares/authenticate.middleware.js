@@ -6,8 +6,8 @@ export default async function authenicateMiddleware (req, res, next) {
     const authorization = req.headers.authorization
     
     // บรรทัดนี้ช่วยเช็คใน Terminal ว่า Frontend ส่งมาจริงไหม
-    console.log('--- Checking Header ---')
-    console.log('Auth Value:', authorization) 
+    // console.log('--- Checking Header ---')
+    // console.log('Auth Value:', authorization) 
 
     if (!authorization || !authorization.startsWith('Bearer ')) {
         return next(createHttpError[401]('Unauthorized 1: No Token or Wrong Format'))
@@ -29,18 +29,9 @@ export default async function authenicateMiddleware (req, res, next) {
 
     const {createdAt,updatedAt,...userInfo} = foundUser
 
-<<<<<<< HEAD
-    req.user = userInfo
-    // console.log('req.user', req.user)
-    next()
-}
-
-
-=======
         req.user = userInfo
         next()
     } catch (err) {
         return next(createHttpError[401]('Unauthorized: Invalid Token'))
     }
 }
->>>>>>> dev
