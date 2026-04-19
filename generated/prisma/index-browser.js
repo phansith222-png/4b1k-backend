@@ -177,7 +177,11 @@ exports.Prisma.PostScalarFieldEnum = {
   content: 'content',
   userId: 'userId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PostArtistScalarFieldEnum = {
+  postId: 'postId',
   artistId: 'artistId'
 };
 
@@ -387,6 +391,7 @@ exports.Prisma.ModelName = {
   ArtistGenre: 'ArtistGenre',
   FavArtist: 'FavArtist',
   Post: 'Post',
+  PostArtist: 'PostArtist',
   PostImage: 'PostImage',
   Like: 'Like',
   Comment: 'Comment',

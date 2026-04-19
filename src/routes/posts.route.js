@@ -15,6 +15,10 @@ postsRouter.patch('/:postId',editPostController)
 
 postsRouter.post('/:postId/comments',commentPostController)
 
+postsRouter.get('/:postId/like',(req,res) => {
+    res.json('get like from post')
+})
+
 postsRouter.post('/:postId/like',likePostController)
 
 postsRouter.delete('/:postId/like',deleteLikePostController)
