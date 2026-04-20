@@ -13,13 +13,9 @@ import eventsRouter from "./routes/events.route.js";
 import adminRouter from "./routes/admin.route.js";
 import chatRouter from "./routes/chat.route.js";
 
-import cors from "cors";
-
-const app = express();
-
 app.use(
   cors({
-    origin: true,
+    origin: ["http://localhost:5173"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   })

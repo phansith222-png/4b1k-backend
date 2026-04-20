@@ -31,9 +31,23 @@ export default async function authenicateMiddleware(req, res, next) {
 
     const { createdAt, updatedAt, ...userInfo } = foundUser;
 
-    req.user = userInfo;
-    next();
-  } catch (err) {
-    return next(createHttpError[401]("Unauthorized: Invalid Token"));
-  }
+    if (!token) {
+        return next(createHttpError[401]('Unauthorized 2: Token is missing'))
+    }
+
+    try {
+        const payload = jwt.verify(token, process.env.JWT_SECRET)
+        const foundUser = await getUserby('id', payload.id)
+
+        if (!foundUser) {
+            return next(createHttpError[401]('Unauthorized 3: User not found'))
+        }
+
+    const {createdAt,updatedAt,...userInfo} = foundUser
+
+        req.user = userInfo
+        next()
+    } catch (err) {
+        return next(createHttpError[401]('Unauthorized: Invalid Token'))
+    }
 }
