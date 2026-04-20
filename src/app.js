@@ -1,44 +1,63 @@
-import express from 'express';
-import authRouter from './routes/auth.route.js';
-import usersRouter from './routes/users.route.js';
-import authenicateMiddleware from './middlewares/authenticate.middleware.js';
-import notFoundMiddleware from './middlewares/notFound.middleware.js';
-import errorMidddleware from './middlewares/error.middleware.js';
-import postsRouter from './routes/posts.route.js';
-import artistsRouter from './routes/artist.route.js';
-import eventsRouter from './routes/events.route.js';
-import adminRouter from './routes/admin.route.js';
-import chatRouter from './routes/chat.route.js';
-import cors from 'cors';
+import express from "express";
+import session from "express-session";
+import passport from "./oauthConfig/passport.js";
 
-const app = express()
+import authRouter from "./routes/auth.route.js";
+import usersRouter from "./routes/users.route.js";
+import authenicateMiddleware from "./middlewares/authenticate.middleware.js";
+import notFoundMiddleware from "./middlewares/notFound.middleware.js";
+import errorMidddleware from "./middlewares/error.middleware.js";
+import postsRouter from "./routes/posts.route.js";
+import artistsRouter from "./routes/artist.route.js";
+import eventsRouter from "./routes/events.route.js";
+import adminRouter from "./routes/admin.route.js";
+import chatRouter from "./routes/chat.route.js";
 
-app.use(cors({
+app.use(
+  cors({
     origin: ["http://localhost:5173"],
-    methods:["GET","POST","PUT","PATCH","DELETE"],
-    credentials:true
-}))
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    credentials: true,
+  })
+);
 
-app.use(express.json())
+app.use(express.json());
 
-app.use('/auth',authRouter)
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || process.env.JWT_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000, //1 วัน
+    },
+  })
+);
 
-app.use('/chats', authenicateMiddleware, chatRouter)
+app.use(passport.initialize()); // เอาไว้ใช้กับ Oauth ในการล็อคอินด้วย Google, Facebook, X
 
-app.use('/users',authenicateMiddleware,usersRouter)
+app.use("/chats", authenicateMiddleware, chatRouter);
 
-app.use('/admin',adminRouter)
+app.use("/users", authenicateMiddleware, usersRouter);
 
-app.use('/posts',authenicateMiddleware,postsRouter)
+app.use("/auth", authRouter);
 
-app.use('/artists',artistsRouter)
+app.use("/users", authenicateMiddleware, usersRouter);
 
-app.use('/events',eventsRouter)
+app.use("/admin", adminRouter);
+
+app.use("/posts", authenicateMiddleware, postsRouter);
+
+app.use("/artists", artistsRouter);
+
+app.use("/events", eventsRouter);
 
 //not found
-app.use(notFoundMiddleware)
+app.use(notFoundMiddleware);
 
 //error middleware
-app.use(errorMidddleware)
+app.use(errorMidddleware);
 
-export default app
+export default app;
