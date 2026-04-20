@@ -105,6 +105,7 @@ model Post {
 
   user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   postImages PostImage[]
+  image   String?
 
   @@index([userId], map: "Post_userId_fkey")
 }
@@ -196,6 +197,7 @@ model Venue {
   lat     Float
   lng     Float
   events  Event[]
+  image   String?
 }
 
 model ChatRoom {

@@ -1,17 +1,70 @@
 import createHttpError from 'http-errors'
 import { createEvent, deleteEvent, getAllEvents, getEvent, updateEvent } from '../service.js/event.service.js'
+import { prisma } from '../lib/prisma.js' // 📌 อย่าลืม import prisma ให้ถูกต้องตาม path ของคุณ
 
 export async function getAllEventsController (req,res,next) {
     try {
-        const events = await getAllEvents()
+        const events = await prisma.event.findMany({
+            orderBy: {
+                startTime: 'asc' // เรียงจากวันที่ใกล้สุด
+            },
+            include: {
+                venue: true,
+                artists: {   
+                    include: {
+                        artist: {
+                            include: {
+                                genres: {  // 📌 แก้ตรงนี้! เปลี่ยนจาก artistGenres เป็น genres ตาม Schema ของคุณ
+                                    include: { genre: true }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
 
-        res.status(200).json({
-            message : "Get all events successfully",
-            events : events
-        })
+        // Loop เพื่อสร้างฟิลด์ type และ mainArtistName ให้ Frontend ไปทำ Filter ง่ายๆ
+        const formattedEvents = events.map(event => {
+            let eventType = "Concert"; 
+            let eventArtistName = "Various Artists";
 
-    }catch(error) {
-        next(error)
+            if (event.artists && event.artists.length > 0) {
+                // เช็คโครงสร้างการดึงข้อมูล
+                const mainArtist = event.artists[0].artist ? event.artists[0].artist : event.artists[0];
+                
+                if (mainArtist) {
+                    eventArtistName = mainArtist.artistName || "Unknown Artist";
+                    
+                    // 📌 เปลี่ยนมาเรียกใช้ .genres ให้ตรงกัน
+                    const genreList = mainArtist.genres;
+                    
+                    if (genreList && genreList.length > 0) {
+                        const firstGenre = genreList[0].genre ? genreList[0].genre : genreList[0];
+                        const genreName = firstGenre?.name?.toLowerCase() || "";
+                        
+                        // จัดกลุ่มแนวเพลงให้เป็นคำสั้นๆ สำหรับทำปุ่ม Filter
+                        if (genreName.includes('pop')) eventType = "Pop";
+                        else if (genreName.includes('rock')) eventType = "Rock";
+                        else if (genreName.includes('r&b') || genreName.includes('rnb') || genreName.includes('classic')) eventType = "R&B / Classic";
+                        else if (genreName.includes('hip') || genreName.includes('rap')) eventType = "Hip Hop";
+                        else if (genreName.includes('edm') || genreName.includes('electronic')) eventType = "EDM";
+                        else eventType = firstGenre?.name || "Concert"; 
+                    }
+                }
+            }
+
+            return {
+                ...event,
+                type: eventType,
+                mainArtistName: eventArtistName 
+            };
+        });
+
+        res.status(200).json({ events: formattedEvents });
+    } catch (err) {
+        console.error("❌ Error in getAllEventsController:", err.message);
+        next(err);
     }
 }
 

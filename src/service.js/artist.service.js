@@ -1,49 +1,52 @@
-import {prisma} from '../lib/prisma.js'
+import { prisma } from '../lib/prisma.js'
 import createHttpError from 'http-errors'
 
-export const getAllArtists = async() => {
+export const getAllArtists = async () => {
     const result = await prisma.artist.findMany({
-        orderBy : {createdAt : 'desc'},
-    })
-    return result
-}
-
-export const getArtist = async(artistId) => {
-    const result = await prisma.artist.findUnique({
-        where : {id : artistId},
+        orderBy: { createdAt: 'desc' },
+        // ถ้าอยากให้หน้าเว็บดึง Genres และ Agency ได้จากคำสั่งนี้เลย ให้เปิดคอมเมนต์ตรงนี้ครับ
         include: {
-            // 1. ดึงข้อมูล Agency (ต้นสังกัด)
-            agency: true, 
-            // 2. ดึงรายการเพลงทั้งหมดของศิลปินนี้
-            songs: {
-                orderBy: { releaseDate: 'desc' } // (ตัวเลือกเพิ่มเติม) เรียงเพลงใหม่ล่าสุดขึ้นก่อน
-            },
-            // 3. ดึงข้อมูลแนวเพลง (เนื่องจากเป็น Many-to-Many ต้อง nested include)
+            agency: true,
             genres: {
-                include: {
-                    genre: true // เข้าไปหยิบชื่อแนวเพลงจากตาราง Genre
-                }
+                include: { genre: true }
             }
         }
     })
     return result
 }
 
-export const createArtistPage = async(data) => {
-    const { artistName, profileImage, biography, agencyId, genreId, songs,userId } = data
+export const getArtist = async (artistId) => {
+    return await prisma.artist.findUnique({
+        where: { id: artistId },
+        include: {
+            agency: true,
+            genres: { include: { genre: true } },
+            songs: { orderBy: { popularity: 'desc' } }, // ขาดบรรทัดนี้ เพลงไม่ขึ้น
+            events: { // ขาดบล็อกนี้ คอนเสิร์ตไม่ขึ้น
+                include: {
+                    event: { include: { venue: true } }
+                }
+            }
+        }
+    })
+}
 
+export const createArtistPage = async (data) => {
+    const { artistName, profileImage, biography, agencyId, genreId, songs, userId } = data
+
+    // เตรียมโครงสร้างข้อมูลที่จะสร้าง (Data payload)
     const prismaData = {
         artistName: artistName,
         profileImage: profileImage || null,
         biography: biography || null,
         createdByUser: {
-            connect : {id : userId}
+            connect: { id: userId }
         }
     }
 
     if (agencyId) {
-        prismaData.agency = { 
-            connect: { id: agencyId } 
+        prismaData.agency = {
+            connect: { id: agencyId }
         };
     }
 
@@ -55,7 +58,7 @@ export const createArtistPage = async(data) => {
         };
     }
 
-    //ถ้ามีข้อมูลเพลงส่งมาด้วย -> ให้สร้างเพลงใหม่ลงตาราง Song (Nested Create)
+    // ถ้ามีข้อมูลเพลงส่งมาด้วย
     if (songs && Array.isArray(songs) && songs.length > 0) {
         prismaData.songs = {
             create: songs.map((song) => ({
@@ -63,7 +66,6 @@ export const createArtistPage = async(data) => {
                 coverImage: song.coverImage || null,
                 duration: song.duration ? Number(song.duration) : null,
                 streamUrl: song.streamUrl || null,
-                // แปลงวันที่ String ให้เป็น DateTime เพื่อให้เซฟลง Database ได้
                 releaseDate: song.releaseDate ? new Date(song.releaseDate) : null
             }))
         };
@@ -71,15 +73,14 @@ export const createArtistPage = async(data) => {
 
     const result = await prisma.artist.create({
         data: prismaData,
-        // ดึงข้อมูลที่เพิ่งสร้าง/ผูกเสร็จ กลับไปให้ Controller ด้วย
         include: {
             agency: true,
-            genres: { 
-                include: { genre: true } 
+            genres: {
+                include: { genre: true }
             },
             songs: true,
             createdByUser: {
-                select: { id: true, username: true } // ดึงมาแค่ ID กับชื่อก็พอ
+                select: { id: true, username: true }
             }
         }
     })
@@ -87,45 +88,43 @@ export const createArtistPage = async(data) => {
     return result
 }
 
-export const updateArtistPage = async(data) => {
-
-    const { artistName,artistId, profileImage, biography, agencyId, genreId, songs,userId } = data
+export const updateArtistPage = async (data) => {
+    const { artistName, artistId, profileImage, biography, agencyId, genreId, songs, userId } = data
+    
     const foundArtist = await prisma.artist.findUnique({
-        where : {id : artistId}
+        where: { id: artistId }
     })
 
-    if(!foundArtist) {
-        return (createHttpError[404]('Not found Artist'))
+    if (!foundArtist) {
+        // แก้ไข: ใช้ throw และวงเล็บที่ถูกต้อง
+        throw createHttpError(404, 'Artist not found')
     }
 
-    // เตรียมข้อมูลที่จะอัปเดต
     const prismaData = {
         artistName: artistName,
         profileImage: profileImage !== undefined ? profileImage : undefined,
         biography: biography !== undefined ? biography : undefined,
+        // (ส่วนนี้อาจไม่ต้องอัปเดต createdByUser ตลอดเวลาที่แก้ไข แต่อิงตามโค้ดเดิมของคุณ)
         createdByUser: {
-            connect : {id : userId}
+            connect: { id: userId }
         }
     }
 
-    // console.log(prismaData)
-    //ถ้ามีการเปลี่ยนค่ายเพลง (agencyId)
     if (agencyId) {
-        prismaData.agency = { 
-            connect: { id: agencyId } 
+        prismaData.agency = {
+            connect: { id: agencyId }
         }
     }
 
     if (genreId) {
         prismaData.genres = {
-            deleteMany: {}, // ลบแนวเพลงเดิมของศิลปินคนนี้ออกทั้งหมด เพิ่มได้ทีละหลายแนว ไม่ค้อเียนโค้ดดักว่า แนวเพลงนี้มีซ้ำหรือยัง
+            deleteMany: {},
             create: [
-                { genre: { connect: { id: genreId } } } // ผูกกับแนวเพลงใหม่
+                { genre: { connect: { id: genreId } } }
             ]
         };
     }
 
-    // ถ้าส่งเพลงใหม่มาด้วย (สมมติว่าเป็นการ "เพิ่มเพลงใหม่" เข้าไป ไม่ใช่ลบเพลงเก่า)
     if (songs && Array.isArray(songs) && songs.length > 0) {
         prismaData.songs = {
             create: songs.map((song) => ({
@@ -138,7 +137,6 @@ export const updateArtistPage = async(data) => {
         };
     }
 
-    //อัปเดตลง Database
     const result = await prisma.artist.update({
         where: { id: artistId },
         data: prismaData,
@@ -147,7 +145,7 @@ export const updateArtistPage = async(data) => {
             genres: { include: { genre: true } },
             songs: true,
             createdByUser: {
-                select: { id: true, username: true } // ดึงมาแค่ ID กับชื่อก็พอ
+                select: { id: true, username: true }
             }
         }
     });
@@ -155,35 +153,33 @@ export const updateArtistPage = async(data) => {
     return result
 }
 
-export const deleteArtistPage = async(artistId) => {
-
+export const deleteArtistPage = async (artistId) => {
     const foundArtist = await prisma.artist.findUnique({
-          where : { id : artistId}
+        where: { id: artistId }
     })
 
-    if(!foundArtist) {
-        return (createHttpError[404],('Artist not found'))
+    if (!foundArtist) {
+        throw createHttpError(404, 'Artist not found')
     }
 
+    // กรณีศิลปินถูกลบ Prisma อาจจะติดเรื่อง Relation 
+    // ตรวจสอบ schema ด้วยว่า ArtistGenre, Song ตั้งค่า onDelete: Cascade ไว้หรือไม่
     const result = await prisma.artist.delete({
-        where : { id : artistId}
+        where: { id: artistId }
     })
 
     return result
 }
 
-export const likeArtist = async(data) => {
-
-    const {userId,artistId} = data
-
-    // console.log('artistId at likeArtist',artistId)
+export const likeArtist = async (data) => {
+    const { userId, artistId } = data
 
     const foundArtist = await prisma.artist.findUnique({
-        where : {id : artistId}
+        where: { id: artistId }
     })
 
-    if(!foundArtist) {
-        return (createHttpError(404),'Artist Not Found')
+    if (!foundArtist) {
+        throw createHttpError(404, 'Artist Not Found')
     }
 
     const haveLike = await prisma.favArtist.findUnique({
@@ -195,35 +191,58 @@ export const likeArtist = async(data) => {
         }
     })
 
-    if(haveLike) {
-        return (createHttpError[400],('already like this artist'))
+    if (haveLike) {
+        throw createHttpError(400, 'Already liked this artist')
     }
 
     const result = await prisma.favArtist.create({
-        data : {userId : userId, artistId : artistId}
+        data: { userId: userId, artistId: artistId }
     })
 
     return result
 }
 
-export const unlikeArtist = async(data) => {
-    const {userId,artistId} = data
+export const unlikeArtist = async (data) => {
+    const { userId, artistId } = data
 
     const likeData = await prisma.favArtist.findUnique({
-        where : {
-            userId_artistId : {userId,artistId}
+        where: {
+            userId_artistId: { userId, artistId }
         }
     })
 
-    if(!likeData) {
-        return (createHttpError[401]('Cannot unlike this artist'))
+    if (!likeData) {
+        throw createHttpError(401, 'Cannot unlike this artist, or not liked yet')
     }
 
     const result = await prisma.favArtist.delete({
-        where : {
-            userId_artistId : {userId,artistId}
+        where: {
+            userId_artistId: { userId, artistId }
         }
     })
 
     return result
+}
+
+// ดึงเพลง
+export const getSongsByArtist = async (artistId) => {
+    return await prisma.song.findMany({
+        where: { artistId: Number(artistId) },
+        orderBy: { popularity: 'desc' } // เรียงจากฮิตสุด
+    });
+}
+
+// ดึงอีเวนต์
+export const getEventsByArtist = async (artistId) => {
+    // เนื่องจากตารางเป็น ArtistEvent เราต้อง Include ไปหา Event และ Venue
+    return await prisma.artistEvent.findMany({
+        where: { artistId: Number(artistId) },
+        include: {
+            event: {
+                include: {
+                    venue: true // เพื่อให้หน้าเว็บดึงชื่อสถานที่ (evt.venue.name) ได้
+                }
+            }
+        }
+    });
 }
