@@ -29,18 +29,9 @@ export default async function authenicateMiddleware (req, res, next) {
 
     const {createdAt,updatedAt,...userInfo} = foundUser
 
-<<<<<<< HEAD
-    req.user = userInfo
-    // console.log('req.user', req.user)
-    next()
-}
-
-
-=======
         req.user = userInfo
         next()
     } catch (err) {
         return next(createHttpError[401]('Unauthorized: Invalid Token'))
     }
 }
->>>>>>> dev
