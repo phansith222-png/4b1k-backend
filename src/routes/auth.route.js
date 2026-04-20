@@ -42,6 +42,18 @@ authRouter.get(
   oauthSuccessHandler
 );
 
+// Twitter (X)
+authRouter.get("/twitter", passport.authenticate("twitter"));
+
+authRouter.get(
+  "/twitter/callback",
+  passport.authenticate("twitter", {
+    session: false,
+    failureRedirect: "/auth/oauth/failed",
+  }),
+  oauthSuccessHandler
+);
+
 function oauthSuccessHandler(req, res) {
   const user = req.user;
 

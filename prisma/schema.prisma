@@ -29,6 +29,7 @@ model User {
   messages       Message[]
   posts          Post[]
   createdEvents  Event[]        @relation("EventCreator")
+  news           News[]         @relation("NewsCreator")
 }
 
 model Artist {
@@ -38,6 +39,7 @@ model Artist {
   biography       String?       @db.LongText
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
+
   agencyId        Int?
   createdByUserId Int?
   agency          Agency?       @relation(fields: [agencyId], references: [id])
@@ -45,8 +47,9 @@ model Artist {
   events          ArtistEvent[]
   genres          ArtistGenre[]
   favByUsers      FavArtist[]
-  posts           Post[]
+  postArtists PostArtist[] // ความสัมพันธ์กลับไปยัง Post
   songs           Song[]
+   news            NewsArtist[]
 
   @@index([agencyId], map: "Artist_agencyId_fkey")
   @@index([createdByUserId], map: "Artist_createdByUserId_fkey")
@@ -95,16 +98,28 @@ model Post {
   userId     Int
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
-  artistId   Int?
+ 
   comments   Comment[]
   likes      Like[]
-  artist     Artist?     @relation(fields: [artistId], references: [id])
+  postArtists PostArtist[]
+
   user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   postImages PostImage[]
 
-  @@index([artistId], map: "Post_artistId_fkey")
   @@index([userId], map: "Post_userId_fkey")
 }
+
+model PostArtist {
+  postId   Int
+  artistId Int
+  post     Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  artist   Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
+
+  @@id([postId, artistId])
+  @@index([artistId])
+  @@index([postId]) // ใช้ Composite Key เพื่อป้องกันการผูกศิลปินซ้ำในโพสต์เดียว
+}
+
 
 model PostImage {
   id        Int      @id @default(autoincrement())
@@ -144,21 +159,21 @@ model Comment {
 }
 
 model Event {
-  id            Int           @id @default(autoincrement())
-  eventName     String
-  description   String?       @db.LongText
-  posterImage   String?
-  status        EventStatus   @default(UPCOMING)
-  ticketLink    String?
-  startTime     DateTime
-  endTime       DateTime?
-  venueId       Int
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  artists       ArtistEvent[]
+  id              Int           @id @default(autoincrement())
+  eventName       String
+  description     String?       @db.LongText
+  posterImage     String?
+  status          EventStatus   @default(UPCOMING)
+  ticketLink      String?
+  startTime       DateTime
+  endTime         DateTime?
+  venueId         Int
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  artists         ArtistEvent[]
   createdByUserId Int?
-  createdByUser User?         @relation("EventCreator", fields: [createdByUserId], references: [id])
-  venue         Venue         @relation(fields: [venueId], references: [id])
+  createdByUser   User?         @relation("EventCreator", fields: [createdByUserId], references: [id])
+  venue           Venue         @relation(fields: [venueId], references: [id])
 
   @@index([venueId], map: "Event_venueId_fkey")
   @@index([createdByUserId], map: "Event_createdByUserId_fkey")
@@ -231,6 +246,33 @@ model Song {
   artist      Artist    @relation(fields: [artistId], references: [id], onDelete: Cascade)
 
   @@index([artistId], map: "Song_artistId_fkey")
+}
+
+model News {
+  id         Int      @id @default(autoincrement())
+  title      String
+  content    String   @db.Text
+  coverImage String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  //admin คนที่อัพเดทข่าว
+  authorId     Int
+  author       User     @relation("NewsCreator", fields: [authorId], references: [id])
+
+  artists      NewsArtist[]
+
+  @@index([authorId])
+}
+
+model NewsArtist {
+  newsId   Int
+  artistId Int
+  news     News   @relation(fields: [newsId], references: [id], onDelete: Cascade)
+  artist   Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
+
+  @@id([newsId, artistId]) // ใช้คู่ ID เป็น Primary Key เพื่อป้องกันการแท็กซ้ำในข่าวเดียว
+  @@index([artistId])
 }
 
 enum Role {
