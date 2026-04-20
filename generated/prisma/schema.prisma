@@ -93,7 +93,7 @@ model FavArtist {
 
 model Post {
   id        Int      @id @default(autoincrement())
-  title     String
+  title     String?
   content   String   @db.LongText
   userId    Int
   createdAt DateTime @default(now())
