@@ -4,7 +4,7 @@ import authenicateMiddleware from '../middlewares/authenticate.middleware.js'
 
 const eventsRouter = express.Router()
 
-eventsRouter.get('/',authenicateMiddleware,getAllEventsController)
+eventsRouter.get('/',getAllEventsController)
 
 eventsRouter.get('/:eventId',authenicateMiddleware,getEventController)
 

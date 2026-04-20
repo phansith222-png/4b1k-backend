@@ -8962,6 +8962,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     artistId: number | null
+    image: string | null
   }
 
   export type PostMaxAggregateOutputType = {
@@ -8972,6 +8973,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     artistId: number | null
+    image: string | null
   }
 
   export type PostCountAggregateOutputType = {
@@ -8982,6 +8984,7 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     artistId: number
+    image: number
     _all: number
   }
 
@@ -9006,6 +9009,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     artistId?: true
+    image?: true
   }
 
   export type PostMaxAggregateInputType = {
@@ -9016,6 +9020,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     artistId?: true
+    image?: true
   }
 
   export type PostCountAggregateInputType = {
@@ -9026,6 +9031,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     artistId?: true
+    image?: true
     _all?: true
   }
 
@@ -9123,6 +9129,7 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     artistId: number | null
+    image: string | null
     _count: PostCountAggregateOutputType | null
     _avg: PostAvgAggregateOutputType | null
     _sum: PostSumAggregateOutputType | null
@@ -9152,6 +9159,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     artistId?: boolean
+    image?: boolean
     comments?: boolean | Post$commentsArgs<ExtArgs>
     likes?: boolean | Post$likesArgs<ExtArgs>
     artist?: boolean | Post$artistArgs<ExtArgs>
@@ -9170,9 +9178,10 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     artistId?: boolean
+    image?: boolean
   }
 
-  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "userId" | "createdAt" | "updatedAt" | "artistId", ExtArgs["result"]["post"]>
+  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "userId" | "createdAt" | "updatedAt" | "artistId" | "image", ExtArgs["result"]["post"]>
   export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     comments?: boolean | Post$commentsArgs<ExtArgs>
     likes?: boolean | Post$likesArgs<ExtArgs>
@@ -9199,6 +9208,7 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       artistId: number | null
+      image: string | null
     }, ExtArgs["result"]["post"]>
     composites: {}
   }
@@ -9580,6 +9590,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Post", 'DateTime'>
     readonly updatedAt: FieldRef<"Post", 'DateTime'>
     readonly artistId: FieldRef<"Post", 'Int'>
+    readonly image: FieldRef<"Post", 'String'>
   }
     
 
@@ -15048,6 +15059,7 @@ export namespace Prisma {
     address: string | null
     lat: number | null
     lng: number | null
+    image: string | null
   }
 
   export type VenueMaxAggregateOutputType = {
@@ -15056,6 +15068,7 @@ export namespace Prisma {
     address: string | null
     lat: number | null
     lng: number | null
+    image: string | null
   }
 
   export type VenueCountAggregateOutputType = {
@@ -15064,6 +15077,7 @@ export namespace Prisma {
     address: number
     lat: number
     lng: number
+    image: number
     _all: number
   }
 
@@ -15086,6 +15100,7 @@ export namespace Prisma {
     address?: true
     lat?: true
     lng?: true
+    image?: true
   }
 
   export type VenueMaxAggregateInputType = {
@@ -15094,6 +15109,7 @@ export namespace Prisma {
     address?: true
     lat?: true
     lng?: true
+    image?: true
   }
 
   export type VenueCountAggregateInputType = {
@@ -15102,6 +15118,7 @@ export namespace Prisma {
     address?: true
     lat?: true
     lng?: true
+    image?: true
     _all?: true
   }
 
@@ -15197,6 +15214,7 @@ export namespace Prisma {
     address: string | null
     lat: number
     lng: number
+    image: string | null
     _count: VenueCountAggregateOutputType | null
     _avg: VenueAvgAggregateOutputType | null
     _sum: VenueSumAggregateOutputType | null
@@ -15224,6 +15242,7 @@ export namespace Prisma {
     address?: boolean
     lat?: boolean
     lng?: boolean
+    image?: boolean
     events?: boolean | Venue$eventsArgs<ExtArgs>
     _count?: boolean | VenueCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["venue"]>
@@ -15236,9 +15255,10 @@ export namespace Prisma {
     address?: boolean
     lat?: boolean
     lng?: boolean
+    image?: boolean
   }
 
-  export type VenueOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "address" | "lat" | "lng", ExtArgs["result"]["venue"]>
+  export type VenueOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "address" | "lat" | "lng" | "image", ExtArgs["result"]["venue"]>
   export type VenueInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     events?: boolean | Venue$eventsArgs<ExtArgs>
     _count?: boolean | VenueCountOutputTypeDefaultArgs<ExtArgs>
@@ -15255,6 +15275,7 @@ export namespace Prisma {
       address: string | null
       lat: number
       lng: number
+      image: string | null
     }, ExtArgs["result"]["venue"]>
     composites: {}
   }
@@ -15630,6 +15651,7 @@ export namespace Prisma {
     readonly address: FieldRef<"Venue", 'String'>
     readonly lat: FieldRef<"Venue", 'Float'>
     readonly lng: FieldRef<"Venue", 'Float'>
+    readonly image: FieldRef<"Venue", 'String'>
   }
     
 
@@ -20101,7 +20123,8 @@ export namespace Prisma {
     userId: 'userId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    artistId: 'artistId'
+    artistId: 'artistId',
+    image: 'image'
   };
 
   export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
@@ -20171,7 +20194,8 @@ export namespace Prisma {
     name: 'name',
     address: 'address',
     lat: 'lat',
-    lng: 'lng'
+    lng: 'lng',
+    image: 'image'
   };
 
   export type VenueScalarFieldEnum = (typeof VenueScalarFieldEnum)[keyof typeof VenueScalarFieldEnum]
@@ -20281,7 +20305,8 @@ export namespace Prisma {
 
   export const PostOrderByRelevanceFieldEnum: {
     title: 'title',
-    content: 'content'
+    content: 'content',
+    image: 'image'
   };
 
   export type PostOrderByRelevanceFieldEnum = (typeof PostOrderByRelevanceFieldEnum)[keyof typeof PostOrderByRelevanceFieldEnum]
@@ -20314,7 +20339,8 @@ export namespace Prisma {
 
   export const VenueOrderByRelevanceFieldEnum: {
     name: 'name',
-    address: 'address'
+    address: 'address',
+    image: 'image'
   };
 
   export type VenueOrderByRelevanceFieldEnum = (typeof VenueOrderByRelevanceFieldEnum)[keyof typeof VenueOrderByRelevanceFieldEnum]
@@ -20819,6 +20845,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
     artistId?: IntNullableFilter<"Post"> | number | null
+    image?: StringNullableFilter<"Post"> | string | null
     comments?: CommentListRelationFilter
     likes?: LikeListRelationFilter
     artist?: XOR<ArtistNullableScalarRelationFilter, ArtistWhereInput> | null
@@ -20834,6 +20861,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     artistId?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
     comments?: CommentOrderByRelationAggregateInput
     likes?: LikeOrderByRelationAggregateInput
     artist?: ArtistOrderByWithRelationInput
@@ -20853,6 +20881,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
     artistId?: IntNullableFilter<"Post"> | number | null
+    image?: StringNullableFilter<"Post"> | string | null
     comments?: CommentListRelationFilter
     likes?: LikeListRelationFilter
     artist?: XOR<ArtistNullableScalarRelationFilter, ArtistWhereInput> | null
@@ -20868,6 +20897,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     artistId?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
     _count?: PostCountOrderByAggregateInput
     _avg?: PostAvgOrderByAggregateInput
     _max?: PostMaxOrderByAggregateInput
@@ -20886,6 +20916,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
     artistId?: IntNullableWithAggregatesFilter<"Post"> | number | null
+    image?: StringNullableWithAggregatesFilter<"Post"> | string | null
   }
 
   export type PostImageWhereInput = {
@@ -21222,6 +21253,7 @@ export namespace Prisma {
     address?: StringNullableFilter<"Venue"> | string | null
     lat?: FloatFilter<"Venue"> | number
     lng?: FloatFilter<"Venue"> | number
+    image?: StringNullableFilter<"Venue"> | string | null
     events?: EventListRelationFilter
   }
 
@@ -21231,6 +21263,7 @@ export namespace Prisma {
     address?: SortOrderInput | SortOrder
     lat?: SortOrder
     lng?: SortOrder
+    image?: SortOrderInput | SortOrder
     events?: EventOrderByRelationAggregateInput
     _relevance?: VenueOrderByRelevanceInput
   }
@@ -21244,6 +21277,7 @@ export namespace Prisma {
     address?: StringNullableFilter<"Venue"> | string | null
     lat?: FloatFilter<"Venue"> | number
     lng?: FloatFilter<"Venue"> | number
+    image?: StringNullableFilter<"Venue"> | string | null
     events?: EventListRelationFilter
   }, "id">
 
@@ -21253,6 +21287,7 @@ export namespace Prisma {
     address?: SortOrderInput | SortOrder
     lat?: SortOrder
     lng?: SortOrder
+    image?: SortOrderInput | SortOrder
     _count?: VenueCountOrderByAggregateInput
     _avg?: VenueAvgOrderByAggregateInput
     _max?: VenueMaxOrderByAggregateInput
@@ -21269,6 +21304,7 @@ export namespace Prisma {
     address?: StringNullableWithAggregatesFilter<"Venue"> | string | null
     lat?: FloatWithAggregatesFilter<"Venue"> | number
     lng?: FloatWithAggregatesFilter<"Venue"> | number
+    image?: StringNullableWithAggregatesFilter<"Venue"> | string | null
   }
 
   export type ChatRoomWhereInput = {
@@ -21928,6 +21964,7 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: string | null
     comments?: CommentCreateNestedManyWithoutPostInput
     likes?: LikeCreateNestedManyWithoutPostInput
     artist?: ArtistCreateNestedOneWithoutPostsInput
@@ -21943,6 +21980,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     artistId?: number | null
+    image?: string | null
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     postImages?: PostImageUncheckedCreateNestedManyWithoutPostInput
@@ -21953,6 +21991,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUpdateManyWithoutPostNestedInput
     likes?: LikeUpdateManyWithoutPostNestedInput
     artist?: ArtistUpdateOneWithoutPostsNestedInput
@@ -21968,6 +22007,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     artistId?: NullableIntFieldUpdateOperationsInput | number | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
@@ -21981,6 +22021,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     artistId?: number | null
+    image?: string | null
   }
 
   export type PostUpdateManyMutationInput = {
@@ -21988,6 +22029,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PostUncheckedUpdateManyInput = {
@@ -21998,6 +22040,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     artistId?: NullableIntFieldUpdateOperationsInput | number | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PostImageCreateInput = {
@@ -22297,6 +22340,7 @@ export namespace Prisma {
     address?: string | null
     lat: number
     lng: number
+    image?: string | null
     events?: EventCreateNestedManyWithoutVenueInput
   }
 
@@ -22306,6 +22350,7 @@ export namespace Prisma {
     address?: string | null
     lat: number
     lng: number
+    image?: string | null
     events?: EventUncheckedCreateNestedManyWithoutVenueInput
   }
 
@@ -22314,6 +22359,7 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     events?: EventUpdateManyWithoutVenueNestedInput
   }
 
@@ -22323,6 +22369,7 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     events?: EventUncheckedUpdateManyWithoutVenueNestedInput
   }
 
@@ -22332,6 +22379,7 @@ export namespace Prisma {
     address?: string | null
     lat: number
     lng: number
+    image?: string | null
   }
 
   export type VenueUpdateManyMutationInput = {
@@ -22339,6 +22387,7 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type VenueUncheckedUpdateManyInput = {
@@ -22347,6 +22396,7 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ChatRoomCreateInput = {
@@ -23181,6 +23231,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     artistId?: SortOrder
+    image?: SortOrder
   }
 
   export type PostAvgOrderByAggregateInput = {
@@ -23197,6 +23248,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     artistId?: SortOrder
+    image?: SortOrder
   }
 
   export type PostMinOrderByAggregateInput = {
@@ -23207,6 +23259,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     artistId?: SortOrder
+    image?: SortOrder
   }
 
   export type PostSumOrderByAggregateInput = {
@@ -23511,6 +23564,7 @@ export namespace Prisma {
     address?: SortOrder
     lat?: SortOrder
     lng?: SortOrder
+    image?: SortOrder
   }
 
   export type VenueAvgOrderByAggregateInput = {
@@ -23525,6 +23579,7 @@ export namespace Prisma {
     address?: SortOrder
     lat?: SortOrder
     lng?: SortOrder
+    image?: SortOrder
   }
 
   export type VenueMinOrderByAggregateInput = {
@@ -23533,6 +23588,7 @@ export namespace Prisma {
     address?: SortOrder
     lat?: SortOrder
     lng?: SortOrder
+    image?: SortOrder
   }
 
   export type VenueSumOrderByAggregateInput = {
@@ -25467,6 +25523,7 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: string | null
     comments?: CommentCreateNestedManyWithoutPostInput
     likes?: LikeCreateNestedManyWithoutPostInput
     artist?: ArtistCreateNestedOneWithoutPostsInput
@@ -25480,6 +25537,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     artistId?: number | null
+    image?: string | null
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     postImages?: PostImageUncheckedCreateNestedManyWithoutPostInput
@@ -25725,6 +25783,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
     artistId?: IntNullableFilter<"Post"> | number | null
+    image?: StringNullableFilter<"Post"> | string | null
   }
 
   export type EventUpsertWithWhereUniqueWithoutCreatedByUserInput = {
@@ -25891,6 +25950,7 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: string | null
     comments?: CommentCreateNestedManyWithoutPostInput
     likes?: LikeCreateNestedManyWithoutPostInput
     user: UserCreateNestedOneWithoutPostsInput
@@ -25904,6 +25964,7 @@ export namespace Prisma {
     userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: string | null
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     postImages?: PostImageUncheckedCreateNestedManyWithoutPostInput
@@ -26833,6 +26894,7 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: string | null
     comments?: CommentCreateNestedManyWithoutPostInput
     likes?: LikeCreateNestedManyWithoutPostInput
     artist?: ArtistCreateNestedOneWithoutPostsInput
@@ -26847,6 +26909,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     artistId?: number | null
+    image?: string | null
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
   }
@@ -26872,6 +26935,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUpdateManyWithoutPostNestedInput
     likes?: LikeUpdateManyWithoutPostNestedInput
     artist?: ArtistUpdateOneWithoutPostsNestedInput
@@ -26886,6 +26950,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     artistId?: NullableIntFieldUpdateOperationsInput | number | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
   }
@@ -26895,6 +26960,7 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: string | null
     comments?: CommentCreateNestedManyWithoutPostInput
     artist?: ArtistCreateNestedOneWithoutPostsInput
     user: UserCreateNestedOneWithoutPostsInput
@@ -26909,6 +26975,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     artistId?: number | null
+    image?: string | null
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
     postImages?: PostImageUncheckedCreateNestedManyWithoutPostInput
   }
@@ -26984,6 +27051,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUpdateManyWithoutPostNestedInput
     artist?: ArtistUpdateOneWithoutPostsNestedInput
     user?: UserUpdateOneRequiredWithoutPostsNestedInput
@@ -26998,6 +27066,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     artistId?: NullableIntFieldUpdateOperationsInput | number | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
   }
@@ -27063,6 +27132,7 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: string | null
     likes?: LikeCreateNestedManyWithoutPostInput
     artist?: ArtistCreateNestedOneWithoutPostsInput
     user: UserCreateNestedOneWithoutPostsInput
@@ -27077,6 +27147,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     artistId?: number | null
+    image?: string | null
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     postImages?: PostImageUncheckedCreateNestedManyWithoutPostInput
   }
@@ -27152,6 +27223,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     likes?: LikeUpdateManyWithoutPostNestedInput
     artist?: ArtistUpdateOneWithoutPostsNestedInput
     user?: UserUpdateOneRequiredWithoutPostsNestedInput
@@ -27166,6 +27238,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     artistId?: NullableIntFieldUpdateOperationsInput | number | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
   }
@@ -27299,6 +27372,7 @@ export namespace Prisma {
     address?: string | null
     lat: number
     lng: number
+    image?: string | null
   }
 
   export type VenueUncheckedCreateWithoutEventsInput = {
@@ -27307,6 +27381,7 @@ export namespace Prisma {
     address?: string | null
     lat: number
     lng: number
+    image?: string | null
   }
 
   export type VenueCreateOrConnectWithoutEventsInput = {
@@ -27402,6 +27477,7 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type VenueUncheckedUpdateWithoutEventsInput = {
@@ -27410,6 +27486,7 @@ export namespace Prisma {
     address?: NullableStringFieldUpdateOperationsInput | string | null
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ArtistCreateWithoutEventsInput = {
@@ -28121,6 +28198,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     artistId?: number | null
+    image?: string | null
   }
 
   export type EventCreateManyCreatedByUserInput = {
@@ -28279,6 +28357,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUpdateManyWithoutPostNestedInput
     likes?: LikeUpdateManyWithoutPostNestedInput
     artist?: ArtistUpdateOneWithoutPostsNestedInput
@@ -28292,6 +28371,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     artistId?: NullableIntFieldUpdateOperationsInput | number | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
@@ -28304,6 +28384,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     artistId?: NullableIntFieldUpdateOperationsInput | number | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EventUpdateWithoutCreatedByUserInput = {
@@ -28370,6 +28451,7 @@ export namespace Prisma {
     userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: string | null
   }
 
   export type SongCreateManyArtistInput = {
@@ -28430,6 +28512,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUpdateManyWithoutPostNestedInput
     likes?: LikeUpdateManyWithoutPostNestedInput
     user?: UserUpdateOneRequiredWithoutPostsNestedInput
@@ -28443,6 +28526,7 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
@@ -28455,6 +28539,7 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SongUpdateWithoutArtistInput = {
