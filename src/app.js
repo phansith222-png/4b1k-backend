@@ -12,6 +12,9 @@ import artistsRouter from "./routes/artist.route.js";
 import eventsRouter from "./routes/events.route.js";
 import adminRouter from "./routes/admin.route.js";
 import chatRouter from "./routes/chat.route.js";
+import cors from "cors"
+
+const app = express()
 
 app.use(
   cors({
