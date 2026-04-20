@@ -14,14 +14,7 @@ import cors from 'cors';
 const app = express()
 
 app.use(cors({
-<<<<<<< HEAD
-    origin: ["http://localhost:5173" , "http://127.0.0.1:5173",
-        // เผื่อบางครั้ง Vite รันด้วย network IP
-        "http://localhost:3000",
-        "http://127.0.0.1:3000"],
-=======
-    origin: true,
->>>>>>> backend-connect
+    origin: ["http://localhost:5173"],
     methods:["GET","POST","PUT","PATCH","DELETE"],
     credentials:true
 }))

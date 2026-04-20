@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-  "name": "prisma-client-bc4ddee81ee1bc765190565060f4c0942bb181acc04380802a4c5764b74255df",
-=======
-  "name": "prisma-client-68239c6c6772ea9aa7de459dda24ea1bed70ea3ea8862e73a20720f0d699c999",
->>>>>>> backend-connect
+  "name": "prisma-client-e5f1c78e70fef23387a35cf0247fbd987cd499ac2d6ca719c65821d44fae01cf",
   "main": "index.js",
   "types": "index.d.ts",
   "browser": "default.js",
