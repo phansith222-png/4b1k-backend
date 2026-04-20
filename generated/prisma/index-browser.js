@@ -178,8 +178,7 @@ exports.Prisma.PostScalarFieldEnum = {
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  artistId: 'artistId',
-  image: 'image'
+  artistId: 'artistId'
 };
 
 exports.Prisma.PostImageScalarFieldEnum = {
@@ -270,6 +269,21 @@ exports.Prisma.SongScalarFieldEnum = {
   artistId: 'artistId'
 };
 
+exports.Prisma.NewsScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  coverImage: 'coverImage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  authorId: 'authorId'
+};
+
+exports.Prisma.NewsArtistScalarFieldEnum = {
+  newsId: 'newsId',
+  artistId: 'artistId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -344,6 +358,12 @@ exports.Prisma.SongOrderByRelevanceFieldEnum = {
   coverImage: 'coverImage',
   streamUrl: 'streamUrl'
 };
+
+exports.Prisma.NewsOrderByRelevanceFieldEnum = {
+  title: 'title',
+  content: 'content',
+  coverImage: 'coverImage'
+};
 exports.Role = exports.$Enums.Role = {
   ADMIN: 'ADMIN',
   USER: 'USER'
@@ -370,6 +390,7 @@ exports.Prisma.ModelName = {
   ArtistGenre: 'ArtistGenre',
   FavArtist: 'FavArtist',
   Post: 'Post',
+  PostArtist: 'PostArtist',
   PostImage: 'PostImage',
   Like: 'Like',
   Comment: 'Comment',
@@ -379,7 +400,9 @@ exports.Prisma.ModelName = {
   ChatRoom: 'ChatRoom',
   ChatRoomUser: 'ChatRoomUser',
   Message: 'Message',
-  Song: 'Song'
+  Song: 'Song',
+  News: 'News',
+  NewsArtist: 'NewsArtist'
 };
 
 /**

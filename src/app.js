@@ -8,15 +8,20 @@ import postsRouter from './routes/posts.route.js';
 import artistsRouter from './routes/artist.route.js';
 import eventsRouter from './routes/events.route.js';
 import adminRouter from './routes/admin.route.js';
+import chatRouter from './routes/chat.route.js';
 import cors from 'cors';
 
 const app = express()
 
 app.use(cors({
+<<<<<<< HEAD
     origin: ["http://localhost:5173" , "http://127.0.0.1:5173",
         // เผื่อบางครั้ง Vite รันด้วย network IP
         "http://localhost:3000",
         "http://127.0.0.1:3000"],
+=======
+    origin: true,
+>>>>>>> backend-connect
     methods:["GET","POST","PUT","PATCH","DELETE"],
     credentials:true
 }))
@@ -24,6 +29,8 @@ app.use(cors({
 app.use(express.json())
 
 app.use('/auth',authRouter)
+
+app.use('/chats', authenicateMiddleware, chatRouter)
 
 app.use('/users',authenicateMiddleware,usersRouter)
 

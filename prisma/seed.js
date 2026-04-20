@@ -629,6 +629,7 @@ async function resetData() {
         prisma.$executeRawUnsafe('TRUNCATE TABLE `ArtistGenre`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `FavArtist`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `Post`;'),
+        prisma.$executeRawUnsafe('TRUNCATE TABLE `PostArtist`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `Like`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `Comment`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `Event`;'),
@@ -637,6 +638,8 @@ async function resetData() {
         prisma.$executeRawUnsafe('TRUNCATE TABLE `ChatRoom`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `Message`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `Song`;'),
+        prisma.$executeRawUnsafe('TRUNCATE TABLE `News`;'),
+        prisma.$executeRawUnsafe('TRUNCATE TABLE `NewsArtist`;'),
         prisma.$executeRawUnsafe('SET FOREIGN_KEY_CHECKS = 1;'),
     ]);
     console.log('Start seeding')

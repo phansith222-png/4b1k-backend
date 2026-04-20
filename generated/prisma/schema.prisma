@@ -29,15 +29,17 @@ model User {
   messages       Message[]
   posts          Post[]
   createdEvents  Event[]        @relation("EventCreator")
+  news           News[]         @relation("NewsCreator")
 }
 
 model Artist {
-  id              Int           @id @default(autoincrement())
-  artistName      String
-  profileImage    String?
-  biography       String?       @db.LongText
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+  id           Int      @id @default(autoincrement())
+  artistName   String
+  profileImage String?
+  biography    String?  @db.LongText
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
   agencyId        Int?
   createdByUserId Int?
   agency          Agency?       @relation(fields: [agencyId], references: [id])
@@ -45,8 +47,9 @@ model Artist {
   events          ArtistEvent[]
   genres          ArtistGenre[]
   favByUsers      FavArtist[]
-  posts           Post[]
+  postArtists     PostArtist[] // ความสัมพันธ์กลับไปยัง Post
   songs           Song[]
+  news            NewsArtist[]
 
   @@index([agencyId], map: "Artist_agencyId_fkey")
   @@index([createdByUserId], map: "Artist_createdByUserId_fkey")
@@ -89,22 +92,33 @@ model FavArtist {
 }
 
 model Post {
-  id         Int         @id @default(autoincrement())
-  title      String
-  content    String      @db.LongText
-  userId     Int
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
-  artistId   Int?
-  comments   Comment[]
-  likes      Like[]
-  artist     Artist?     @relation(fields: [artistId], references: [id])
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String   @db.LongText
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  comments    Comment[]
+  likes       Like[]
+  postArtists PostArtist[]
+
   user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   postImages PostImage[]
   image      String?
 
-  @@index([artistId], map: "Post_artistId_fkey")
   @@index([userId], map: "Post_userId_fkey")
+}
+
+model PostArtist {
+  postId   Int
+  artistId Int
+  post     Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  artist   Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
+
+  @@id([postId, artistId])
+  @@index([artistId])
+  @@index([postId]) // ใช้ Composite Key เพื่อป้องกันการผูกศิลปินซ้ำในโพสต์เดียว
 }
 
 model PostImage {
@@ -233,6 +247,33 @@ model Song {
   artist      Artist    @relation(fields: [artistId], references: [id], onDelete: Cascade)
 
   @@index([artistId], map: "Song_artistId_fkey")
+}
+
+model News {
+  id         Int      @id @default(autoincrement())
+  title      String
+  content    String   @db.Text
+  coverImage String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  //admin คนที่อัพเดทข่าว
+  authorId Int
+  author   User @relation("NewsCreator", fields: [authorId], references: [id])
+
+  artists NewsArtist[]
+
+  @@index([authorId])
+}
+
+model NewsArtist {
+  newsId   Int
+  artistId Int
+  news     News   @relation(fields: [newsId], references: [id], onDelete: Cascade)
+  artist   Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
+
+  @@id([newsId, artistId]) // ใช้คู่ ID เป็น Primary Key เพื่อป้องกันการแท็กซ้ำในข่าวเดียว
+  @@index([artistId])
 }
 
 enum Role {
