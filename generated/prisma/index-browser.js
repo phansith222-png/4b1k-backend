@@ -178,6 +178,11 @@ exports.Prisma.PostScalarFieldEnum = {
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  image: 'image'
+};
+
+exports.Prisma.PostArtistScalarFieldEnum = {
+  postId: 'postId',
   artistId: 'artistId'
 };
 

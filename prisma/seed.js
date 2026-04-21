@@ -1,17 +1,22 @@
 import bcrypt from 'bcrypt'
 import { prisma } from '../src/lib/prisma.js' // เช็ค path ให้ตรงกับโปรเจกต์ของคุณ
+import { postArtistsData } from './data/postsArtists.js';
+import { postsData } from './data/postsData.js';
+import { likePostData } from './data/likePostData.js';
+import { commentsData } from './data/commentsData.js';
+import { usersData } from './data/userData.js';
 
-const hashPassword = () => bcrypt.hashSync('@Concert123456', 8)
+// const hashPassword = () => bcrypt.hashSync('@Concert123456', 8)
 
-// 1. Users (6 คน) - 🔴 เพิ่มฟิลด์ profileImage
-const usersData = [
-  { username: "admin_ben", email: "admin.ben@concert.com", firstName: "Ben", lastName: "Admin", password: hashPassword(), role: "ADMIN", gender: "FEMALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
-  { username: "admin_lisa", email: "lisa.admin@concert.com", firstName: "Lisa", lastName: "Admin", password: hashPassword(), role: "ADMIN", gender: "MALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
-  { username: "fanboy01", email: "fanboy@gmail.com", firstName: "Somchai", lastName: "Jaidee", password: hashPassword(), role: "USER", gender: "MALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
-  { username: "fangirl99", email: "fangirl@gmail.com", firstName: "Somsri", lastName: "Rakdee", password: hashPassword(), role: "USER", gender: "FEMALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
-  { username: "musiclover", email: "music@yahoo.com", firstName: "John", lastName: "Doe", password: hashPassword(), role: "USER", gender: "OTHER", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
-  { username: "concertgoer", email: "goer@hotmail.com", firstName: "Jane", lastName: "Smith", password: hashPassword(), role: "USER", gender: "FEMALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
-];
+// // 1. Users (6 คน) - 🔴 เพิ่มฟิลด์ profileImage
+// const usersData = [
+//   { username: "admin_ben", email: "admin.ben@concert.com", firstName: "Ben", lastName: "Admin", password: hashPassword(), role: "ADMIN", gender: "FEMALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
+//   { username: "admin_lisa", email: "lisa.admin@concert.com", firstName: "Lisa", lastName: "Admin", password: hashPassword(), role: "ADMIN", gender: "MALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
+//   { username: "fanboy01", email: "fanboy@gmail.com", firstName: "Somchai", lastName: "Jaidee", password: hashPassword(), role: "USER", gender: "MALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
+//   { username: "fangirl99", email: "fangirl@gmail.com", firstName: "Somsri", lastName: "Rakdee", password: hashPassword(), role: "USER", gender: "FEMALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
+//   { username: "musiclover", email: "music@yahoo.com", firstName: "John", lastName: "Doe", password: hashPassword(), role: "USER", gender: "OTHER", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
+//   { username: "concertgoer", email: "goer@hotmail.com", firstName: "Jane", lastName: "Smith", password: hashPassword(), role: "USER", gender: "FEMALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
+// ];
 
 // 2. Genres (5 แนวเพลง)
 const genresData = [
@@ -570,29 +575,29 @@ const favArtistsData = [
   { userId: 6, artistId: 12 }, { userId: 6, artistId: 21 }, { userId: 6, artistId: 18 }
 ];
 
-// 11. Posts (โพสต์ใน Community) - 🔴 เพิ่มฟิลด์ image ได้ถ้า Schema รองรับ
-const postsData = [
-  { title: "เตรียมตัวให้พร้อม! รอกดบัตรคอนเสิร์ต NONT TANONT", content: "รอกดบัตรคอนเสิร์ตพี่นนท์ไม่ไหวแล้ววว...", userId: 3, artistId: 1 },
-  { title: "ตามหาบัตร Bodyslam โซน A", content: "ใครมีบัตร Bodyslam โซน A ปล่อยบ้างครับ...", userId: 5, artistId: 6 },
-  { title: "ข่าวลือ! The Weeknd อาจจะมาไทยปลายปีนี้?", content: "The Weeknd มาไทยรอบนี้จัดเต็มแน่!...", userId: 4, artistId: 16 },
-  { title: "รีวิวเพลงใหม่ MILLI ฟังแล้วหยุดโยกไม่ได้", content: "เพลงใหม่ MILLI คือดีย์มากแม่...", userId: 6, artistId: 12 },
-  { title: "รวมรูป อิงค์ วรันธร จากงาน Music Fest", content: "อิงค์ วรันธร น่ารักมากก งานเมื่อวาน...", userId: 3, artistId: 2 },
-  { title: "เตือนภัย! ระวังมิจฉาชีพหลอกขายบัตรทิพย์ใน Twitter", content: "ช่วงนี้คอนเสิร์ตเยอะมาก ระวังคนที่ให้โอนเงินก่อน...", userId: 1 }
-];
+// // 11. Posts (โพสต์ใน Community) - 🔴 เพิ่มฟิลด์ image ได้ถ้า Schema รองรับ
+// const postsData = [
+//   { title: "เตรียมตัวให้พร้อม! รอกดบัตรคอนเสิร์ต NONT TANONT", content: "รอกดบัตรคอนเสิร์ตพี่นนท์ไม่ไหวแล้ววว...", userId: 3, artistId: 1 },
+//   { title: "ตามหาบัตร Bodyslam โซน A", content: "ใครมีบัตร Bodyslam โซน A ปล่อยบ้างครับ...", userId: 5, artistId: 6 },
+//   { title: "ข่าวลือ! The Weeknd อาจจะมาไทยปลายปีนี้?", content: "The Weeknd มาไทยรอบนี้จัดเต็มแน่!...", userId: 4, artistId: 16 },
+//   { title: "รีวิวเพลงใหม่ MILLI ฟังแล้วหยุดโยกไม่ได้", content: "เพลงใหม่ MILLI คือดีย์มากแม่...", userId: 6, artistId: 12 },
+//   { title: "รวมรูป อิงค์ วรันธร จากงาน Music Fest", content: "อิงค์ วรันธร น่ารักมากก งานเมื่อวาน...", userId: 3, artistId: 2 },
+//   { title: "เตือนภัย! ระวังมิจฉาชีพหลอกขายบัตรทิพย์ใน Twitter", content: "ช่วงนี้คอนเสิร์ตเยอะมาก ระวังคนที่ให้โอนเงินก่อน...", userId: 1 }
+// ];
 
-// 12. Likes (กดไลก์โพสต์)
-const likesData = [
-  { userId: 4, postId: 1 }, { userId: 6, postId: 1 }, { userId: 3, postId: 2 }, { userId: 5, postId: 3 }, { userId: 4, postId: 4 }
-];
+// // 12. Likes (กดไลก์โพสต์)
+// const likesData = [
+//   { userId: 4, postId: 1 }, { userId: 6, postId: 1 }, { userId: 3, postId: 2 }, { userId: 5, postId: 3 }, { userId: 4, postId: 4 }
+// ];
 
 // 13. Comments (คอมเมนต์โพสต์)
-const commentsData = [
-  { content: "กดให้ทันนะค๊าา คู่แข่งเยอะมาก", userId: 4, postId: 1 },
-  { content: "หาด้วยคนครับ โซน A", userId: 6, postId: 2 },
-  { content: "เตรียมตังค์พร้อมแล้ว!", userId: 3, postId: 3 },
-  { content: "ท่อนแร็ปคือสุด", userId: 5, postId: 4 },
-  { content: "โดนตกไปเต็มๆ", userId: 6, postId: 5 }
-];
+// const commentsData = [
+//   { content: "กดให้ทันนะค๊าา คู่แข่งเยอะมาก", userId: 4, postId: 1 },
+//   { content: "หาด้วยคนครับ โซน A", userId: 6, postId: 2 },
+//   { content: "เตรียมตังค์พร้อมแล้ว!", userId: 3, postId: 3 },
+//   { content: "ท่อนแร็ปคือสุด", userId: 5, postId: 4 },
+//   { content: "โดนตกไปเต็มๆ", userId: 6, postId: 5 }
+// ];
 
 // 14. ChatRooms
 const chatRoomsData = [
@@ -640,6 +645,7 @@ async function resetData() {
         prisma.$executeRawUnsafe('TRUNCATE TABLE `Song`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `News`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `NewsArtist`;'),
+
         prisma.$executeRawUnsafe('SET FOREIGN_KEY_CHECKS = 1;'),
     ]);
     console.log('Start seeding')
@@ -655,11 +661,12 @@ async function resetData() {
      await prisma.artistEvent.createMany({ data: artistEventsData, skipDuplicates: true })    
      await prisma.favArtist.createMany({ data: favArtistsData, skipDuplicates: true }) 
      await prisma.post.createMany({ data: postsData, skipDuplicates: true })    
-     await prisma.like.createMany({ data: likesData, skipDuplicates: true })
+     await prisma.like.createMany({ data: likePostData, skipDuplicates: true })
      await prisma.comment.createMany({ data: commentsData, skipDuplicates: true })
      await prisma.chatRoom.createMany({ data: chatRoomsData, skipDuplicates: true })
      await prisma.chatRoomUser.createMany({ data: chatRoomUsersData, skipDuplicates: true })
      await prisma.message.createMany({ data: messagesData, skipDuplicates: true })
+     await prisma.postArtist.createMany({ data: postArtistsData, skipDuplicates: true })// เพิ่มตรงนี้ต่างจากแบม
 }
 
 resetData().then(async ()=> {
