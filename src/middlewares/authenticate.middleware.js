@@ -2,8 +2,12 @@ import createHttpError from "http-errors";
 import jwt from "jsonwebtoken";
 import { getUserby } from "../service.js/auth.service.js";
 
-export default async function authenicateMiddleware(req, res, next) {
-  const authorization = req.headers.authorization;
+export default async function authenicateMiddleware (req, res, next) {
+    const authorization = req.headers.authorization
+    
+    // บรรทัดนี้ช่วยเช็คใน Terminal ว่า Frontend ส่งมาจริงไหม
+    // console.log('--- Checking Header ---')
+    // console.log('Auth Value:', authorization) 
 
   // บรรทัดนี้ช่วยเช็คใน Terminal ว่า Frontend ส่งมาจริงไหม
   console.log("--- Checking Header ---");

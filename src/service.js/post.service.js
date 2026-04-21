@@ -11,7 +11,16 @@ export const getAllPosts = async() => {
             },
             likes : {
                 include : {user : {select : {username : true}}}
-            }
+            },
+            postArtists: {
+                include: {
+                artist: {
+            select: { artistName: true, id: true } // เลือกเฉพาะชื่อและ ID ไปทำ Tag
+          }
+        }
+      },
+
+
         }
     })
 
