@@ -177,8 +177,7 @@ exports.Prisma.PostScalarFieldEnum = {
   content: 'content',
   userId: 'userId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  image: 'image'
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.PostArtistScalarFieldEnum = {
@@ -330,8 +329,7 @@ exports.Prisma.GenreOrderByRelevanceFieldEnum = {
 
 exports.Prisma.PostOrderByRelevanceFieldEnum = {
   title: 'title',
-  content: 'content',
-  image: 'image'
+  content: 'content'
 };
 
 exports.Prisma.PostImageOrderByRelevanceFieldEnum = {

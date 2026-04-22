@@ -105,7 +105,6 @@ model Post {
 
   user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   postImages PostImage[]
-  image      String?
 
   @@index([userId], map: "Post_userId_fkey")
 }

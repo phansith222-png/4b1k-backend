@@ -9336,7 +9336,6 @@ export namespace Prisma {
     userId: number | null
     createdAt: Date | null
     updatedAt: Date | null
-    image: string | null
   }
 
   export type PostMaxAggregateOutputType = {
@@ -9346,7 +9345,6 @@ export namespace Prisma {
     userId: number | null
     createdAt: Date | null
     updatedAt: Date | null
-    image: string | null
   }
 
   export type PostCountAggregateOutputType = {
@@ -9356,7 +9354,6 @@ export namespace Prisma {
     userId: number
     createdAt: number
     updatedAt: number
-    image: number
     _all: number
   }
 
@@ -9378,7 +9375,6 @@ export namespace Prisma {
     userId?: true
     createdAt?: true
     updatedAt?: true
-    image?: true
   }
 
   export type PostMaxAggregateInputType = {
@@ -9388,7 +9384,6 @@ export namespace Prisma {
     userId?: true
     createdAt?: true
     updatedAt?: true
-    image?: true
   }
 
   export type PostCountAggregateInputType = {
@@ -9398,7 +9393,6 @@ export namespace Prisma {
     userId?: true
     createdAt?: true
     updatedAt?: true
-    image?: true
     _all?: true
   }
 
@@ -9495,7 +9489,6 @@ export namespace Prisma {
     userId: number
     createdAt: Date
     updatedAt: Date
-    image: string | null
     _count: PostCountAggregateOutputType | null
     _avg: PostAvgAggregateOutputType | null
     _sum: PostSumAggregateOutputType | null
@@ -9524,7 +9517,6 @@ export namespace Prisma {
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    image?: boolean
     comments?: boolean | Post$commentsArgs<ExtArgs>
     likes?: boolean | Post$likesArgs<ExtArgs>
     postArtists?: boolean | Post$postArtistsArgs<ExtArgs>
@@ -9542,10 +9534,9 @@ export namespace Prisma {
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    image?: boolean
   }
 
-  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "userId" | "createdAt" | "updatedAt" | "image", ExtArgs["result"]["post"]>
+  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["post"]>
   export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     comments?: boolean | Post$commentsArgs<ExtArgs>
     likes?: boolean | Post$likesArgs<ExtArgs>
@@ -9571,7 +9562,6 @@ export namespace Prisma {
       userId: number
       createdAt: Date
       updatedAt: Date
-      image: string | null
     }, ExtArgs["result"]["post"]>
     composites: {}
   }
@@ -9952,7 +9942,6 @@ export namespace Prisma {
     readonly userId: FieldRef<"Post", 'Int'>
     readonly createdAt: FieldRef<"Post", 'DateTime'>
     readonly updatedAt: FieldRef<"Post", 'DateTime'>
-    readonly image: FieldRef<"Post", 'String'>
   }
     
 
@@ -23425,8 +23414,7 @@ export namespace Prisma {
     content: 'content',
     userId: 'userId',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    image: 'image'
+    updatedAt: 'updatedAt'
   };
 
   export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
@@ -23638,8 +23626,7 @@ export namespace Prisma {
 
   export const PostOrderByRelevanceFieldEnum: {
     title: 'title',
-    content: 'content',
-    image: 'image'
+    content: 'content'
   };
 
   export type PostOrderByRelevanceFieldEnum = (typeof PostOrderByRelevanceFieldEnum)[keyof typeof PostOrderByRelevanceFieldEnum]
@@ -24200,7 +24187,6 @@ export namespace Prisma {
     userId?: IntFilter<"Post"> | number
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
-    image?: StringNullableFilter<"Post"> | string | null
     comments?: CommentListRelationFilter
     likes?: LikeListRelationFilter
     postArtists?: PostArtistListRelationFilter
@@ -24215,7 +24201,6 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    image?: SortOrderInput | SortOrder
     comments?: CommentOrderByRelationAggregateInput
     likes?: LikeOrderByRelationAggregateInput
     postArtists?: PostArtistOrderByRelationAggregateInput
@@ -24234,7 +24219,6 @@ export namespace Prisma {
     userId?: IntFilter<"Post"> | number
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
-    image?: StringNullableFilter<"Post"> | string | null
     comments?: CommentListRelationFilter
     likes?: LikeListRelationFilter
     postArtists?: PostArtistListRelationFilter
@@ -24249,7 +24233,6 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    image?: SortOrderInput | SortOrder
     _count?: PostCountOrderByAggregateInput
     _avg?: PostAvgOrderByAggregateInput
     _max?: PostMaxOrderByAggregateInput
@@ -24267,7 +24250,6 @@ export namespace Prisma {
     userId?: IntWithAggregatesFilter<"Post"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
-    image?: StringNullableWithAggregatesFilter<"Post"> | string | null
   }
 
   export type PostArtistWhereInput = {
@@ -25497,7 +25479,6 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentCreateNestedManyWithoutPostInput
     likes?: LikeCreateNestedManyWithoutPostInput
     postArtists?: PostArtistCreateNestedManyWithoutPostInput
@@ -25512,7 +25493,6 @@ export namespace Prisma {
     userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     postArtists?: PostArtistUncheckedCreateNestedManyWithoutPostInput
@@ -25524,7 +25504,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUpdateManyWithoutPostNestedInput
     likes?: LikeUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUpdateManyWithoutPostNestedInput
@@ -25539,7 +25518,6 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUncheckedUpdateManyWithoutPostNestedInput
@@ -25553,7 +25531,6 @@ export namespace Prisma {
     userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
   }
 
   export type PostUpdateManyMutationInput = {
@@ -25561,7 +25538,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PostUncheckedUpdateManyInput = {
@@ -25571,7 +25547,6 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PostArtistCreateInput = {
@@ -26938,7 +26913,6 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    image?: SortOrder
   }
 
   export type PostAvgOrderByAggregateInput = {
@@ -26953,7 +26927,6 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    image?: SortOrder
   }
 
   export type PostMinOrderByAggregateInput = {
@@ -26963,7 +26936,6 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    image?: SortOrder
   }
 
   export type PostSumOrderByAggregateInput = {
@@ -29575,7 +29547,6 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentCreateNestedManyWithoutPostInput
     likes?: LikeCreateNestedManyWithoutPostInput
     postArtists?: PostArtistCreateNestedManyWithoutPostInput
@@ -29588,7 +29559,6 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     postArtists?: PostArtistUncheckedCreateNestedManyWithoutPostInput
@@ -29863,7 +29833,6 @@ export namespace Prisma {
     userId?: IntFilter<"Post"> | number
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
-    image?: StringNullableFilter<"Post"> | string | null
   }
 
   export type EventUpsertWithWhereUniqueWithoutCreatedByUserInput = {
@@ -31018,7 +30987,6 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentCreateNestedManyWithoutPostInput
     likes?: LikeCreateNestedManyWithoutPostInput
     user: UserCreateNestedOneWithoutPostsInput
@@ -31032,7 +31000,6 @@ export namespace Prisma {
     userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     postImages?: PostImageUncheckedCreateNestedManyWithoutPostInput
@@ -31095,7 +31062,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUpdateManyWithoutPostNestedInput
     likes?: LikeUpdateManyWithoutPostNestedInput
     user?: UserUpdateOneRequiredWithoutPostsNestedInput
@@ -31109,7 +31075,6 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
@@ -31162,7 +31127,6 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentCreateNestedManyWithoutPostInput
     likes?: LikeCreateNestedManyWithoutPostInput
     postArtists?: PostArtistCreateNestedManyWithoutPostInput
@@ -31176,7 +31140,6 @@ export namespace Prisma {
     userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     postArtists?: PostArtistUncheckedCreateNestedManyWithoutPostInput
@@ -31203,7 +31166,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUpdateManyWithoutPostNestedInput
     likes?: LikeUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUpdateManyWithoutPostNestedInput
@@ -31217,7 +31179,6 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUncheckedUpdateManyWithoutPostNestedInput
@@ -31228,7 +31189,6 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentCreateNestedManyWithoutPostInput
     postArtists?: PostArtistCreateNestedManyWithoutPostInput
     user: UserCreateNestedOneWithoutPostsInput
@@ -31242,7 +31202,6 @@ export namespace Prisma {
     userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
     postArtists?: PostArtistUncheckedCreateNestedManyWithoutPostInput
     postImages?: PostImageUncheckedCreateNestedManyWithoutPostInput
@@ -31321,7 +31280,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUpdateManyWithoutPostNestedInput
     user?: UserUpdateOneRequiredWithoutPostsNestedInput
@@ -31335,7 +31293,6 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUncheckedUpdateManyWithoutPostNestedInput
     postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
@@ -31404,7 +31361,6 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     likes?: LikeCreateNestedManyWithoutPostInput
     postArtists?: PostArtistCreateNestedManyWithoutPostInput
     user: UserCreateNestedOneWithoutPostsInput
@@ -31418,7 +31374,6 @@ export namespace Prisma {
     userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     postArtists?: PostArtistUncheckedCreateNestedManyWithoutPostInput
     postImages?: PostImageUncheckedCreateNestedManyWithoutPostInput
@@ -31497,7 +31452,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     likes?: LikeUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUpdateManyWithoutPostNestedInput
     user?: UserUpdateOneRequiredWithoutPostsNestedInput
@@ -31511,7 +31465,6 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUncheckedUpdateManyWithoutPostNestedInput
     postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
@@ -32785,7 +32738,6 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
   }
 
   export type EventCreateManyCreatedByUserInput = {
@@ -32955,7 +32907,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUpdateManyWithoutPostNestedInput
     likes?: LikeUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUpdateManyWithoutPostNestedInput
@@ -32968,7 +32919,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUncheckedUpdateManyWithoutPostNestedInput
@@ -32981,7 +32931,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EventUpdateWithoutCreatedByUserInput = {
