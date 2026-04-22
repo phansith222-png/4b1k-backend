@@ -15,6 +15,7 @@ import chatRouter from "./routes/chat.route.js";
 import cors from "cors"
 
 const app = express()
+app.use(express.json());
 
 app.use(
   cors({
@@ -24,28 +25,14 @@ app.use(
   })
 );
 
-app.use(express.json());
-
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET || process.env.JWT_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      secure: process.env.NODE_ENV === "production",
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000, //1 วัน
-    },
-  })
-);
-
 app.use(passport.initialize()); // เอาไว้ใช้กับ Oauth ในการล็อคอินด้วย Google, Facebook, X
+
+app.use("/auth", authRouter);
 
 app.use("/chats", authenicateMiddleware, chatRouter);
 
 app.use("/users", authenicateMiddleware, usersRouter);
 
-app.use("/auth", authRouter);
 
 app.use("/users", authenicateMiddleware, usersRouter);
 

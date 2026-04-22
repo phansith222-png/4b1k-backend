@@ -144,6 +144,16 @@ export const EventStatus: {
 
 export type EventStatus = (typeof EventStatus)[keyof typeof EventStatus]
 
+
+export const AuthProvider: {
+  LOCAL: 'LOCAL',
+  GOOGLE: 'GOOGLE',
+  FACEBOOK: 'FACEBOOK',
+  X: 'X'
+};
+
+export type AuthProvider = (typeof AuthProvider)[keyof typeof AuthProvider]
+
 }
 
 export type Role = $Enums.Role
@@ -157,6 +167,10 @@ export const Gender: typeof $Enums.Gender
 export type EventStatus = $Enums.EventStatus
 
 export const EventStatus: typeof $Enums.EventStatus
+
+export type AuthProvider = $Enums.AuthProvider
+
+export const AuthProvider: typeof $Enums.AuthProvider
 
 /**
  * ##  Prisma Client ʲˢ
@@ -9322,7 +9336,6 @@ export namespace Prisma {
     userId: number | null
     createdAt: Date | null
     updatedAt: Date | null
-    image: string | null
   }
 
   export type PostMaxAggregateOutputType = {
@@ -9332,7 +9345,6 @@ export namespace Prisma {
     userId: number | null
     createdAt: Date | null
     updatedAt: Date | null
-    image: string | null
   }
 
   export type PostCountAggregateOutputType = {
@@ -9342,7 +9354,6 @@ export namespace Prisma {
     userId: number
     createdAt: number
     updatedAt: number
-    image: number
     _all: number
   }
 
@@ -9364,7 +9375,6 @@ export namespace Prisma {
     userId?: true
     createdAt?: true
     updatedAt?: true
-    image?: true
   }
 
   export type PostMaxAggregateInputType = {
@@ -9374,7 +9384,6 @@ export namespace Prisma {
     userId?: true
     createdAt?: true
     updatedAt?: true
-    image?: true
   }
 
   export type PostCountAggregateInputType = {
@@ -9384,7 +9393,6 @@ export namespace Prisma {
     userId?: true
     createdAt?: true
     updatedAt?: true
-    image?: true
     _all?: true
   }
 
@@ -9481,7 +9489,6 @@ export namespace Prisma {
     userId: number
     createdAt: Date
     updatedAt: Date
-    image: string | null
     _count: PostCountAggregateOutputType | null
     _avg: PostAvgAggregateOutputType | null
     _sum: PostSumAggregateOutputType | null
@@ -9510,7 +9517,6 @@ export namespace Prisma {
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    image?: boolean
     comments?: boolean | Post$commentsArgs<ExtArgs>
     likes?: boolean | Post$likesArgs<ExtArgs>
     postArtists?: boolean | Post$postArtistsArgs<ExtArgs>
@@ -9528,10 +9534,9 @@ export namespace Prisma {
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    image?: boolean
   }
 
-  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "userId" | "createdAt" | "updatedAt" | "image", ExtArgs["result"]["post"]>
+  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["post"]>
   export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     comments?: boolean | Post$commentsArgs<ExtArgs>
     likes?: boolean | Post$likesArgs<ExtArgs>
@@ -9557,7 +9562,6 @@ export namespace Prisma {
       userId: number
       createdAt: Date
       updatedAt: Date
-      image: string | null
     }, ExtArgs["result"]["post"]>
     composites: {}
   }
@@ -9938,7 +9942,6 @@ export namespace Prisma {
     readonly userId: FieldRef<"Post", 'Int'>
     readonly createdAt: FieldRef<"Post", 'DateTime'>
     readonly updatedAt: FieldRef<"Post", 'DateTime'>
-    readonly image: FieldRef<"Post", 'String'>
   }
     
 
@@ -17361,6 +17364,8 @@ export namespace Prisma {
   export type ChatRoomMinAggregateOutputType = {
     id: number | null
     isGroup: boolean | null
+    name: string | null
+    coverImage: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -17368,6 +17373,8 @@ export namespace Prisma {
   export type ChatRoomMaxAggregateOutputType = {
     id: number | null
     isGroup: boolean | null
+    name: string | null
+    coverImage: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -17375,6 +17382,8 @@ export namespace Prisma {
   export type ChatRoomCountAggregateOutputType = {
     id: number
     isGroup: number
+    name: number
+    coverImage: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -17392,6 +17401,8 @@ export namespace Prisma {
   export type ChatRoomMinAggregateInputType = {
     id?: true
     isGroup?: true
+    name?: true
+    coverImage?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -17399,6 +17410,8 @@ export namespace Prisma {
   export type ChatRoomMaxAggregateInputType = {
     id?: true
     isGroup?: true
+    name?: true
+    coverImage?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -17406,6 +17419,8 @@ export namespace Prisma {
   export type ChatRoomCountAggregateInputType = {
     id?: true
     isGroup?: true
+    name?: true
+    coverImage?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -17500,6 +17515,8 @@ export namespace Prisma {
   export type ChatRoomGroupByOutputType = {
     id: number
     isGroup: boolean
+    name: string | null
+    coverImage: string | null
     createdAt: Date
     updatedAt: Date
     _count: ChatRoomCountAggregateOutputType | null
@@ -17526,6 +17543,8 @@ export namespace Prisma {
   export type ChatRoomSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     isGroup?: boolean
+    name?: boolean
+    coverImage?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     users?: boolean | ChatRoom$usersArgs<ExtArgs>
@@ -17538,11 +17557,13 @@ export namespace Prisma {
   export type ChatRoomSelectScalar = {
     id?: boolean
     isGroup?: boolean
+    name?: boolean
+    coverImage?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ChatRoomOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "isGroup" | "createdAt" | "updatedAt", ExtArgs["result"]["chatRoom"]>
+  export type ChatRoomOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "isGroup" | "name" | "coverImage" | "createdAt" | "updatedAt", ExtArgs["result"]["chatRoom"]>
   export type ChatRoomInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | ChatRoom$usersArgs<ExtArgs>
     messages?: boolean | ChatRoom$messagesArgs<ExtArgs>
@@ -17558,6 +17579,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       isGroup: boolean
+      name: string | null
+      coverImage: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["chatRoom"]>
@@ -17933,6 +17956,8 @@ export namespace Prisma {
   interface ChatRoomFieldRefs {
     readonly id: FieldRef<"ChatRoom", 'Int'>
     readonly isGroup: FieldRef<"ChatRoom", 'Boolean'>
+    readonly name: FieldRef<"ChatRoom", 'String'>
+    readonly coverImage: FieldRef<"ChatRoom", 'String'>
     readonly createdAt: FieldRef<"ChatRoom", 'DateTime'>
     readonly updatedAt: FieldRef<"ChatRoom", 'DateTime'>
   }
@@ -18364,29 +18389,34 @@ export namespace Prisma {
   export type ChatRoomUserAvgAggregateOutputType = {
     userId: number | null
     chatRoomId: number | null
+    lastReadMessageId: number | null
   }
 
   export type ChatRoomUserSumAggregateOutputType = {
     userId: number | null
     chatRoomId: number | null
+    lastReadMessageId: number | null
   }
 
   export type ChatRoomUserMinAggregateOutputType = {
     userId: number | null
     chatRoomId: number | null
     joinedAt: Date | null
+    lastReadMessageId: number | null
   }
 
   export type ChatRoomUserMaxAggregateOutputType = {
     userId: number | null
     chatRoomId: number | null
     joinedAt: Date | null
+    lastReadMessageId: number | null
   }
 
   export type ChatRoomUserCountAggregateOutputType = {
     userId: number
     chatRoomId: number
     joinedAt: number
+    lastReadMessageId: number
     _all: number
   }
 
@@ -18394,29 +18424,34 @@ export namespace Prisma {
   export type ChatRoomUserAvgAggregateInputType = {
     userId?: true
     chatRoomId?: true
+    lastReadMessageId?: true
   }
 
   export type ChatRoomUserSumAggregateInputType = {
     userId?: true
     chatRoomId?: true
+    lastReadMessageId?: true
   }
 
   export type ChatRoomUserMinAggregateInputType = {
     userId?: true
     chatRoomId?: true
     joinedAt?: true
+    lastReadMessageId?: true
   }
 
   export type ChatRoomUserMaxAggregateInputType = {
     userId?: true
     chatRoomId?: true
     joinedAt?: true
+    lastReadMessageId?: true
   }
 
   export type ChatRoomUserCountAggregateInputType = {
     userId?: true
     chatRoomId?: true
     joinedAt?: true
+    lastReadMessageId?: true
     _all?: true
   }
 
@@ -18510,6 +18545,7 @@ export namespace Prisma {
     userId: number
     chatRoomId: number
     joinedAt: Date
+    lastReadMessageId: number | null
     _count: ChatRoomUserCountAggregateOutputType | null
     _avg: ChatRoomUserAvgAggregateOutputType | null
     _sum: ChatRoomUserSumAggregateOutputType | null
@@ -18535,6 +18571,7 @@ export namespace Prisma {
     userId?: boolean
     chatRoomId?: boolean
     joinedAt?: boolean
+    lastReadMessageId?: boolean
     chatRoom?: boolean | ChatRoomDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["chatRoomUser"]>
@@ -18545,9 +18582,10 @@ export namespace Prisma {
     userId?: boolean
     chatRoomId?: boolean
     joinedAt?: boolean
+    lastReadMessageId?: boolean
   }
 
-  export type ChatRoomUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "chatRoomId" | "joinedAt", ExtArgs["result"]["chatRoomUser"]>
+  export type ChatRoomUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "chatRoomId" | "joinedAt" | "lastReadMessageId", ExtArgs["result"]["chatRoomUser"]>
   export type ChatRoomUserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     chatRoom?: boolean | ChatRoomDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -18563,6 +18601,7 @@ export namespace Prisma {
       userId: number
       chatRoomId: number
       joinedAt: Date
+      lastReadMessageId: number | null
     }, ExtArgs["result"]["chatRoomUser"]>
     composites: {}
   }
@@ -18937,6 +18976,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"ChatRoomUser", 'Int'>
     readonly chatRoomId: FieldRef<"ChatRoomUser", 'Int'>
     readonly joinedAt: FieldRef<"ChatRoomUser", 'DateTime'>
+    readonly lastReadMessageId: FieldRef<"ChatRoomUser", 'Int'>
   }
     
 
@@ -19332,7 +19372,6 @@ export namespace Prisma {
     content: string | null
     senderId: number | null
     chatRoomId: number | null
-    isRead: boolean | null
     createdAt: Date | null
   }
 
@@ -19341,7 +19380,6 @@ export namespace Prisma {
     content: string | null
     senderId: number | null
     chatRoomId: number | null
-    isRead: boolean | null
     createdAt: Date | null
   }
 
@@ -19350,7 +19388,6 @@ export namespace Prisma {
     content: number
     senderId: number
     chatRoomId: number
-    isRead: number
     createdAt: number
     _all: number
   }
@@ -19373,7 +19410,6 @@ export namespace Prisma {
     content?: true
     senderId?: true
     chatRoomId?: true
-    isRead?: true
     createdAt?: true
   }
 
@@ -19382,7 +19418,6 @@ export namespace Prisma {
     content?: true
     senderId?: true
     chatRoomId?: true
-    isRead?: true
     createdAt?: true
   }
 
@@ -19391,7 +19426,6 @@ export namespace Prisma {
     content?: true
     senderId?: true
     chatRoomId?: true
-    isRead?: true
     createdAt?: true
     _all?: true
   }
@@ -19487,7 +19521,6 @@ export namespace Prisma {
     content: string
     senderId: number
     chatRoomId: number
-    isRead: boolean
     createdAt: Date
     _count: MessageCountAggregateOutputType | null
     _avg: MessageAvgAggregateOutputType | null
@@ -19515,7 +19548,6 @@ export namespace Prisma {
     content?: boolean
     senderId?: boolean
     chatRoomId?: boolean
-    isRead?: boolean
     createdAt?: boolean
     chatRoom?: boolean | ChatRoomDefaultArgs<ExtArgs>
     sender?: boolean | UserDefaultArgs<ExtArgs>
@@ -19528,11 +19560,10 @@ export namespace Prisma {
     content?: boolean
     senderId?: boolean
     chatRoomId?: boolean
-    isRead?: boolean
     createdAt?: boolean
   }
 
-  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "senderId" | "chatRoomId" | "isRead" | "createdAt", ExtArgs["result"]["message"]>
+  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "senderId" | "chatRoomId" | "createdAt", ExtArgs["result"]["message"]>
   export type MessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     chatRoom?: boolean | ChatRoomDefaultArgs<ExtArgs>
     sender?: boolean | UserDefaultArgs<ExtArgs>
@@ -19549,7 +19580,6 @@ export namespace Prisma {
       content: string
       senderId: number
       chatRoomId: number
-      isRead: boolean
       createdAt: Date
     }, ExtArgs["result"]["message"]>
     composites: {}
@@ -19926,7 +19956,6 @@ export namespace Prisma {
     readonly content: FieldRef<"Message", 'String'>
     readonly senderId: FieldRef<"Message", 'Int'>
     readonly chatRoomId: FieldRef<"Message", 'Int'>
-    readonly isRead: FieldRef<"Message", 'Boolean'>
     readonly createdAt: FieldRef<"Message", 'DateTime'>
   }
     
@@ -23385,8 +23414,7 @@ export namespace Prisma {
     content: 'content',
     userId: 'userId',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    image: 'image'
+    updatedAt: 'updatedAt'
   };
 
   export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
@@ -23474,6 +23502,8 @@ export namespace Prisma {
   export const ChatRoomScalarFieldEnum: {
     id: 'id',
     isGroup: 'isGroup',
+    name: 'name',
+    coverImage: 'coverImage',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -23484,7 +23514,8 @@ export namespace Prisma {
   export const ChatRoomUserScalarFieldEnum: {
     userId: 'userId',
     chatRoomId: 'chatRoomId',
-    joinedAt: 'joinedAt'
+    joinedAt: 'joinedAt',
+    lastReadMessageId: 'lastReadMessageId'
   };
 
   export type ChatRoomUserScalarFieldEnum = (typeof ChatRoomUserScalarFieldEnum)[keyof typeof ChatRoomUserScalarFieldEnum]
@@ -23495,7 +23526,6 @@ export namespace Prisma {
     content: 'content',
     senderId: 'senderId',
     chatRoomId: 'chatRoomId',
-    isRead: 'isRead',
     createdAt: 'createdAt'
   };
 
@@ -23596,8 +23626,7 @@ export namespace Prisma {
 
   export const PostOrderByRelevanceFieldEnum: {
     title: 'title',
-    content: 'content',
-    image: 'image'
+    content: 'content'
   };
 
   export type PostOrderByRelevanceFieldEnum = (typeof PostOrderByRelevanceFieldEnum)[keyof typeof PostOrderByRelevanceFieldEnum]
@@ -23635,6 +23664,14 @@ export namespace Prisma {
   };
 
   export type VenueOrderByRelevanceFieldEnum = (typeof VenueOrderByRelevanceFieldEnum)[keyof typeof VenueOrderByRelevanceFieldEnum]
+
+
+  export const ChatRoomOrderByRelevanceFieldEnum: {
+    name: 'name',
+    coverImage: 'coverImage'
+  };
+
+  export type ChatRoomOrderByRelevanceFieldEnum = (typeof ChatRoomOrderByRelevanceFieldEnum)[keyof typeof ChatRoomOrderByRelevanceFieldEnum]
 
 
   export const MessageOrderByRelevanceFieldEnum: {
@@ -24150,7 +24187,6 @@ export namespace Prisma {
     userId?: IntFilter<"Post"> | number
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
-    image?: StringNullableFilter<"Post"> | string | null
     comments?: CommentListRelationFilter
     likes?: LikeListRelationFilter
     postArtists?: PostArtistListRelationFilter
@@ -24165,7 +24201,6 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    image?: SortOrderInput | SortOrder
     comments?: CommentOrderByRelationAggregateInput
     likes?: LikeOrderByRelationAggregateInput
     postArtists?: PostArtistOrderByRelationAggregateInput
@@ -24184,7 +24219,6 @@ export namespace Prisma {
     userId?: IntFilter<"Post"> | number
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
-    image?: StringNullableFilter<"Post"> | string | null
     comments?: CommentListRelationFilter
     likes?: LikeListRelationFilter
     postArtists?: PostArtistListRelationFilter
@@ -24199,7 +24233,6 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    image?: SortOrderInput | SortOrder
     _count?: PostCountOrderByAggregateInput
     _avg?: PostAvgOrderByAggregateInput
     _max?: PostMaxOrderByAggregateInput
@@ -24217,7 +24250,6 @@ export namespace Prisma {
     userId?: IntWithAggregatesFilter<"Post"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
-    image?: StringNullableWithAggregatesFilter<"Post"> | string | null
   }
 
   export type PostArtistWhereInput = {
@@ -24660,6 +24692,8 @@ export namespace Prisma {
     NOT?: ChatRoomWhereInput | ChatRoomWhereInput[]
     id?: IntFilter<"ChatRoom"> | number
     isGroup?: BoolFilter<"ChatRoom"> | boolean
+    name?: StringNullableFilter<"ChatRoom"> | string | null
+    coverImage?: StringNullableFilter<"ChatRoom"> | string | null
     createdAt?: DateTimeFilter<"ChatRoom"> | Date | string
     updatedAt?: DateTimeFilter<"ChatRoom"> | Date | string
     users?: ChatRoomUserListRelationFilter
@@ -24669,10 +24703,13 @@ export namespace Prisma {
   export type ChatRoomOrderByWithRelationInput = {
     id?: SortOrder
     isGroup?: SortOrder
+    name?: SortOrderInput | SortOrder
+    coverImage?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     users?: ChatRoomUserOrderByRelationAggregateInput
     messages?: MessageOrderByRelationAggregateInput
+    _relevance?: ChatRoomOrderByRelevanceInput
   }
 
   export type ChatRoomWhereUniqueInput = Prisma.AtLeast<{
@@ -24681,6 +24718,8 @@ export namespace Prisma {
     OR?: ChatRoomWhereInput[]
     NOT?: ChatRoomWhereInput | ChatRoomWhereInput[]
     isGroup?: BoolFilter<"ChatRoom"> | boolean
+    name?: StringNullableFilter<"ChatRoom"> | string | null
+    coverImage?: StringNullableFilter<"ChatRoom"> | string | null
     createdAt?: DateTimeFilter<"ChatRoom"> | Date | string
     updatedAt?: DateTimeFilter<"ChatRoom"> | Date | string
     users?: ChatRoomUserListRelationFilter
@@ -24690,6 +24729,8 @@ export namespace Prisma {
   export type ChatRoomOrderByWithAggregationInput = {
     id?: SortOrder
     isGroup?: SortOrder
+    name?: SortOrderInput | SortOrder
+    coverImage?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ChatRoomCountOrderByAggregateInput
@@ -24705,6 +24746,8 @@ export namespace Prisma {
     NOT?: ChatRoomScalarWhereWithAggregatesInput | ChatRoomScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"ChatRoom"> | number
     isGroup?: BoolWithAggregatesFilter<"ChatRoom"> | boolean
+    name?: StringNullableWithAggregatesFilter<"ChatRoom"> | string | null
+    coverImage?: StringNullableWithAggregatesFilter<"ChatRoom"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"ChatRoom"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ChatRoom"> | Date | string
   }
@@ -24716,6 +24759,7 @@ export namespace Prisma {
     userId?: IntFilter<"ChatRoomUser"> | number
     chatRoomId?: IntFilter<"ChatRoomUser"> | number
     joinedAt?: DateTimeFilter<"ChatRoomUser"> | Date | string
+    lastReadMessageId?: IntNullableFilter<"ChatRoomUser"> | number | null
     chatRoom?: XOR<ChatRoomScalarRelationFilter, ChatRoomWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -24724,6 +24768,7 @@ export namespace Prisma {
     userId?: SortOrder
     chatRoomId?: SortOrder
     joinedAt?: SortOrder
+    lastReadMessageId?: SortOrderInput | SortOrder
     chatRoom?: ChatRoomOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
   }
@@ -24736,6 +24781,7 @@ export namespace Prisma {
     userId?: IntFilter<"ChatRoomUser"> | number
     chatRoomId?: IntFilter<"ChatRoomUser"> | number
     joinedAt?: DateTimeFilter<"ChatRoomUser"> | Date | string
+    lastReadMessageId?: IntNullableFilter<"ChatRoomUser"> | number | null
     chatRoom?: XOR<ChatRoomScalarRelationFilter, ChatRoomWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "userId_chatRoomId">
@@ -24744,6 +24790,7 @@ export namespace Prisma {
     userId?: SortOrder
     chatRoomId?: SortOrder
     joinedAt?: SortOrder
+    lastReadMessageId?: SortOrderInput | SortOrder
     _count?: ChatRoomUserCountOrderByAggregateInput
     _avg?: ChatRoomUserAvgOrderByAggregateInput
     _max?: ChatRoomUserMaxOrderByAggregateInput
@@ -24758,6 +24805,7 @@ export namespace Prisma {
     userId?: IntWithAggregatesFilter<"ChatRoomUser"> | number
     chatRoomId?: IntWithAggregatesFilter<"ChatRoomUser"> | number
     joinedAt?: DateTimeWithAggregatesFilter<"ChatRoomUser"> | Date | string
+    lastReadMessageId?: IntNullableWithAggregatesFilter<"ChatRoomUser"> | number | null
   }
 
   export type MessageWhereInput = {
@@ -24768,7 +24816,6 @@ export namespace Prisma {
     content?: StringFilter<"Message"> | string
     senderId?: IntFilter<"Message"> | number
     chatRoomId?: IntFilter<"Message"> | number
-    isRead?: BoolFilter<"Message"> | boolean
     createdAt?: DateTimeFilter<"Message"> | Date | string
     chatRoom?: XOR<ChatRoomScalarRelationFilter, ChatRoomWhereInput>
     sender?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -24779,7 +24826,6 @@ export namespace Prisma {
     content?: SortOrder
     senderId?: SortOrder
     chatRoomId?: SortOrder
-    isRead?: SortOrder
     createdAt?: SortOrder
     chatRoom?: ChatRoomOrderByWithRelationInput
     sender?: UserOrderByWithRelationInput
@@ -24794,7 +24840,6 @@ export namespace Prisma {
     content?: StringFilter<"Message"> | string
     senderId?: IntFilter<"Message"> | number
     chatRoomId?: IntFilter<"Message"> | number
-    isRead?: BoolFilter<"Message"> | boolean
     createdAt?: DateTimeFilter<"Message"> | Date | string
     chatRoom?: XOR<ChatRoomScalarRelationFilter, ChatRoomWhereInput>
     sender?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -24805,7 +24850,6 @@ export namespace Prisma {
     content?: SortOrder
     senderId?: SortOrder
     chatRoomId?: SortOrder
-    isRead?: SortOrder
     createdAt?: SortOrder
     _count?: MessageCountOrderByAggregateInput
     _avg?: MessageAvgOrderByAggregateInput
@@ -24822,7 +24866,6 @@ export namespace Prisma {
     content?: StringWithAggregatesFilter<"Message"> | string
     senderId?: IntWithAggregatesFilter<"Message"> | number
     chatRoomId?: IntWithAggregatesFilter<"Message"> | number
-    isRead?: BoolWithAggregatesFilter<"Message"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
   }
 
@@ -25436,7 +25479,6 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentCreateNestedManyWithoutPostInput
     likes?: LikeCreateNestedManyWithoutPostInput
     postArtists?: PostArtistCreateNestedManyWithoutPostInput
@@ -25451,7 +25493,6 @@ export namespace Prisma {
     userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     postArtists?: PostArtistUncheckedCreateNestedManyWithoutPostInput
@@ -25463,7 +25504,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUpdateManyWithoutPostNestedInput
     likes?: LikeUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUpdateManyWithoutPostNestedInput
@@ -25478,7 +25518,6 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUncheckedUpdateManyWithoutPostNestedInput
@@ -25492,7 +25531,6 @@ export namespace Prisma {
     userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
   }
 
   export type PostUpdateManyMutationInput = {
@@ -25500,7 +25538,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PostUncheckedUpdateManyInput = {
@@ -25510,7 +25547,6 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PostArtistCreateInput = {
@@ -25905,6 +25941,8 @@ export namespace Prisma {
 
   export type ChatRoomCreateInput = {
     isGroup?: boolean
+    name?: string | null
+    coverImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: ChatRoomUserCreateNestedManyWithoutChatRoomInput
@@ -25914,6 +25952,8 @@ export namespace Prisma {
   export type ChatRoomUncheckedCreateInput = {
     id?: number
     isGroup?: boolean
+    name?: string | null
+    coverImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: ChatRoomUserUncheckedCreateNestedManyWithoutChatRoomInput
@@ -25922,6 +25962,8 @@ export namespace Prisma {
 
   export type ChatRoomUpdateInput = {
     isGroup?: BoolFieldUpdateOperationsInput | boolean
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: ChatRoomUserUpdateManyWithoutChatRoomNestedInput
@@ -25931,6 +25973,8 @@ export namespace Prisma {
   export type ChatRoomUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     isGroup?: BoolFieldUpdateOperationsInput | boolean
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: ChatRoomUserUncheckedUpdateManyWithoutChatRoomNestedInput
@@ -25940,12 +25984,16 @@ export namespace Prisma {
   export type ChatRoomCreateManyInput = {
     id?: number
     isGroup?: boolean
+    name?: string | null
+    coverImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type ChatRoomUpdateManyMutationInput = {
     isGroup?: BoolFieldUpdateOperationsInput | boolean
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -25953,12 +26001,15 @@ export namespace Prisma {
   export type ChatRoomUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     isGroup?: BoolFieldUpdateOperationsInput | boolean
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ChatRoomUserCreateInput = {
     joinedAt?: Date | string
+    lastReadMessageId?: number | null
     chatRoom: ChatRoomCreateNestedOneWithoutUsersInput
     user: UserCreateNestedOneWithoutChatRoomsInput
   }
@@ -25967,10 +26018,12 @@ export namespace Prisma {
     userId: number
     chatRoomId: number
     joinedAt?: Date | string
+    lastReadMessageId?: number | null
   }
 
   export type ChatRoomUserUpdateInput = {
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastReadMessageId?: NullableIntFieldUpdateOperationsInput | number | null
     chatRoom?: ChatRoomUpdateOneRequiredWithoutUsersNestedInput
     user?: UserUpdateOneRequiredWithoutChatRoomsNestedInput
   }
@@ -25979,27 +26032,30 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     chatRoomId?: IntFieldUpdateOperationsInput | number
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastReadMessageId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ChatRoomUserCreateManyInput = {
     userId: number
     chatRoomId: number
     joinedAt?: Date | string
+    lastReadMessageId?: number | null
   }
 
   export type ChatRoomUserUpdateManyMutationInput = {
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastReadMessageId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ChatRoomUserUncheckedUpdateManyInput = {
     userId?: IntFieldUpdateOperationsInput | number
     chatRoomId?: IntFieldUpdateOperationsInput | number
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastReadMessageId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type MessageCreateInput = {
     content: string
-    isRead?: boolean
     createdAt?: Date | string
     chatRoom: ChatRoomCreateNestedOneWithoutMessagesInput
     sender: UserCreateNestedOneWithoutMessagesInput
@@ -26010,13 +26066,11 @@ export namespace Prisma {
     content: string
     senderId: number
     chatRoomId: number
-    isRead?: boolean
     createdAt?: Date | string
   }
 
   export type MessageUpdateInput = {
     content?: StringFieldUpdateOperationsInput | string
-    isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     chatRoom?: ChatRoomUpdateOneRequiredWithoutMessagesNestedInput
     sender?: UserUpdateOneRequiredWithoutMessagesNestedInput
@@ -26027,7 +26081,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     senderId?: IntFieldUpdateOperationsInput | number
     chatRoomId?: IntFieldUpdateOperationsInput | number
-    isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -26036,13 +26089,11 @@ export namespace Prisma {
     content: string
     senderId: number
     chatRoomId: number
-    isRead?: boolean
     createdAt?: Date | string
   }
 
   export type MessageUpdateManyMutationInput = {
     content?: StringFieldUpdateOperationsInput | string
-    isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -26051,7 +26102,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     senderId?: IntFieldUpdateOperationsInput | number
     chatRoomId?: IntFieldUpdateOperationsInput | number
-    isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -26863,7 +26913,6 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    image?: SortOrder
   }
 
   export type PostAvgOrderByAggregateInput = {
@@ -26878,7 +26927,6 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    image?: SortOrder
   }
 
   export type PostMinOrderByAggregateInput = {
@@ -26888,7 +26936,6 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    image?: SortOrder
   }
 
   export type PostSumOrderByAggregateInput = {
@@ -27276,9 +27323,17 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type ChatRoomOrderByRelevanceInput = {
+    fields: ChatRoomOrderByRelevanceFieldEnum | ChatRoomOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
   export type ChatRoomCountOrderByAggregateInput = {
     id?: SortOrder
     isGroup?: SortOrder
+    name?: SortOrder
+    coverImage?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -27290,6 +27345,8 @@ export namespace Prisma {
   export type ChatRoomMaxOrderByAggregateInput = {
     id?: SortOrder
     isGroup?: SortOrder
+    name?: SortOrder
+    coverImage?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -27297,6 +27354,8 @@ export namespace Prisma {
   export type ChatRoomMinOrderByAggregateInput = {
     id?: SortOrder
     isGroup?: SortOrder
+    name?: SortOrder
+    coverImage?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -27327,28 +27386,33 @@ export namespace Prisma {
     userId?: SortOrder
     chatRoomId?: SortOrder
     joinedAt?: SortOrder
+    lastReadMessageId?: SortOrder
   }
 
   export type ChatRoomUserAvgOrderByAggregateInput = {
     userId?: SortOrder
     chatRoomId?: SortOrder
+    lastReadMessageId?: SortOrder
   }
 
   export type ChatRoomUserMaxOrderByAggregateInput = {
     userId?: SortOrder
     chatRoomId?: SortOrder
     joinedAt?: SortOrder
+    lastReadMessageId?: SortOrder
   }
 
   export type ChatRoomUserMinOrderByAggregateInput = {
     userId?: SortOrder
     chatRoomId?: SortOrder
     joinedAt?: SortOrder
+    lastReadMessageId?: SortOrder
   }
 
   export type ChatRoomUserSumOrderByAggregateInput = {
     userId?: SortOrder
     chatRoomId?: SortOrder
+    lastReadMessageId?: SortOrder
   }
 
   export type MessageOrderByRelevanceInput = {
@@ -27362,7 +27426,6 @@ export namespace Prisma {
     content?: SortOrder
     senderId?: SortOrder
     chatRoomId?: SortOrder
-    isRead?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -27377,7 +27440,6 @@ export namespace Prisma {
     content?: SortOrder
     senderId?: SortOrder
     chatRoomId?: SortOrder
-    isRead?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -27386,7 +27448,6 @@ export namespace Prisma {
     content?: SortOrder
     senderId?: SortOrder
     chatRoomId?: SortOrder
-    isRead?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -29369,12 +29430,14 @@ export namespace Prisma {
 
   export type ChatRoomUserCreateWithoutUserInput = {
     joinedAt?: Date | string
+    lastReadMessageId?: number | null
     chatRoom: ChatRoomCreateNestedOneWithoutUsersInput
   }
 
   export type ChatRoomUserUncheckedCreateWithoutUserInput = {
     chatRoomId: number
     joinedAt?: Date | string
+    lastReadMessageId?: number | null
   }
 
   export type ChatRoomUserCreateOrConnectWithoutUserInput = {
@@ -29458,7 +29521,6 @@ export namespace Prisma {
 
   export type MessageCreateWithoutSenderInput = {
     content: string
-    isRead?: boolean
     createdAt?: Date | string
     chatRoom: ChatRoomCreateNestedOneWithoutMessagesInput
   }
@@ -29467,7 +29529,6 @@ export namespace Prisma {
     id?: number
     content: string
     chatRoomId: number
-    isRead?: boolean
     createdAt?: Date | string
   }
 
@@ -29486,7 +29547,6 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentCreateNestedManyWithoutPostInput
     likes?: LikeCreateNestedManyWithoutPostInput
     postArtists?: PostArtistCreateNestedManyWithoutPostInput
@@ -29499,7 +29559,6 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     postArtists?: PostArtistUncheckedCreateNestedManyWithoutPostInput
@@ -29637,6 +29696,7 @@ export namespace Prisma {
     userId?: IntFilter<"ChatRoomUser"> | number
     chatRoomId?: IntFilter<"ChatRoomUser"> | number
     joinedAt?: DateTimeFilter<"ChatRoomUser"> | Date | string
+    lastReadMessageId?: IntNullableFilter<"ChatRoomUser"> | number | null
   }
 
   export type CommentUpsertWithWhereUniqueWithoutUserInput = {
@@ -29744,7 +29804,6 @@ export namespace Prisma {
     content?: StringFilter<"Message"> | string
     senderId?: IntFilter<"Message"> | number
     chatRoomId?: IntFilter<"Message"> | number
-    isRead?: BoolFilter<"Message"> | boolean
     createdAt?: DateTimeFilter<"Message"> | Date | string
   }
 
@@ -29774,7 +29833,6 @@ export namespace Prisma {
     userId?: IntFilter<"Post"> | number
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
-    image?: StringNullableFilter<"Post"> | string | null
   }
 
   export type EventUpsertWithWhereUniqueWithoutCreatedByUserInput = {
@@ -30929,7 +30987,6 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentCreateNestedManyWithoutPostInput
     likes?: LikeCreateNestedManyWithoutPostInput
     user: UserCreateNestedOneWithoutPostsInput
@@ -30943,7 +31000,6 @@ export namespace Prisma {
     userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     postImages?: PostImageUncheckedCreateNestedManyWithoutPostInput
@@ -31006,7 +31062,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUpdateManyWithoutPostNestedInput
     likes?: LikeUpdateManyWithoutPostNestedInput
     user?: UserUpdateOneRequiredWithoutPostsNestedInput
@@ -31020,7 +31075,6 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
@@ -31073,7 +31127,6 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentCreateNestedManyWithoutPostInput
     likes?: LikeCreateNestedManyWithoutPostInput
     postArtists?: PostArtistCreateNestedManyWithoutPostInput
@@ -31087,7 +31140,6 @@ export namespace Prisma {
     userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     postArtists?: PostArtistUncheckedCreateNestedManyWithoutPostInput
@@ -31114,7 +31166,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUpdateManyWithoutPostNestedInput
     likes?: LikeUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUpdateManyWithoutPostNestedInput
@@ -31128,7 +31179,6 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUncheckedUpdateManyWithoutPostNestedInput
@@ -31139,7 +31189,6 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentCreateNestedManyWithoutPostInput
     postArtists?: PostArtistCreateNestedManyWithoutPostInput
     user: UserCreateNestedOneWithoutPostsInput
@@ -31153,7 +31202,6 @@ export namespace Prisma {
     userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
     postArtists?: PostArtistUncheckedCreateNestedManyWithoutPostInput
     postImages?: PostImageUncheckedCreateNestedManyWithoutPostInput
@@ -31232,7 +31280,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUpdateManyWithoutPostNestedInput
     user?: UserUpdateOneRequiredWithoutPostsNestedInput
@@ -31246,7 +31293,6 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUncheckedUpdateManyWithoutPostNestedInput
     postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
@@ -31315,7 +31361,6 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     likes?: LikeCreateNestedManyWithoutPostInput
     postArtists?: PostArtistCreateNestedManyWithoutPostInput
     user: UserCreateNestedOneWithoutPostsInput
@@ -31329,7 +31374,6 @@ export namespace Prisma {
     userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     postArtists?: PostArtistUncheckedCreateNestedManyWithoutPostInput
     postImages?: PostImageUncheckedCreateNestedManyWithoutPostInput
@@ -31408,7 +31452,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     likes?: LikeUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUpdateManyWithoutPostNestedInput
     user?: UserUpdateOneRequiredWithoutPostsNestedInput
@@ -31422,7 +31465,6 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUncheckedUpdateManyWithoutPostNestedInput
     postImages?: PostImageUncheckedUpdateManyWithoutPostNestedInput
@@ -31889,12 +31931,14 @@ export namespace Prisma {
 
   export type ChatRoomUserCreateWithoutChatRoomInput = {
     joinedAt?: Date | string
+    lastReadMessageId?: number | null
     user: UserCreateNestedOneWithoutChatRoomsInput
   }
 
   export type ChatRoomUserUncheckedCreateWithoutChatRoomInput = {
     userId: number
     joinedAt?: Date | string
+    lastReadMessageId?: number | null
   }
 
   export type ChatRoomUserCreateOrConnectWithoutChatRoomInput = {
@@ -31909,7 +31953,6 @@ export namespace Prisma {
 
   export type MessageCreateWithoutChatRoomInput = {
     content: string
-    isRead?: boolean
     createdAt?: Date | string
     sender: UserCreateNestedOneWithoutMessagesInput
   }
@@ -31918,7 +31961,6 @@ export namespace Prisma {
     id?: number
     content: string
     senderId: number
-    isRead?: boolean
     createdAt?: Date | string
   }
 
@@ -31966,6 +32008,8 @@ export namespace Prisma {
 
   export type ChatRoomCreateWithoutUsersInput = {
     isGroup?: boolean
+    name?: string | null
+    coverImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     messages?: MessageCreateNestedManyWithoutChatRoomInput
@@ -31974,6 +32018,8 @@ export namespace Prisma {
   export type ChatRoomUncheckedCreateWithoutUsersInput = {
     id?: number
     isGroup?: boolean
+    name?: string | null
+    coverImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     messages?: MessageUncheckedCreateNestedManyWithoutChatRoomInput
@@ -32049,6 +32095,8 @@ export namespace Prisma {
 
   export type ChatRoomUpdateWithoutUsersInput = {
     isGroup?: BoolFieldUpdateOperationsInput | boolean
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: MessageUpdateManyWithoutChatRoomNestedInput
@@ -32057,6 +32105,8 @@ export namespace Prisma {
   export type ChatRoomUncheckedUpdateWithoutUsersInput = {
     id?: IntFieldUpdateOperationsInput | number
     isGroup?: BoolFieldUpdateOperationsInput | boolean
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: MessageUncheckedUpdateManyWithoutChatRoomNestedInput
@@ -32122,6 +32172,8 @@ export namespace Prisma {
 
   export type ChatRoomCreateWithoutMessagesInput = {
     isGroup?: boolean
+    name?: string | null
+    coverImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: ChatRoomUserCreateNestedManyWithoutChatRoomInput
@@ -32130,6 +32182,8 @@ export namespace Prisma {
   export type ChatRoomUncheckedCreateWithoutMessagesInput = {
     id?: number
     isGroup?: boolean
+    name?: string | null
+    coverImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: ChatRoomUserUncheckedCreateNestedManyWithoutChatRoomInput
@@ -32205,6 +32259,8 @@ export namespace Prisma {
 
   export type ChatRoomUpdateWithoutMessagesInput = {
     isGroup?: BoolFieldUpdateOperationsInput | boolean
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: ChatRoomUserUpdateManyWithoutChatRoomNestedInput
@@ -32213,6 +32269,8 @@ export namespace Prisma {
   export type ChatRoomUncheckedUpdateWithoutMessagesInput = {
     id?: IntFieldUpdateOperationsInput | number
     isGroup?: BoolFieldUpdateOperationsInput | boolean
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: ChatRoomUserUncheckedUpdateManyWithoutChatRoomNestedInput
@@ -32643,6 +32701,7 @@ export namespace Prisma {
   export type ChatRoomUserCreateManyUserInput = {
     chatRoomId: number
     joinedAt?: Date | string
+    lastReadMessageId?: number | null
   }
 
   export type CommentCreateManyUserInput = {
@@ -32670,7 +32729,6 @@ export namespace Prisma {
     id?: number
     content: string
     chatRoomId: number
-    isRead?: boolean
     createdAt?: Date | string
   }
 
@@ -32680,7 +32738,6 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image?: string | null
   }
 
   export type EventCreateManyCreatedByUserInput = {
@@ -32749,17 +32806,20 @@ export namespace Prisma {
 
   export type ChatRoomUserUpdateWithoutUserInput = {
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastReadMessageId?: NullableIntFieldUpdateOperationsInput | number | null
     chatRoom?: ChatRoomUpdateOneRequiredWithoutUsersNestedInput
   }
 
   export type ChatRoomUserUncheckedUpdateWithoutUserInput = {
     chatRoomId?: IntFieldUpdateOperationsInput | number
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastReadMessageId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ChatRoomUserUncheckedUpdateManyWithoutUserInput = {
     chatRoomId?: IntFieldUpdateOperationsInput | number
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastReadMessageId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type CommentUpdateWithoutUserInput = {
@@ -32824,7 +32884,6 @@ export namespace Prisma {
 
   export type MessageUpdateWithoutSenderInput = {
     content?: StringFieldUpdateOperationsInput | string
-    isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     chatRoom?: ChatRoomUpdateOneRequiredWithoutMessagesNestedInput
   }
@@ -32833,7 +32892,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
     chatRoomId?: IntFieldUpdateOperationsInput | number
-    isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -32841,7 +32899,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
     chatRoomId?: IntFieldUpdateOperationsInput | number
-    isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -32850,7 +32907,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUpdateManyWithoutPostNestedInput
     likes?: LikeUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUpdateManyWithoutPostNestedInput
@@ -32863,7 +32919,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     postArtists?: PostArtistUncheckedUpdateManyWithoutPostNestedInput
@@ -32876,7 +32931,6 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EventUpdateWithoutCreatedByUserInput = {
@@ -33324,34 +33378,36 @@ export namespace Prisma {
   export type ChatRoomUserCreateManyChatRoomInput = {
     userId: number
     joinedAt?: Date | string
+    lastReadMessageId?: number | null
   }
 
   export type MessageCreateManyChatRoomInput = {
     id?: number
     content: string
     senderId: number
-    isRead?: boolean
     createdAt?: Date | string
   }
 
   export type ChatRoomUserUpdateWithoutChatRoomInput = {
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastReadMessageId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutChatRoomsNestedInput
   }
 
   export type ChatRoomUserUncheckedUpdateWithoutChatRoomInput = {
     userId?: IntFieldUpdateOperationsInput | number
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastReadMessageId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ChatRoomUserUncheckedUpdateManyWithoutChatRoomInput = {
     userId?: IntFieldUpdateOperationsInput | number
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastReadMessageId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type MessageUpdateWithoutChatRoomInput = {
     content?: StringFieldUpdateOperationsInput | string
-    isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sender?: UserUpdateOneRequiredWithoutMessagesNestedInput
   }
@@ -33360,7 +33416,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
     senderId?: IntFieldUpdateOperationsInput | number
-    isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -33368,7 +33423,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
     senderId?: IntFieldUpdateOperationsInput | number
-    isRead?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

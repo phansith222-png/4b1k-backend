@@ -9,4 +9,6 @@ router.get("/rooms", authenticate, chatController.getRooms);
 
 router.get("/:roomId/messages", authenticate, chatController.getMessages);
 
+
+
 export default router;

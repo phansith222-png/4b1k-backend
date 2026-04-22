@@ -4,75 +4,76 @@ import { Strategy as FacebookStrategy } from "passport-facebook";
 import { Strategy as TwitterStrategy } from "passport-twitter";
 import { findOrCreateOAuthUser } from "../service.js/auth.service.js";
 
-// เก็บแค่ user id ใน session
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
+// // เก็บแค่ user id ใน session
+// passport.serializeUser((user, done) => {
+//   done(null, user.id);
+// });
 
-// ทุกๆ request จะทำการ refresh โดยใช้ user id
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await findOrCreateOAuthUser(null, { id });
-    done(null, user);
-  } catch (err) {
-    done(err, null);
-  }
-});
+// // ทุกๆ request จะทำการ refresh โดยใช้ user id
+// passport.deserializeUser(async (id, done) => {
+//   try {
+//     const user = await findOrCreateOAuthUser(null, { id });
+//     done(null, user);
+//   } catch (err) {
+//     done(err, null);
+//   }
+// });
 
-// Google
+
+// --- Google ---
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.OAUTH_GOOGLE_CLIENT_ID,
-      clientSecret: process.env.OAUTH_GOOGLE_SECRET_ID,
-      callbackURL: process.env.OAUTH_GOOGLE_CALLBACK_URL,
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_SECRET_ID,
+      callbackURL: "/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
         const user = await findOrCreateOAuthUser("google", profile);
         return done(null, user);
-      } catch (err) {
-        return done(err, null);
+      } catch (error) {
+        return done(error, null);
       }
     }
   )
 );
 
-// Facebook
+// --- Facebook ---
 passport.use(
   new FacebookStrategy(
     {
-      clientID: process.env.OAUTH_FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.OAUTH_FACEBOOK_SECRET_ID,
-      callbackURL: process.env.OAUTH_FACEBOOK_CALLBACK_URL,
-      profileFields: ["id", "displayName", "photos", "email"],
+      clientID: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_SECRET_ID,
+      callbackURL: "/auth/facebook/callback",
+      profileFields: ["id", "displayName", "emails", "photos"],
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
         const user = await findOrCreateOAuthUser("facebook", profile);
         return done(null, user);
-      } catch (err) {
-        return done(err, null);
+      } catch (error) {
+        return done(error, null);
       }
     }
   )
 );
 
-// X
+// --- Twitter (X) ---
 passport.use(
   new TwitterStrategy(
     {
-      consumerKey: process.env.OAUTH_TWITTER_CLIENT_ID,
-      consumerSecret: process.env.OAUTH_TWITTER_SECRET_ID,
-      callbackURL: process.env.OAUTH_TWITTER_CALLBACK_URL,
+      consumerKey: process.env.TWITTER_CLIENT_ID,
+      consumerSecret: process.env.TWITTER_SECRET_ID,
+      callbackURL: "/auth/twitter/callback",
       includeEmail: true,
     },
     async (token, tokenSecret, profile, done) => {
       try {
         const user = await findOrCreateOAuthUser("twitter", profile);
         return done(null, user);
-      } catch (err) {
-        return done(err, null);
+      } catch (error) {
+        return done(error, null);
       }
     }
   )
