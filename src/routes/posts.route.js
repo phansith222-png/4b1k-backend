@@ -13,13 +13,16 @@ postsRouter.delete('/:postId',deletePostController)
 
 postsRouter.patch('/:postId',editPostController)
 
-postsRouter.post('/:postId/comments',commentPostController)
+
 
 postsRouter.get('/:postId/like',getAllLikeController)
 
 postsRouter.post('/:postId/like',likePostController)
 
 postsRouter.delete('/:postId/like',deleteLikePostController)
+
+
+postsRouter.post('/:postId/comments',commentPostController)
 
 postsRouter.patch('/:postId/comments/:commentId',editCommentController)
 

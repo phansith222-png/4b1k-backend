@@ -5,6 +5,7 @@ export const getAllPosts = async() => {
     const result = await prisma.post.findMany({
         orderBy : {createdAt : 'desc'},
         include : {
+            postImages : true,
             user : {select : {username:true,profileImage:true}},
             comments : {
                 include : {user : {select : {username:true,profileImage:true}}}
@@ -98,7 +99,7 @@ export const deletePost = async(postId,userId) => {
     return result
 }
 
-export const editPost = async(postId,userId,title,content,postImages,artistId) => {
+export const editPost = async(postId,userId,title,content,image,artistId) => {
     const foundPost = await getAPost(postId)
     // console.log(foundPost)
     if(!foundPost) {
@@ -108,27 +109,45 @@ export const editPost = async(postId,userId,title,content,postImages,artistId) =
          return (createHttpError[404]('Cannot delete this post'))
     }
 
-    const result = await prisma.post.update({
-        where : {id : postId},
-        data : {
-            title : title,
-            content : content,
-            artistId : artistId,
-            postImages : {
-                create : {
-                    url : postImages
-                }
-            }
 
+
+ // 2. จัดการ Query ของรูปภาพ
+    let imageUpdateQuery = {};
+
+    // ถ้ามี Array ของ image ส่งมาจากหน้าบ้าน (รวมรูปเก่าที่เหลือ + รูปใหม่แล้ว)
+    if (image && Array.isArray(image)) {
+        imageUpdateQuery = {
+            postImages: {
+                deleteMany: {}, // 👈 จุดสำคัญ: ลบรูปภาพเดิมในฐานข้อมูลของโพสต์นี้ทิ้งก่อน
+                create: image.map((imageUrl) => ({
+                    url: imageUrl // 👈 แล้วเอา Array ล่าสุดจากหน้าบ้าน มาสร้างบันทึกเข้าไปใหม่แทนที่
+                }))
+            }
+        };
+    }
+
+    // 3. อัปเดตข้อมูล
+    const result = await prisma.post.update({
+        where: { id: postId },
+        data: {
+            title: title,
+            content: content,
+            artistId: artistId,
+            ...imageUpdateQuery // เอาเงื่อนไขรูปภาพมาใส่ตรงนี้
+        },
+        include: {
+            postImages: true // ให้ส่งข้อมูลรูปที่อัปเดตแล้วกลับมาด้วย
         }
-    }) 
-    return result
+    });
+
+    return result;
 }
 
-export const commentPost = async (content,userId,postId) => {
+export const commentPost = async (content,image,userId,postId) => {
     const result = await prisma.comment.create({
         data : {
             content : content,
+            image : image || null,
             userId : userId,
             postId : postId
         },
@@ -223,7 +242,7 @@ export const unlikePost = async (userId,postId) => {
     return result
 }
 
-export const editComment = async (userId,postId,commentId,newContent) => {
+export const editComment = async (userId,postId,commentId,newContent,image) => {
 
     const haveComment = await prisma.comment.findUnique({
         where : { id : commentId}
@@ -241,11 +260,19 @@ export const editComment = async (userId,postId,commentId,newContent) => {
         return (createHttpError[403],'You are not authorized to edit this comment')
     }
 
+    // เตรียม object สำหรับอัปเดต
+    const updateData = {
+        content: newContent
+    };
+
+    // ✅ เพิ่มการจัดการ image: ถ้ารับ image มาด้วย ค่อยเอาไปอัปเดต
+    if (image !== undefined) {
+        updateData.image = image;
+    }
+
     const result = await prisma.comment.update({
         where : { id : commentId},
-        data : {
-            content : newContent
-        },
+        data : updateData,
         include : {
             user : {
                 select : {
