@@ -34,20 +34,49 @@ export const getAPost = async(postId) => {
     return result
 }
 
-export const createPost = async(title,content,postImages,userId,artistId) => {
-    const result = await prisma.post.create({
-        data : {
-            title: title,
-            content : content,
-            userId: userId,
-            artistId : artistId,
-            postImages: {
-               create: {
-                    url: postImages 
-                } 
+export const createPost = async(title,content,image,userId,artistId) => {
+
+
+// 1. เตรียมข้อมูลพื้นฐาน
+    const postData = {
+        title: title || null,
+        content: content,
+        userId: userId,
+    };
+
+    // 2. จัดการเรื่องรูปภาพ (ถ้ามี)
+    if (image && image.length > 0) {
+        postData.postImages = {
+            create: image.map((imageUrl) => ({
+                url: imageUrl
+            }))
+        };
+    }
+
+    // 3. จัดการเรื่อง Artist (ถ้ามี)
+    // ✅ เอามาต่อกันตรงนี้ได้เลย Prisma จะจัดการสร้างลงตาราง PostArtist ให้พร้อมกัน
+    if (artistId) {
+        postData.postArtists = {
+            create: {
+                 artistId: Number(artistId)
             }
+        };
+    }
+
+    // 4. บันทึกลง Database
+    const result = await prisma.post.create({
+        data: postData,
+        // สั่งให้รีเทิร์นข้อมูลรูปกับศิลปินกลับมาด้วย
+        include: {
+            postImages: true,
+            postArtists: {
+                include: {
+                    artist: true // แถมข้อมูล Artist กลับไปด้วยเลย
+                }
+            },
+            user: true // แถมข้อมูลคนโพสต์กลับไปด้วยเพื่อเอาไปโชว์หน้า UI
         }
-    })
+    });
 
     return result
 }

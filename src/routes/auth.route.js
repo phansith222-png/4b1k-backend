@@ -3,6 +3,8 @@ import passport from "passport";
 import jwt from "jsonwebtoken";
 import {
   loginController,
+  oauthFailedController,
+  oauthSuccessController,
   registerController,
 } from "../controllers/auth.controllers.js";
 
@@ -12,63 +14,40 @@ authRouter.post("/register", registerController);
 
 authRouter.post("/login", loginController);
 
-// Google Oauth
-authRouter.get(
-  "/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
+
+// ========================
+// Google Routes
+// ========================
+authRouter.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+
+authRouter.get("/google/callback",
+  passport.authenticate("google", { session: false, failureRedirect: "/auth/oauth/failed" }),
+  oauthSuccessController
 );
 
-authRouter.get(
-  "/google/callback",
-  passport.authenticate("google", {
-    session: false,
-    failureRedirect: "/auth/oauth/failed",
-  }),
-  oauthSuccessHandler
+// ========================
+// Facebook Routes
+// ========================
+authRouter.get("/facebook", passport.authenticate("facebook", { scope: ["email"] }));
+
+authRouter.get("/facebook/callback",
+  passport.authenticate("facebook", { session: false, failureRedirect: "/auth/oauth/failed" }),
+  oauthSuccessController
 );
 
-// Facebook Oauth
-authRouter.get(
-  "/facebook",
-  passport.authenticate("facebook", { scope: ["email"] })
-);
-
-authRouter.get(
-  "/facebook/callback",
-  passport.authenticate("facebook", {
-    session: false,
-    failureRedirect: "/auth/oauth/failed",
-  }),
-  oauthSuccessHandler
-);
-
-// Twitter (X)
+// ========================
+// Twitter Routes
+// ========================
 authRouter.get("/twitter", passport.authenticate("twitter"));
 
-authRouter.get(
-  "/twitter/callback",
-  passport.authenticate("twitter", {
-    session: false,
-    failureRedirect: "/auth/oauth/failed",
-  }),
-  oauthSuccessHandler
+authRouter.get("/twitter/callback",
+  passport.authenticate("twitter", { session: false, failureRedirect: "/auth/oauth/failed" }),
+  oauthSuccessController
 );
 
-function oauthSuccessHandler(req, res) {
-  const user = req.user;
-
-  const payload = { id: user.id };
-  const token = jwt.sign(payload, process.env.JWT_SECRET, {
-    algorithm: "HS256",
-    expiresIn: "7d",
-  });
-
-  const frontendURL = process.env.FRONTEND_URL || "http://localhost:5173";
-  res.redirect(`${frontendURL}/oauth/callback?token=${token}`);
-}
-
-authRouter.get("/oauth/failed", (req, res) => {
-  res.status(401).json({ message: "OAuth login failed. Please try again." });
-});
+// ========================
+// Failed Route
+// ========================
+authRouter.get("/oauth/failed", oauthFailedController);
 
 export default authRouter;

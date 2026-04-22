@@ -14,12 +14,10 @@ export async function getAllPostController (req,res,next) {
 
 
 export async function getPostController (req,res,next) {
-    const {postId} = req.params.id
+    const {postId} = req.params
     try {
         const getPost = await getAPost(Number(postId))
-        if(!foundPost) {
-            return next (createHttpError[404]('Post Not Found'))
-        }
+
         res.status(200).json({
             message : 'get post successfully',
             post : getPost
@@ -32,10 +30,15 @@ export async function getPostController (req,res,next) {
 
 export async function createPostController (req,res,next) {
     const userId = req.user.id
-    const {title,content,postImages,artistId} = req.body
+    const {title,content,image,artistId} = req.body
     try {
-        const createdPost = await createPost(title,content,postImages,userId,artistId)
-        res.status(200).json({createdPost})
+        const createdPost = await createPost(title,content,image,userId,artistId)
+
+
+        res.status(201).json({
+            message: "create post successfully",
+            post: createdPost
+        });
 
     }catch(error) {
         next(error)
