@@ -46,3 +46,5 @@ export const adminDeleteComment = async (postId,commentId) => {
 
     return {result , postInfo : foundPost}
 }
+
+

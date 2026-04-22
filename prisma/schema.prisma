@@ -105,7 +105,6 @@ model Post {
 
   user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   postImages PostImage[]
-  image   String?
 
   @@index([userId], map: "Post_userId_fkey")
 }
@@ -201,20 +200,24 @@ model Venue {
 }
 
 model ChatRoom {
-  id        Int            @id @default(autoincrement())
-  isGroup   Boolean        @default(false)
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
-  users     ChatRoomUser[]
-  messages  Message[]
+  id          Int            @id @default(autoincrement())
+  isGroup     Boolean        @default(false)
+  name        String?        // เพิ่ม: สำหรับชื่อแชทกลุ่ม
+  coverImage  String?        // เพิ่ม: สำหรับรูปแชทกลุ่ม
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  users       ChatRoomUser[]
+  messages    Message[]
 }
 
 model ChatRoomUser {
-  userId     Int
-  chatRoomId Int
-  joinedAt   DateTime @default(now())
-  chatRoom   ChatRoom @relation(fields: [chatRoomId], references: [id], onDelete: Cascade)
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId            Int
+  chatRoomId        Int
+  joinedAt          DateTime @default(now())
+  lastReadMessageId Int?     // เพิ่ม: เก็บ ID ของข้อความล่าสุดที่ User คนนี้อ่าน (แก้ปัญหา Read status ในแชทกลุ่ม)
+  
+  chatRoom          ChatRoom @relation(fields: [chatRoomId], references: [id], onDelete: Cascade)
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([userId, chatRoomId])
   @@index([chatRoomId], map: "ChatRoomUser_chatRoomId_fkey")
@@ -225,8 +228,9 @@ model Message {
   content    String   @db.Text
   senderId   Int
   chatRoomId Int
-  isRead     Boolean  @default(false)
+  // เอา isRead ออก แล้วไปใช้ lastReadMessageId ใน ChatRoomUser แทน
   createdAt  DateTime @default(now())
+  
   chatRoom   ChatRoom @relation(fields: [chatRoomId], references: [id], onDelete: Cascade)
   sender     User     @relation(fields: [senderId], references: [id], onDelete: Cascade)
 
@@ -293,4 +297,11 @@ enum EventStatus {
   ONGOING
   CANCELED
   FINISHED
+}
+
+enum AuthProvider {
+  LOCAL   // สมัครผ่านเว็บปกติ (กรอกรหัสผ่าน)
+  GOOGLE
+  FACEBOOK
+  X
 }
