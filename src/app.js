@@ -25,19 +25,6 @@ app.use(
   })
 );
 
-// app.use(
-//   session({
-//     secret: process.env.SESSION_SECRET || process.env.JWT_SECRET,
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: {
-//       secure: process.env.NODE_ENV === "production",
-//       httpOnly: true,
-//       maxAge: 24 * 60 * 60 * 1000, //1 วัน
-//     },
-//   })
-// );
-
 app.use(passport.initialize()); // เอาไว้ใช้กับ Oauth ในการล็อคอินด้วย Google, Facebook, X
 
 app.use("/auth", authRouter);
