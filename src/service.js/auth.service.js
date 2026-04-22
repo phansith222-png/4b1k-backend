@@ -13,48 +13,48 @@ export async function createUser(data) {
   return await prisma.user.create({ data: data });
 }
 
-export async function findOrCreateOAuthUser(provider, profile) {
-  if (!provider) {
-    return await prisma.user.findUnique({ where: { id: profile.id } });
-  }
+// export async function findOrCreateOAuthUser(provider, profile) {
+//   if (!provider) {
+//     return await prisma.user.findUnique({ where: { id: profile.id } });
+//   }
 
-  const providerId = profile.id;
-  const email = profile.emails?.[0]?.value || null;
-  const displayName = profile.displayName || "";
-  const photo = profile.photos?.[0]?.value || null;
+//   const providerId = profile.id;
+//   const email = profile.emails?.[0]?.value || null;
+//   const displayName = profile.displayName || "";
+//   const photo = profile.photos?.[0]?.value || null;
 
-  const [firstName = displayName, ...rest] = displayName.split(" ");
-  const lastName = rest.join(" ") || "-";
+//   const [firstName = displayName, ...rest] = displayName.split(" ");
+//   const lastName = rest.join(" ") || "-";
 
-  // ตัวอย่าง username: "google_12345", "facebook_12345", "twitter_12345"
-  const oauthUsername = `${provider}_${providerId}`;
+//   // ตัวอย่าง username: "google_12345", "facebook_12345", "twitter_12345"
+//   const oauthUsername = `${provider}_${providerId}`;
 
-  // 1. ถ้าหากสมัครสมาชิกด้วย oauth อยู่แล้ว
-  let user = await prisma.user.findUnique({
-    where: { username: oauthUsername },
-  });
-  if (user) return user;
+//   // 1. ถ้าหากสมัครสมาชิกด้วย oauth อยู่แล้ว
+//   let user = await prisma.user.findUnique({
+//     where: { username: oauthUsername },
+//   });
+//   if (user) return user;
 
-  // 2. หาอีเมลของผู้ใช้ที่มีอยู่แล้ว ถ้าอีเมลตรงกันก็ให้ลิงค์กัน
-  if (email) {
-    user = await prisma.user.findUnique({ where: { email } });
-    if (user) return user;
-  }
+//   // 2. หาอีเมลของผู้ใช้ที่มีอยู่แล้ว ถ้าอีเมลตรงกันก็ให้ลิงค์กัน
+//   if (email) {
+//     user = await prisma.user.findUnique({ where: { email } });
+//     if (user) return user;
+//   }
 
-  // 3. ผู้ใช้ใหม่ สร้างแอคเค้าท์
-  user = await prisma.user.create({
-    data: {
-      username: oauthUsername,
-      email: email || `${oauthUsername}@oauth.placeholder`, // ต้องใช้ schema ที่มี email เป็น unique
-      firstName,
-      lastName,
-      password: `oauth_${provider}_${providerId}`, // อันนี้แค่ placeholder เท่านั้น ห้ามใช้กับ oauth login
-      profileImage: photo,
-    },
-  });
+//   // 3. ผู้ใช้ใหม่ สร้างแอคเค้าท์
+//   user = await prisma.user.create({
+//     data: {
+//       username: oauthUsername,
+//       email: email || `${oauthUsername}@oauth.placeholder`, // ต้องใช้ schema ที่มี email เป็น unique
+//       firstName,
+//       lastName,
+//       password: `oauth_${provider}_${providerId}`, // อันนี้แค่ placeholder เท่านั้น ห้ามใช้กับ oauth login
+//       profileImage: photo,
+//     },
+//   });
 
-  return user;
-}
+//   return user;
+// }
 
 //function editUser สร้าง รับ id,username,firstName,password,lastName,gender,email,telephone,profileImage
 export const editUser = async (
@@ -84,3 +84,44 @@ export const editUser = async (
   });
   return userData;
 };
+
+//สำหรับ google facebook X
+export async function findOrCreateOAuthUser(provider, profile) {
+  const providerId = profile.id;
+  const email = profile.emails?.[0]?.value || null;
+  const displayName = profile.displayName || "";
+  const photo = profile.photos?.[0]?.value || null;
+
+  const [firstName = displayName, ...rest] = displayName.split(" ");
+  const lastName = rest.join(" ") || "-";
+
+  // สร้าง username จำลอง เช่น "google_12345"
+  const oauthUsername = `${displayName}`;
+
+  // 1. เช็คว่าเคยเข้าสู่ระบบด้วยช่องทางนี้หรือยัง
+  let user = await prisma.user.findUnique({
+    where: { username: oauthUsername },
+  });
+  if (user) return user;
+
+  // 2. ถ้ายังไม่เคย ให้เช็คว่าอีเมลนี้มีในระบบ (ที่สมัครแบบปกติ) หรือยัง ถ้ามีก็ดึงมาใช้เลย
+  if (email) {
+    user = await prisma.user.findUnique({ where: { email } });
+    if (user) return user;
+  }
+
+  // 3. ถ้าไม่มีเลย = เป็นผู้ใช้ใหม่เอี่ยม ให้สร้างแอคเคาท์ใหม่
+  user = await prisma.user.create({
+    data: {
+      username: oauthUsername,
+      email: email || `${oauthUsername}@oauth.placeholder`, 
+      firstName,
+      lastName,
+      password: `oauth_${provider}_${providerId}`, // ใส่ไว้กัน Error เพราะ Schema บังคับ
+      profileImage: photo,
+    },
+  });
+
+  return user;
+}
+

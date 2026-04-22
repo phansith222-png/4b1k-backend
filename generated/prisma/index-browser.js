@@ -242,6 +242,8 @@ exports.Prisma.VenueScalarFieldEnum = {
 exports.Prisma.ChatRoomScalarFieldEnum = {
   id: 'id',
   isGroup: 'isGroup',
+  name: 'name',
+  coverImage: 'coverImage',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -249,7 +251,8 @@ exports.Prisma.ChatRoomScalarFieldEnum = {
 exports.Prisma.ChatRoomUserScalarFieldEnum = {
   userId: 'userId',
   chatRoomId: 'chatRoomId',
-  joinedAt: 'joinedAt'
+  joinedAt: 'joinedAt',
+  lastReadMessageId: 'lastReadMessageId'
 };
 
 exports.Prisma.MessageScalarFieldEnum = {
@@ -257,7 +260,6 @@ exports.Prisma.MessageScalarFieldEnum = {
   content: 'content',
   senderId: 'senderId',
   chatRoomId: 'chatRoomId',
-  isRead: 'isRead',
   createdAt: 'createdAt'
 };
 
@@ -352,6 +354,11 @@ exports.Prisma.VenueOrderByRelevanceFieldEnum = {
   name: 'name',
   address: 'address',
   image: 'image'
+};
+
+exports.Prisma.ChatRoomOrderByRelevanceFieldEnum = {
+  name: 'name',
+  coverImage: 'coverImage'
 };
 
 exports.Prisma.MessageOrderByRelevanceFieldEnum = {
