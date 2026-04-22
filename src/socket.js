@@ -21,7 +21,7 @@ const setupSocket = (server) => {
       }
     });
 
-    socket.on("send_message", async (data) => {
+    socket.on("mark_read", async ({ chatRoomId, userId }) => {
       try {
         const { chatRoomId, senderId, content } = data;
         
@@ -29,11 +29,15 @@ const setupSocket = (server) => {
         const newMessage = await chatService.saveMessage(chatRoomId, senderId, content);
         
         // 2. ส่งกลับไปหาทุกคนในห้อง (ต้องมั่นใจว่า roomId ตรงกับตอน join)
-        io.to(String(chatRoomId)).emit("receive_message", newMessage);
-      } catch (error) {
-        console.error("❌ Socket Error:", error);
-      }
-    });
+     io.to(String(chatRoomId)).emit("message_read", { 
+        chatRoomId: String(chatRoomId), 
+        readByUserId: userId 
+      });
+      
+    } catch (error) {
+      console.error("Error marking messages as read:", error);
+    }
+  });
 
     socket.on("disconnect", () => {
       console.log("🔴 User disconnected:", socket.id);
