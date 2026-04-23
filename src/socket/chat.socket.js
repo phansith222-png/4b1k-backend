@@ -52,6 +52,25 @@ export default function setupChatSocket(io) {
       }
     });
 
+    // ลบกลุ่ม (เฉพาะคนสร้าง)
+    socket.on('delete_group', async ({ roomId, userId }) => {
+      try {
+        const group = await prisma.chatRoom.findUnique({ where: { id: Number(roomId) } });
+        
+        if (group && Number(group.creatorId) === Number(userId)) {
+          await prisma.chatRoom.delete({ where: { id: Number(roomId) } });
+          
+          io.to(String(roomId)).emit("group_deleted", { roomId });
+          io.in(String(roomId)).socketsLeave(String(roomId));
+          console.log(`🗑️ Group ${roomId} deleted by user ${userId}`);
+        } else {
+          socket.emit("error", { message: "คุณไม่มีสิทธิ์ลบกลุ่มนี้" });
+        }
+      } catch (error) {
+        console.error("🔥 Error deleting group:", error);
+      }
+    });
+
     socket.on('disconnect', () => console.log(`🔴 User Offline: ${socket.user.id}`));
   });
 }

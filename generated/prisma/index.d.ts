@@ -2502,6 +2502,7 @@ export namespace Prisma {
     posts: number
     createdEvents: number
     news: number
+    createdChatRooms: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2514,6 +2515,7 @@ export namespace Prisma {
     posts?: boolean | UserCountOutputTypeCountPostsArgs
     createdEvents?: boolean | UserCountOutputTypeCountCreatedEventsArgs
     news?: boolean | UserCountOutputTypeCountNewsArgs
+    createdChatRooms?: boolean | UserCountOutputTypeCountCreatedChatRoomsArgs
   }
 
   // Custom InputTypes
@@ -2588,6 +2590,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountNewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NewsWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedChatRoomsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChatRoomWhereInput
   }
 
 
@@ -3195,6 +3204,7 @@ export namespace Prisma {
     posts?: boolean | User$postsArgs<ExtArgs>
     createdEvents?: boolean | User$createdEventsArgs<ExtArgs>
     news?: boolean | User$newsArgs<ExtArgs>
+    createdChatRooms?: boolean | User$createdChatRoomsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3227,6 +3237,7 @@ export namespace Prisma {
     posts?: boolean | User$postsArgs<ExtArgs>
     createdEvents?: boolean | User$createdEventsArgs<ExtArgs>
     news?: boolean | User$newsArgs<ExtArgs>
+    createdChatRooms?: boolean | User$createdChatRoomsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -3242,6 +3253,7 @@ export namespace Prisma {
       posts: Prisma.$PostPayload<ExtArgs>[]
       createdEvents: Prisma.$EventPayload<ExtArgs>[]
       news: Prisma.$NewsPayload<ExtArgs>[]
+      createdChatRooms: Prisma.$ChatRoomPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3606,6 +3618,7 @@ export namespace Prisma {
     posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     createdEvents<T extends User$createdEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     news<T extends User$newsArgs<ExtArgs> = {}>(args?: Subset<T, User$newsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdChatRooms<T extends User$createdChatRoomsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdChatRoomsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatRoomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4209,6 +4222,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: NewsScalarFieldEnum | NewsScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdChatRooms
+   */
+  export type User$createdChatRoomsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChatRoom
+     */
+    select?: ChatRoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChatRoom
+     */
+    omit?: ChatRoomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatRoomInclude<ExtArgs> | null
+    where?: ChatRoomWhereInput
+    orderBy?: ChatRoomOrderByWithRelationInput | ChatRoomOrderByWithRelationInput[]
+    cursor?: ChatRoomWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChatRoomScalarFieldEnum | ChatRoomScalarFieldEnum[]
   }
 
   /**
@@ -17355,10 +17392,12 @@ export namespace Prisma {
 
   export type ChatRoomAvgAggregateOutputType = {
     id: number | null
+    creatorId: number | null
   }
 
   export type ChatRoomSumAggregateOutputType = {
     id: number | null
+    creatorId: number | null
   }
 
   export type ChatRoomMinAggregateOutputType = {
@@ -17368,6 +17407,7 @@ export namespace Prisma {
     coverImage: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    creatorId: number | null
   }
 
   export type ChatRoomMaxAggregateOutputType = {
@@ -17377,6 +17417,7 @@ export namespace Prisma {
     coverImage: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    creatorId: number | null
   }
 
   export type ChatRoomCountAggregateOutputType = {
@@ -17386,16 +17427,19 @@ export namespace Prisma {
     coverImage: number
     createdAt: number
     updatedAt: number
+    creatorId: number
     _all: number
   }
 
 
   export type ChatRoomAvgAggregateInputType = {
     id?: true
+    creatorId?: true
   }
 
   export type ChatRoomSumAggregateInputType = {
     id?: true
+    creatorId?: true
   }
 
   export type ChatRoomMinAggregateInputType = {
@@ -17405,6 +17449,7 @@ export namespace Prisma {
     coverImage?: true
     createdAt?: true
     updatedAt?: true
+    creatorId?: true
   }
 
   export type ChatRoomMaxAggregateInputType = {
@@ -17414,6 +17459,7 @@ export namespace Prisma {
     coverImage?: true
     createdAt?: true
     updatedAt?: true
+    creatorId?: true
   }
 
   export type ChatRoomCountAggregateInputType = {
@@ -17423,6 +17469,7 @@ export namespace Prisma {
     coverImage?: true
     createdAt?: true
     updatedAt?: true
+    creatorId?: true
     _all?: true
   }
 
@@ -17519,6 +17566,7 @@ export namespace Prisma {
     coverImage: string | null
     createdAt: Date
     updatedAt: Date
+    creatorId: number | null
     _count: ChatRoomCountAggregateOutputType | null
     _avg: ChatRoomAvgAggregateOutputType | null
     _sum: ChatRoomSumAggregateOutputType | null
@@ -17547,6 +17595,8 @@ export namespace Prisma {
     coverImage?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    creatorId?: boolean
+    creator?: boolean | ChatRoom$creatorArgs<ExtArgs>
     users?: boolean | ChatRoom$usersArgs<ExtArgs>
     messages?: boolean | ChatRoom$messagesArgs<ExtArgs>
     _count?: boolean | ChatRoomCountOutputTypeDefaultArgs<ExtArgs>
@@ -17561,10 +17611,12 @@ export namespace Prisma {
     coverImage?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    creatorId?: boolean
   }
 
-  export type ChatRoomOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "isGroup" | "name" | "coverImage" | "createdAt" | "updatedAt", ExtArgs["result"]["chatRoom"]>
+  export type ChatRoomOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "isGroup" | "name" | "coverImage" | "createdAt" | "updatedAt" | "creatorId", ExtArgs["result"]["chatRoom"]>
   export type ChatRoomInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    creator?: boolean | ChatRoom$creatorArgs<ExtArgs>
     users?: boolean | ChatRoom$usersArgs<ExtArgs>
     messages?: boolean | ChatRoom$messagesArgs<ExtArgs>
     _count?: boolean | ChatRoomCountOutputTypeDefaultArgs<ExtArgs>
@@ -17573,6 +17625,7 @@ export namespace Prisma {
   export type $ChatRoomPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ChatRoom"
     objects: {
+      creator: Prisma.$UserPayload<ExtArgs> | null
       users: Prisma.$ChatRoomUserPayload<ExtArgs>[]
       messages: Prisma.$MessagePayload<ExtArgs>[]
     }
@@ -17583,6 +17636,7 @@ export namespace Prisma {
       coverImage: string | null
       createdAt: Date
       updatedAt: Date
+      creatorId: number | null
     }, ExtArgs["result"]["chatRoom"]>
     composites: {}
   }
@@ -17923,6 +17977,7 @@ export namespace Prisma {
    */
   export interface Prisma__ChatRoomClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    creator<T extends ChatRoom$creatorArgs<ExtArgs> = {}>(args?: Subset<T, ChatRoom$creatorArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     users<T extends ChatRoom$usersArgs<ExtArgs> = {}>(args?: Subset<T, ChatRoom$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatRoomUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     messages<T extends ChatRoom$messagesArgs<ExtArgs> = {}>(args?: Subset<T, ChatRoom$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -17960,6 +18015,7 @@ export namespace Prisma {
     readonly coverImage: FieldRef<"ChatRoom", 'String'>
     readonly createdAt: FieldRef<"ChatRoom", 'DateTime'>
     readonly updatedAt: FieldRef<"ChatRoom", 'DateTime'>
+    readonly creatorId: FieldRef<"ChatRoom", 'Int'>
   }
     
 
@@ -18305,6 +18361,25 @@ export namespace Prisma {
      * Limit how many ChatRooms to delete.
      */
     limit?: number
+  }
+
+  /**
+   * ChatRoom.creator
+   */
+  export type ChatRoom$creatorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -23505,7 +23580,8 @@ export namespace Prisma {
     name: 'name',
     coverImage: 'coverImage',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    creatorId: 'creatorId'
   };
 
   export type ChatRoomScalarFieldEnum = (typeof ChatRoomScalarFieldEnum)[keyof typeof ChatRoomScalarFieldEnum]
@@ -23789,6 +23865,7 @@ export namespace Prisma {
     posts?: PostListRelationFilter
     createdEvents?: EventListRelationFilter
     news?: NewsListRelationFilter
+    createdChatRooms?: ChatRoomListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -23814,6 +23891,7 @@ export namespace Prisma {
     posts?: PostOrderByRelationAggregateInput
     createdEvents?: EventOrderByRelationAggregateInput
     news?: NewsOrderByRelationAggregateInput
+    createdChatRooms?: ChatRoomOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
   }
 
@@ -23843,6 +23921,7 @@ export namespace Prisma {
     posts?: PostListRelationFilter
     createdEvents?: EventListRelationFilter
     news?: NewsListRelationFilter
+    createdChatRooms?: ChatRoomListRelationFilter
   }, "id" | "username" | "email" | "telephone">
 
   export type UserOrderByWithAggregationInput = {
@@ -24696,6 +24775,8 @@ export namespace Prisma {
     coverImage?: StringNullableFilter<"ChatRoom"> | string | null
     createdAt?: DateTimeFilter<"ChatRoom"> | Date | string
     updatedAt?: DateTimeFilter<"ChatRoom"> | Date | string
+    creatorId?: IntNullableFilter<"ChatRoom"> | number | null
+    creator?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     users?: ChatRoomUserListRelationFilter
     messages?: MessageListRelationFilter
   }
@@ -24707,6 +24788,8 @@ export namespace Prisma {
     coverImage?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    creatorId?: SortOrderInput | SortOrder
+    creator?: UserOrderByWithRelationInput
     users?: ChatRoomUserOrderByRelationAggregateInput
     messages?: MessageOrderByRelationAggregateInput
     _relevance?: ChatRoomOrderByRelevanceInput
@@ -24722,6 +24805,8 @@ export namespace Prisma {
     coverImage?: StringNullableFilter<"ChatRoom"> | string | null
     createdAt?: DateTimeFilter<"ChatRoom"> | Date | string
     updatedAt?: DateTimeFilter<"ChatRoom"> | Date | string
+    creatorId?: IntNullableFilter<"ChatRoom"> | number | null
+    creator?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     users?: ChatRoomUserListRelationFilter
     messages?: MessageListRelationFilter
   }, "id">
@@ -24733,6 +24818,7 @@ export namespace Prisma {
     coverImage?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    creatorId?: SortOrderInput | SortOrder
     _count?: ChatRoomCountOrderByAggregateInput
     _avg?: ChatRoomAvgOrderByAggregateInput
     _max?: ChatRoomMaxOrderByAggregateInput
@@ -24750,6 +24836,7 @@ export namespace Prisma {
     coverImage?: StringNullableWithAggregatesFilter<"ChatRoom"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"ChatRoom"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ChatRoom"> | Date | string
+    creatorId?: IntNullableWithAggregatesFilter<"ChatRoom"> | number | null
   }
 
   export type ChatRoomUserWhereInput = {
@@ -25091,6 +25178,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutUserInput
     createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
     news?: NewsCreateNestedManyWithoutAuthorInput
+    createdChatRooms?: ChatRoomCreateNestedManyWithoutCreatorInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -25116,6 +25204,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
     news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
+    createdChatRooms?: ChatRoomUncheckedCreateNestedManyWithoutCreatorInput
   }
 
   export type UserUpdateInput = {
@@ -25140,6 +25229,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutUserNestedInput
     createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
     news?: NewsUpdateManyWithoutAuthorNestedInput
+    createdChatRooms?: ChatRoomUpdateManyWithoutCreatorNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -25165,6 +25255,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
     news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
+    createdChatRooms?: ChatRoomUncheckedUpdateManyWithoutCreatorNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -25945,6 +26036,7 @@ export namespace Prisma {
     coverImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    creator?: UserCreateNestedOneWithoutCreatedChatRoomsInput
     users?: ChatRoomUserCreateNestedManyWithoutChatRoomInput
     messages?: MessageCreateNestedManyWithoutChatRoomInput
   }
@@ -25956,6 +26048,7 @@ export namespace Prisma {
     coverImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    creatorId?: number | null
     users?: ChatRoomUserUncheckedCreateNestedManyWithoutChatRoomInput
     messages?: MessageUncheckedCreateNestedManyWithoutChatRoomInput
   }
@@ -25966,6 +26059,7 @@ export namespace Prisma {
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creator?: UserUpdateOneWithoutCreatedChatRoomsNestedInput
     users?: ChatRoomUserUpdateManyWithoutChatRoomNestedInput
     messages?: MessageUpdateManyWithoutChatRoomNestedInput
   }
@@ -25977,6 +26071,7 @@ export namespace Prisma {
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creatorId?: NullableIntFieldUpdateOperationsInput | number | null
     users?: ChatRoomUserUncheckedUpdateManyWithoutChatRoomNestedInput
     messages?: MessageUncheckedUpdateManyWithoutChatRoomNestedInput
   }
@@ -25988,6 +26083,7 @@ export namespace Prisma {
     coverImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    creatorId?: number | null
   }
 
   export type ChatRoomUpdateManyMutationInput = {
@@ -26005,6 +26101,7 @@ export namespace Prisma {
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creatorId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ChatRoomUserCreateInput = {
@@ -26416,6 +26513,12 @@ export namespace Prisma {
     none?: NewsWhereInput
   }
 
+  export type ChatRoomListRelationFilter = {
+    every?: ChatRoomWhereInput
+    some?: ChatRoomWhereInput
+    none?: ChatRoomWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -26454,6 +26557,10 @@ export namespace Prisma {
   }
 
   export type NewsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ChatRoomOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -27336,10 +27443,12 @@ export namespace Prisma {
     coverImage?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    creatorId?: SortOrder
   }
 
   export type ChatRoomAvgOrderByAggregateInput = {
     id?: SortOrder
+    creatorId?: SortOrder
   }
 
   export type ChatRoomMaxOrderByAggregateInput = {
@@ -27349,6 +27458,7 @@ export namespace Prisma {
     coverImage?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    creatorId?: SortOrder
   }
 
   export type ChatRoomMinOrderByAggregateInput = {
@@ -27358,10 +27468,12 @@ export namespace Prisma {
     coverImage?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    creatorId?: SortOrder
   }
 
   export type ChatRoomSumOrderByAggregateInput = {
     id?: SortOrder
+    creatorId?: SortOrder
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -27660,6 +27772,13 @@ export namespace Prisma {
     connect?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
   }
 
+  export type ChatRoomCreateNestedManyWithoutCreatorInput = {
+    create?: XOR<ChatRoomCreateWithoutCreatorInput, ChatRoomUncheckedCreateWithoutCreatorInput> | ChatRoomCreateWithoutCreatorInput[] | ChatRoomUncheckedCreateWithoutCreatorInput[]
+    connectOrCreate?: ChatRoomCreateOrConnectWithoutCreatorInput | ChatRoomCreateOrConnectWithoutCreatorInput[]
+    createMany?: ChatRoomCreateManyCreatorInputEnvelope
+    connect?: ChatRoomWhereUniqueInput | ChatRoomWhereUniqueInput[]
+  }
+
   export type ArtistUncheckedCreateNestedManyWithoutCreatedByUserInput = {
     create?: XOR<ArtistCreateWithoutCreatedByUserInput, ArtistUncheckedCreateWithoutCreatedByUserInput> | ArtistCreateWithoutCreatedByUserInput[] | ArtistUncheckedCreateWithoutCreatedByUserInput[]
     connectOrCreate?: ArtistCreateOrConnectWithoutCreatedByUserInput | ArtistCreateOrConnectWithoutCreatedByUserInput[]
@@ -27721,6 +27840,13 @@ export namespace Prisma {
     connectOrCreate?: NewsCreateOrConnectWithoutAuthorInput | NewsCreateOrConnectWithoutAuthorInput[]
     createMany?: NewsCreateManyAuthorInputEnvelope
     connect?: NewsWhereUniqueInput | NewsWhereUniqueInput[]
+  }
+
+  export type ChatRoomUncheckedCreateNestedManyWithoutCreatorInput = {
+    create?: XOR<ChatRoomCreateWithoutCreatorInput, ChatRoomUncheckedCreateWithoutCreatorInput> | ChatRoomCreateWithoutCreatorInput[] | ChatRoomUncheckedCreateWithoutCreatorInput[]
+    connectOrCreate?: ChatRoomCreateOrConnectWithoutCreatorInput | ChatRoomCreateOrConnectWithoutCreatorInput[]
+    createMany?: ChatRoomCreateManyCreatorInputEnvelope
+    connect?: ChatRoomWhereUniqueInput | ChatRoomWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -27869,6 +27995,20 @@ export namespace Prisma {
     deleteMany?: NewsScalarWhereInput | NewsScalarWhereInput[]
   }
 
+  export type ChatRoomUpdateManyWithoutCreatorNestedInput = {
+    create?: XOR<ChatRoomCreateWithoutCreatorInput, ChatRoomUncheckedCreateWithoutCreatorInput> | ChatRoomCreateWithoutCreatorInput[] | ChatRoomUncheckedCreateWithoutCreatorInput[]
+    connectOrCreate?: ChatRoomCreateOrConnectWithoutCreatorInput | ChatRoomCreateOrConnectWithoutCreatorInput[]
+    upsert?: ChatRoomUpsertWithWhereUniqueWithoutCreatorInput | ChatRoomUpsertWithWhereUniqueWithoutCreatorInput[]
+    createMany?: ChatRoomCreateManyCreatorInputEnvelope
+    set?: ChatRoomWhereUniqueInput | ChatRoomWhereUniqueInput[]
+    disconnect?: ChatRoomWhereUniqueInput | ChatRoomWhereUniqueInput[]
+    delete?: ChatRoomWhereUniqueInput | ChatRoomWhereUniqueInput[]
+    connect?: ChatRoomWhereUniqueInput | ChatRoomWhereUniqueInput[]
+    update?: ChatRoomUpdateWithWhereUniqueWithoutCreatorInput | ChatRoomUpdateWithWhereUniqueWithoutCreatorInput[]
+    updateMany?: ChatRoomUpdateManyWithWhereWithoutCreatorInput | ChatRoomUpdateManyWithWhereWithoutCreatorInput[]
+    deleteMany?: ChatRoomScalarWhereInput | ChatRoomScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -28001,6 +28141,20 @@ export namespace Prisma {
     update?: NewsUpdateWithWhereUniqueWithoutAuthorInput | NewsUpdateWithWhereUniqueWithoutAuthorInput[]
     updateMany?: NewsUpdateManyWithWhereWithoutAuthorInput | NewsUpdateManyWithWhereWithoutAuthorInput[]
     deleteMany?: NewsScalarWhereInput | NewsScalarWhereInput[]
+  }
+
+  export type ChatRoomUncheckedUpdateManyWithoutCreatorNestedInput = {
+    create?: XOR<ChatRoomCreateWithoutCreatorInput, ChatRoomUncheckedCreateWithoutCreatorInput> | ChatRoomCreateWithoutCreatorInput[] | ChatRoomUncheckedCreateWithoutCreatorInput[]
+    connectOrCreate?: ChatRoomCreateOrConnectWithoutCreatorInput | ChatRoomCreateOrConnectWithoutCreatorInput[]
+    upsert?: ChatRoomUpsertWithWhereUniqueWithoutCreatorInput | ChatRoomUpsertWithWhereUniqueWithoutCreatorInput[]
+    createMany?: ChatRoomCreateManyCreatorInputEnvelope
+    set?: ChatRoomWhereUniqueInput | ChatRoomWhereUniqueInput[]
+    disconnect?: ChatRoomWhereUniqueInput | ChatRoomWhereUniqueInput[]
+    delete?: ChatRoomWhereUniqueInput | ChatRoomWhereUniqueInput[]
+    connect?: ChatRoomWhereUniqueInput | ChatRoomWhereUniqueInput[]
+    update?: ChatRoomUpdateWithWhereUniqueWithoutCreatorInput | ChatRoomUpdateWithWhereUniqueWithoutCreatorInput[]
+    updateMany?: ChatRoomUpdateManyWithWhereWithoutCreatorInput | ChatRoomUpdateManyWithWhereWithoutCreatorInput[]
+    deleteMany?: ChatRoomScalarWhereInput | ChatRoomScalarWhereInput[]
   }
 
   export type AgencyCreateNestedOneWithoutArtistsInput = {
@@ -28873,6 +29027,12 @@ export namespace Prisma {
     deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
   }
 
+  export type UserCreateNestedOneWithoutCreatedChatRoomsInput = {
+    create?: XOR<UserCreateWithoutCreatedChatRoomsInput, UserUncheckedCreateWithoutCreatedChatRoomsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedChatRoomsInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type ChatRoomUserCreateNestedManyWithoutChatRoomInput = {
     create?: XOR<ChatRoomUserCreateWithoutChatRoomInput, ChatRoomUserUncheckedCreateWithoutChatRoomInput> | ChatRoomUserCreateWithoutChatRoomInput[] | ChatRoomUserUncheckedCreateWithoutChatRoomInput[]
     connectOrCreate?: ChatRoomUserCreateOrConnectWithoutChatRoomInput | ChatRoomUserCreateOrConnectWithoutChatRoomInput[]
@@ -28903,6 +29063,16 @@ export namespace Prisma {
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type UserUpdateOneWithoutCreatedChatRoomsNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedChatRoomsInput, UserUncheckedCreateWithoutCreatedChatRoomsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedChatRoomsInput
+    upsert?: UserUpsertWithoutCreatedChatRoomsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedChatRoomsInput, UserUpdateWithoutCreatedChatRoomsInput>, UserUncheckedUpdateWithoutCreatedChatRoomsInput>
   }
 
   export type ChatRoomUserUpdateManyWithoutChatRoomNestedInput = {
@@ -29643,6 +29813,37 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ChatRoomCreateWithoutCreatorInput = {
+    isGroup?: boolean
+    name?: string | null
+    coverImage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ChatRoomUserCreateNestedManyWithoutChatRoomInput
+    messages?: MessageCreateNestedManyWithoutChatRoomInput
+  }
+
+  export type ChatRoomUncheckedCreateWithoutCreatorInput = {
+    id?: number
+    isGroup?: boolean
+    name?: string | null
+    coverImage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: ChatRoomUserUncheckedCreateNestedManyWithoutChatRoomInput
+    messages?: MessageUncheckedCreateNestedManyWithoutChatRoomInput
+  }
+
+  export type ChatRoomCreateOrConnectWithoutCreatorInput = {
+    where: ChatRoomWhereUniqueInput
+    create: XOR<ChatRoomCreateWithoutCreatorInput, ChatRoomUncheckedCreateWithoutCreatorInput>
+  }
+
+  export type ChatRoomCreateManyCreatorInputEnvelope = {
+    data: ChatRoomCreateManyCreatorInput | ChatRoomCreateManyCreatorInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ArtistUpsertWithWhereUniqueWithoutCreatedByUserInput = {
     where: ArtistWhereUniqueInput
     update: XOR<ArtistUpdateWithoutCreatedByUserInput, ArtistUncheckedUpdateWithoutCreatedByUserInput>
@@ -29898,6 +30099,35 @@ export namespace Prisma {
     authorId?: IntFilter<"News"> | number
   }
 
+  export type ChatRoomUpsertWithWhereUniqueWithoutCreatorInput = {
+    where: ChatRoomWhereUniqueInput
+    update: XOR<ChatRoomUpdateWithoutCreatorInput, ChatRoomUncheckedUpdateWithoutCreatorInput>
+    create: XOR<ChatRoomCreateWithoutCreatorInput, ChatRoomUncheckedCreateWithoutCreatorInput>
+  }
+
+  export type ChatRoomUpdateWithWhereUniqueWithoutCreatorInput = {
+    where: ChatRoomWhereUniqueInput
+    data: XOR<ChatRoomUpdateWithoutCreatorInput, ChatRoomUncheckedUpdateWithoutCreatorInput>
+  }
+
+  export type ChatRoomUpdateManyWithWhereWithoutCreatorInput = {
+    where: ChatRoomScalarWhereInput
+    data: XOR<ChatRoomUpdateManyMutationInput, ChatRoomUncheckedUpdateManyWithoutCreatorInput>
+  }
+
+  export type ChatRoomScalarWhereInput = {
+    AND?: ChatRoomScalarWhereInput | ChatRoomScalarWhereInput[]
+    OR?: ChatRoomScalarWhereInput[]
+    NOT?: ChatRoomScalarWhereInput | ChatRoomScalarWhereInput[]
+    id?: IntFilter<"ChatRoom"> | number
+    isGroup?: BoolFilter<"ChatRoom"> | boolean
+    name?: StringNullableFilter<"ChatRoom"> | string | null
+    coverImage?: StringNullableFilter<"ChatRoom"> | string | null
+    createdAt?: DateTimeFilter<"ChatRoom"> | Date | string
+    updatedAt?: DateTimeFilter<"ChatRoom"> | Date | string
+    creatorId?: IntNullableFilter<"ChatRoom"> | number | null
+  }
+
   export type AgencyCreateWithoutArtistsInput = {
     name: string
     description?: string | null
@@ -29937,6 +30167,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutUserInput
     createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
     news?: NewsCreateNestedManyWithoutAuthorInput
+    createdChatRooms?: ChatRoomCreateNestedManyWithoutCreatorInput
   }
 
   export type UserUncheckedCreateWithoutCreatedArtistsInput = {
@@ -29961,6 +30192,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
     news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
+    createdChatRooms?: ChatRoomUncheckedCreateNestedManyWithoutCreatorInput
   }
 
   export type UserCreateOrConnectWithoutCreatedArtistsInput = {
@@ -30150,6 +30382,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutUserNestedInput
     createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
     news?: NewsUpdateManyWithoutAuthorNestedInput
+    createdChatRooms?: ChatRoomUpdateManyWithoutCreatorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedArtistsInput = {
@@ -30174,6 +30407,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
     news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
+    createdChatRooms?: ChatRoomUncheckedUpdateManyWithoutCreatorNestedInput
   }
 
   export type ArtistEventUpsertWithWhereUniqueWithoutArtistInput = {
@@ -30580,6 +30814,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutUserInput
     createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
     news?: NewsCreateNestedManyWithoutAuthorInput
+    createdChatRooms?: ChatRoomCreateNestedManyWithoutCreatorInput
   }
 
   export type UserUncheckedCreateWithoutFavArtistsInput = {
@@ -30604,6 +30839,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
     news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
+    createdChatRooms?: ChatRoomUncheckedCreateNestedManyWithoutCreatorInput
   }
 
   export type UserCreateOrConnectWithoutFavArtistsInput = {
@@ -30685,6 +30921,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutUserNestedInput
     createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
     news?: NewsUpdateManyWithoutAuthorNestedInput
+    createdChatRooms?: ChatRoomUpdateManyWithoutCreatorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFavArtistsInput = {
@@ -30709,6 +30946,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
     news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
+    createdChatRooms?: ChatRoomUncheckedUpdateManyWithoutCreatorNestedInput
   }
 
   export type CommentCreateWithoutPostInput = {
@@ -30798,6 +31036,7 @@ export namespace Prisma {
     messages?: MessageCreateNestedManyWithoutSenderInput
     createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
     news?: NewsCreateNestedManyWithoutAuthorInput
+    createdChatRooms?: ChatRoomCreateNestedManyWithoutCreatorInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -30822,6 +31061,7 @@ export namespace Prisma {
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
     news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
+    createdChatRooms?: ChatRoomUncheckedCreateNestedManyWithoutCreatorInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -30930,6 +31170,7 @@ export namespace Prisma {
     messages?: MessageUpdateManyWithoutSenderNestedInput
     createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
     news?: NewsUpdateManyWithoutAuthorNestedInput
+    createdChatRooms?: ChatRoomUpdateManyWithoutCreatorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -30954,6 +31195,7 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
     news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
+    createdChatRooms?: ChatRoomUncheckedUpdateManyWithoutCreatorNestedInput
   }
 
   export type PostImageUpsertWithWhereUniqueWithoutPostInput = {
@@ -31233,6 +31475,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutUserInput
     createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
     news?: NewsCreateNestedManyWithoutAuthorInput
+    createdChatRooms?: ChatRoomCreateNestedManyWithoutCreatorInput
   }
 
   export type UserUncheckedCreateWithoutLikesInput = {
@@ -31257,6 +31500,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
     news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
+    createdChatRooms?: ChatRoomUncheckedCreateNestedManyWithoutCreatorInput
   }
 
   export type UserCreateOrConnectWithoutLikesInput = {
@@ -31330,6 +31574,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutUserNestedInput
     createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
     news?: NewsUpdateManyWithoutAuthorNestedInput
+    createdChatRooms?: ChatRoomUpdateManyWithoutCreatorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLikesInput = {
@@ -31354,6 +31599,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
     news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
+    createdChatRooms?: ChatRoomUncheckedUpdateManyWithoutCreatorNestedInput
   }
 
   export type PostCreateWithoutCommentsInput = {
@@ -31405,6 +31651,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutUserInput
     createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
     news?: NewsCreateNestedManyWithoutAuthorInput
+    createdChatRooms?: ChatRoomCreateNestedManyWithoutCreatorInput
   }
 
   export type UserUncheckedCreateWithoutCommentsInput = {
@@ -31429,6 +31676,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
     news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
+    createdChatRooms?: ChatRoomUncheckedCreateNestedManyWithoutCreatorInput
   }
 
   export type UserCreateOrConnectWithoutCommentsInput = {
@@ -31502,6 +31750,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutUserNestedInput
     createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
     news?: NewsUpdateManyWithoutAuthorNestedInput
+    createdChatRooms?: ChatRoomUpdateManyWithoutCreatorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -31526,6 +31775,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
     news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
+    createdChatRooms?: ChatRoomUncheckedUpdateManyWithoutCreatorNestedInput
   }
 
   export type ArtistEventCreateWithoutEventInput = {
@@ -31567,6 +31817,7 @@ export namespace Prisma {
     messages?: MessageCreateNestedManyWithoutSenderInput
     posts?: PostCreateNestedManyWithoutUserInput
     news?: NewsCreateNestedManyWithoutAuthorInput
+    createdChatRooms?: ChatRoomCreateNestedManyWithoutCreatorInput
   }
 
   export type UserUncheckedCreateWithoutCreatedEventsInput = {
@@ -31591,6 +31842,7 @@ export namespace Prisma {
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
+    createdChatRooms?: ChatRoomUncheckedCreateNestedManyWithoutCreatorInput
   }
 
   export type UserCreateOrConnectWithoutCreatedEventsInput = {
@@ -31668,6 +31920,7 @@ export namespace Prisma {
     messages?: MessageUpdateManyWithoutSenderNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
     news?: NewsUpdateManyWithoutAuthorNestedInput
+    createdChatRooms?: ChatRoomUpdateManyWithoutCreatorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedEventsInput = {
@@ -31692,6 +31945,7 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
+    createdChatRooms?: ChatRoomUncheckedUpdateManyWithoutCreatorNestedInput
   }
 
   export type VenueUpsertWithoutEventsInput = {
@@ -31929,6 +32183,60 @@ export namespace Prisma {
     data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyWithoutVenueInput>
   }
 
+  export type UserCreateWithoutCreatedChatRoomsInput = {
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdArtists?: ArtistCreateNestedManyWithoutCreatedByUserInput
+    chatRooms?: ChatRoomUserCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
+    news?: NewsCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedChatRoomsInput = {
+    id?: number
+    username: string
+    email: string
+    telephone?: string | null
+    firstName: string
+    lastName: string
+    password: string
+    profileImage?: string | null
+    nationalId?: string | null
+    role?: $Enums.Role
+    gender?: $Enums.Gender
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdArtists?: ArtistUncheckedCreateNestedManyWithoutCreatedByUserInput
+    chatRooms?: ChatRoomUserUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    favArtists?: FavArtistUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
+    news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedChatRoomsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedChatRoomsInput, UserUncheckedCreateWithoutCreatedChatRoomsInput>
+  }
+
   export type ChatRoomUserCreateWithoutChatRoomInput = {
     joinedAt?: Date | string
     lastReadMessageId?: number | null
@@ -31974,6 +32282,66 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserUpsertWithoutCreatedChatRoomsInput = {
+    update: XOR<UserUpdateWithoutCreatedChatRoomsInput, UserUncheckedUpdateWithoutCreatedChatRoomsInput>
+    create: XOR<UserCreateWithoutCreatedChatRoomsInput, UserUncheckedCreateWithoutCreatedChatRoomsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedChatRoomsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedChatRoomsInput, UserUncheckedUpdateWithoutCreatedChatRoomsInput>
+  }
+
+  export type UserUpdateWithoutCreatedChatRoomsInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdArtists?: ArtistUpdateManyWithoutCreatedByUserNestedInput
+    chatRooms?: ChatRoomUserUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    favArtists?: FavArtistUpdateManyWithoutUserNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
+    news?: NewsUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedChatRoomsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    nationalId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdArtists?: ArtistUncheckedUpdateManyWithoutCreatedByUserNestedInput
+    chatRooms?: ChatRoomUserUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    favArtists?: FavArtistUncheckedUpdateManyWithoutUserNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
+    news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
+  }
+
   export type ChatRoomUserUpsertWithWhereUniqueWithoutChatRoomInput = {
     where: ChatRoomUserWhereUniqueInput
     update: XOR<ChatRoomUserUpdateWithoutChatRoomInput, ChatRoomUserUncheckedUpdateWithoutChatRoomInput>
@@ -32012,6 +32380,7 @@ export namespace Prisma {
     coverImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    creator?: UserCreateNestedOneWithoutCreatedChatRoomsInput
     messages?: MessageCreateNestedManyWithoutChatRoomInput
   }
 
@@ -32022,6 +32391,7 @@ export namespace Prisma {
     coverImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    creatorId?: number | null
     messages?: MessageUncheckedCreateNestedManyWithoutChatRoomInput
   }
 
@@ -32051,6 +32421,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutUserInput
     createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
     news?: NewsCreateNestedManyWithoutAuthorInput
+    createdChatRooms?: ChatRoomCreateNestedManyWithoutCreatorInput
   }
 
   export type UserUncheckedCreateWithoutChatRoomsInput = {
@@ -32075,6 +32446,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
     news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
+    createdChatRooms?: ChatRoomUncheckedCreateNestedManyWithoutCreatorInput
   }
 
   export type UserCreateOrConnectWithoutChatRoomsInput = {
@@ -32099,6 +32471,7 @@ export namespace Prisma {
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creator?: UserUpdateOneWithoutCreatedChatRoomsNestedInput
     messages?: MessageUpdateManyWithoutChatRoomNestedInput
   }
 
@@ -32109,6 +32482,7 @@ export namespace Prisma {
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creatorId?: NullableIntFieldUpdateOperationsInput | number | null
     messages?: MessageUncheckedUpdateManyWithoutChatRoomNestedInput
   }
 
@@ -32144,6 +32518,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutUserNestedInput
     createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
     news?: NewsUpdateManyWithoutAuthorNestedInput
+    createdChatRooms?: ChatRoomUpdateManyWithoutCreatorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChatRoomsInput = {
@@ -32168,6 +32543,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
     news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
+    createdChatRooms?: ChatRoomUncheckedUpdateManyWithoutCreatorNestedInput
   }
 
   export type ChatRoomCreateWithoutMessagesInput = {
@@ -32176,6 +32552,7 @@ export namespace Prisma {
     coverImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    creator?: UserCreateNestedOneWithoutCreatedChatRoomsInput
     users?: ChatRoomUserCreateNestedManyWithoutChatRoomInput
   }
 
@@ -32186,6 +32563,7 @@ export namespace Prisma {
     coverImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    creatorId?: number | null
     users?: ChatRoomUserUncheckedCreateNestedManyWithoutChatRoomInput
   }
 
@@ -32215,6 +32593,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutUserInput
     createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
     news?: NewsCreateNestedManyWithoutAuthorInput
+    createdChatRooms?: ChatRoomCreateNestedManyWithoutCreatorInput
   }
 
   export type UserUncheckedCreateWithoutMessagesInput = {
@@ -32239,6 +32618,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
     news?: NewsUncheckedCreateNestedManyWithoutAuthorInput
+    createdChatRooms?: ChatRoomUncheckedCreateNestedManyWithoutCreatorInput
   }
 
   export type UserCreateOrConnectWithoutMessagesInput = {
@@ -32263,6 +32643,7 @@ export namespace Prisma {
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creator?: UserUpdateOneWithoutCreatedChatRoomsNestedInput
     users?: ChatRoomUserUpdateManyWithoutChatRoomNestedInput
   }
 
@@ -32273,6 +32654,7 @@ export namespace Prisma {
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creatorId?: NullableIntFieldUpdateOperationsInput | number | null
     users?: ChatRoomUserUncheckedUpdateManyWithoutChatRoomNestedInput
   }
 
@@ -32308,6 +32690,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutUserNestedInput
     createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
     news?: NewsUpdateManyWithoutAuthorNestedInput
+    createdChatRooms?: ChatRoomUpdateManyWithoutCreatorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessagesInput = {
@@ -32332,6 +32715,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
     news?: NewsUncheckedUpdateManyWithoutAuthorNestedInput
+    createdChatRooms?: ChatRoomUncheckedUpdateManyWithoutCreatorNestedInput
   }
 
   export type ArtistCreateWithoutSongsInput = {
@@ -32433,6 +32817,7 @@ export namespace Prisma {
     messages?: MessageCreateNestedManyWithoutSenderInput
     posts?: PostCreateNestedManyWithoutUserInput
     createdEvents?: EventCreateNestedManyWithoutCreatedByUserInput
+    createdChatRooms?: ChatRoomCreateNestedManyWithoutCreatorInput
   }
 
   export type UserUncheckedCreateWithoutNewsInput = {
@@ -32457,6 +32842,7 @@ export namespace Prisma {
     messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     createdEvents?: EventUncheckedCreateNestedManyWithoutCreatedByUserInput
+    createdChatRooms?: ChatRoomUncheckedCreateNestedManyWithoutCreatorInput
   }
 
   export type UserCreateOrConnectWithoutNewsInput = {
@@ -32514,6 +32900,7 @@ export namespace Prisma {
     messages?: MessageUpdateManyWithoutSenderNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
     createdEvents?: EventUpdateManyWithoutCreatedByUserNestedInput
+    createdChatRooms?: ChatRoomUpdateManyWithoutCreatorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNewsInput = {
@@ -32538,6 +32925,7 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     createdEvents?: EventUncheckedUpdateManyWithoutCreatedByUserNestedInput
+    createdChatRooms?: ChatRoomUncheckedUpdateManyWithoutCreatorNestedInput
   }
 
   export type NewsArtistUpsertWithWhereUniqueWithoutNewsInput = {
@@ -32758,6 +33146,15 @@ export namespace Prisma {
     id?: number
     title: string
     content: string
+    coverImage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ChatRoomCreateManyCreatorInput = {
+    id?: number
+    isGroup?: boolean
+    name?: string | null
     coverImage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -32999,6 +33396,36 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChatRoomUpdateWithoutCreatorInput = {
+    isGroup?: BoolFieldUpdateOperationsInput | boolean
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ChatRoomUserUpdateManyWithoutChatRoomNestedInput
+    messages?: MessageUpdateManyWithoutChatRoomNestedInput
+  }
+
+  export type ChatRoomUncheckedUpdateWithoutCreatorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    isGroup?: BoolFieldUpdateOperationsInput | boolean
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: ChatRoomUserUncheckedUpdateManyWithoutChatRoomNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutChatRoomNestedInput
+  }
+
+  export type ChatRoomUncheckedUpdateManyWithoutCreatorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    isGroup?: BoolFieldUpdateOperationsInput | boolean
+    name?: NullableStringFieldUpdateOperationsInput | string | null
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

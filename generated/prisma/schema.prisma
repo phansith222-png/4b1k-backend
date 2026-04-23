@@ -8,28 +8,29 @@ datasource db {
 }
 
 model User {
-  id             Int            @id @default(autoincrement())
-  username       String         @unique
-  email          String         @unique
-  telephone      String?        @unique
-  firstName      String
-  lastName       String
-  password       String
-  profileImage   String?
-  nationalId     String?
-  role           Role           @default(USER)
-  gender         Gender         @default(OTHER)
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
-  createdArtists Artist[]       @relation("ArtistCreator")
-  chatRooms      ChatRoomUser[]
-  comments       Comment[]
-  favArtists     FavArtist[]
-  likes          Like[]
-  messages       Message[]
-  posts          Post[]
-  createdEvents  Event[]        @relation("EventCreator")
-  news           News[]         @relation("NewsCreator")
+  id               Int            @id @default(autoincrement())
+  username         String         @unique
+  email            String         @unique
+  telephone        String?        @unique
+  firstName        String
+  lastName         String
+  password         String
+  profileImage     String?
+  nationalId       String?
+  role             Role           @default(USER)
+  gender           Gender         @default(OTHER)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  createdArtists   Artist[]       @relation("ArtistCreator")
+  chatRooms        ChatRoomUser[]
+  comments         Comment[]
+  favArtists       FavArtist[]
+  likes            Like[]
+  messages         Message[]
+  posts            Post[]
+  createdEvents    Event[]        @relation("EventCreator")
+  news             News[]         @relation("NewsCreator")
+  createdChatRooms ChatRoom[]     @relation("ChatRoomCreator")
 }
 
 model Artist {
@@ -199,14 +200,18 @@ model Venue {
 }
 
 model ChatRoom {
-  id         Int            @id @default(autoincrement())
-  isGroup    Boolean        @default(false)
+  id         Int      @id @default(autoincrement())
+  isGroup    Boolean  @default(false)
   name       String? // เพิ่ม: สำหรับชื่อแชทกลุ่ม
   coverImage String? // เพิ่ม: สำหรับรูปแชทกลุ่ม
-  createdAt  DateTime       @default(now())
-  updatedAt  DateTime       @updatedAt
-  users      ChatRoomUser[]
-  messages   Message[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  creatorId Int? // เพิ่ม: สำหรับเก็บ ID คนสร้างกลุ่ม
+  creator   User? @relation("ChatRoomCreator", fields: [creatorId], references: [id])
+
+  users    ChatRoomUser[]
+  messages Message[]
 }
 
 model ChatRoomUser {
