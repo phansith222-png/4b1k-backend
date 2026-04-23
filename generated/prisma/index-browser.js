@@ -244,7 +244,8 @@ exports.Prisma.ChatRoomScalarFieldEnum = {
   name: 'name',
   coverImage: 'coverImage',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  creatorId: 'creatorId'
 };
 
 exports.Prisma.ChatRoomUserScalarFieldEnum = {

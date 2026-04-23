@@ -3,6 +3,7 @@ import http from "http";
 import { Server } from "socket.io";
 import app from "./app.js";
 import chatService from "./service.js/chat.service.js";
+import prisma from "./lib/prisma.js";
 
 const PORT = process.env.PORT || 8000;
 
@@ -90,6 +91,25 @@ io.on("connection", (socket) => {
     } catch (error) {
       console.error("❌ [Socket] Error in send_message:", error.message);
       socket.emit("error_message", { message: "Failed to send message" });
+    }
+  });
+
+  // --- 5. ลบกลุ่ม (เฉพาะคนสร้าง) ---
+  socket.on("delete_group", async ({ roomId, userId }) => {
+    try {
+      const group = await prisma.chatRoom.findUnique({ where: { id: Number(roomId) } });
+      
+      if (group && Number(group.creatorId) === Number(userId)) {
+        await prisma.chatRoom.delete({ where: { id: Number(roomId) } });
+        
+        io.to(String(roomId)).emit("group_deleted", { roomId });
+        io.in(String(roomId)).socketsLeave(String(roomId));
+        console.log(`🗑️ Group ${roomId} deleted by user ${userId}`);
+      } else {
+        socket.emit("error_message", { message: "คุณไม่มีสิทธิ์ลบกลุ่มนี้" });
+      }
+    } catch (error) {
+      console.error("❌ [Socket] Error deleting group:", error.message);
     }
   });
 
