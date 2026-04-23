@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 router.get("/rooms", authenticate, chatController.getRooms);
-
+router.post("/rooms", authenticate, chatController.createRoom);
 router.get("/:roomId/messages", authenticate, chatController.getMessages);
 
 

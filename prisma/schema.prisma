@@ -30,6 +30,7 @@ model User {
   posts          Post[]
   createdEvents  Event[]        @relation("EventCreator")
   news           News[]         @relation("NewsCreator")
+  createdChatRooms ChatRoom[]   @relation("ChatRoomCreator")
 }
 
 model Artist {
@@ -206,6 +207,10 @@ model ChatRoom {
   coverImage  String?        // เพิ่ม: สำหรับรูปแชทกลุ่ม
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
+  
+  creatorId   Int?           // เพิ่ม: สำหรับเก็บ ID คนสร้างกลุ่ม
+  creator     User?          @relation("ChatRoomCreator", fields: [creatorId], references: [id])
+
   users       ChatRoomUser[]
   messages    Message[]
 }
