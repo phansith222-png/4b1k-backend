@@ -30,6 +30,7 @@ model User {
   posts          Post[]
   createdEvents  Event[]        @relation("EventCreator")
   news           News[]         @relation("NewsCreator")
+  createdChatRooms ChatRoom[]   @relation("ChatRoomCreator")
 }
 
 model Artist {
@@ -47,9 +48,9 @@ model Artist {
   events          ArtistEvent[]
   genres          ArtistGenre[]
   favByUsers      FavArtist[]
-  postArtists PostArtist[] // ความสัมพันธ์กลับไปยัง Post
+  postArtists     PostArtist[] // ความสัมพันธ์กลับไปยัง Post
   songs           Song[]
-   news            NewsArtist[]
+  news            NewsArtist[]
 
   @@index([agencyId], map: "Artist_agencyId_fkey")
   @@index([createdByUserId], map: "Artist_createdByUserId_fkey")
@@ -206,6 +207,10 @@ model ChatRoom {
   coverImage  String?        // เพิ่ม: สำหรับรูปแชทกลุ่ม
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
+  
+  creatorId   Int?           // เพิ่ม: สำหรับเก็บ ID คนสร้างกลุ่ม
+  creator     User?          @relation("ChatRoomCreator", fields: [creatorId], references: [id])
+
   users       ChatRoomUser[]
   messages    Message[]
 }
