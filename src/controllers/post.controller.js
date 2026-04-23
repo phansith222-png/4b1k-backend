@@ -224,10 +224,11 @@ export async function deleteCommentController (req,res,next) {
             return createHttpError(400, 'Invalid post ID or comment ID')
         }
     
-        const removeComment = await deleteComment(userId,Number(userId),Number(commentId))
+        const removeComment = await deleteComment(userId,Number(postId),Number(commentId))
 
         res.status(200).json({
-            message : 'Deleted comment successfully'
+            message : 'Deleted comment successfully',
+            deleteComment : removeComment
         })
 
     }catch(error) {
