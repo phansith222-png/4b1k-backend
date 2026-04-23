@@ -66,14 +66,15 @@ export async function editPostController (req,res,next) {
     try {
         const {postId} = req.params
         const userId = req.user.id
-        const { title,content,postImages,artistId} = req.body
+        console.log(req.body)
+        const { title,content,image,artistId} = req.body
 
         const updatePost = await editPost(
             Number(postId),
             userId,
             title,
             content,
-            postImages,
+            image,
             artistId
         )
 
@@ -90,10 +91,10 @@ export async function editPostController (req,res,next) {
 export async function commentPostController (req,res,next) {
     try {
         const {postId} = req.params
-        const {content} = req.body
+        const {content,image} = req.body
         const userId = req.user.id
 
-        if (!content || content.trim() === '') {
+        if ((!content || content.trim() === '') && !image) {
             return res.status(400).json({ error: 'Comment content cannot be empty' })
         }
 
@@ -103,6 +104,7 @@ export async function commentPostController (req,res,next) {
 
         const newComment = await commentPost(
             content.trim(),
+            image,
             userId,
             Number(postId)
         )
@@ -186,7 +188,7 @@ export async function editCommentController (req,res,next) {
     try {
         const {postId,commentId} = req.params
         const userId = req.user.id
-        const {content} = req.body
+        const {content,image} = req.body
 
         if(!content || content.trim() === '') {
             return createHttpError(400, 'Comment content cannot be empty')
@@ -200,7 +202,8 @@ export async function editCommentController (req,res,next) {
             userId,
             Number(postId),
             Number(commentId),
-            content.trim())
+            content.trim(),
+            image)
 
         res.status(201).json({
             message : 'edit comment successfully',
