@@ -47,9 +47,9 @@ model Artist {
   events          ArtistEvent[]
   genres          ArtistGenre[]
   favByUsers      FavArtist[]
-  postArtists PostArtist[] // ความสัมพันธ์กลับไปยัง Post
+  postArtists     PostArtist[] // ความสัมพันธ์กลับไปยัง Post
   songs           Song[]
-   news            NewsArtist[]
+  news            NewsArtist[]
 
   @@index([agencyId], map: "Artist_agencyId_fkey")
   @@index([createdByUserId], map: "Artist_createdByUserId_fkey")
