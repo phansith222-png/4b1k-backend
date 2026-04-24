@@ -8,6 +8,7 @@ import { usersData } from './data/userData.js';
 import { venuesData } from './data/venuesData.js';
 import { eventsData } from './data/eventData.js';
 import { artistsEventsData } from './data/artistsEvents.js';
+import { postImagesData } from './data/postImageData.js';
 
 // 2. Genres (5 แนวเพลง)
 const genresData = [
@@ -598,6 +599,7 @@ async function resetData() {
         prisma.$executeRawUnsafe('TRUNCATE TABLE `Song`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `News`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `NewsArtist`;'),
+        prisma.$executeRawUnsafe('TRUNCATE TABLE `PostImage`;'),//เพิ่ม postImage
 
         prisma.$executeRawUnsafe('SET FOREIGN_KEY_CHECKS = 1;'),
     ]);
@@ -620,6 +622,7 @@ async function resetData() {
      await prisma.chatRoomUser.createMany({ data: chatRoomUsersData, skipDuplicates: true })
      await prisma.message.createMany({ data: messagesData, skipDuplicates: true })
      await prisma.postArtist.createMany({ data: postArtistsData, skipDuplicates: true })// เพิ่มตรงนี้ต่างจากแบม
+     await prisma.postImage.createMany({ data: postImagesData, skipDuplicates: true })
 }
 
 resetData().then(async ()=> {
