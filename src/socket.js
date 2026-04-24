@@ -14,30 +14,56 @@ const setupSocket = (server) => {
     console.log("🟢 User connected:", socket.id);
 
     socket.on("join_room", (roomId) => {
-      // ตรวจสอบว่า roomId ถูกส่งมาจริง (ต้องเป็นตัวเลขหรือ string ที่ไม่ใช่ null)
       if (roomId) {
         socket.join(String(roomId));
         console.log(`👤 User joined room: ${roomId}`);
       }
     });
 
-    socket.on("mark_read", async ({ chatRoomId, userId }) => {
+    socket.on("send_message", async (data) => {
       try {
-        const { chatRoomId, senderId, content } = data;
+        const { chatRoomId, senderId, content, id } = data;
         
         // 1. บันทึกลง Database
         const newMessage = await chatService.saveMessage(chatRoomId, senderId, content);
         
-        // 2. ส่งกลับไปหาทุกคนในห้อง (ต้องมั่นใจว่า roomId ตรงกับตอน join)
-     io.to(String(chatRoomId)).emit("message_read", { 
-        chatRoomId: String(chatRoomId), 
-        readByUserId: userId 
-      });
-      
-    } catch (error) {
-      console.error("Error marking messages as read:", error);
-    }
-  });
+        // 2. ส่งกลับไปหาทุกคนในห้อง (รวมคนส่งด้วย)
+        io.to(String(chatRoomId)).emit("receive_message", {
+          ...newMessage,
+          optimisticId: id // ให้ฝั่ง frontend ใช้จับคู่
+        });
+      } catch (error) {
+        console.error("Error saving/sending message:", error);
+      }
+    });
+
+    socket.on("mark_read", async ({ chatRoomId, userId, lastMessageId }) => {
+      try {
+        if (lastMessageId) {
+          await chatService.markMessagesAsRead(chatRoomId, userId, lastMessageId);
+        }
+        
+        io.to(String(chatRoomId)).emit("message_read", { 
+          chatRoomId: String(chatRoomId), 
+          readByUserId: userId,
+          lastReadMessageId: lastMessageId
+        });
+      } catch (error) {
+        console.error("Error marking messages as read:", error);
+      }
+    });
+
+    socket.on("typing", ({ chatRoomId, userName }) => {
+      socket.to(String(chatRoomId)).emit("display_typing", { roomId: chatRoomId, user: userName });
+    });
+
+    socket.on("stop_typing", ({ chatRoomId }) => {
+      socket.to(String(chatRoomId)).emit("hide_typing");
+    });
+    
+    socket.on("delete_group", ({ roomId, userId }) => {
+      io.to(String(roomId)).emit("group_deleted", { roomId, deletedBy: userId });
+    });
 
     socket.on("disconnect", () => {
       console.log("🔴 User disconnected:", socket.id);
@@ -47,4 +73,4 @@ const setupSocket = (server) => {
   return io;
 };
 
-export default setupSocket; // เปลี่ยนจาก module.exports
+export default setupSocket;
