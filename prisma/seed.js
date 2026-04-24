@@ -5,18 +5,10 @@ import { postsData } from './data/postsData.js';
 import { likePostData } from './data/likePostData.js';
 import { commentsData } from './data/commentsData.js';
 import { usersData } from './data/userData.js';
-
-// const hashPassword = () => bcrypt.hashSync('@Concert123456', 8)
-
-// // 1. Users (6 คน) - 🔴 เพิ่มฟิลด์ profileImage
-// const usersData = [
-//   { username: "admin_ben", email: "admin.ben@concert.com", firstName: "Ben", lastName: "Admin", password: hashPassword(), role: "ADMIN", gender: "FEMALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
-//   { username: "admin_lisa", email: "lisa.admin@concert.com", firstName: "Lisa", lastName: "Admin", password: hashPassword(), role: "ADMIN", gender: "MALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
-//   { username: "fanboy01", email: "fanboy@gmail.com", firstName: "Somchai", lastName: "Jaidee", password: hashPassword(), role: "USER", gender: "MALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
-//   { username: "fangirl99", email: "fangirl@gmail.com", firstName: "Somsri", lastName: "Rakdee", password: hashPassword(), role: "USER", gender: "FEMALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
-//   { username: "musiclover", email: "music@yahoo.com", firstName: "John", lastName: "Doe", password: hashPassword(), role: "USER", gender: "OTHER", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
-//   { username: "concertgoer", email: "goer@hotmail.com", firstName: "Jane", lastName: "Smith", password: hashPassword(), role: "USER", gender: "FEMALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
-// ];
+import { venuesData } from './data/venuesData.js';
+import { eventsData } from './data/eventData.js';
+import { artistsEventsData } from './data/artistsEvents.js';
+import { postImagesData } from './data/postImageData.js';
 
 // 2. Genres (5 แนวเพลง)
 const genresData = [
@@ -299,21 +291,7 @@ songsList.forEach((artistSongs, artistIndex) => {
   });
 });
 
-// 7. Venues (สถานที่ 10 แห่ง)
-const venuesData = [
-  { name: "Impact Arena", address: "Muang Thong Thani", lat: 13.9133, lng: 100.5480 },
-  { name: "Rajamangala Stadium", address: "Hua Mak", lat: 13.7552, lng: 100.6225 },
-  { name: "Thunder Dome", address: "Muang Thong Thani", lat: 13.9211, lng: 100.5466 },
-  { name: "Bitec Bangna", address: "Bang Na", lat: 13.6705, lng: 100.6105 },
-  { name: "Lido Connect", address: "Siam Square", lat: 13.7455, lng: 100.5315 },
-  { name: "Madison Square Garden", address: "New York, NY", lat: 40.7505, lng: -73.9934 },
-  { name: "Wembley Stadium", address: "London, UK", lat: 51.5560, lng: -0.2795 },
-  { name: "Tokyo Dome", address: "Tokyo, Japan", lat: 35.7056, lng: 139.7519 },
-  { name: "Coachella Valley", address: "Indio, CA", lat: 33.6784, lng: -116.2372 },
-  { name: "Tomorrowland Mainstage", address: "Boom, Belgium", lat: 51.0914, lng: 4.3854 }
-];
 
-const eventsData = [];
 const artistEventsData = [];
 
 const getRandomConcertImage = (index) => {
@@ -527,45 +505,45 @@ const eventPostersByArtist = [
   ]
 ];
 
-let eventIdCounter = 1;
-for (let i = 0; i < 25; i++) {
-  const artistId = i + 1;
-  const artistName = artistsData[i].artistName;
+// let eventIdCounter = 1;
+// for (let i = 0; i < 25; i++) {
+//   const artistId = i + 1;
+//   const artistName = artistsData[i].artistName;
   
-  for (let j = 0; j < 5; j++) {
-    const venueId = Math.floor(Math.random() * 10) + 1;
-    const isFinished = j < 2;
-    const status = isFinished ? "FINISHED" : "UPCOMING";
+//   for (let j = 0; j < 5; j++) {
+//     const venueId = Math.floor(Math.random() * 10) + 1;
+//     const isFinished = j < 2;
+//     const status = isFinished ? "FINISHED" : "UPCOMING";
     
-    const year = isFinished ? 2024 + Math.floor(Math.random() * 2) : 2026 + Math.floor(Math.random() * 2);
-    const month = Math.floor(Math.random() * 12) + 1;
-    const startTime = new Date(`${year}-${month.toString().padStart(2, '0')}-15T19:00:00Z`);
+//     const year = isFinished ? 2024 + Math.floor(Math.random() * 2) : 2026 + Math.floor(Math.random() * 2);
+//     const month = Math.floor(Math.random() * 12) + 1;
+//     const startTime = new Date(`${year}-${month.toString().padStart(2, '0')}-15T19:00:00Z`);
 
-    const eventNames = [
-      `${artistName} Live in Concert`,
-      `${artistName} World Tour ${year}`,
-      `${artistName} Intimate Night`,
-      `${artistName} Festival Headline`,
-      `${artistName} Fan Meeting & Live`
-    ];
+//     const eventNames = [
+//       `${artistName} Live in Concert`,
+//       `${artistName} World Tour ${year}`,
+//       `${artistName} Intimate Night`,
+//       `${artistName} Festival Headline`,
+//       `${artistName} Fan Meeting & Live`
+//     ];
 
-    eventsData.push({
-      eventName: eventNames[j],
-      venueId: venueId,
-      startTime: startTime,
-      status: status,
-      ticketLink: "https://thaiticketmajor.com",
-      posterImage: eventPostersByArtist[i][j] // ดึงรูปตามที่กรอกด้านบน
-    });
+//     eventsData.push({
+//       eventName: eventNames[j],
+//       venueId: venueId,
+//       startTime: startTime,
+//       status: status,
+//       ticketLink: "https://thaiticketmajor.com",
+//       posterImage: eventPostersByArtist[i][j] // ดึงรูปตามที่กรอกด้านบน
+//     });
 
-    artistEventsData.push({
-      artistId: artistId,
-      eventId: eventIdCounter
-    });
+//     artistEventsData.push({
+//       artistId: artistId,
+//       eventId: eventIdCounter
+//     });
 
-    eventIdCounter++;
-  }
-}
+//     eventIdCounter++;
+//   }
+// }
 
 // 10. FavArtist (User Follow ศิลปิน)
 const favArtistsData = [
@@ -575,31 +553,7 @@ const favArtistsData = [
   { userId: 6, artistId: 12 }, { userId: 6, artistId: 21 }, { userId: 6, artistId: 18 }
 ];
 
-// // 11. Posts (โพสต์ใน Community) - 🔴 เพิ่มฟิลด์ image ได้ถ้า Schema รองรับ
-// const postsData = [
-//   { title: "เตรียมตัวให้พร้อม! รอกดบัตรคอนเสิร์ต NONT TANONT", content: "รอกดบัตรคอนเสิร์ตพี่นนท์ไม่ไหวแล้ววว...", userId: 3, artistId: 1 },
-//   { title: "ตามหาบัตร Bodyslam โซน A", content: "ใครมีบัตร Bodyslam โซน A ปล่อยบ้างครับ...", userId: 5, artistId: 6 },
-//   { title: "ข่าวลือ! The Weeknd อาจจะมาไทยปลายปีนี้?", content: "The Weeknd มาไทยรอบนี้จัดเต็มแน่!...", userId: 4, artistId: 16 },
-//   { title: "รีวิวเพลงใหม่ MILLI ฟังแล้วหยุดโยกไม่ได้", content: "เพลงใหม่ MILLI คือดีย์มากแม่...", userId: 6, artistId: 12 },
-//   { title: "รวมรูป อิงค์ วรันธร จากงาน Music Fest", content: "อิงค์ วรันธร น่ารักมากก งานเมื่อวาน...", userId: 3, artistId: 2 },
-//   { title: "เตือนภัย! ระวังมิจฉาชีพหลอกขายบัตรทิพย์ใน Twitter", content: "ช่วงนี้คอนเสิร์ตเยอะมาก ระวังคนที่ให้โอนเงินก่อน...", userId: 1 }
-// ];
 
-// // 12. Likes (กดไลก์โพสต์)
-// const likesData = [
-//   { userId: 4, postId: 1 }, { userId: 6, postId: 1 }, { userId: 3, postId: 2 }, { userId: 5, postId: 3 }, { userId: 4, postId: 4 }
-// ];
-
-// 13. Comments (คอมเมนต์โพสต์)
-// const commentsData = [
-//   { content: "กดให้ทันนะค๊าา คู่แข่งเยอะมาก", userId: 4, postId: 1 },
-//   { content: "หาด้วยคนครับ โซน A", userId: 6, postId: 2 },
-//   { content: "เตรียมตังค์พร้อมแล้ว!", userId: 3, postId: 3 },
-//   { content: "ท่อนแร็ปคือสุด", userId: 5, postId: 4 },
-//   { content: "โดนตกไปเต็มๆ", userId: 6, postId: 5 }
-// ];
-
-// 14. ChatRooms
 const chatRoomsData = [
   { isGroup: false }, { isGroup: false }, { isGroup: false }, { isGroup: false }, { isGroup: false }
 ];
@@ -645,6 +599,7 @@ async function resetData() {
         prisma.$executeRawUnsafe('TRUNCATE TABLE `Song`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `News`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `NewsArtist`;'),
+        prisma.$executeRawUnsafe('TRUNCATE TABLE `PostImage`;'),//เพิ่ม postImage
 
         prisma.$executeRawUnsafe('SET FOREIGN_KEY_CHECKS = 1;'),
     ]);
@@ -656,9 +611,9 @@ async function resetData() {
      await prisma.artist.createMany({ data: artistsData, skipDuplicates: true })
      await prisma.artistGenre.createMany({ data: artistGenresData, skipDuplicates: true })
      await prisma.song.createMany({ data: songsData, skipDuplicates: true })
-     await prisma.venue.createMany({ data: venuesData, skipDuplicates: true })    
-     await prisma.event.createMany({ data: eventsData, skipDuplicates: true })   
-     await prisma.artistEvent.createMany({ data: artistEventsData, skipDuplicates: true })    
+     await prisma.venue.createMany({ data: venuesData, skipDuplicates: true }) // 8 ที่ ในไทย  
+     await prisma.event.createMany({ data: eventsData, skipDuplicates: true })//mock data 100 event
+     await prisma.artistEvent.createMany({ data: artistsEventsData, skipDuplicates: true }) // many to many eventData&artist   
      await prisma.favArtist.createMany({ data: favArtistsData, skipDuplicates: true }) 
      await prisma.post.createMany({ data: postsData, skipDuplicates: true })    
      await prisma.like.createMany({ data: likePostData, skipDuplicates: true })
@@ -667,6 +622,7 @@ async function resetData() {
      await prisma.chatRoomUser.createMany({ data: chatRoomUsersData, skipDuplicates: true })
      await prisma.message.createMany({ data: messagesData, skipDuplicates: true })
      await prisma.postArtist.createMany({ data: postArtistsData, skipDuplicates: true })// เพิ่มตรงนี้ต่างจากแบม
+     await prisma.postImage.createMany({ data: postImagesData, skipDuplicates: true })
 }
 
 resetData().then(async ()=> {

@@ -1,76 +1,202 @@
 export const artistsEventsData = [
-  // 1. Bodyslam Fest 2026 (venueId: 2)
-  { artistId: 3, eventId: 1 }, 
-
-  // 2. The Weeknd After Hours Asia Tour (venueId: 1)
-  { artistId: 28, eventId: 2 }, 
-
-  // 3. Indie Pop Night (venueId: 5)
-  { artistId: 2, eventId: 3 }, { artistId: 9, eventId: 3 }, // INK, BOWKYLION
-
-  // 4. Hip Hop Festival (venueId: 4) - FINISHED
-  { artistId: 14, eventId: 4 }, { artistId: 8, eventId: 4 }, // F.HERO, MILLI
-
-  // 5. EDM Countdown (venueId: 3)
-  { artistId: 41, eventId: 5 }, 
-
-  // 6. KISS OF LIFE 1st World Tour (venueId: 6)
-  { artistId: 16, eventId: 6 }, 
-
-  // 7. T-Pop Star Concert (venueId: 7)
-  { artistId: 1, eventId: 7 }, { artistId: 12, eventId: 7 }, // NONT, 4EVE
-
-  // 8. International Rock Night (venueId: 3)
-  { artistId: 24, eventId: 8 }, { artistId: 25, eventId: 8 }, // Coldplay, Arctic Monkeys
-
-  // 9. Coachella Bangkok (venueId: 2)
-  { artistId: 21, eventId: 9 }, { artistId: 17, eventId: 9 }, // Taylor Swift, NewJeans
-
-  // 10. Jeff Satur Space Shuttle No.8 (venueId: 6)
-  { artistId: 15, eventId: 10 },
-
-  // 11. K-Pop Overload 2026 (venueId: 1)
-  { artistId: 18, eventId: 11 }, { artistId: 19, eventId: 11 }, { artistId: 20, eventId: 11 }, // IVE, Stray Kids, aespa
-
-  // 12. J-Pop Connection (venueId: 6)
-  { artistId: 36, eventId: 12 }, { artistId: 37, eventId: 12 }, // YOASOBI, Fujii Kaze
-
-  // 13. Indie Summer Beach (venueId: 4) - FINISHED
-  { artistId: 11, eventId: 13 }, { artistId: 10, eventId: 13 }, // Phum Viphurit, Violette Wautier
-
-  // 14. The Eras Tour (Extended) (venueId: 2)
-  { artistId: 21, eventId: 14 }, 
-
-  // 15. Ed Sheeran Live in BKK (venueId: 2) - FINISHED
-  { artistId: 23, eventId: 15 },
-
-  // 16. R&B Soul Night (venueId: 5)
-  { artistId: 29, eventId: 16 }, { artistId: 30, eventId: 16 }, { artistId: 34, eventId: 16 }, // SZA, NIKI, Keshi
-
-  // 17. Girls Power Concert (venueId: 7)
-  { artistId: 12, eventId: 17 }, { artistId: 16, eventId: 17 }, // 4EVE, KISS OF LIFE
-
-  // 18. Rap Is Now: All Stars (venueId: 3)
-  { artistId: 13, eventId: 18 }, { artistId: 14, eventId: 18 }, { artistId: 8, eventId: 18 }, // URBOYTJ, F.HERO, MILLI
-
-  // 19. Japanese Rock Invasion (venueId: 3)
-  { artistId: 39, eventId: 19 }, { artistId: 40, eventId: 19 }, // Ado, LiSA
-
-  // 20. Lo-fi Vibe at Lido (venueId: 5)
-  { artistId: 33, eventId: 20 }, { artistId: 34, eventId: 20 }, // Lauv, Keshi
-
-  // 21. Global EDM Festival (venueId: 2)
-  { artistId: 41, eventId: 21 }, { artistId: 42, eventId: 21 }, { artistId: 43, eventId: 21 }, // Martin Garrix, Zedd, Calvin Harris
-
-  // 22. NewJeans 1st Fan Meeting in BKK (venueId: 6)
-  { artistId: 17, eventId: 22 },
-
-  // 23. 88Rising Asia Tour (venueId: 1)
-  { artistId: 30, eventId: 23 }, { artistId: 8, eventId: 23 }, // NIKI, MILLI
-
-  // 24. Ariana Grande: Moonlight Tour (venueId: 1)
-  { artistId: 22, eventId: 24 },
-
-  // 25. Three Man Down vs Tilly Birds (venueId: 3)
-  { artistId: 6, eventId: 25 }, { artistId: 7, eventId: 25 }
-];
+  { eventId: 1, artistId: 1 },
+  { eventId: 2, artistId: 20 },
+  { eventId: 2, artistId: 18 },
+  { eventId: 2, artistId: 17 },
+  { eventId: 3, artistId: 4 },
+  { eventId: 3, artistId: 1 },
+  { eventId: 4, artistId: 7 },
+  { eventId: 4, artistId: 6 },
+  { eventId: 5, artistId: 5 },
+  { eventId: 5, artistId: 1 },
+  { eventId: 6, artistId: 9 },
+  { eventId: 7, artistId: 6 },
+  { eventId: 7, artistId: 9 },
+  { eventId: 7, artistId: 10 },
+  { eventId: 8, artistId: 9 },
+  { eventId: 8, artistId: 8 },
+  { eventId: 8, artistId: 7 },
+  { eventId: 9, artistId: 3 },
+  { eventId: 9, artistId: 5 },
+  { eventId: 10, artistId: 6 },
+  { eventId: 10, artistId: 7 },
+  { eventId: 11, artistId: 4 },
+  { eventId: 11, artistId: 3 },
+  { eventId: 11, artistId: 2 },
+  { eventId: 12, artistId: 4 },
+  { eventId: 12, artistId: 3 },
+  { eventId: 12, artistId: 5 },
+  { eventId: 13, artistId: 22 },
+  { eventId: 13, artistId: 23 },
+  { eventId: 14, artistId: 13 },
+  { eventId: 15, artistId: 23 },
+  { eventId: 16, artistId: 19 },
+  { eventId: 17, artistId: 4 },
+  { eventId: 18, artistId: 13 },
+  { eventId: 18, artistId: 14 },
+  { eventId: 19, artistId: 1 },
+  { eventId: 19, artistId: 3 },
+  { eventId: 19, artistId: 2 },
+  { eventId: 20, artistId: 4 },
+  { eventId: 20, artistId: 2 },
+  { eventId: 21, artistId: 9 },
+  { eventId: 21, artistId: 6 },
+  { eventId: 21, artistId: 8 },
+  { eventId: 22, artistId: 16 },
+  { eventId: 22, artistId: 17 },
+  { eventId: 22, artistId: 18 },
+  { eventId: 23, artistId: 19 },
+  { eventId: 23, artistId: 17 },
+  { eventId: 23, artistId: 16 },
+  { eventId: 24, artistId: 9 },
+  { eventId: 25, artistId: 1 },
+  { eventId: 26, artistId: 1 },
+  { eventId: 26, artistId: 2 },
+  { eventId: 27, artistId: 7 },
+  { eventId: 27, artistId: 6 },
+  { eventId: 28, artistId: 11 },
+  { eventId: 28, artistId: 12 },
+  { eventId: 29, artistId: 17 },
+  { eventId: 29, artistId: 20 },
+  { eventId: 29, artistId: 16 },
+  { eventId: 30, artistId: 20 },
+  { eventId: 30, artistId: 17 },
+  { eventId: 30, artistId: 18 },
+  { eventId: 31, artistId: 19 },
+  { eventId: 31, artistId: 20 },
+  { eventId: 31, artistId: 16 },
+  { eventId: 32, artistId: 3 },
+  { eventId: 32, artistId: 1 },
+  { eventId: 33, artistId: 22 },
+  { eventId: 34, artistId: 8 },
+  { eventId: 34, artistId: 7 },
+  { eventId: 34, artistId: 6 },
+  { eventId: 35, artistId: 4 },
+  { eventId: 35, artistId: 1 },
+  { eventId: 36, artistId: 9 },
+  { eventId: 36, artistId: 7 },
+  { eventId: 36, artistId: 6 },
+  { eventId: 37, artistId: 20 },
+  { eventId: 37, artistId: 19 },
+  { eventId: 38, artistId: 21 },
+  { eventId: 39, artistId: 21 },
+  { eventId: 39, artistId: 22 },
+  { eventId: 39, artistId: 23 },
+  { eventId: 40, artistId: 8 },
+  { eventId: 40, artistId: 6 },
+  { eventId: 40, artistId: 9 },
+  { eventId: 41, artistId: 3 },
+  { eventId: 42, artistId: 24 },
+  { eventId: 42, artistId: 23 },
+  { eventId: 43, artistId: 7 },
+  { eventId: 43, artistId: 8 },
+  { eventId: 44, artistId: 21 },
+  { eventId: 44, artistId: 22 },
+  { eventId: 44, artistId: 23 },
+  { eventId: 45, artistId: 17 },
+  { eventId: 45, artistId: 18 },
+  { eventId: 45, artistId: 19 },
+  { eventId: 46, artistId: 16 },
+  { eventId: 46, artistId: 17 },
+  { eventId: 46, artistId: 18 },
+  { eventId: 47, artistId: 13 },
+  { eventId: 48, artistId: 10 },
+  { eventId: 48, artistId: 9 },
+  { eventId: 48, artistId: 8 },
+  { eventId: 49, artistId: 24 },
+  { eventId: 49, artistId: 23 },
+  { eventId: 50, artistId: 21 },
+  { eventId: 51, artistId: 22 },
+  { eventId: 52, artistId: 20 },
+  { eventId: 53, artistId: 14 },
+  { eventId: 53, artistId: 13 },
+  { eventId: 54, artistId: 18 },
+  { eventId: 54, artistId: 19 },
+  { eventId: 54, artistId: 17 },
+  { eventId: 55, artistId: 22 },
+  { eventId: 55, artistId: 25 },
+  { eventId: 55, artistId: 21 },
+  { eventId: 56, artistId: 12 },
+  { eventId: 57, artistId: 5 },
+  { eventId: 58, artistId: 19 },
+  { eventId: 58, artistId: 16 },
+  { eventId: 58, artistId: 17 },
+  { eventId: 59, artistId: 20 },
+  { eventId: 60, artistId: 11 },
+  { eventId: 61, artistId: 6 },
+  { eventId: 62, artistId: 24 },
+  { eventId: 62, artistId: 21 },
+  { eventId: 62, artistId: 23 },
+  { eventId: 63, artistId: 9 },
+  { eventId: 63, artistId: 6 },
+  { eventId: 64, artistId: 17 },
+  { eventId: 64, artistId: 20 },
+  { eventId: 64, artistId: 19 },
+  { eventId: 65, artistId: 15 },
+  { eventId: 66, artistId: 19 },
+  { eventId: 66, artistId: 16 },
+  { eventId: 66, artistId: 20 },
+  { eventId: 67, artistId: 13 },
+  { eventId: 67, artistId: 12 },
+  { eventId: 68, artistId: 8 },
+  { eventId: 69, artistId: 21 },
+  { eventId: 69, artistId: 22 },
+  { eventId: 69, artistId: 23 },
+  { eventId: 70, artistId: 20 },
+  { eventId: 71, artistId: 15 },
+  { eventId: 71, artistId: 12 },
+  { eventId: 71, artistId: 11 },
+  { eventId: 72, artistId: 14 },
+  { eventId: 72, artistId: 13 },
+  { eventId: 72, artistId: 11 },
+  { eventId: 73, artistId: 9 },
+  { eventId: 74, artistId: 21 },
+  { eventId: 74, artistId: 22 },
+  { eventId: 74, artistId: 24 },
+  { eventId: 75, artistId: 10 },
+  { eventId: 75, artistId: 9 },
+  { eventId: 76, artistId: 8 },
+  { eventId: 77, artistId: 5 },
+  { eventId: 77, artistId: 2 },
+  { eventId: 78, artistId: 12 },
+  { eventId: 78, artistId: 11 },
+  { eventId: 79, artistId: 14 },
+  { eventId: 79, artistId: 11 },
+  { eventId: 79, artistId: 12 },
+  { eventId: 80, artistId: 9 },
+  { eventId: 80, artistId: 8 },
+  { eventId: 80, artistId: 6 },
+  { eventId: 81, artistId: 24 },
+  { eventId: 82, artistId: 17 },
+  { eventId: 82, artistId: 16 },
+  { eventId: 83, artistId: 1 },
+  { eventId: 84, artistId: 11 },
+  { eventId: 84, artistId: 15 },
+  { eventId: 84, artistId: 12 },
+  { eventId: 85, artistId: 6 },
+  { eventId: 86, artistId: 21 },
+  { eventId: 86, artistId: 23 },
+  { eventId: 86, artistId: 22 },
+  { eventId: 87, artistId: 13 },
+  { eventId: 87, artistId: 15 },
+  { eventId: 88, artistId: 6 },
+  { eventId: 89, artistId: 21 },
+  { eventId: 90, artistId: 21 },
+  { eventId: 91, artistId: 23 },
+  { eventId: 91, artistId: 22 },
+  { eventId: 92, artistId: 21 },
+  { eventId: 92, artistId: 22 },
+  { eventId: 93, artistId: 24 },
+  { eventId: 94, artistId: 22 },
+  { eventId: 94, artistId: 25 },
+  { eventId: 95, artistId: 16 },
+  { eventId: 95, artistId: 17 },
+  { eventId: 95, artistId: 20 },
+  { eventId: 96, artistId: 20 },
+  { eventId: 96, artistId: 19 },
+  { eventId: 97, artistId: 4 },
+  { eventId: 98, artistId: 12 },
+  { eventId: 99, artistId: 1 },
+  { eventId: 99, artistId: 2 },
+  { eventId: 100, artistId: 18 }
+]
