@@ -8,6 +8,7 @@ import { usersData } from './data/userData.js';
 import { venuesData } from './data/venuesData.js';
 import { eventsData } from './data/eventData.js';
 import { artistsEventsData } from './data/artistsEvents.js';
+import { postImagesData } from './data/postImageData.js';
 
 // 2. Genres (5 แนวเพลง)
 const genresData = [
@@ -27,25 +28,25 @@ const agenciesData = [
 const artistsData = [
   // --- POP (1-5) ---
   { artistName: "NONT TANONT", agencyId: 1, profileImage: "https://www.myband.co.th/uploads/20250116/82ff19bfa9053ee0a431ca41d570ad1a.jpg", biography: "ธนนท์ จำเริญ (นนท์) ผู้ชนะจากรายการ The Voice Thailand Season 1..." },
-  { artistName: "INK WARUNTORN", agencyId: 1, profileImage: "https://yt3.googleusercontent.com/Fn6THjnRY5HNH6-Otij1SeOI5bR1ps993kGlmaUfoGJiuXvV5WJsSQBDDLeDJWG6hChy11jaZcA=s900-c-k-c0x00ffffff-no-rj", biography: "อิ้งค์ วรันธร เปานิล เจ้าหญิงแห่งวงการซินธ์ป๊อป (Synth-Pop)..." },
+  { artistName: "INK WARUNTORN", agencyId: 1, profileImage: "https://i.scdn.co/image/ab67616d00001e026a0020916947bb631a5578c2", biography: "อิ้งค์ วรันธร เปานิล เจ้าหญิงแห่งวงการซินธ์ป๊อป (Synth-Pop)..." },
   { artistName: "Taylor Swift", agencyId: 3, profileImage: "https://cdn.britannica.com/37/252437-050-F21BD210/Taylor-Swift-performs-The-Eras-Tour-Sao-Paulo-Brazil-2023.jpg", biography: "Taylor Swift is a globally recognized pop icon and singer-songwriter." },
   { artistName: "Ariana Grande", agencyId: 3, profileImage: "https://m.media-amazon.com/images/M/MV5BM2JhZWJmMDEtNTU5MS00YmQ3LTk1NjMtOGFlMjM2MjZlNjg5XkEyXkFqcGc@._V1_.jpg", biography: "Ariana Grande is an American singer, songwriter, and actress." },
-  { artistName: "Ed Sheeran", agencyId: 3, profileImage: "https://static.wikia.nocookie.net/snl/images/1/15/Ed-sheeran.jpg/revision/latest?cb=20211123094841", biography: "Edward Christopher Sheeran is an English singer-songwriter." },
+  { artistName: "Ed Sheeran", agencyId: 3, profileImage: "https://s.isanook.com/jo/0/ud/489/2446249/ed.jpg?ip/crop/w1200h700/q80/webp", biography: "Edward Christopher Sheeran is an English singer-songwriter." },
   // --- ROCK (6-10) ---
-  { artistName: "Bodyslam", agencyId: 1, profileImage: "https://s.isanook.com/jo/0/ud/483/2415877/bodyslam2.jpg?ip/resize/w728/q80/jpg", biography: "Bodyslam วงร็อคอันดับ 1 ของประเทศไทย นำโดย ตูน อาทิวราห์" },
+  { artistName: "Bodyslam", agencyId: 1, profileImage: "https://t2.genius.com/unsafe/899x0/https%3A%2F%2Fimages.genius.com%2Ff9be36f783b806eeeb3fbeb4daa77952.640x640x1.jpg", biography: "Bodyslam วงร็อคอันดับ 1 ของประเทศไทย นำโดย ตูน อาทิวราห์" },
   { artistName: "TaitosmitH", agencyId: 1, profileImage: "https://s.isanook.com/jo/0/ud/483/2417049/t6.jpg?ip/resize/w728/q80/jpg", biography: "ไททศมิตร (TaitosmitH) วงร็อคอินดี้เพื่อชีวิตยุคใหม่" },
   { artistName: "Coldplay", agencyId: 3, profileImage: "https://imagenes.elpais.com/resizer/v2/AHK4UHCHQ5EJJMOJISB4XF6C7E.jpg?auth=2a2fbbae9a847fdaf0ea0ce87f996ad96513d4cee708570128a8254570f0f1ce&width=1960&height=1470&smart=true", biography: "Coldplay is a British rock band formed in London." },
   { artistName: "Arctic Monkeys", agencyId: 3, profileImage: "https://www.meer.com/attachments/c197c99f7e75f340df337940d8eb518014bda493/store/fill/1090/613/25c5247fb68a977aa9347d4a17cfe97bff97a0e412020ed8d845977af6a7/The-Arctic-Monkeys-band-members.jpg", biography: "Arctic Monkeys are an English rock band formed in Sheffield." },
   { artistName: "Lomosonic", agencyId: 1, profileImage: "https://i.ytimg.com/vi/H6cFWr5c1zk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB4GRX7Bx7E64cpB6nxo_CSeXgzDg", biography: "Lomosonic วงร็อคพลังงานล้นเหลือ โด่งดังจากการแสดงสดที่บ้าคลั่ง" },
   // --- HIP HOP (11-15) ---
-  { artistName: "URBOYTJ", agencyId: 5, profileImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsxbW-oZZBUIzcWcV3xwIP2s1Os2sHOsKCPg&s", biography: "URBOYTJ (เต๋า - จิรายุทธ) ศิลปินฮิปฮอปแถวหน้าของไทย" },
+  { artistName: "URBOYTJ", agencyId: 5, profileImage: "https://cdn-images.dzcdn.net/images/cover/699bbaf79b77bf78e282dd094cca8fc4/0x1900-000000-80-0-0.jpg", biography: "URBOYTJ (เต๋า - จิรายุทธ) ศิลปินฮิปฮอปแถวหน้าของไทย" },
   { artistName: "MILLI", agencyId: 1, profileImage: "https://viberate-upload.ams3.cdn.digitaloceanspaces.com/prod/entity/artist/milli-123-6d4FD", biography: "MILLI (มิลลิ) แรปเปอร์สาวชาวไทยผู้สร้างประวัติศาสตร์บนเวที Coachella" },
   { artistName: "F.HERO", agencyId: 4, profileImage: "https://i.scdn.co/image/ab6761610000e5ebcf6dc7909f08fd4c42c59a24", biography: "F.HERO (กอล์ฟ - ฟักกลิ้ง ฮีโร่) ตำนานแรปเปอร์ของเมืองไทย" },
   { artistName: "Kendrick Lamar", agencyId: 3, profileImage: "https://cdn-images.dzcdn.net/images/artist/be0a7c550567f4af0ed202d7235b74d6/1900x1900-000000-80-0-0.jpg", biography: "Kendrick Lamar is an American rapper and songwriter." },
   { artistName: "Travis Scott", agencyId: 3, profileImage: "https://media.gq.com/photos/654866eb710360665d544892/4:3/w_1604,h_1203,c_limit/GQ1223_Scott_D_10.jpg", biography: "Travis Scott is an American rapper and record producer." },
   // --- R&B (16-20) ---
-  { artistName: "The Weeknd", agencyId: 3, profileImage: "https://static.wikia.nocookie.net/singmovie/images/b/b5/The-Weeknd.jpg/revision/latest?cb=20220808010527", biography: "The Weeknd is a Canadian singer, songwriter, and record producer." },
-  { artistName: "Jeff Satur", agencyId: 5, profileImage: "https://i.pinimg.com/236x/9e/05/2a/9e052a8ab644a4d1fa7355f1b8b1c462.jpg", biography: "Jeff Satur ศิลปินหนุ่มลูกครึ่งไทย-อังกฤษ ผู้ผสมผสานดนตรี R&B และ Pop" },
+  { artistName: "The Weeknd", agencyId: 3, profileImage: "https://i.pinimg.com/736x/98/58/21/985821e798645022a1634e152567c91f.jpg", biography: "The Weeknd is a Canadian singer, songwriter, and record producer." },
+  { artistName: "Jeff Satur", agencyId: 5, profileImage: "https://f.ptcdn.info/382/088/000/mc4ixmm6iS0g874WHaW-o.jpg", biography: "Jeff Satur ศิลปินหนุ่มลูกครึ่งไทย-อังกฤษ ผู้ผสมผสานดนตรี R&B และ Pop" },
   { artistName: "SZA", agencyId: 3, profileImage: "https://s.isanook.com/jo/0/ud/490/2454237/sza-sosalbumcover.jpg?ip/resize/w728/q80/jpg", biography: "SZA is an American R&B singer-songwriter celebrated for her raw songwriting." },
   { artistName: "NIKI", agencyId: 3, profileImage: "https://s.isanook.com/jo/0/ud/489/2449909/niki01.jpg?ip/crop/w1200h700/q80/jpg", biography: "NIKI is an Indonesian singer, songwriter, and producer signed to 88rising." },
   { artistName: "BOWKYLION", agencyId: 1, profileImage: "https://www.myband.co.th/uploads/20240907/dd43a92bfc4a2624cdc4e7d192acb785.jpeg", biography: "โบกี้ไลอ้อน (BOWKYLION) ศิลปินหญิงมากความสามารถ เจ้าของเสียงร้องทรงพลัง" },
@@ -598,6 +599,7 @@ async function resetData() {
         prisma.$executeRawUnsafe('TRUNCATE TABLE `Song`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `News`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `NewsArtist`;'),
+        prisma.$executeRawUnsafe('TRUNCATE TABLE `PostImage`;'),//เพิ่ม postImage
 
         prisma.$executeRawUnsafe('SET FOREIGN_KEY_CHECKS = 1;'),
     ]);
@@ -620,6 +622,7 @@ async function resetData() {
      await prisma.chatRoomUser.createMany({ data: chatRoomUsersData, skipDuplicates: true })
      await prisma.message.createMany({ data: messagesData, skipDuplicates: true })
      await prisma.postArtist.createMany({ data: postArtistsData, skipDuplicates: true })// เพิ่มตรงนี้ต่างจากแบม
+     await prisma.postImage.createMany({ data: postImagesData, skipDuplicates: true })
 }
 
 resetData().then(async ()=> {

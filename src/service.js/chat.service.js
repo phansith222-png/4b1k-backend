@@ -33,15 +33,33 @@ class ChatService {
     });
   }
 
-  // 3. อ่านข้อความแล้ว
-  async markMessagesAsRead(chatRoomId, userId) {
-    return await db.message.updateMany({
+  // 3. อัปเดต ID ข้อความล่าสุดที่อ่านแล้ว
+  async markMessagesAsRead(chatRoomId, userId, lastMessageId) {
+    if (!lastMessageId) return null;
+    
+    // ตรวจสอบว่าผู้ใช้เป็นสมาชิกของห้องหรือไม่ก่อนอัปเดต
+    const member = await db.chatRoomUser.findUnique({
       where: {
-        chatRoomId: Number(chatRoomId),
-        senderId: { not: Number(userId) },
-        isRead: false
+        userId_chatRoomId: {
+          userId: Number(userId),
+          chatRoomId: Number(chatRoomId)
+        }
+      }
+    });
+
+    if (!member) return null;
+
+    return await db.chatRoomUser.update({
+      where: {
+        userId_chatRoomId: {
+          userId: Number(userId),
+          chatRoomId: Number(chatRoomId)
+        }
       },
-      data: { isRead: true }
+      data: {
+        // อัปเดตเฉพาะเมื่อ lastMessageId ใหม่มากกว่าเดิม
+        lastReadMessageId: Math.max(member.lastReadMessageId || 0, Number(lastMessageId))
+      }
     });
   }
 
