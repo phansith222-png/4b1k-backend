@@ -1,17 +1,14 @@
 import bcrypt from 'bcrypt'
 import { prisma } from '../src/lib/prisma.js' // เช็ค path ให้ตรงกับโปรเจกต์ของคุณ
-
-const hashPassword = () => bcrypt.hashSync('@Concert123456', 8)
-
-// 1. Users (6 คน) - 🔴 เพิ่มฟิลด์ profileImage
-const usersData = [
-  { username: "admin_ben", email: "admin.ben@concert.com", firstName: "Ben", lastName: "Admin", password: hashPassword(), role: "ADMIN", gender: "FEMALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
-  { username: "admin_lisa", email: "lisa.admin@concert.com", firstName: "Lisa", lastName: "Admin", password: hashPassword(), role: "ADMIN", gender: "MALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
-  { username: "fanboy01", email: "fanboy@gmail.com", firstName: "Somchai", lastName: "Jaidee", password: hashPassword(), role: "USER", gender: "MALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
-  { username: "fangirl99", email: "fangirl@gmail.com", firstName: "Somsri", lastName: "Rakdee", password: hashPassword(), role: "USER", gender: "FEMALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
-  { username: "musiclover", email: "music@yahoo.com", firstName: "John", lastName: "Doe", password: hashPassword(), role: "USER", gender: "OTHER", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
-  { username: "concertgoer", email: "goer@hotmail.com", firstName: "Jane", lastName: "Smith", password: hashPassword(), role: "USER", gender: "FEMALE", profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" },
-];
+import { postArtistsData } from './data/postsArtists.js';
+import { postsData } from './data/postsData.js';
+import { likePostData } from './data/likePostData.js';
+import { commentsData } from './data/commentsData.js';
+import { usersData } from './data/userData.js';
+import { venuesData } from './data/venuesData.js';
+import { eventsData } from './data/eventData.js';
+import { artistsEventsData } from './data/artistsEvents.js';
+import { postImagesData } from './data/postImageData.js';
 
 // 2. Genres (5 แนวเพลง)
 const genresData = [
@@ -31,25 +28,25 @@ const agenciesData = [
 const artistsData = [
   // --- POP (1-5) ---
   { artistName: "NONT TANONT", agencyId: 1, profileImage: "https://www.myband.co.th/uploads/20250116/82ff19bfa9053ee0a431ca41d570ad1a.jpg", biography: "ธนนท์ จำเริญ (นนท์) ผู้ชนะจากรายการ The Voice Thailand Season 1..." },
-  { artistName: "INK WARUNTORN", agencyId: 1, profileImage: "https://yt3.googleusercontent.com/Fn6THjnRY5HNH6-Otij1SeOI5bR1ps993kGlmaUfoGJiuXvV5WJsSQBDDLeDJWG6hChy11jaZcA=s900-c-k-c0x00ffffff-no-rj", biography: "อิ้งค์ วรันธร เปานิล เจ้าหญิงแห่งวงการซินธ์ป๊อป (Synth-Pop)..." },
+  { artistName: "INK WARUNTORN", agencyId: 1, profileImage: "https://i.scdn.co/image/ab67616d00001e026a0020916947bb631a5578c2", biography: "อิ้งค์ วรันธร เปานิล เจ้าหญิงแห่งวงการซินธ์ป๊อป (Synth-Pop)..." },
   { artistName: "Taylor Swift", agencyId: 3, profileImage: "https://cdn.britannica.com/37/252437-050-F21BD210/Taylor-Swift-performs-The-Eras-Tour-Sao-Paulo-Brazil-2023.jpg", biography: "Taylor Swift is a globally recognized pop icon and singer-songwriter." },
   { artistName: "Ariana Grande", agencyId: 3, profileImage: "https://m.media-amazon.com/images/M/MV5BM2JhZWJmMDEtNTU5MS00YmQ3LTk1NjMtOGFlMjM2MjZlNjg5XkEyXkFqcGc@._V1_.jpg", biography: "Ariana Grande is an American singer, songwriter, and actress." },
-  { artistName: "Ed Sheeran", agencyId: 3, profileImage: "https://static.wikia.nocookie.net/snl/images/1/15/Ed-sheeran.jpg/revision/latest?cb=20211123094841", biography: "Edward Christopher Sheeran is an English singer-songwriter." },
+  { artistName: "Ed Sheeran", agencyId: 3, profileImage: "https://s.isanook.com/jo/0/ud/489/2446249/ed.jpg?ip/crop/w1200h700/q80/webp", biography: "Edward Christopher Sheeran is an English singer-songwriter." },
   // --- ROCK (6-10) ---
-  { artistName: "Bodyslam", agencyId: 1, profileImage: "https://s.isanook.com/jo/0/ud/483/2415877/bodyslam2.jpg?ip/resize/w728/q80/jpg", biography: "Bodyslam วงร็อคอันดับ 1 ของประเทศไทย นำโดย ตูน อาทิวราห์" },
+  { artistName: "Bodyslam", agencyId: 1, profileImage: "https://t2.genius.com/unsafe/899x0/https%3A%2F%2Fimages.genius.com%2Ff9be36f783b806eeeb3fbeb4daa77952.640x640x1.jpg", biography: "Bodyslam วงร็อคอันดับ 1 ของประเทศไทย นำโดย ตูน อาทิวราห์" },
   { artistName: "TaitosmitH", agencyId: 1, profileImage: "https://s.isanook.com/jo/0/ud/483/2417049/t6.jpg?ip/resize/w728/q80/jpg", biography: "ไททศมิตร (TaitosmitH) วงร็อคอินดี้เพื่อชีวิตยุคใหม่" },
   { artistName: "Coldplay", agencyId: 3, profileImage: "https://imagenes.elpais.com/resizer/v2/AHK4UHCHQ5EJJMOJISB4XF6C7E.jpg?auth=2a2fbbae9a847fdaf0ea0ce87f996ad96513d4cee708570128a8254570f0f1ce&width=1960&height=1470&smart=true", biography: "Coldplay is a British rock band formed in London." },
   { artistName: "Arctic Monkeys", agencyId: 3, profileImage: "https://www.meer.com/attachments/c197c99f7e75f340df337940d8eb518014bda493/store/fill/1090/613/25c5247fb68a977aa9347d4a17cfe97bff97a0e412020ed8d845977af6a7/The-Arctic-Monkeys-band-members.jpg", biography: "Arctic Monkeys are an English rock band formed in Sheffield." },
   { artistName: "Lomosonic", agencyId: 1, profileImage: "https://i.ytimg.com/vi/H6cFWr5c1zk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB4GRX7Bx7E64cpB6nxo_CSeXgzDg", biography: "Lomosonic วงร็อคพลังงานล้นเหลือ โด่งดังจากการแสดงสดที่บ้าคลั่ง" },
   // --- HIP HOP (11-15) ---
-  { artistName: "URBOYTJ", agencyId: 5, profileImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsxbW-oZZBUIzcWcV3xwIP2s1Os2sHOsKCPg&s", biography: "URBOYTJ (เต๋า - จิรายุทธ) ศิลปินฮิปฮอปแถวหน้าของไทย" },
+  { artistName: "URBOYTJ", agencyId: 5, profileImage: "https://cdn-images.dzcdn.net/images/cover/699bbaf79b77bf78e282dd094cca8fc4/0x1900-000000-80-0-0.jpg", biography: "URBOYTJ (เต๋า - จิรายุทธ) ศิลปินฮิปฮอปแถวหน้าของไทย" },
   { artistName: "MILLI", agencyId: 1, profileImage: "https://viberate-upload.ams3.cdn.digitaloceanspaces.com/prod/entity/artist/milli-123-6d4FD", biography: "MILLI (มิลลิ) แรปเปอร์สาวชาวไทยผู้สร้างประวัติศาสตร์บนเวที Coachella" },
   { artistName: "F.HERO", agencyId: 4, profileImage: "https://i.scdn.co/image/ab6761610000e5ebcf6dc7909f08fd4c42c59a24", biography: "F.HERO (กอล์ฟ - ฟักกลิ้ง ฮีโร่) ตำนานแรปเปอร์ของเมืองไทย" },
   { artistName: "Kendrick Lamar", agencyId: 3, profileImage: "https://cdn-images.dzcdn.net/images/artist/be0a7c550567f4af0ed202d7235b74d6/1900x1900-000000-80-0-0.jpg", biography: "Kendrick Lamar is an American rapper and songwriter." },
   { artistName: "Travis Scott", agencyId: 3, profileImage: "https://media.gq.com/photos/654866eb710360665d544892/4:3/w_1604,h_1203,c_limit/GQ1223_Scott_D_10.jpg", biography: "Travis Scott is an American rapper and record producer." },
   // --- R&B (16-20) ---
-  { artistName: "The Weeknd", agencyId: 3, profileImage: "https://static.wikia.nocookie.net/singmovie/images/b/b5/The-Weeknd.jpg/revision/latest?cb=20220808010527", biography: "The Weeknd is a Canadian singer, songwriter, and record producer." },
-  { artistName: "Jeff Satur", agencyId: 5, profileImage: "https://i.pinimg.com/236x/9e/05/2a/9e052a8ab644a4d1fa7355f1b8b1c462.jpg", biography: "Jeff Satur ศิลปินหนุ่มลูกครึ่งไทย-อังกฤษ ผู้ผสมผสานดนตรี R&B และ Pop" },
+  { artistName: "The Weeknd", agencyId: 3, profileImage: "https://i.pinimg.com/736x/98/58/21/985821e798645022a1634e152567c91f.jpg", biography: "The Weeknd is a Canadian singer, songwriter, and record producer." },
+  { artistName: "Jeff Satur", agencyId: 5, profileImage: "https://f.ptcdn.info/382/088/000/mc4ixmm6iS0g874WHaW-o.jpg", biography: "Jeff Satur ศิลปินหนุ่มลูกครึ่งไทย-อังกฤษ ผู้ผสมผสานดนตรี R&B และ Pop" },
   { artistName: "SZA", agencyId: 3, profileImage: "https://s.isanook.com/jo/0/ud/490/2454237/sza-sosalbumcover.jpg?ip/resize/w728/q80/jpg", biography: "SZA is an American R&B singer-songwriter celebrated for her raw songwriting." },
   { artistName: "NIKI", agencyId: 3, profileImage: "https://s.isanook.com/jo/0/ud/489/2449909/niki01.jpg?ip/crop/w1200h700/q80/jpg", biography: "NIKI is an Indonesian singer, songwriter, and producer signed to 88rising." },
   { artistName: "BOWKYLION", agencyId: 1, profileImage: "https://www.myband.co.th/uploads/20240907/dd43a92bfc4a2624cdc4e7d192acb785.jpeg", biography: "โบกี้ไลอ้อน (BOWKYLION) ศิลปินหญิงมากความสามารถ เจ้าของเสียงร้องทรงพลัง" },
@@ -294,21 +291,7 @@ songsList.forEach((artistSongs, artistIndex) => {
   });
 });
 
-// 7. Venues (สถานที่ 10 แห่ง)
-const venuesData = [
-  { name: "Impact Arena", address: "Muang Thong Thani", lat: 13.9133, lng: 100.5480 },
-  { name: "Rajamangala Stadium", address: "Hua Mak", lat: 13.7552, lng: 100.6225 },
-  { name: "Thunder Dome", address: "Muang Thong Thani", lat: 13.9211, lng: 100.5466 },
-  { name: "Bitec Bangna", address: "Bang Na", lat: 13.6705, lng: 100.6105 },
-  { name: "Lido Connect", address: "Siam Square", lat: 13.7455, lng: 100.5315 },
-  { name: "Madison Square Garden", address: "New York, NY", lat: 40.7505, lng: -73.9934 },
-  { name: "Wembley Stadium", address: "London, UK", lat: 51.5560, lng: -0.2795 },
-  { name: "Tokyo Dome", address: "Tokyo, Japan", lat: 35.7056, lng: 139.7519 },
-  { name: "Coachella Valley", address: "Indio, CA", lat: 33.6784, lng: -116.2372 },
-  { name: "Tomorrowland Mainstage", address: "Boom, Belgium", lat: 51.0914, lng: 4.3854 }
-];
 
-const eventsData = [];
 const artistEventsData = [];
 
 const getRandomConcertImage = (index) => {
@@ -522,45 +505,45 @@ const eventPostersByArtist = [
   ]
 ];
 
-let eventIdCounter = 1;
-for (let i = 0; i < 25; i++) {
-  const artistId = i + 1;
-  const artistName = artistsData[i].artistName;
+// let eventIdCounter = 1;
+// for (let i = 0; i < 25; i++) {
+//   const artistId = i + 1;
+//   const artistName = artistsData[i].artistName;
   
-  for (let j = 0; j < 5; j++) {
-    const venueId = Math.floor(Math.random() * 10) + 1;
-    const isFinished = j < 2;
-    const status = isFinished ? "FINISHED" : "UPCOMING";
+//   for (let j = 0; j < 5; j++) {
+//     const venueId = Math.floor(Math.random() * 10) + 1;
+//     const isFinished = j < 2;
+//     const status = isFinished ? "FINISHED" : "UPCOMING";
     
-    const year = isFinished ? 2024 + Math.floor(Math.random() * 2) : 2026 + Math.floor(Math.random() * 2);
-    const month = Math.floor(Math.random() * 12) + 1;
-    const startTime = new Date(`${year}-${month.toString().padStart(2, '0')}-15T19:00:00Z`);
+//     const year = isFinished ? 2024 + Math.floor(Math.random() * 2) : 2026 + Math.floor(Math.random() * 2);
+//     const month = Math.floor(Math.random() * 12) + 1;
+//     const startTime = new Date(`${year}-${month.toString().padStart(2, '0')}-15T19:00:00Z`);
 
-    const eventNames = [
-      `${artistName} Live in Concert`,
-      `${artistName} World Tour ${year}`,
-      `${artistName} Intimate Night`,
-      `${artistName} Festival Headline`,
-      `${artistName} Fan Meeting & Live`
-    ];
+//     const eventNames = [
+//       `${artistName} Live in Concert`,
+//       `${artistName} World Tour ${year}`,
+//       `${artistName} Intimate Night`,
+//       `${artistName} Festival Headline`,
+//       `${artistName} Fan Meeting & Live`
+//     ];
 
-    eventsData.push({
-      eventName: eventNames[j],
-      venueId: venueId,
-      startTime: startTime,
-      status: status,
-      ticketLink: "https://thaiticketmajor.com",
-      posterImage: eventPostersByArtist[i][j] // ดึงรูปตามที่กรอกด้านบน
-    });
+//     eventsData.push({
+//       eventName: eventNames[j],
+//       venueId: venueId,
+//       startTime: startTime,
+//       status: status,
+//       ticketLink: "https://thaiticketmajor.com",
+//       posterImage: eventPostersByArtist[i][j] // ดึงรูปตามที่กรอกด้านบน
+//     });
 
-    artistEventsData.push({
-      artistId: artistId,
-      eventId: eventIdCounter
-    });
+//     artistEventsData.push({
+//       artistId: artistId,
+//       eventId: eventIdCounter
+//     });
 
-    eventIdCounter++;
-  }
-}
+//     eventIdCounter++;
+//   }
+// }
 
 // 10. FavArtist (User Follow ศิลปิน)
 const favArtistsData = [
@@ -570,31 +553,7 @@ const favArtistsData = [
   { userId: 6, artistId: 12 }, { userId: 6, artistId: 21 }, { userId: 6, artistId: 18 }
 ];
 
-// 11. Posts (โพสต์ใน Community) - 🔴 เพิ่มฟิลด์ image ได้ถ้า Schema รองรับ
-const postsData = [
-  { title: "เตรียมตัวให้พร้อม! รอกดบัตรคอนเสิร์ต NONT TANONT", content: "รอกดบัตรคอนเสิร์ตพี่นนท์ไม่ไหวแล้ววว...", userId: 3, artistId: 1 },
-  { title: "ตามหาบัตร Bodyslam โซน A", content: "ใครมีบัตร Bodyslam โซน A ปล่อยบ้างครับ...", userId: 5, artistId: 6 },
-  { title: "ข่าวลือ! The Weeknd อาจจะมาไทยปลายปีนี้?", content: "The Weeknd มาไทยรอบนี้จัดเต็มแน่!...", userId: 4, artistId: 16 },
-  { title: "รีวิวเพลงใหม่ MILLI ฟังแล้วหยุดโยกไม่ได้", content: "เพลงใหม่ MILLI คือดีย์มากแม่...", userId: 6, artistId: 12 },
-  { title: "รวมรูป อิงค์ วรันธร จากงาน Music Fest", content: "อิงค์ วรันธร น่ารักมากก งานเมื่อวาน...", userId: 3, artistId: 2 },
-  { title: "เตือนภัย! ระวังมิจฉาชีพหลอกขายบัตรทิพย์ใน Twitter", content: "ช่วงนี้คอนเสิร์ตเยอะมาก ระวังคนที่ให้โอนเงินก่อน...", userId: 1 }
-];
 
-// 12. Likes (กดไลก์โพสต์)
-const likesData = [
-  { userId: 4, postId: 1 }, { userId: 6, postId: 1 }, { userId: 3, postId: 2 }, { userId: 5, postId: 3 }, { userId: 4, postId: 4 }
-];
-
-// 13. Comments (คอมเมนต์โพสต์)
-const commentsData = [
-  { content: "กดให้ทันนะค๊าา คู่แข่งเยอะมาก", userId: 4, postId: 1 },
-  { content: "หาด้วยคนครับ โซน A", userId: 6, postId: 2 },
-  { content: "เตรียมตังค์พร้อมแล้ว!", userId: 3, postId: 3 },
-  { content: "ท่อนแร็ปคือสุด", userId: 5, postId: 4 },
-  { content: "โดนตกไปเต็มๆ", userId: 6, postId: 5 }
-];
-
-// 14. ChatRooms
 const chatRoomsData = [
   { isGroup: false }, { isGroup: false }, { isGroup: false }, { isGroup: false }, { isGroup: false }
 ];
@@ -640,6 +599,8 @@ async function resetData() {
         prisma.$executeRawUnsafe('TRUNCATE TABLE `Song`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `News`;'),
         prisma.$executeRawUnsafe('TRUNCATE TABLE `NewsArtist`;'),
+        prisma.$executeRawUnsafe('TRUNCATE TABLE `PostImage`;'),//เพิ่ม postImage
+
         prisma.$executeRawUnsafe('SET FOREIGN_KEY_CHECKS = 1;'),
     ]);
     console.log('Start seeding')
@@ -650,16 +611,18 @@ async function resetData() {
      await prisma.artist.createMany({ data: artistsData, skipDuplicates: true })
      await prisma.artistGenre.createMany({ data: artistGenresData, skipDuplicates: true })
      await prisma.song.createMany({ data: songsData, skipDuplicates: true })
-     await prisma.venue.createMany({ data: venuesData, skipDuplicates: true })    
-     await prisma.event.createMany({ data: eventsData, skipDuplicates: true })   
-     await prisma.artistEvent.createMany({ data: artistEventsData, skipDuplicates: true })    
+     await prisma.venue.createMany({ data: venuesData, skipDuplicates: true }) // 8 ที่ ในไทย  
+     await prisma.event.createMany({ data: eventsData, skipDuplicates: true })//mock data 100 event
+     await prisma.artistEvent.createMany({ data: artistsEventsData, skipDuplicates: true }) // many to many eventData&artist   
      await prisma.favArtist.createMany({ data: favArtistsData, skipDuplicates: true }) 
      await prisma.post.createMany({ data: postsData, skipDuplicates: true })    
-     await prisma.like.createMany({ data: likesData, skipDuplicates: true })
+     await prisma.like.createMany({ data: likePostData, skipDuplicates: true })
      await prisma.comment.createMany({ data: commentsData, skipDuplicates: true })
      await prisma.chatRoom.createMany({ data: chatRoomsData, skipDuplicates: true })
      await prisma.chatRoomUser.createMany({ data: chatRoomUsersData, skipDuplicates: true })
      await prisma.message.createMany({ data: messagesData, skipDuplicates: true })
+     await prisma.postArtist.createMany({ data: postArtistsData, skipDuplicates: true })// เพิ่มตรงนี้ต่างจากแบม
+     await prisma.postImage.createMany({ data: postImagesData, skipDuplicates: true })
 }
 
 resetData().then(async ()=> {

@@ -1,10 +1,10 @@
-// 1. เปลี่ยน require เป็น import
-import prisma from "../lib/prisma.js"; 
+import { prisma as db } from "../lib/prisma.js";
 
 class ChatService {
-  // 1. ดึงห้องแชททั้งหมดของ User คนนั้น
+  // 1. ดึงห้องแชททั้งหมดของ User
   async getUserChatRooms(userId) {
-    return await prisma.chatRoom.findMany({
+    // เปลี่ยนจาก prisma เป็น db
+    return await db.chatRoom.findMany({
       where: {
         users: { some: { userId: Number(userId) } }
       },
@@ -21,9 +21,10 @@ class ChatService {
     });
   }
 
-  // 2. ดึงประวัติแชทในห้องนั้นๆ
+  // 2. ดึงประวัติแชท
   async getMessagesByRoom(chatRoomId) {
-    return await prisma.message.findMany({
+    // เปลี่ยนจาก prisma เป็น db
+    return await db.message.findMany({
       where: { chatRoomId: Number(chatRoomId) },
       orderBy: { createdAt: 'asc' }, 
       include: {
@@ -32,10 +33,41 @@ class ChatService {
     });
   }
 
-  // 3. บันทึกข้อความใหม่ลง Database
+  // 3. อัปเดต ID ข้อความล่าสุดที่อ่านแล้ว
+  async markMessagesAsRead(chatRoomId, userId, lastMessageId) {
+    if (!lastMessageId) return null;
+    
+    // ตรวจสอบว่าผู้ใช้เป็นสมาชิกของห้องหรือไม่ก่อนอัปเดต
+    const member = await db.chatRoomUser.findUnique({
+      where: {
+        userId_chatRoomId: {
+          userId: Number(userId),
+          chatRoomId: Number(chatRoomId)
+        }
+      }
+    });
+
+    if (!member) return null;
+
+    return await db.chatRoomUser.update({
+      where: {
+        userId_chatRoomId: {
+          userId: Number(userId),
+          chatRoomId: Number(chatRoomId)
+        }
+      },
+      data: {
+        // อัปเดตเฉพาะเมื่อ lastMessageId ใหม่มากกว่าเดิม
+        lastReadMessageId: Math.max(member.lastReadMessageId || 0, Number(lastMessageId))
+      }
+    });
+  }
+
+  // 4. บันทึกข้อความใหม่ (ใช้ Transaction)
   async saveMessage(chatRoomId, senderId, content) {
-    const [newMessage] = await prisma.$transaction([
-      prisma.message.create({
+    // เปลี่ยนจาก prisma เป็น db ทั้งหมดในนี้
+    const [newMessage] = await db.$transaction([
+      db.message.create({
         data: {
           chatRoomId: Number(chatRoomId),
           senderId: Number(senderId),
@@ -43,7 +75,7 @@ class ChatService {
         },
         include: { sender: { select: { id: true, username: true, profileImage: true } } }
       }),
-      prisma.chatRoom.update({
+      db.chatRoom.update({
         where: { id: Number(chatRoomId) },
         data: { updatedAt: new Date() }
       })
@@ -52,6 +84,5 @@ class ChatService {
   }
 }
 
-// 2. เปลี่ยน module.exports เป็น export default
 const chatService = new ChatService();
 export default chatService;

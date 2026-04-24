@@ -3,13 +3,15 @@
 ### get all post
 GET {{BASE_URL}}/posts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1ODEwOTg0LCJleHAiOjE3NzY0MTU3ODR9.yeVuLZXpYrb8zzNZiloi-O1FjOO9Tb69O76WAvLURS8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc2NTEyMjY0LCJleHAiOjE3NzcxMTcwNjR9.KkS_GbmWeSjmOlxi-71ePSA9SvchJ8yd_8c7gXEF5-M
+
+### edit comment
 
 
 ### get a post
-GET {{BASE_URL}}/posts/1
+GET {{BASE_URL}}/posts/52
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc1ODEwOTg0LCJleHAiOjE3NzY0MTU3ODR9.yeVuLZXpYrb8zzNZiloi-O1FjOO9Tb69O76WAvLURS8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc2ODI5NjU3LCJleHAiOjE3Nzc0MzQ0NTd9.Q-sUntxTQMVEE_F4m_VNeyAvzorW7cWQf_kYuEgDCPc
 
 ### create post
 POST {{BASE_URL}}/posts
@@ -66,6 +68,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxN
     "content" : "ฉันเห็นด้วยยยยยยยย อยากให้จัด อยากหาคนไปด้วยจัง",
     "userId" : "3"
 }
+
+### get all like
+GET {{BASE_URL}}/posts/6/like
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc2NTEyMjY0LCJleHAiOjE3NzcxMTcwNjR9.KkS_GbmWeSjmOlxi-71ePSA9SvchJ8yd_8c7gXEF5-M
 
 ### edit comment
 DELETE  {{BASE_URL}}/posts/3/comments/3

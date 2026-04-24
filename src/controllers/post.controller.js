@@ -5,6 +5,7 @@ export async function getAllPostController (req,res,next) {
     
     try {
         const posts = await getAllPosts()
+        
         res.status(200).json({posts})
     }catch(error) {
         next(error)
@@ -13,12 +14,10 @@ export async function getAllPostController (req,res,next) {
 
 
 export async function getPostController (req,res,next) {
-    const {postId} = req.params.id
+    const {postId} = req.params
     try {
         const getPost = await getAPost(Number(postId))
-        if(!foundPost) {
-            return next (createHttpError[404]('Post Not Found'))
-        }
+
         res.status(200).json({
             message : 'get post successfully',
             post : getPost
@@ -31,10 +30,15 @@ export async function getPostController (req,res,next) {
 
 export async function createPostController (req,res,next) {
     const userId = req.user.id
-    const {title,content,postImages,artistId} = req.body
+    const {title,content,image,artistId} = req.body
     try {
-        const createdPost = await createPost(title,content,postImages,userId,artistId)
-        res.status(200).json({createdPost})
+        const createdPost = await createPost(title,content,image,userId,artistId)
+
+
+        res.status(201).json({
+            message: "create post successfully",
+            post: createdPost
+        });
 
     }catch(error) {
         next(error)
@@ -62,14 +66,15 @@ export async function editPostController (req,res,next) {
     try {
         const {postId} = req.params
         const userId = req.user.id
-        const { title,content,postImages,artistId} = req.body
+        console.log(req.body)
+        const { title,content,image,artistId} = req.body
 
         const updatePost = await editPost(
             Number(postId),
             userId,
             title,
             content,
-            postImages,
+            image,
             artistId
         )
 
@@ -86,10 +91,10 @@ export async function editPostController (req,res,next) {
 export async function commentPostController (req,res,next) {
     try {
         const {postId} = req.params
-        const {content} = req.body
+        const {content,image} = req.body
         const userId = req.user.id
 
-        if (!content || content.trim() === '') {
+        if ((!content || content.trim() === '') && !image) {
             return res.status(400).json({ error: 'Comment content cannot be empty' })
         }
 
@@ -99,6 +104,7 @@ export async function commentPostController (req,res,next) {
 
         const newComment = await commentPost(
             content.trim(),
+            image,
             userId,
             Number(postId)
         )
@@ -116,12 +122,15 @@ export async function getAllLikeController (req,res,next) {
     try {
         const {postId} = req.params
 
-        const getLike = await getAllLike(postId)
+        const likes = await getAllLike(Number(postId))
 
         res.status(200).json({
             message : 'get all like successfully',
-            getLike : getLike
+            postId : postId,
+            likes : likes,
+            totalLikes : likes.length
         })
+
 
     }catch (error) {
         next(error)
@@ -179,7 +188,7 @@ export async function editCommentController (req,res,next) {
     try {
         const {postId,commentId} = req.params
         const userId = req.user.id
-        const {content} = req.body
+        const {content,image} = req.body
 
         if(!content || content.trim() === '') {
             return createHttpError(400, 'Comment content cannot be empty')
@@ -193,7 +202,8 @@ export async function editCommentController (req,res,next) {
             userId,
             Number(postId),
             Number(commentId),
-            content.trim())
+            content.trim(),
+            image)
 
         res.status(201).json({
             message : 'edit comment successfully',
@@ -214,10 +224,11 @@ export async function deleteCommentController (req,res,next) {
             return createHttpError(400, 'Invalid post ID or comment ID')
         }
     
-        const removeComment = await deleteComment(userId,Number(userId),Number(commentId))
+        const removeComment = await deleteComment(userId,Number(postId),Number(commentId))
 
         res.status(200).json({
-            message : 'Deleted comment successfully'
+            message : 'Deleted comment successfully',
+            deleteComment : removeComment
         })
 
     }catch(error) {

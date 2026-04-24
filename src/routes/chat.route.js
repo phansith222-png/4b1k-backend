@@ -6,7 +6,11 @@ const router = express.Router();
 
 
 router.get("/rooms", authenticate, chatController.getRooms);
-
+router.post("/rooms", authenticate, chatController.createRoom);
+router.delete("/rooms/:roomId", authenticate, chatController.deleteRoom);
+router.post("/personal", authenticate, chatController.getOrCreatePersonalRoom);
 router.get("/:roomId/messages", authenticate, chatController.getMessages);
+
+
 
 export default router;

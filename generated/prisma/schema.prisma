@@ -8,28 +8,29 @@ datasource db {
 }
 
 model User {
-  id             Int            @id @default(autoincrement())
-  username       String         @unique
-  email          String         @unique
-  telephone      String?        @unique
-  firstName      String
-  lastName       String
-  password       String
-  profileImage   String?
-  nationalId     String?
-  role           Role           @default(USER)
-  gender         Gender         @default(OTHER)
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
-  createdArtists Artist[]       @relation("ArtistCreator")
-  chatRooms      ChatRoomUser[]
-  comments       Comment[]
-  favArtists     FavArtist[]
-  likes          Like[]
-  messages       Message[]
-  posts          Post[]
-  createdEvents  Event[]        @relation("EventCreator")
-  news           News[]         @relation("NewsCreator")
+  id               Int            @id @default(autoincrement())
+  username         String         @unique
+  email            String         @unique
+  telephone        String?        @unique
+  firstName        String
+  lastName         String
+  password         String
+  profileImage     String?
+  nationalId       String?
+  role             Role           @default(USER)
+  gender           Gender         @default(OTHER)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  createdArtists   Artist[]       @relation("ArtistCreator")
+  chatRooms        ChatRoomUser[]
+  comments         Comment[]
+  favArtists       FavArtist[]
+  likes            Like[]
+  messages         Message[]
+  posts            Post[]
+  createdEvents    Event[]        @relation("EventCreator")
+  news             News[]         @relation("NewsCreator")
+  createdChatRooms ChatRoom[]     @relation("ChatRoomCreator")
 }
 
 model Artist {
@@ -93,7 +94,7 @@ model FavArtist {
 
 model Post {
   id        Int      @id @default(autoincrement())
-  title     String
+  title     String?
   content   String   @db.LongText
   userId    Int
   createdAt DateTime @default(now())
@@ -105,7 +106,6 @@ model Post {
 
   user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   postImages PostImage[]
-  image      String?
 
   @@index([userId], map: "Post_userId_fkey")
 }
@@ -200,20 +200,28 @@ model Venue {
 }
 
 model ChatRoom {
-  id        Int            @id @default(autoincrement())
-  isGroup   Boolean        @default(false)
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
-  users     ChatRoomUser[]
-  messages  Message[]
+  id         Int      @id @default(autoincrement())
+  isGroup    Boolean  @default(false)
+  name       String? // เพิ่ม: สำหรับชื่อแชทกลุ่ม
+  coverImage String? // เพิ่ม: สำหรับรูปแชทกลุ่ม
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  creatorId Int? // เพิ่ม: สำหรับเก็บ ID คนสร้างกลุ่ม
+  creator   User? @relation("ChatRoomCreator", fields: [creatorId], references: [id])
+
+  users    ChatRoomUser[]
+  messages Message[]
 }
 
 model ChatRoomUser {
-  userId     Int
-  chatRoomId Int
-  joinedAt   DateTime @default(now())
-  chatRoom   ChatRoom @relation(fields: [chatRoomId], references: [id], onDelete: Cascade)
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId            Int
+  chatRoomId        Int
+  joinedAt          DateTime @default(now())
+  lastReadMessageId Int? // เพิ่ม: เก็บ ID ของข้อความล่าสุดที่ User คนนี้อ่าน (แก้ปัญหา Read status ในแชทกลุ่ม)
+
+  chatRoom ChatRoom @relation(fields: [chatRoomId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([userId, chatRoomId])
   @@index([chatRoomId], map: "ChatRoomUser_chatRoomId_fkey")
@@ -224,10 +232,11 @@ model Message {
   content    String   @db.Text
   senderId   Int
   chatRoomId Int
-  isRead     Boolean  @default(false)
+  // เอา isRead ออก แล้วไปใช้ lastReadMessageId ใน ChatRoomUser แทน
   createdAt  DateTime @default(now())
-  chatRoom   ChatRoom @relation(fields: [chatRoomId], references: [id], onDelete: Cascade)
-  sender     User     @relation(fields: [senderId], references: [id], onDelete: Cascade)
+
+  chatRoom ChatRoom @relation(fields: [chatRoomId], references: [id], onDelete: Cascade)
+  sender   User     @relation(fields: [senderId], references: [id], onDelete: Cascade)
 
   @@index([chatRoomId], map: "Message_chatRoomId_fkey")
   @@index([senderId], map: "Message_senderId_fkey")
@@ -292,4 +301,11 @@ enum EventStatus {
   ONGOING
   CANCELED
   FINISHED
+}
+
+enum AuthProvider {
+  LOCAL // สมัครผ่านเว็บปกติ (กรอกรหัสผ่าน)
+  GOOGLE
+  FACEBOOK
+  X
 }
