@@ -21,3 +21,11 @@ Content-Type: application/json
     "username" : "fanboy01",
     "password" : "@Concert123456"
 }
+
+### test reset password 
+POST {{BASE_URL}}/auth/reset-password
+Content-Type: application/json
+
+{
+    "email" : "fanboy@gmail.com"
+}
