@@ -389,6 +389,39 @@ const uploadMessageImage = async (req, res, next) => {
   }
 };
 
+const renameRoom = async (req, res, next) => {
+  try {
+    const { roomId } = req.params;
+    const userId = req.user.id;
+    const { roomName } = req.body;
+
+    if (!roomName || !roomName.trim()) {
+      return res.status(400).json({ message: "Room name is required" });
+    }
+
+    const room = await prisma.chatRoom.findUnique({
+      where: { id: Number(roomId) },
+    });
+
+    if (!room) {
+      return res.status(404).json({ message: "Room not found" });
+    }
+
+    if (room.isGroup && room.creatorId !== userId) {
+      return res.status(403).json({ message: "Only the creator can rename this group" });
+    }
+
+    const updated = await prisma.chatRoom.update({
+      where: { id: Number(roomId) },
+      data: { name: roomName.trim() },
+    });
+
+    res.json({ message: "Room renamed successfully", room: updated });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export default {
   getRooms,
   getMessages,
@@ -397,4 +430,5 @@ export default {
   deleteRoom,
   updateRoomAvatar,
   uploadMessageImage,
+  renameRoom,
 };
