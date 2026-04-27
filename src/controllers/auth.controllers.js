@@ -2,7 +2,7 @@ import createHttpError from 'http-errors'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { loginSchema, registerSchema } from '../validations/validate.js'
-import { createUser, getUserby } from '../service.js/auth.service.js'
+import { createUser, getUserby, resetPassword } from '../service.js/auth.service.js'
 
 
 export async function registerController (req,res,next) {
@@ -113,3 +113,35 @@ export const oauthFailedController = (req, res) => {
   res.status(401).json({ message: "OAuth login failed. Please try again." });
 };
 
+export async function resetPasswordController (req,res,next)  {
+
+    try {
+
+    const {email} = req.body
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    const user = await resetPassword(email)
+
+    res.status(200).json({
+        message : "If this email address is in the system, an OTP will be sent"
+    })
+    }catch(eorror) {
+        next(error)
+    }
+
+}
+
+export async function verifyOtpController  (req,res) {
+
+    const {email,otp} = req.body
+
+    const result = await verifyOtp(email,otp)
+
+    res.status(200).json({
+        message : "verify success",
+        OTP : otp    })
+
+}

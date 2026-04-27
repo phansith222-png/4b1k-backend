@@ -1,4 +1,6 @@
 import prisma from "../lib/prisma.js";
+import fs from "fs";
+import path from "path";
 
 const getRooms = async (req, res, next) => {
   try {
@@ -16,6 +18,8 @@ const getRooms = async (req, res, next) => {
               select: {
                 id: true,
                 username: true,
+                firstName: true,
+                lastName: true,
                 profileImage: true,
               },
             },
@@ -28,6 +32,8 @@ const getRooms = async (req, res, next) => {
             sender: {
               select: {
                 username: true,
+                firstName: true,
+                lastName: true,
                 profileImage: true,
               },
             },
@@ -87,6 +93,8 @@ const createRoom = async (req, res, next) => {
               select: {
                 id: true,
                 username: true,
+                firstName: true,
+                lastName: true,
                 profileImage: true,
               },
             },
@@ -134,6 +142,8 @@ const getMessages = async (req, res, next) => {
           select: {
             id: true,
             username: true,
+            firstName: true,
+            lastName: true,
             profileImage: true,
           },
         },
@@ -201,6 +211,8 @@ const getOrCreatePersonalRoom = async (req, res, next) => {
               select: {
                 id: true,
                 username: true,
+                firstName: true,
+                lastName: true,
                 profileImage: true,
               },
             },
@@ -231,6 +243,8 @@ const getOrCreatePersonalRoom = async (req, res, next) => {
               select: {
                 id: true,
                 username: true,
+                firstName: true,
+                lastName: true,
                 profileImage: true,
               },
             },
@@ -282,10 +296,139 @@ const deleteRoom = async (req, res, next) => {
   }
 };
 
+const updateRoomAvatar = async (req, res, next) => {
+  try {
+    const { roomId } = req.params;
+    const userId = req.user.id;
+    const { coverImage } = req.body;
+
+    const room = await prisma.chatRoom.findUnique({
+      where: { id: Number(roomId) },
+    });
+
+    if (!room) {
+      return res.status(404).json({ message: "Room not found" });
+    }
+
+    if (room.isGroup && room.creatorId !== userId) {
+      return res.status(403).json({ message: "Only creator can change the avatar" });
+    }
+
+    let imageUrl = room.coverImage;
+
+    if (coverImage && coverImage.startsWith('data:image')) {
+      const base64Data = coverImage.replace(/^data:image\/\w+;base64,/, '');
+      const buffer = Buffer.from(base64Data, 'base64');
+      const filename = `room_${roomId}_${Date.now()}.jpg`;
+      const uploadDir = path.join(process.cwd(), 'public', 'uploads');
+      
+      if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+      }
+      
+      const filepath = path.join(uploadDir, filename);
+      fs.writeFileSync(filepath, buffer);
+      
+      const port = process.env.PORT || 8000;
+      imageUrl = `http://localhost:${port}/uploads/${filename}`;
+    }
+
+    await prisma.chatRoom.update({
+      where: { id: Number(roomId) },
+      data: { coverImage: imageUrl },
+    });
+
+    res.json({ message: "Avatar updated successfully", coverImage: imageUrl });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const uploadMessageImage = async (req, res, next) => {
+  try {
+    const { roomId } = req.params;
+    const userId = req.user.id;
+    const { image } = req.body;
+
+    const room = await prisma.chatRoom.findUnique({
+      where: { id: Number(roomId) },
+      include: { users: true },
+    });
+
+    if (!room) {
+      return res.status(404).json({ message: "Room not found" });
+    }
+
+    const isMember = room.users.some((u) => u.userId === userId);
+    if (!room.isGroup && !isMember) {
+      return res.status(403).json({ message: "You are not a member of this chat" });
+    }
+
+    if (!image || !image.startsWith('data:image')) {
+      return res.status(400).json({ message: "Invalid image format" });
+    }
+
+    const base64Data = image.replace(/^data:image\/\w+;base64,/, '');
+    const buffer = Buffer.from(base64Data, 'base64');
+    const filename = `msg_${roomId}_${userId}_${Date.now()}.jpg`;
+    const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'messages');
+    
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+    
+    const filepath = path.join(uploadDir, filename);
+    fs.writeFileSync(filepath, buffer);
+    
+    const port = process.env.PORT || 8000;
+    const imageUrl = `http://localhost:${port}/uploads/messages/${filename}`;
+
+    res.json({ imageUrl });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const renameRoom = async (req, res, next) => {
+  try {
+    const { roomId } = req.params;
+    const userId = req.user.id;
+    const { roomName } = req.body;
+
+    if (!roomName || !roomName.trim()) {
+      return res.status(400).json({ message: "Room name is required" });
+    }
+
+    const room = await prisma.chatRoom.findUnique({
+      where: { id: Number(roomId) },
+    });
+
+    if (!room) {
+      return res.status(404).json({ message: "Room not found" });
+    }
+
+    if (room.isGroup && room.creatorId !== userId) {
+      return res.status(403).json({ message: "Only the creator can rename this group" });
+    }
+
+    const updated = await prisma.chatRoom.update({
+      where: { id: Number(roomId) },
+      data: { name: roomName.trim() },
+    });
+
+    res.json({ message: "Room renamed successfully", room: updated });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export default {
   getRooms,
   getMessages,
   createRoom,
   getOrCreatePersonalRoom,
   deleteRoom,
+  updateRoomAvatar,
+  uploadMessageImage,
+  renameRoom,
 };

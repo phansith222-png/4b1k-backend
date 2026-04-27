@@ -1,5 +1,22 @@
 import bcrypt from 'bcrypt'
-import { editUser } from '../service.js/auth.service.js'
+import { editUser, getUserby } from '../service.js/auth.service.js'
+
+export async function getUserByIdController (req, res, next) {
+    try {
+        const { id } = req.params;
+        const user = await getUserby('id', parseInt(id));
+        
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Return only non-sensitive information
+        const { password, resetOtp, resetOtpExpires, ...safeUser } = user;
+        res.json(safeUser);
+    } catch (error) {
+        next(error);
+    }
+}
 
 export async function getMeController (req,res) {
     // console.log('get profile',req.user)

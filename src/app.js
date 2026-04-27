@@ -1,7 +1,5 @@
 import express from "express";
-import session from "express-session";
 import passport from "./oauthConfig/passport.js";
-
 import authRouter from "./routes/auth.route.js";
 import usersRouter from "./routes/users.route.js";
 import authenicateMiddleware from "./middlewares/authenticate.middleware.js";
@@ -15,7 +13,7 @@ import chatRouter from "./routes/chat.route.js";
 import cors from "cors"
 
 const app = express()
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
 
 app.use(
   cors({
@@ -23,7 +21,9 @@ app.use(
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   })
-);
+)
+
+app.use("/uploads", express.static("public/uploads"));
 
 app.use(passport.initialize()); // เอาไว้ใช้กับ Oauth ในการล็อคอินด้วย Google, Facebook, X
 
@@ -33,8 +33,7 @@ app.use("/chats", authenicateMiddleware, chatRouter);
 
 app.use("/users", authenicateMiddleware, usersRouter);
 
-
-app.use("/users", authenicateMiddleware, usersRouter);
+app.use("/users", authenicateMiddleware, usersRouter)//ซ้ำ
 
 app.use("/admin", adminRouter);
 

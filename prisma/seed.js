@@ -277,6 +277,19 @@ const songsList = [
   ]
 ];
 
+//LNGSHOT
+[
+   { title: "Moonwalkin'", url: "https://www.youtube.com/watch?v=HJgdT15UT4k&start_radio=1", coverImage: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=400&auto=format&fit=crop" },
+   { title: "Never Let Go", url: "https://www.youtube.com/watch?v=sOsh_GKOny4&start_radio=1", coverImage: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=400&auto=format&fit=crop" },
+   { title: "Saucin", url: "https://www.youtube.com/watch?v=bdkxg83ICAA&list=RDbdkxg83ICAA&start_radio=1", coverImage: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=400&auto=format&fit=crop" },
+   { title: "FaceTime", url: "https://www.youtube.com/watch?v=GGe5OkNgZjQ&list=RDGGe5OkNgZjQ&start_radio=1", coverImage: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=400&auto=format&fit=crop" },
+]
+
+[
+ { artistName: "LNGSHOT", agencyId: 3, profileImage: "https://media.discordapp.net/attachments/1466412045325959189/1497109846447624192/74d4a9f73a91b20842b2b8caa6f0c0ad.1000x1000x1.png?ex=69ef9f72&is=69ee4df2&hm=eaa1a7dfd4dadd9aeecf6764a69019f5b2ede4644e2ff3c928ae174f9e096aaa&=&format=webp&quality=lossless&width=1400&height=1400", biography: "Illenium is an American DJ and producer known for future bass tracks." }
+]
+
+
 songsList.forEach((artistSongs, artistIndex) => {
   artistSongs.forEach((song, songIndex) => {
     songsData.push({
