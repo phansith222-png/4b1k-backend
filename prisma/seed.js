@@ -51,8 +51,8 @@ const artistsData = [
   { artistName: "NIKI", agencyId: 3, profileImage: "https://s.isanook.com/jo/0/ud/489/2449909/niki01.jpg?ip/crop/w1200h700/q80/jpg", biography: "NIKI is an Indonesian singer, songwriter, and producer signed to 88rising." },
   { artistName: "BOWKYLION", agencyId: 1, profileImage: "https://www.myband.co.th/uploads/20240907/dd43a92bfc4a2624cdc4e7d192acb785.jpeg", biography: "โบกี้ไลอ้อน (BOWKYLION) ศิลปินหญิงมากความสามารถ เจ้าของเสียงร้องทรงพลัง" },
   // --- EDM (21-25) ---
-  { artistName: "Martin Garrix", agencyId: 3, profileImage: "https://yt3.googleusercontent.com/GE5UaHPciygWU-7lj-8gfnkLJFOqQGMN0x3_eD7tlWfeLJQVMZGwIKdmxtMy0kAHb3A4xrPZEA=s900-c-k-c0x00ffffff-no-rj", biography: "Martin Garrix is a Dutch DJ and record producer." },
-  { artistName: "Zedd", agencyId: 3, profileImage: "https://yt3.googleusercontent.com/3AjBxybgKhjqf76bXW-NLdaZKepEOTtJsPAqCqIPo7_fo6O5_2zuDpWUHGeRL7if0LOYdBSIVMw=s900-c-k-c0x00ffffff-no-rj", biography: "Zedd is a Russian-German DJ and producer known for melodic electronic music." },
+  { artistName: "Martin Garrix", agencyId: 3, profileImage: "https://i.scdn.co/image/ab6761610000e5eba0ba69e1262d08a0d90bd669", biography: "Martin Garrix is a Dutch DJ and record producer." },
+  { artistName: "Zedd", agencyId: 3, profileImage: "https://i.scdn.co/image/ab6761610000e5ebc5211ea54032ce47e9ff8dd3", biography: "Zedd is a Russian-German DJ and producer known for melodic electronic music." },
   { artistName: "Calvin Harris", agencyId: 3, profileImage: "https://s.isanook.com/jo/0/ud/489/2448837/calvin-harris.jpg?ip/crop/w670h402/q80/jpg", biography: "Calvin Harris is a Scottish DJ, record producer, and singer." },
   { artistName: "DJ Snake", agencyId: 3, profileImage: "https://photos.bandsintown.com/large/18404475.jpeg", biography: "DJ Snake is a French record producer and DJ." },
   { artistName: "Illenium", agencyId: 3, profileImage: "https://i8.amplience.net/i/naras/ILLENIUM-9506A-3.5.21-jpg-credit-Brian-Ziff", biography: "Illenium is an American DJ and producer known for future bass tracks." }

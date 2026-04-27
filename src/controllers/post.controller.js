@@ -30,9 +30,10 @@ export async function getPostController (req,res,next) {
 
 export async function createPostController (req,res,next) {
     const userId = req.user.id
-    const {title,content,image,artistId} = req.body
+    const {title,content,image,artistIds} = req.body
+    // console.log("controller",req.body)
     try {
-        const createdPost = await createPost(title,content,image,userId,artistId)
+        const createdPost = await createPost(title,content,image,userId,artistIds)
 
 
         res.status(201).json({
@@ -67,7 +68,9 @@ export async function editPostController (req,res,next) {
         const {postId} = req.params
         const userId = req.user.id
         console.log(req.body)
-        const { title,content,image,artistId} = req.body
+        const { title,content,image,artistIds} = req.body
+
+        console.log("trdtdtts", artistIds)
 
         const updatePost = await editPost(
             Number(postId),
@@ -75,7 +78,7 @@ export async function editPostController (req,res,next) {
             title,
             content,
             image,
-            artistId
+            artistIds
         )
 
         res.status(200).json({

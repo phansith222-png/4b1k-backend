@@ -37,7 +37,7 @@ export const getAPost = async(postId) => {
 
 export const createPost = async(title,content,image,userId,artistId) => {
 
-
+console.log("create post service",artistId)
 // 1. เตรียมข้อมูลพื้นฐาน
     const postData = {
         title: title || null,
@@ -53,20 +53,20 @@ export const createPost = async(title,content,image,userId,artistId) => {
             }))
         };
     }
-
+  let artistUpdateQuery = {};
     // 3. จัดการเรื่อง Artist (ถ้ามี)
     // ✅ เอามาต่อกันตรงนี้ได้เลย Prisma จะจัดการสร้างลงตาราง PostArtist ให้พร้อมกัน
-    if (artistId) {
-        postData.postArtists = {
-            create: {
-                 artistId: Number(artistId)
+    if (artistId && Array.isArray(artistId)) {
+        artistUpdateQuery = {
+            postArtists: {
+                create: artistId.map(id => ({ artistId: Number(id) }))
             }
         };
     }
 
     // 4. บันทึกลง Database
     const result = await prisma.post.create({
-        data: postData,
+        data: {...postData, ...artistUpdateQuery},
         // สั่งให้รีเทิร์นข้อมูลรูปกับศิลปินกลับมาด้วย
         include: {
             postImages: true,
@@ -100,6 +100,7 @@ export const deletePost = async(postId,userId) => {
 }
 
 export const editPost = async(postId,userId,title,content,image,artistId) => {
+    console.log("+++++++++++++++++++++++++++++++++++++++++++",artistId)
     const foundPost = await getAPost(postId)
     // console.log(foundPost)
     if(!foundPost) {
@@ -126,13 +127,24 @@ export const editPost = async(postId,userId,title,content,image,artistId) => {
         };
     }
 
-    // 3. อัปเดตข้อมูล
+    // 3. จัดการ Query ของศิลปิน
+    let artistUpdateQuery = {};
+    if (artistId && Array.isArray(artistId)) {
+        artistUpdateQuery = {
+            postArtists: {
+                deleteMany: {}, // ลบความสัมพันธ์เดิมก่อน
+                create: artistId.map(id => ({ artistId: id })) // สร้างความสัมพันธ์ใหม่
+            }
+        };
+    }
+
+    // 4. อัปเดตข้อมูล
     const result = await prisma.post.update({
         where: { id: postId },
         data: {
             title: title,
             content: content,
-            artistId: artistId,
+            ...artistUpdateQuery, // เอาเงื่อนไขศิลปินมาใส่ตรงนี้
             ...imageUpdateQuery // เอาเงื่อนไขรูปภาพมาใส่ตรงนี้
         },
         include: {
