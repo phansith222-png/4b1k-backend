@@ -6,6 +6,7 @@ import {
   oauthFailedController,
   oauthSuccessController,
   registerController,
+  resetPasswordController,
 } from "../controllers/auth.controllers.js";
 
 const authRouter = express.Router();
@@ -13,6 +14,10 @@ const authRouter = express.Router();
 authRouter.post("/register", registerController);
 
 authRouter.post("/login", loginController);
+
+authRouter.post("/reset-password",resetPasswordController)
+
+// authRouter.post("/reset-password/verify")
 
 
 // ========================

@@ -1,7 +1,5 @@
 import express from "express";
-import session from "express-session";
 import passport from "./oauthConfig/passport.js";
-
 import authRouter from "./routes/auth.route.js";
 import usersRouter from "./routes/users.route.js";
 import authenicateMiddleware from "./middlewares/authenticate.middleware.js";
@@ -23,7 +21,7 @@ app.use(
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   })
-);
+)
 
 app.use("/uploads", express.static("public/uploads"));
 
@@ -35,8 +33,7 @@ app.use("/chats", authenicateMiddleware, chatRouter);
 
 app.use("/users", authenicateMiddleware, usersRouter);
 
-
-app.use("/users", authenicateMiddleware, usersRouter);
+app.use("/users", authenicateMiddleware, usersRouter)//ซ้ำ
 
 app.use("/admin", adminRouter);
 
