@@ -51,8 +51,8 @@ const artistsData = [
   { artistName: "NIKI", agencyId: 3, profileImage: "https://s.isanook.com/jo/0/ud/489/2449909/niki01.jpg?ip/crop/w1200h700/q80/jpg", biography: "NIKI is an Indonesian singer, songwriter, and producer signed to 88rising." },
   { artistName: "BOWKYLION", agencyId: 1, profileImage: "https://www.myband.co.th/uploads/20240907/dd43a92bfc4a2624cdc4e7d192acb785.jpeg", biography: "โบกี้ไลอ้อน (BOWKYLION) ศิลปินหญิงมากความสามารถ เจ้าของเสียงร้องทรงพลัง" },
   // --- EDM (21-25) ---
-  { artistName: "Martin Garrix", agencyId: 3, profileImage: "https://yt3.googleusercontent.com/GE5UaHPciygWU-7lj-8gfnkLJFOqQGMN0x3_eD7tlWfeLJQVMZGwIKdmxtMy0kAHb3A4xrPZEA=s900-c-k-c0x00ffffff-no-rj", biography: "Martin Garrix is a Dutch DJ and record producer." },
-  { artistName: "Zedd", agencyId: 3, profileImage: "https://yt3.googleusercontent.com/3AjBxybgKhjqf76bXW-NLdaZKepEOTtJsPAqCqIPo7_fo6O5_2zuDpWUHGeRL7if0LOYdBSIVMw=s900-c-k-c0x00ffffff-no-rj", biography: "Zedd is a Russian-German DJ and producer known for melodic electronic music." },
+  { artistName: "Martin Garrix", agencyId: 3, profileImage: "https://media.timeout.com/images/103968523/750/562/image.jpg", biography: "Martin Garrix is a Dutch DJ and record producer." },
+  { artistName: "Zedd", agencyId: 3, profileImage: "https://variety.com/wp-content/uploads/2026/04/ZITP_Doc_Pic1-1.jpg?w=1000&h=667&crop=1", biography: "Zedd is a Russian-German DJ and producer known for melodic electronic music." },
   { artistName: "Calvin Harris", agencyId: 3, profileImage: "https://s.isanook.com/jo/0/ud/489/2448837/calvin-harris.jpg?ip/crop/w670h402/q80/jpg", biography: "Calvin Harris is a Scottish DJ, record producer, and singer." },
   { artistName: "DJ Snake", agencyId: 3, profileImage: "https://photos.bandsintown.com/large/18404475.jpeg", biography: "DJ Snake is a French record producer and DJ." },
   { artistName: "Illenium", agencyId: 3, profileImage: "https://i8.amplience.net/i/naras/ILLENIUM-9506A-3.5.21-jpg-credit-Brian-Ziff", biography: "Illenium is an American DJ and producer known for future bass tracks." }
@@ -276,6 +276,19 @@ const songsList = [
     { title: "Fractures", url: "https://youtu.be/ZCu2gwLj9ok?si=O8MjSocKk3zYEqV8", coverImage: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400&auto=format&fit=crop" }
   ]
 ];
+
+//LNGSHOT
+[
+   { title: "Moonwalkin'", url: "https://www.youtube.com/watch?v=HJgdT15UT4k&start_radio=1", coverImage: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=400&auto=format&fit=crop" },
+   { title: "Never Let Go", url: "https://www.youtube.com/watch?v=sOsh_GKOny4&start_radio=1", coverImage: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=400&auto=format&fit=crop" },
+   { title: "Saucin", url: "https://www.youtube.com/watch?v=bdkxg83ICAA&list=RDbdkxg83ICAA&start_radio=1", coverImage: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=400&auto=format&fit=crop" },
+   { title: "FaceTime", url: "https://www.youtube.com/watch?v=GGe5OkNgZjQ&list=RDGGe5OkNgZjQ&start_radio=1", coverImage: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=400&auto=format&fit=crop" },
+]
+
+[
+ { artistName: "LNGSHOT", agencyId: 3, profileImage: "https://media.discordapp.net/attachments/1466412045325959189/1497109846447624192/74d4a9f73a91b20842b2b8caa6f0c0ad.1000x1000x1.png?ex=69ef9f72&is=69ee4df2&hm=eaa1a7dfd4dadd9aeecf6764a69019f5b2ede4644e2ff3c928ae174f9e096aaa&=&format=webp&quality=lossless&width=1400&height=1400", biography: "Illenium is an American DJ and producer known for future bass tracks." }
+]
+
 
 songsList.forEach((artistSongs, artistIndex) => {
   artistSongs.forEach((song, songIndex) => {

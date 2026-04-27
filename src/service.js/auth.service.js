@@ -1,4 +1,6 @@
 import { prisma } from "../lib/prisma.js";
+import crypto from 'crypto'
+import bcrypt from 'bcrypt'
 
 export async function getUserby(field, value) {
   const result = await prisma.user.findUnique({
@@ -13,48 +15,6 @@ export async function createUser(data) {
   return await prisma.user.create({ data: data });
 }
 
-// export async function findOrCreateOAuthUser(provider, profile) {
-//   if (!provider) {
-//     return await prisma.user.findUnique({ where: { id: profile.id } });
-//   }
-
-//   const providerId = profile.id;
-//   const email = profile.emails?.[0]?.value || null;
-//   const displayName = profile.displayName || "";
-//   const photo = profile.photos?.[0]?.value || null;
-
-//   const [firstName = displayName, ...rest] = displayName.split(" ");
-//   const lastName = rest.join(" ") || "-";
-
-//   // ตัวอย่าง username: "google_12345", "facebook_12345", "twitter_12345"
-//   const oauthUsername = `${provider}_${providerId}`;
-
-//   // 1. ถ้าหากสมัครสมาชิกด้วย oauth อยู่แล้ว
-//   let user = await prisma.user.findUnique({
-//     where: { username: oauthUsername },
-//   });
-//   if (user) return user;
-
-//   // 2. หาอีเมลของผู้ใช้ที่มีอยู่แล้ว ถ้าอีเมลตรงกันก็ให้ลิงค์กัน
-//   if (email) {
-//     user = await prisma.user.findUnique({ where: { email } });
-//     if (user) return user;
-//   }
-
-//   // 3. ผู้ใช้ใหม่ สร้างแอคเค้าท์
-//   user = await prisma.user.create({
-//     data: {
-//       username: oauthUsername,
-//       email: email || `${oauthUsername}@oauth.placeholder`, // ต้องใช้ schema ที่มี email เป็น unique
-//       firstName,
-//       lastName,
-//       password: `oauth_${provider}_${providerId}`, // อันนี้แค่ placeholder เท่านั้น ห้ามใช้กับ oauth login
-//       profileImage: photo,
-//     },
-//   });
-
-//   return user;
-// }
 
 //function editUser สร้าง รับ id,username,firstName,password,lastName,gender,email,telephone,profileImage
 export const editUser = async (
@@ -125,3 +85,47 @@ export async function findOrCreateOAuthUser(provider, profile) {
   return user;
 }
 
+export async function resetPassword (email) {
+
+  const foundUser = await prisma.user.findUnique(
+    {where : { email : email}}
+  )
+
+  if (!foundUser) {
+    return { success : false,message : 'User not found'}
+  }
+
+    const otp = crypto.randomInt(100000, 999999).toString()
+    const expiresAt = new Date(Date.now() + 5 * 60 * 1000)
+    const hashedOtp = await bcrypt.hash(otp,8)
+
+    await prisma.user.update({
+    where : {id : foundUser.id},
+    data : {
+      resetOtp : hashedOtp,
+      resetOtpExpires : expiresAt
+    }
+  })
+
+  const result = await (email, `Your OTP is : ${otp}`)
+
+  return { success : true ,result} 
+}
+
+export async function verifyOtp (email,otp) {
+    const tokenRecord = await prisma.user.findFirst ({
+      where : {
+        user : {email : email},
+        resetOtpExpires : { gt : new Date()},
+      }
+    })
+
+    if (!tokenRecord) {
+      return res.status(400).json({
+        error : "OTP already expried"
+      })
+    }
+
+    const isValid = await bcrypt.compare(otp,tokenRecord.otp)
+
+}

@@ -9,8 +9,7 @@ export const usersData = [
     lastName: "Admin", 
     password: hashPassword(), 
     role: "ADMIN", 
-    gender: "FEMALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "FEMALE"
   },
   { 
     username: "admin_lisa", 
@@ -19,8 +18,7 @@ export const usersData = [
     lastName: "Admin", 
     password: hashPassword(), 
     role: "ADMIN", 
-    gender: "MALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "MALE"
   },
   // Users (24)
   { 
@@ -30,8 +28,7 @@ export const usersData = [
     lastName: "Jaidee", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "MALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "MALE"
   },
   { 
     username: "fangirl99", 
@@ -40,8 +37,7 @@ export const usersData = [
     lastName: "Rakdee", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "FEMALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "FEMALE"
   },
   { 
     username: "musiclover", 
@@ -50,8 +46,7 @@ export const usersData = [
     lastName: "Doe", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "OTHER", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "OTHER"
   },
   { 
     username: "concertgoer", 
@@ -60,8 +55,7 @@ export const usersData = [
     lastName: "Smith", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "FEMALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "FEMALE"
   },
   { 
     username: "kpop_stan_01", 
@@ -70,8 +64,7 @@ export const usersData = [
     lastName: "Siri", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "MALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "MALE"
   },
   { 
     username: "melody_queen", 
@@ -80,8 +73,7 @@ export const usersData = [
     lastName: "Wong", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "FEMALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "FEMALE"
   },
   { 
     username: "rock_never_die", 
@@ -90,8 +82,7 @@ export const usersData = [
     lastName: "Sangsri", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "MALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "MALE"
   },
   { 
     username: "jazz_lover", 
@@ -100,8 +91,7 @@ export const usersData = [
     lastName: "Keng", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "OTHER", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "OTHER"
   },
   { 
     username: "frontrow_girl", 
@@ -110,8 +100,7 @@ export const usersData = [
     lastName: "Mee", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "FEMALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "FEMALE"
   },
   { 
     username: "bass_hunter", 
@@ -120,8 +109,7 @@ export const usersData = [
     lastName: "Poom", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "MALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "MALE"
   },
   { 
     username: "indie_vibe", 
@@ -130,8 +118,7 @@ export const usersData = [
     lastName: "Roj", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "FEMALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "FEMALE"
   },
   { 
     username: "ticket_master_th", 
@@ -140,8 +127,7 @@ export const usersData = [
     lastName: "Pha", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "MALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "MALE"
   },
   { 
     username: "concert_addict", 
@@ -150,8 +136,7 @@ export const usersData = [
     lastName: "Zaa", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "FEMALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "FEMALE"
   },
   { 
     username: "acoustic_soul", 
@@ -160,8 +145,7 @@ export const usersData = [
     lastName: "Dee", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "MALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "MALE"
   },
   { 
     username: "festival_goer", 
@@ -170,8 +154,7 @@ export const usersData = [
     lastName: "Siri", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "FEMALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "FEMALE"
   },
   { 
     username: "beat_maker", 
@@ -180,8 +163,7 @@ export const usersData = [
     lastName: "Suk", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "OTHER", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "OTHER"
   },
   { 
     username: "vocal_coach_fan", 
@@ -190,8 +172,7 @@ export const usersData = [
     lastName: "Prao", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "FEMALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "FEMALE"
   },
   { 
     username: "vinyl_collector", 
@@ -200,8 +181,7 @@ export const usersData = [
     lastName: "Man", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "MALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "MALE"
   },
   { 
     username: "lightstick_ready", 
@@ -210,8 +190,7 @@ export const usersData = [
     lastName: "Chai", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "FEMALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "FEMALE"
   },
   { 
     username: "moshpit_king", 
@@ -220,8 +199,7 @@ export const usersData = [
     lastName: "Kong", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "MALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "MALE"
   },
   { 
     username: "dreamy_sound", 
@@ -230,8 +208,7 @@ export const usersData = [
     lastName: "Yim", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "FEMALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "FEMALE"
   },
   { 
     username: "rhythm_seeker", 
@@ -240,8 +217,7 @@ export const usersData = [
     lastName: "Pai", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "MALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "MALE"
   },
   { 
     username: "stage_side", 
@@ -250,8 +226,7 @@ export const usersData = [
     lastName: "Rat", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "FEMALE", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "FEMALE"
   },
   { 
     username: "blue_note", 
@@ -260,7 +235,6 @@ export const usersData = [
     lastName: "See", 
     password: hashPassword(), 
     role: "USER", 
-    gender: "OTHER", 
-    profileImage: "ใส่ลิงก์รูปโปรไฟล์ที่นี่" 
+    gender: "OTHER"
   },
 ];

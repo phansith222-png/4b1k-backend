@@ -8,15 +8,20 @@ datasource db {
 }
 
 model User {
-  id               Int            @id @default(autoincrement())
-  username         String         @unique
-  email            String         @unique
-  telephone        String?        @unique
-  firstName        String
-  lastName         String
-  password         String
-  profileImage     String?
-  nationalId       String?
+  id           Int     @id @default(autoincrement())
+  username     String  @unique
+  email        String  @unique
+  telephone    String? @unique
+  firstName    String
+  lastName     String
+  password     String
+  profileImage String?
+  nationalId   String?
+
+  //reset password
+  resetOtp        String?
+  resetOtpExpires DateTime?
+
   role             Role           @default(USER)
   gender           Gender         @default(OTHER)
   createdAt        DateTime       @default(now())

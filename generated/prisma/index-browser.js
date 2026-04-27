@@ -130,6 +130,8 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password',
   profileImage: 'profileImage',
   nationalId: 'nationalId',
+  resetOtp: 'resetOtp',
+  resetOtpExpires: 'resetOtpExpires',
   role: 'role',
   gender: 'gender',
   createdAt: 'createdAt',
@@ -309,7 +311,8 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   lastName: 'lastName',
   password: 'password',
   profileImage: 'profileImage',
-  nationalId: 'nationalId'
+  nationalId: 'nationalId',
+  resetOtp: 'resetOtp'
 };
 
 exports.Prisma.ArtistOrderByRelevanceFieldEnum = {
