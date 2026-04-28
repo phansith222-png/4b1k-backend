@@ -51,8 +51,8 @@ const artistsData = [
   { artistName: "NIKI", agencyId: 3, profileImage: "https://s.isanook.com/jo/0/ud/489/2449909/niki01.jpg?ip/crop/w1200h700/q80/jpg", biography: "NIKI is an Indonesian singer, songwriter, and producer signed to 88rising." },
   { artistName: "BOWKYLION", agencyId: 1, profileImage: "https://www.myband.co.th/uploads/20240907/dd43a92bfc4a2624cdc4e7d192acb785.jpeg", biography: "โบกี้ไลอ้อน (BOWKYLION) ศิลปินหญิงมากความสามารถ เจ้าของเสียงร้องทรงพลัง" },
   // --- EDM (21-25) ---
-  { artistName: "Martin Garrix", agencyId: 3, profileImage: "https://media.timeout.com/images/103968523/750/562/image.jpg", biography: "Martin Garrix is a Dutch DJ and record producer." },
-  { artistName: "Zedd", agencyId: 3, profileImage: "https://variety.com/wp-content/uploads/2026/04/ZITP_Doc_Pic1-1.jpg?w=1000&h=667&crop=1", biography: "Zedd is a Russian-German DJ and producer known for melodic electronic music." },
+  { artistName: "Martin Garrix", agencyId: 3, profileImage: "https://cdn-images.dzcdn.net/images/artist/4cab1c0cbe0edc1b3d2234873abc485e/1900x1900-000000-80-0-0.jpg", biography: "Martin Garrix is a Dutch DJ and record producer." },
+  { artistName: "Zedd", agencyId: 3, profileImage: "https://lewishowes.com/wp-content/uploads/2024/12/DSC08550-1024x683.png", biography: "Zedd is a Russian-German DJ and producer known for melodic electronic music." },
   { artistName: "Calvin Harris", agencyId: 3, profileImage: "https://s.isanook.com/jo/0/ud/489/2448837/calvin-harris.jpg?ip/crop/w670h402/q80/jpg", biography: "Calvin Harris is a Scottish DJ, record producer, and singer." },
   { artistName: "DJ Snake", agencyId: 3, profileImage: "https://photos.bandsintown.com/large/18404475.jpeg", biography: "DJ Snake is a French record producer and DJ." },
   { artistName: "Illenium", agencyId: 3, profileImage: "https://i8.amplience.net/i/naras/ILLENIUM-9506A-3.5.21-jpg-credit-Brian-Ziff", biography: "Illenium is an American DJ and producer known for future bass tracks." }
