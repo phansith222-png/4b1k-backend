@@ -592,30 +592,11 @@ const messagesData = [
 async function resetData() {
     console.log('Clean table')
 
-   await prisma.$transaction([
-        prisma.$executeRawUnsafe('SET FOREIGN_KEY_CHECKS = 0;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `User`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `Artist`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `Agency`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `Genre`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `ArtistGenre`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `FavArtist`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `Post`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `PostArtist`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `Like`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `Comment`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `Event`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `ArtistEvent`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `Venue`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `ChatRoom`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `Message`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `Song`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `News`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `NewsArtist`;'),
-        prisma.$executeRawUnsafe('TRUNCATE TABLE `PostImage`;'),//เพิ่ม postImage
-
-        prisma.$executeRawUnsafe('SET FOREIGN_KEY_CHECKS = 1;'),
-    ]);
+   await prisma.$executeRawUnsafe(
+        `TRUNCATE TABLE "User", "Artist", "Agency", "Genre", "ArtistGenre", "FavArtist",
+         "Post", "PostArtist", "Like", "Comment", "Event", "ArtistEvent", "Venue",
+         "ChatRoom", "Message", "Song", "News", "NewsArtist", "PostImage" CASCADE`
+    );
     console.log('Start seeding')
 
      await prisma.user.createMany({ data: usersData, skipDuplicates: true })

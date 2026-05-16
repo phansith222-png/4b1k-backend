@@ -4,7 +4,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
 }
 
 model User {
@@ -42,7 +42,7 @@ model Artist {
   id           Int      @id @default(autoincrement())
   artistName   String
   profileImage String?
-  biography    String?  @db.LongText
+  biography    String?  @db.Text
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -53,18 +53,18 @@ model Artist {
   events          ArtistEvent[]
   genres          ArtistGenre[]
   favByUsers      FavArtist[]
-  postArtists     PostArtist[] // ความสัมพันธ์กลับไปยัง Post
+  postArtists     PostArtist[]
   songs           Song[]
   news            NewsArtist[]
 
-  @@index([agencyId], map: "Artist_agencyId_fkey")
-  @@index([createdByUserId], map: "Artist_createdByUserId_fkey")
+  @@index([agencyId])
+  @@index([createdByUserId])
 }
 
 model Agency {
   id          Int      @id @default(autoincrement())
   name        String
-  description String?  @db.LongText
+  description String?  @db.Text
   socialMedia String?
   artists     Artist[]
 }
@@ -82,7 +82,7 @@ model ArtistGenre {
   genre    Genre  @relation(fields: [genreId], references: [id], onDelete: Cascade)
 
   @@id([artistId, genreId])
-  @@index([genreId], map: "ArtistGenre_genreId_fkey")
+  @@index([genreId])
 }
 
 model FavArtist {
@@ -94,13 +94,13 @@ model FavArtist {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, artistId])
-  @@index([artistId], map: "FavArtist_artistId_fkey")
+  @@index([artistId])
 }
 
 model Post {
   id        Int      @id @default(autoincrement())
   title     String?
-  content   String   @db.LongText
+  content   String   @db.Text
   userId    Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -112,7 +112,7 @@ model Post {
   user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   postImages PostImage[]
 
-  @@index([userId], map: "Post_userId_fkey")
+  @@index([userId])
 }
 
 model PostArtist {
@@ -123,7 +123,7 @@ model PostArtist {
 
   @@id([postId, artistId])
   @@index([artistId])
-  @@index([postId]) // ใช้ Composite Key เพื่อป้องกันการผูกศิลปินซ้ำในโพสต์เดียว
+  @@index([postId])
 }
 
 model PostImage {
@@ -133,7 +133,7 @@ model PostImage {
   createdAt DateTime @default(now())
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
 
-  @@index([postId], map: "PostImage_postId_fkey")
+  @@index([postId])
 }
 
 model Like {
@@ -145,7 +145,7 @@ model Like {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, postId])
-  @@index([postId], map: "Like_postId_fkey")
+  @@index([postId])
 }
 
 model Comment {
@@ -159,14 +159,14 @@ model Comment {
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@index([postId], map: "Comment_postId_fkey")
-  @@index([userId], map: "Comment_userId_fkey")
+  @@index([postId])
+  @@index([userId])
 }
 
 model Event {
   id              Int           @id @default(autoincrement())
   eventName       String
-  description     String?       @db.LongText
+  description     String?       @db.Text
   posterImage     String?
   status          EventStatus   @default(UPCOMING)
   ticketLink      String?
@@ -180,8 +180,8 @@ model Event {
   createdByUser   User?         @relation("EventCreator", fields: [createdByUserId], references: [id])
   venue           Venue         @relation(fields: [venueId], references: [id])
 
-  @@index([venueId], map: "Event_venueId_fkey")
-  @@index([createdByUserId], map: "Event_createdByUserId_fkey")
+  @@index([venueId])
+  @@index([createdByUserId])
 }
 
 model ArtistEvent {
@@ -191,7 +191,7 @@ model ArtistEvent {
   event    Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
   @@id([artistId, eventId])
-  @@index([eventId], map: "ArtistEvent_eventId_fkey")
+  @@index([eventId])
 }
 
 model Venue {
@@ -207,12 +207,12 @@ model Venue {
 model ChatRoom {
   id         Int      @id @default(autoincrement())
   isGroup    Boolean  @default(false)
-  name       String? // เพิ่ม: สำหรับชื่อแชทกลุ่ม
-  coverImage String? // เพิ่ม: สำหรับรูปแชทกลุ่ม
+  name       String?
+  coverImage String?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
-  creatorId Int? // เพิ่ม: สำหรับเก็บ ID คนสร้างกลุ่ม
+  creatorId Int?
   creator   User? @relation("ChatRoomCreator", fields: [creatorId], references: [id])
 
   users    ChatRoomUser[]
@@ -223,13 +223,13 @@ model ChatRoomUser {
   userId            Int
   chatRoomId        Int
   joinedAt          DateTime @default(now())
-  lastReadMessageId Int? // เพิ่ม: เก็บ ID ของข้อความล่าสุดที่ User คนนี้อ่าน (แก้ปัญหา Read status ในแชทกลุ่ม)
+  lastReadMessageId Int?
 
   chatRoom ChatRoom @relation(fields: [chatRoomId], references: [id], onDelete: Cascade)
   user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([userId, chatRoomId])
-  @@index([chatRoomId], map: "ChatRoomUser_chatRoomId_fkey")
+  @@index([chatRoomId])
 }
 
 model Message {
@@ -237,14 +237,13 @@ model Message {
   content    String   @db.Text
   senderId   Int
   chatRoomId Int
-  // เอา isRead ออก แล้วไปใช้ lastReadMessageId ใน ChatRoomUser แทน
   createdAt  DateTime @default(now())
 
   chatRoom ChatRoom @relation(fields: [chatRoomId], references: [id], onDelete: Cascade)
   sender   User     @relation(fields: [senderId], references: [id], onDelete: Cascade)
 
-  @@index([chatRoomId], map: "Message_chatRoomId_fkey")
-  @@index([senderId], map: "Message_senderId_fkey")
+  @@index([chatRoomId])
+  @@index([senderId])
 }
 
 model Song {
@@ -255,12 +254,14 @@ model Song {
   streamUrl   String?
   popularity  Int       @default(0)
   releaseDate DateTime?
+  isDemo      Boolean   @default(true)
+  licenseNote String?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   artistId    Int
   artist      Artist    @relation(fields: [artistId], references: [id], onDelete: Cascade)
 
-  @@index([artistId], map: "Song_artistId_fkey")
+  @@index([artistId])
 }
 
 model News {
@@ -271,7 +272,6 @@ model News {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
-  //admin คนที่อัพเดทข่าว
   authorId Int
   author   User @relation("NewsCreator", fields: [authorId], references: [id])
 
@@ -286,7 +286,7 @@ model NewsArtist {
   news     News   @relation(fields: [newsId], references: [id], onDelete: Cascade)
   artist   Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
 
-  @@id([newsId, artistId]) // ใช้คู่ ID เป็น Primary Key เพื่อป้องกันการแท็กซ้ำในข่าวเดียว
+  @@id([newsId, artistId])
   @@index([artistId])
 }
 
@@ -309,7 +309,7 @@ enum EventStatus {
 }
 
 enum AuthProvider {
-  LOCAL // สมัครผ่านเว็บปกติ (กรอกรหัสผ่าน)
+  LOCAL
   GOOGLE
   FACEBOOK
   X

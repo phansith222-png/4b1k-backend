@@ -5,7 +5,22 @@
   "main": "index.js",
   "scripts": {
     "dev": "node --watch src/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --forceExit",
+    "test:watch": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --watch --forceExit",
+    "test:coverage": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --coverage --forceExit"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {},
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ],
+    "setupFiles": [
+      "./tests/helpers/env.setup.js"
+    ],
+    "moduleNameMapper": {
+      "^.*/lib/prisma\\.js$": "<rootDir>/src/lib/__mocks__/prisma.js"
+    }
   },
   "keywords": [],
   "author": "",
@@ -13,6 +28,7 @@
   "type": "module",
   "dependencies": {
     "@prisma/adapter-mariadb": "^7.7.0",
+    "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "axios": "^1.15.0",
     "bcrypt": "^6.0.0",
@@ -22,12 +38,15 @@
     "express": "^5.2.1",
     "express-rate-limit": "^8.4.1",
     "express-session": "^1.19.0",
+    "helmet": "^8.1.0",
+    "http-errors": "^2.0.1",
     "jsonwebtoken": "^9.0.3",
     "nodemailer": "^8.0.6",
     "passport": "^0.7.0",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-twitter": "^1.0.4",
+    "pg": "^8.20.0",
     "react-hook-form": "^7.72.1",
     "react-router": "^7.14.0",
     "resend": "^6.12.2",
@@ -35,6 +54,10 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "prisma": "^7.8.0"
+    "@jest/globals": "^30.4.1",
+    "cross-env": "^10.1.0",
+    "jest": "^30.4.2",
+    "prisma": "^7.8.0",
+    "supertest": "^7.2.2"
   }
 }

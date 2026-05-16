@@ -8,12 +8,13 @@ import {
   registerController,
   resetPasswordController,
 } from "../controllers/auth.controllers.js";
+import { authLimiter } from "../middlewares/rateLimiter.middleware.js";
 
 const authRouter = express.Router();
 
-authRouter.post("/register", registerController);
+authRouter.post("/register", authLimiter, registerController);
 
-authRouter.post("/login", loginController);
+authRouter.post("/login", authLimiter, loginController);
 
 authRouter.post("/reset-password",resetPasswordController)
 

@@ -24,12 +24,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 7.7.0
- * Query Engine version: 75cbdc1eb7150937890ad5465d861175c6624711
+ * Prisma Client JS version: 7.8.0
+ * Query Engine version: 3c6e192761c0362d496ed980de936e2f3cebcd3a
  */
 Prisma.prismaVersion = {
-  client: "7.7.0",
-  engine: "75cbdc1eb7150937890ad5465d861175c6624711"
+  client: "7.8.0",
+  engine: "3c6e192761c0362d496ed980de936e2f3cebcd3a"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -273,6 +273,8 @@ exports.Prisma.SongScalarFieldEnum = {
   streamUrl: 'streamUrl',
   popularity: 'popularity',
   releaseDate: 'releaseDate',
+  isDemo: 'isDemo',
+  licenseNote: 'licenseNote',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   artistId: 'artistId'
@@ -298,85 +300,14 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
-};
-
-exports.Prisma.UserOrderByRelevanceFieldEnum = {
-  username: 'username',
-  email: 'email',
-  telephone: 'telephone',
-  firstName: 'firstName',
-  lastName: 'lastName',
-  password: 'password',
-  profileImage: 'profileImage',
-  nationalId: 'nationalId',
-  resetOtp: 'resetOtp'
-};
-
-exports.Prisma.ArtistOrderByRelevanceFieldEnum = {
-  artistName: 'artistName',
-  profileImage: 'profileImage',
-  biography: 'biography'
-};
-
-exports.Prisma.AgencyOrderByRelevanceFieldEnum = {
-  name: 'name',
-  description: 'description',
-  socialMedia: 'socialMedia'
-};
-
-exports.Prisma.GenreOrderByRelevanceFieldEnum = {
-  name: 'name'
-};
-
-exports.Prisma.PostOrderByRelevanceFieldEnum = {
-  title: 'title',
-  content: 'content'
-};
-
-exports.Prisma.PostImageOrderByRelevanceFieldEnum = {
-  url: 'url'
-};
-
-exports.Prisma.CommentOrderByRelevanceFieldEnum = {
-  content: 'content',
-  image: 'image'
-};
-
-exports.Prisma.EventOrderByRelevanceFieldEnum = {
-  eventName: 'eventName',
-  description: 'description',
-  posterImage: 'posterImage',
-  ticketLink: 'ticketLink'
-};
-
-exports.Prisma.VenueOrderByRelevanceFieldEnum = {
-  name: 'name',
-  address: 'address',
-  image: 'image'
-};
-
-exports.Prisma.ChatRoomOrderByRelevanceFieldEnum = {
-  name: 'name',
-  coverImage: 'coverImage'
-};
-
-exports.Prisma.MessageOrderByRelevanceFieldEnum = {
-  content: 'content'
-};
-
-exports.Prisma.SongOrderByRelevanceFieldEnum = {
-  title: 'title',
-  coverImage: 'coverImage',
-  streamUrl: 'streamUrl'
-};
-
-exports.Prisma.NewsOrderByRelevanceFieldEnum = {
-  title: 'title',
-  content: 'content',
-  coverImage: 'coverImage'
 };
 exports.Role = exports.$Enums.Role = {
   ADMIN: 'ADMIN',

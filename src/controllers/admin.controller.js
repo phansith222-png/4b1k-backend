@@ -5,7 +5,7 @@ import { adminDeleteComment, adminDeletePost } from '../service.js/admin.service
 export async function adminDeletePostController (req,res,next) {
     try {
         if (req.user.role !== 'ADMIN') {
-                    return (createHttpError[403],'Access denied, Admin only')
+            return next(createHttpError(403, 'Access denied, Admin only'))
         }
 
         const {postId} = req.params
@@ -32,7 +32,7 @@ export async function adminDeletePostController (req,res,next) {
 export async function adminDeleteCommentController (req,res,next) {
     try {
         if (req.user.role !== 'ADMIN') {
-                    return (createHttpError[403],'Access denied, Admin only')
+            return next(createHttpError(403, 'Access denied, Admin only'))
         }
 
         const {postId,commentId} = req.params

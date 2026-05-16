@@ -20,9 +20,18 @@ export async function getArtistController (req,res,next) {
 
         const getAnArtist = await getArtist(Number(artistId))
 
+        if (!getAnArtist) {
+            return next(createHttpError(404, 'Artist not found'))
+        }
+
+        const hasDemo = getAnArtist.songs?.some(s => s.isDemo)
+
         res.status(200).json({
             message : 'get an artist',
-            artist : getAnArtist
+            artist : getAnArtist,
+            ...(hasDemo && {
+                demoDisclaimer: 'Some audio content is for demo purposes only and not licensed for commercial use.'
+            })
         })
     }catch(error){
         next(error)
@@ -32,14 +41,14 @@ export async function getArtistController (req,res,next) {
 export async function createArtistPageController (req,res,next) {
     try {
         if (req.user.role !== 'ADMIN') {
-            return (createHttpError[403],'Access denied, Admin only')
+            return next(createHttpError(403, 'Access denied, Admin only'))
         }
 
         const userId = req.user.id
         const { artistName, profileImage, biography, agencyId, genreId, songs } = req.body
 
         if (!artistName || artistName.trim() === '') {
-            return  (createHttpError[400],'Artist name is required')
+            return next(createHttpError(400, 'Artist name is required'))
         }
 
         const newArtist = await createArtistPage({
@@ -66,7 +75,7 @@ export async function updateArtistPageController (req,res,next) {
 
     try {
         if (req.user.role !== 'ADMIN') {
-            return (createHttpError[403],'Access denied, Admin only')
+            return next(createHttpError(403, 'Access denied, Admin only'))
         }
 
         const userId = req.user.id
@@ -103,8 +112,8 @@ export async function updateArtistPageController (req,res,next) {
 export async function deleteArtistPageController (req,res,next) {
 
     try {
-         if (req.user.role !== 'ADMIN') {
-            return (createHttpError[403],'Access denied, Admin only')
+        if (req.user.role !== 'ADMIN') {
+            return next(createHttpError(403, 'Access denied, Admin only'))
         }
 
         const {artistId} = req.params
@@ -113,9 +122,9 @@ export async function deleteArtistPageController (req,res,next) {
 
         const adminName = req.user.username || "Admin";
 
-       if (!artistId) {
-            return (createHttpError[400], 'Invalid artist ID');
-        } 
+        if (!artistId) {
+            return next(createHttpError(400, 'Invalid artist ID'))
+        }
 
         const remeoveArtist = await deleteArtistPage(Number(artistId))
 

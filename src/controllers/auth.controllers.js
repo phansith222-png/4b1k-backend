@@ -10,14 +10,6 @@ export async function registerController (req,res,next) {
 
     const data = await registerSchema.parseAsync(req.body)
 
-    //ได้ออกมาเป็น data
-    console.log('data',data)
-    
-    // const username = data.username //เพราะ เบญสร้างตัวแปรชื่อ username ให้มีค่าเท่ากับ data.username
-    // const email = data.email
-    // const telephone = data.telephone
-
-
     const foundUser = await getUserby ('username',data.username)
 
     if(foundUser) {
@@ -38,12 +30,6 @@ export async function registerController (req,res,next) {
     }
     }
    
-    // res.send('Success ka') 
-    console.log('data',data)
-    // return 
-    //ตรวจสอบแล้ว username email telephone ไม่ซ้ำก็ให้มา create user **
-
-
     const user = await createUser(data)
 
     const userInfo = {
@@ -62,10 +48,8 @@ export async function registerController (req,res,next) {
 
 export async function loginController (req,res,next){
     const data = loginSchema.parse(req.body)
-    console.log('logincontroller',data)
 
     const foundUser = await getUserby('username',data.username)
-    console.log(foundUser,'foundUser')
     if(!foundUser) {
         return next(createHttpError[401]('Invalid Login 1 username incorrect'))
     }
@@ -128,7 +112,7 @@ export async function resetPasswordController (req,res,next)  {
     res.status(200).json({
         message : "If this email address is in the system, an OTP will be sent"
     })
-    }catch(eorror) {
+    }catch(error) {
         next(error)
     }
 

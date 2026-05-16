@@ -11,14 +11,13 @@ const PORT = process.env.PORT || 8000;
 const server = http.createServer(app);
 
 // 2. ประกาศใช้งาน Socket.io พร้อมตั้งค่า CORS ให้ครอบคลุม
+const socketOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(',')
+  : ['http://localhost:5173', 'http://localhost:5174']
+
 const io = new Server(server, {
   cors: {
-    // ใส่ให้ครบทุก Port ที่คุณใช้งานจริง
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:5174",
-      "http://localhost:5000",
-    ],
+    origin: socketOrigins,
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -52,23 +51,12 @@ io.on("connection", (socket) => {
   });
 
   // --- 3. ระบบ "กำลังพิมพ์..." (Typing Indicator) ---
- io.on("connection", (socket) => {
-  // ... join_room, send_message ...
-
-  // ตรวจสอบว่ามี 2 บล็อกนี้อยู่แยกออกมาไหม:
   socket.on("typing", (data) => {
-    console.log("Someone is typing in room:", data.chatRoomId);
-
     socket.to(String(data.chatRoomId)).emit("display_typing", {
       user: data.userName,
       roomId: data.chatRoomId
     });
   });
-
-  socket.on("stop_typing", (data) => {
-    socket.to(String(data.chatRoomId)).emit("hide_typing");
-  });
-});
 
   socket.on("stop_typing", (data) => {
     const roomName = String(data.chatRoomId);

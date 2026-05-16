@@ -2,7 +2,7 @@ import {  ZodError } from 'zod'
 import createHttpError from 'http-errors'
 
 export default function (err,req,res,next) {
-    if (err.name === 'Token') {
+    if (err.name === 'TokenExpiredError') {
         return res.status(401).json({
             error : 'Token Expired',
             message : 'Your session has expired. Please login again'

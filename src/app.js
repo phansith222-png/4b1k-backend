@@ -1,4 +1,5 @@
 import express from "express";
+import helmet from "helmet";
 import passport from "./oauthConfig/passport.js";
 import authRouter from "./routes/auth.route.js";
 import usersRouter from "./routes/users.route.js";
@@ -11,17 +12,27 @@ import eventsRouter from "./routes/events.route.js";
 import adminRouter from "./routes/admin.route.js";
 import chatRouter from "./routes/chat.route.js";
 import cors from "cors"
+import { apiLimiter } from "./middlewares/rateLimiter.middleware.js";
 
 const app = express()
-app.use(express.json({ limit: "10mb" }));
 
-app.use(
-  cors({
-    origin: ["http://localhost:5173"],
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    credentials: true,
-  })
-)
+app.use(helmet())
+
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(',')
+  : ['http://localhost:5173']
+
+app.use(cors({
+  origin: (origin, cb) => {
+    if (!origin || allowedOrigins.includes(origin)) cb(null, true)
+    else cb(new Error('Not allowed by CORS'))
+  },
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  credentials: true,
+}))
+
+app.use(apiLimiter)
+app.use(express.json({ limit: "10mb" }));
 
 app.use("/uploads", express.static("public/uploads"));
 
@@ -32,8 +43,6 @@ app.use("/auth", authRouter);
 app.use("/chats", authenicateMiddleware, chatRouter);
 
 app.use("/users", authenicateMiddleware, usersRouter);
-
-app.use("/users", authenicateMiddleware, usersRouter)//ซ้ำ
 
 app.use("/admin", adminRouter);
 

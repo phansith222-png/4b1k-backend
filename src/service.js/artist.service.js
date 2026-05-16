@@ -16,19 +16,31 @@ export const getAllArtists = async () => {
 }
 
 export const getArtist = async (artistId) => {
-    return await prisma.artist.findUnique({
+    const artist = await prisma.artist.findUnique({
         where: { id: artistId },
         include: {
             agency: true,
             genres: { include: { genre: true } },
-            songs: { orderBy: { popularity: 'desc' } }, // ขาดบรรทัดนี้ เพลงไม่ขึ้น
-            events: { // ขาดบล็อกนี้ คอนเสิร์ตไม่ขึ้น
+            songs: { orderBy: { popularity: 'desc' } },
+            events: {
                 include: {
                     event: { include: { venue: true } }
                 }
             }
         }
     })
+
+    if (!artist) return null
+
+    const isProduction = process.env.NODE_ENV === 'production'
+
+    return {
+        ...artist,
+        songs: artist.songs.map(song => ({
+            ...song,
+            streamUrl: (song.isDemo && isProduction) ? null : song.streamUrl,
+        }))
+    }
 }
 
 export const createArtistPage = async (data) => {
@@ -226,10 +238,16 @@ export const unlikeArtist = async (data) => {
 
 // ดึงเพลง
 export const getSongsByArtist = async (artistId) => {
-    return await prisma.song.findMany({
+    const songs = await prisma.song.findMany({
         where: { artistId: Number(artistId) },
-        orderBy: { popularity: 'desc' } // เรียงจากฮิตสุด
-    });
+        orderBy: { popularity: 'desc' }
+    })
+
+    const isProduction = process.env.NODE_ENV === 'production'
+    return songs.map(song => ({
+        ...song,
+        streamUrl: (song.isDemo && isProduction) ? null : song.streamUrl,
+    }))
 }
 
 // ดึงอีเวนต์

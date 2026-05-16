@@ -9,10 +9,6 @@ export default async function authenicateMiddleware (req, res, next) {
     // console.log('--- Checking Header ---')
     // console.log('Auth Value:', authorization) 
 
-  // บรรทัดนี้ช่วยเช็คใน Terminal ว่า Frontend ส่งมาจริงไหม
-  console.log("--- Checking Header ---");
-  console.log("Auth Value:", authorization);
-
   if (!authorization || !authorization.startsWith("Bearer ")) {
     return next(
       createHttpError[401]("Unauthorized 1: No Token or Wrong Format")
